@@ -9,11 +9,15 @@ threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests, default is 3000.
 #
-port        ENV.fetch("PORT") { 3000 }
+port        ENV.fetch("PORT") { 3111 }
 
 # Specifies the `environment` that Puma will run in.
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
+
+bind 'unix:///home/work/iquan/current/tmp/sockets/puma.sock'
+pidfile '/home/work/iquan/current/tmp/pids/puma.pid'
+stdout_redirect "/home/work/iquan/current/log/puma.stdout.log", "/home/work/iquan/current/log/puma.stderr.log"
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
