@@ -1,0 +1,72 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.split{
+  border-bottom: 1px dotted #E8E8E8;
+  margin: 5px 0px 15px 0px;
+}
+
+.title{
+  font-size: 20px;
+  line-height: 26px;
+  padding: 10px 15px 15px 0;
+}
+.header-nav{
+  background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+  background-repeat: repeat-x;
+  border: 1px solid #d4d4d4;
+}
+
+p.content{
+  padding: 10px 0 10px 0;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.list_title{
+  font-size: 16px;
+  line-height: 20px;
+  padding: 8px 15px 15px 0;
+}
+
+.desc{
+  padding: 0 0 10px 0;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.article_cover{
+  background-size: cover;
+  background-image: center no-repeat;
+}
+.col-md-3{
+  .article_cover{
+    height: 150px;
+  }
+}
+.col-sm-3{
+  .article_cover{
+    height: 80px;
+  }
+}
+.col-xs-3{
+  .article_cover{
+    height: 80px;
+  }
+}
+
+.tag-label{
+  margin-right: 5px;
+  padding: 4px 7px 4px 7px;
+  a{
+    color: white;
+  }
+}
+
+.mobile-nav-tab{
+  z-index: 1000;
+  background-color: white;
+  width: 100%;
+  padding: 20px 0 0 0;
+  margin-bottom: 10px;
+}
