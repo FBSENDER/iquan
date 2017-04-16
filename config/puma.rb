@@ -15,7 +15,7 @@ port        ENV.fetch("PORT") { 3100 }
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
 
-bind 'unix:///tmp/puma.sock'
+bind 'unix:///tmp/iquan_puma.sock'
 pidfile '/tmp/puma.pid'
 stdout_redirect "/tmp/puma.stdout.log", "/tmp/puma.stderr.log"
 
