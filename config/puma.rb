@@ -15,9 +15,9 @@ port        ENV.fetch("PORT") { 3100 }
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
 
-#bind 'unix:///home/work/iquan/current/tmp/sockets/puma.sock'
-pidfile 'tmp/pids/puma.pid'
-stdout_redirect "log/puma.stdout.log", "log/puma.stderr.log"
+bind 'unix:///tmp/puma.sock'
+pidfile '/tmp/puma.pid'
+stdout_redirect "/tmp/puma.stdout.log", "/tmp/puma.stderr.log"
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
