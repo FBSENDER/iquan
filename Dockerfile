@@ -12,5 +12,4 @@ COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
 ENV RAILS_ENV production 
 RUN bundle install
-EXPOSE 3100
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD bundle exec rake assets:precompile ; bundle exec puma -C config/puma.rb
