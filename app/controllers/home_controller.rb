@@ -2,7 +2,7 @@ require 'seo_domain'
 class HomeController < ApplicationController
   @@compete_brands = nil
   def index
-    if !is_robot? && is_device_mobile?
+    if !is_robot?
       redirect_to "http://taobao.iquan.net", status: 302
       return
     end
