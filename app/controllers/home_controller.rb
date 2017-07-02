@@ -1,4 +1,5 @@
 require 'seo_domain'
+require 'net/http'
 class HomeController < ApplicationController
   @@compete_brands = nil
   def index
