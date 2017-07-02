@@ -169,6 +169,7 @@ DEPENDENCIES
   jquery-rails
   listen
   mysql2
+  nio4r (= 1.2.1)
   puma (~> 3.0)
   rails (~> 5.0.0)
   sass-rails (~> 5.0)

@@ -17,3 +17,4 @@ gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 gem 'ffi', '1.9.14'
+gem 'nio4r', '1.2.1'
