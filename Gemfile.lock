@@ -164,6 +164,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.7)
   coffee-rails (~> 4.2)
+  ffi (= 1.9.14)
   haml-rails (~> 0.9)
   jquery-rails
   listen
