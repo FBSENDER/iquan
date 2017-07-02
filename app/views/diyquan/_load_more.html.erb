@@ -1,0 +1,82 @@
+<div class="more-coupon">
+  <span id="moreCoupon" class="btn loading-text">查看更多优惠券</span>
+</div>
+<script type="text/javascript" src="http://7xllts.com2.z0.glb.qiniucdn.com/mjs/swiper3.1.0.min.js"></script>
+<script type="text/javascript">
+var globalChannel = 27;
+$(function(){
+  var sw = new Swiper('.banner-area',{
+    autoplay: 3000,
+    loop:true,
+    pagination: '.swiper-pager'
+  });
+
+  //Util.sideFixedMenu($('<%= wclass %>'));
+
+  var couponList = $('#couponList'),loadingText = $('.loading-text');
+  var page = 1,pagesize = 20,load = 1,channel = 27;
+
+  $(document).on('scroll',function(){
+    if(page%4 > 0){
+      var _top = $(document).scrollTop(),
+        scroll_height = Util.pageSize()['scrollHeight'],
+        client_height = Util.pageSize()['clientHeight'];
+        if(_top + client_height >= (scroll_height-800)){
+          getCouponList();
+        }
+    }
+  });
+
+  loadingText.on('click',function(){
+    getCouponList();
+  });
+
+  function getCouponList(){
+    if(!load){
+      return;
+    }
+    $.ajax({
+      url: '<%= path %>',
+      type: 'GET',
+      dataType: 'json',
+      data:{
+        'pinyin': '<%= pinyin || '' %>',
+        'keyword': '<%= keyword || ''%>',
+        'sort_id': '<%= keyword || ''%>',
+        'price': '<%= keyword || ''%>',
+        'page':page,
+        'pagesize':pagesize
+      },
+      beforeSend:function(){
+        load = 0;
+        loadingText.html('努力加载中...');
+      },
+      success:function(data){
+        if(data.status == 1){
+          Util.createCouponList(data.data.coupon_list,couponList,channel,'首页');
+          if(data.data.coupon_list.length >= pagesize){
+            page ++;
+            load = 1;
+            loadingText.html('查看更多优惠券');
+          }else{
+            loadingText.html('没有更多了');
+          }
+        }
+      }
+    });
+  }
+
+  //sno
+  var sTabItem = $('.s-tab .tab-list li');
+  sTabItem.on('click',function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      $('.s-tab .tab-list li.active').removeClass('active');
+      _this.addClass('active');
+      var i = _this.data('index');
+      $('.s-tab .content p.active').removeClass('active');
+      $('.s-tab .content p[data-index='+i+']').addClass('active');
+    }
+  });
+});
+</script>

@@ -1,0 +1,34 @@
+<script type="text/javascript" src="http://7xllts.com2.z0.glb.qiniucdn.com/mjs/swiper3.1.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+  globalChannel=27;
+  Util.sideFixedMenu($('.zk-detail'));
+
+  var sw = new Swiper('.swiper-container',{
+    autoplay: 3000,
+    loop:false
+  });
+
+  var timeArea = $('#eventTimeStr');
+  var endTime = $('#endTime').val()*1;
+  setInterval(dateCountDown,1000);
+  function dateCountDown(){
+    var now = Math.floor(new Date().getTime()/1000)*1;
+    if(now > endTime){
+      timeArea.html('优惠券已失效');
+    }else{
+      var gap = endTime - now;
+      var dd = Math.floor(gap/(60*60*24));
+      var hh = Math.floor((gap-dd*60*60*24)/(60*60));
+      var mm = Math.floor((gap-dd*60*60*24-hh*60*60)/60);
+      var ss = gap-dd*60*60*24-hh*60*60-mm*60;
+      var timeStr = '优惠券即将失效:&nbsp;'
+        +(dd>0?'<em>'+dd+'</em>天':'')
+        +(hh>0?'<em>'+hh+'</em>时':'')
+        +(mm>0?'<em>'+mm+'</em>分':'')
+        +(ss>=0?'<em>'+ss+'</em>秒':'');
+      timeArea.html(timeStr);
+    }
+  }
+});
+</script>

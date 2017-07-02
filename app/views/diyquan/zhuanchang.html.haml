@@ -1,0 +1,11 @@
+- title("#{@title}_爱券网")
+- head_desc("专场特卖- #{@title} - 爱券网。")
+- keywords(@title)
+- path(@path)
+- h1(@title)
+
+.wrapper
+  .rel-zk-area
+    %p.head 
+      %span 专场推荐
+  = render partial: "diyquan/quan_list", locals: {coupons: @coupons}

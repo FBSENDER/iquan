@@ -1,0 +1,32 @@
+- title("#{@coupon['title']}优惠券_爱券网")
+- head_desc("#{@coupon['title']},原价#{@coupon['raw_price']}元,领券立减#{@coupon['gap_price']}元,月销#{@coupon['month_sales']}件,淘宝/天猫热销中,优惠券马上领 - 爱券网。")
+- keywords("#{@coupon['title']},#{@coupon['title']}优惠券")
+- path(@path)
+- h1("#{@coupon['title']}优惠券")
+
+.wrapper.zk-detail
+  .wrapper-l.zk-main
+    = render partial: "diyquan/quan_detail_bread", locals: {cate: @coupon['cate_info']['name'], sub_cate: @coupon['subcate_info']['name'], title: @coupon['title']}
+    = render partial: "diyquan/quan_detail_content", locals: {coupon: @coupon, category: @category}
+    %p.sno #{@coupon['title']},原价#{@coupon['raw_price']}元,领券立减#{@coupon['gap_price']}元,月销#{@coupon['month_sales']}件,淘宝/天猫热销中,优惠券马上领。
+  .wrapper-r
+    .rel-zk-area{style: "margin-top: 60px"}
+      %p.head
+        %span 正在热销
+        %a.more-his{href: "/baokuan/", title: "淘宝爆款"} 去抢热门券 - GO
+      .hot-zk-list.clearfix.swiper-container.swiper-container-horizontal
+        .swiper-wrapper
+          - swiper_count = @hot_coupons.size / 4
+          - (0..swiper_count-1).each do |num|
+            .swiper-slide
+              - @hot_coupons[num * 4, 4].each do |coupon|
+                %a{href: "/youhui/#{coupon['coupon_id']}/", title: "#{coupon['title']}", class: "zk-img-item"}
+                  %img.lazy{data: {original: "#{coupon['thumbnail_pic']}"}, alt: "#{coupon['title']}", style: "opacity: 1;"}
+
+.wrapper
+  .rel-zk-area{style: "margin-bottom: 30px;"}
+    %p.head
+      %span 相关推荐
+    .rel-zk-list.clearfix
+      = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
+= render partial: "diyquan/quan_detail_js"

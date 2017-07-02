@@ -1,0 +1,6 @@
+- if keywords
+  .hori-cate-area
+    .hot-keywords
+      .wrapper
+        - keywords.each do |keyword|
+          %a{href: "/zhekou/#{URI.encode(keyword)}/", title: "#{keyword}折扣"} #{keyword}

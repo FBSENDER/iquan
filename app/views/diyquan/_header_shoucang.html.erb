@@ -1,0 +1,161 @@
+<header id="header" class="header">
+
+  <div class="header-bar">
+    <i class="close"></i>
+    <div class="wrapper">
+      <p class="coll-desc">按<strong>Ctrl&nbsp;+&nbsp;D</strong>,把爱券网放入收藏夹，淘宝天猫内部优惠券信息一手掌握！</p>
+    </div>
+  </div>
+
+  <div class="header-top">
+    <div class="wrapper">
+      <a class="logo-area" href="/">
+        <img src="/image/logo.png" alt="爱券网" class="logo">
+        <img src="/image/slogan.png" alt="爱券网" class="slogan">
+      </a>
+      <div class="slogan-area">
+        <i class="slogan-icon slogan-icon-1"></i>
+        <p>正品好货</p>
+        <i class="slogan-icon slogan-icon-2"></i>
+        <p>人工精选</p>
+        <i class="slogan-icon slogan-icon-3"></i>
+        <p>专享优惠券</p>
+        <i class="slogan-icon slogan-icon-4"></i>
+        <p>全场包邮</p>
+      </div>
+      <div class="search-area">
+        <div class="input-area"><i></i><input class="search-input unfocus" type="text" value="输入关键词"></div>
+        <a href="javascript:;" class="search-btn">搜索</a>
+        <p class="err-tip"><i class="err-tip-icon"></i>亲，请复制宝贝全称进行搜索~<i class="arr-up"></i></p>
+      </div>
+    </div>
+  </div>
+  <div class="tab-area-plh">
+    <div class="tab-area">
+      <div class="wrapper">
+        <div class="cate-area">
+          <a data-ga-event="头部:点击:头部_精选推荐" href="/" class="cate-item jxtj active"><span class="cate-rec"></span></a>
+          <a id="header_baokuan" data-ga-event="头部:点击:头部_爆款热销" href="/baokuan/" class="cate-item hot">爆款热销</a>
+          <a id="header_k9" data-ga-event="头部:点击:头部_9块9包邮" href="/9kuai9/" class="cate-item">9块9包邮</a>
+          <a id="header_k20" data-ga-event="头部:点击:头部_20元封顶" href="/shikuaigou/" class="cate-item">20元封顶</a>
+          <a id="header_k20" data-ga-event="头部:点击:头部_领券直播" href="http://taobao.iquan.net/index.php?r=l&u=550416" class="cate-item" target="_blank">领券直播</a>
+        </div>
+        <div class="search-area">
+          <i></i>
+          <input class="search-input unfocus" type="text" value="输入关键词">
+          <p class="err-tip"><i class="err-tip-icon"></i>亲，请复制宝贝全称进行搜索~<i class="arr-up"></i></p>
+        </div>
+      </div>
+
+      <div class="hori-cate-area">
+        <div class="cate-l-1">
+          <div class="wrapper ">
+
+            <a class="" href="/fenlei/nvzhuang/">女装</a>
+
+            <a class="" href="/fenlei/nanzhuang/">男装</a>
+
+            <a class="" href="/fenlei/xiezi/">鞋子</a>
+
+            <a class="" href="/fenlei/xiangbao/">箱包</a>
+
+            <a class="" href="/fenlei/meizhuang/">美妆</a>
+
+            <a class="" href="/fenlei/hufu/">护肤</a>
+
+            <a class="" href="/fenlei/shenghuo/">生活</a>
+
+            <a class="" href="/fenlei/jujia/">居家</a>
+
+            <a class="" href="/fenlei/meishi/">美食</a>
+
+            <a class="" href="/fenlei/neiyi/">内衣</a>
+
+            <a class="" href="/fenlei/yundong/">运动</a>
+
+            <a class="" href="/fenlei/shuma/">数码</a>
+
+            <a class="" href="/fenlei/muying/">母婴</a>
+
+            <a class="" href="/fenlei/peishi/">配饰</a>
+
+            <a class="" href="/fenlei/chengren/">成人</a>
+
+            <a class="" href="/fenlei/chongwu/">宠物</a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+<script type="text/javascript">
+$(function(){
+  var headerBar = $('.header-bar'),
+  tabArea = $('#header .tab-area'),
+  si = $('.search-input'),
+  errTip = $('.err-tip'),
+  sb = $('.search-btn');
+
+  headerBar.find('.close').on('click',function(){
+    headerBar.remove();
+    var d = new Date();
+    d.setTime(d.getTime()+(24*60*60*1000));
+    $.cookie('hideHeaderBar',1,{
+      path:'/',
+      expires:d
+    });
+  });
+
+
+  $(document).on('scroll',function(){
+    var _top = $(document).scrollTop();
+    if(_top >= 400){
+      tabArea.addClass('fixed');
+    }else{
+      tabArea.removeClass('fixed');
+    }
+  });
+
+  si.on('focus',function(){
+    if($(this).val() == '输入关键词'){
+      si.val('');
+    }
+    $(this).removeClass('unfocus');
+  }).on('blur',function(){
+    if($(this).val() == ''){
+      si.val('输入关键词');
+    }
+    $(this).addClass('unfocus');
+  }).on('keyup',function(e){
+    var keycode = e.keyCode,
+    q = $(this).val();
+
+    $('.search-input.unfocus').val(q);
+
+    if(keycode == 13 && q.trim()){
+      goSearch(q.trim());
+    }
+    if(q.trim().match(/http|\.tmall|\.taobao/)){
+      errTip.show();
+    }else{
+      errTip.hide();
+    }
+  });
+
+  sb.on('click',function(){
+    var q = $(si[0]).val();
+    if(q.trim() && q.trim() != '输入关键词'){
+      goSearch(q.trim());
+    }
+  });
+
+  function goSearch(q){
+    if(q.match(/http|\.tmall|\.taobao/)){
+      return;
+    }
+    window.location.href = '/query/?keyword='+q+'';
+  }
+});
+</script>

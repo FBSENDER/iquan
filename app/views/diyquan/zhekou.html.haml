@@ -1,0 +1,12 @@
+- title("【#{@keyword}】_#{@keyword}折扣_优惠券_爱券网")
+- head_desc("淘宝天猫内部隐藏#{@keyword}优惠券,#{@keyword}折扣，20元50元100元，先领券，再下单，专享淘宝折上折优惠。领取#{@keyword}优惠券，查看#{@keyword}打折特价信息 - 爱券网。")
+- keywords("#{@keyword},#{@keyword}优惠,#{@keyword}优惠券,#{@keyword}折扣,特价#{@keyword}")
+- path(@path)
+- h1(@keyword)
+
+= render partial: "diyquan/suggest_keywords", locals: {keywords: @keywords}
+.wrapper.search-result
+  %p.search-res-title "#{@keyword}"搜索结果
+  = render partial: "diyquan/quan_filter"
+  = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
+  = render partial: "diyquan/load_more_search", locals: {path: '/getSearchCouponList', keyword: @keyword, pinyin: '', wclass: '.search-result'}

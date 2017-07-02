@@ -28,4 +28,24 @@ Rails.application.routes.draw do
 
   get "/app/jubao", to: "app#jubao"
   get "/app/hot", to: "app#hot"
+
+  #diyquan
+  get "/getOperElements", to: "diyquan#get_categories"
+  get "/getHomeCouponList", to: "diyquan#get_coupons_index"
+  get "/getFenleiCouponList", to: "diyquan#get_coupons_fenlei"
+  get "/getSearchCouponList", to: "diyquan#get_coupons_search"
+  get "/getHotCouponList", to: "diyquan#get_coupons_hot"
+  get "/getK9CouponList", to: "diyquan#get_coupons_k9"
+  get "/getK20CouponList", to: "diyquan#get_coupons_k20"
+  get "/youhui/:id", to: "diyquan#get_coupon_by_id", id: /\d+/
+  get "/zk/:id", to: "diyquan#old_zk", id: /\d+/
+  get "/buy/:id", to: "diyquan#buy", id: /\d+/
+  get "/zhuanchang/:id", to: "diyquan#zhuanchang", id: /\d+/
+  get "/fenlei/:pinyin", to: "diyquan#fenlei"
+  get "/zhekou/:keyword/", to: "diyquan#zhekou"
+  get "/query/", to: "diyquan#zhekou"
+  get "/query/noresult", to: "diyquan#noresult"
+  get "/baokuan/", to: "diyquan#baokuan"
+  get "/9kuai9/", to: "diyquan#k9"
+  get "/shikuaigou/", to: "diyquan#k20"
 end

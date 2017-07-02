@@ -1,0 +1,11 @@
+- title("淘宝爆款_爱券网")
+- head_desc("爱券网 - 淘宝爆款热销产品,爆款热卖进行中,网站内最热门的优惠券免费领！")
+- keywords("爆款,爆款网,热销,热销产品,热门优惠券")
+- path(@path)
+- h1("淘宝爆款")
+
+.wrapper.collection-wrapper
+  = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
+  = render partial: "diyquan/load_more", locals: {path: '/getHotCouponList', pinyin: '', keyword: '', wclass: '.collection-wrapper'}
+:javascript
+  $('#header_baokuan').addClass('active');

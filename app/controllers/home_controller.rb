@@ -7,7 +7,11 @@ class HomeController < ApplicationController
       return
     end
     if !is_robot? && request.host != "www.zhequan.cc"
-      redirect_to "http://taobao.iquan.net", status: 302
+      if is_device_mobile?
+        redirect_to "http://taobao.iquan.net", status: 302
+      else
+        diyquan_home
+      end
       return
     end
     if @@compete_brands.nil? || Time.now.to_i % 600 == 0
@@ -26,5 +30,11 @@ class HomeController < ApplicationController
       @keywords = brand.keywords
       @description = brand.description
     end
+  end
+
+  def diyquan_home
+    url = "http://z.17gwx.com/web/index/index?client_id=zhekou_app_h5&client_secret=81f454ac98956541b195f2c7f9e53a06&page=0&pagesize=40"
+    @coupons = JSON.parse(Net::HTTP.get(URI(url)))["data"]["coupon_list"]
+    render "diyquan/home", layout: "layouts/diyquan"
   end
 end
