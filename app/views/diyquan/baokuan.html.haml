@@ -5,6 +5,7 @@
 - h1("淘宝爆款")
 
 .wrapper.collection-wrapper
+  %div{style: "margin-top:20px"}
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/load_more", locals: {path: '/getHotCouponList', pinyin: '', keyword: '', wclass: '.collection-wrapper'}
 :javascript

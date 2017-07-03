@@ -8,6 +8,7 @@
 - if @category
   = render partial: "diyquan/header_fenlei", locals: {category: @category}
 .wrapper.home-wrapper
+  %div{style: "margin-top:20px"}
   = render partial: "diyquan/quan_filter"
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/load_more_search", locals: {path: '/getFenleiCouponList', pinyin: @pinyin, keyword: '', wclass: '.home-wrapper'}
