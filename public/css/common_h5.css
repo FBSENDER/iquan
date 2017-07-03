@@ -1,0 +1,149 @@
+@media screen and (max-width: 641px) {
+    *{
+        -webkit-tap-highlight-color: transparent;
+    }
+    .header{
+        height: 40px;
+    }
+    .header .header-top{
+        display: none;
+    }
+    .header .header-bar{
+        display: none;
+    }
+    .header .tab-area .search-area{
+        display: none;
+    }
+    .header .tab-area .cate-area{
+        width: 100%;
+        height: 40px;
+        overflow: hidden;
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+    .header .tab-area .cate-area .cate-item{
+        float: none;
+        display: inline-block;
+    }
+    .wrapper{
+        width: 100%;
+    }
+    .wrapper-l{
+        width: 100%;
+    }
+    .wrapper-r{
+        display: none;
+    }
+    .zk-list{
+        position: relative;
+        margin-right: 0;
+    }
+    .zk-item{
+        position: relative;
+        width: 47%;
+        margin: 0 0 20px 2%;
+    }
+    .zk-item .img-area{
+        height: 176px;
+    }
+    .zk-item .img-area a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .zk-item .img-area a img{
+        max-width: 100%;
+        display: inline-block;
+    }
+    .zk-item .title-area .title{
+        width: 100%;
+        padding-left: 0;
+    }
+    .zk-item .title-area .sold {
+        display: none;
+    }
+    .zk-item .info .buy-area{
+        display: none;
+    }
+    .zk-main .bread-area{
+        padding: 15px;
+        line-height: 24px;
+    }
+    .zk-item .raw-price-area .sold{
+        display: none;
+    }
+    .zk-content{
+        width: auto;
+        height: auto;
+    }
+    .zk-content .img-area{
+        float: none;
+        width: auto;
+        height: auto;
+    }
+    .zk-content .info-area{
+        float: none;
+        width: auto;
+        padding-left: 0;
+    }
+    .zk-content .info-area .title{
+        height: auto;
+        padding-top: 10px;
+    }
+    .zk-content .info-area .buy-area{
+        height: auto;
+    }
+    .rel-zk-area .rel-zk-list{
+        position: relative;
+        margin-right: 0;
+    }
+    .zk-content .info-area .buy-area .btn{
+        float: none;
+        width: 100%;
+    }
+    .zk-content .info-area .buy-area .btn-title{
+        float: none;
+        text-align: center;
+    }
+    .zk-content .info-area .tags .tag-item{
+        margin-top: 10px;
+    }
+    .search-res-title{
+        padding-left: 15px;
+    }
+    .home-wrapper{
+        margin-top: 20px;
+    }
+    .home-oper-area{
+        display: none;
+    }
+    .hori-cate-area .cate-l-1 .wrapper{
+        overflow: hidden;
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+    .hori-cate-area .cate-l-1 a{
+        display: inline-block;
+    }
+    .hori-cate-area .cate-l-2{
+        display: none;
+    }
+    .order-area .price-filter{
+        display: none;
+    }
+    .order-area .sort-type li{
+        margin: 0 8px;
+    }
+    .hori-cate-area .hot-keywords{
+        display: none;
+    }
+    .footer-element-area{
+        display: none;
+    }
+    .footer{
+        display: none;
+    }
+}
