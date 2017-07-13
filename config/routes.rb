@@ -43,7 +43,12 @@ Rails.application.routes.draw do
   get "/zhuanchang/:id", to: "diyquan#zhuanchang", id: /\d+/
   get "/fenlei/:pinyin", to: "diyquan#fenlei"
   get "/zhekou/:keyword/", to: "diyquan#zhekou"
-  get "/query/", to: "diyquan#zhekou"
+  get "/zhekou/:keyword/rexiao/", to: "diyquan#zhekou_rexiao"
+  get "/zhekou/:keyword/tejia/", to: "diyquan#zhekou_tejia"
+  get "/zhekou/:keyword/dae/", to: "diyquan#zhekou_dae"
+  get "/zhekou/:keyword/yizhe/", to: "diyquan#zhekou_yizhe"
+  get "/query/", to: "diyquan#search"
+
   get "/query/noresult", to: "diyquan#noresult"
   get "/baokuan/", to: "diyquan#baokuan"
   get "/9kuai9/", to: "diyquan#k9"

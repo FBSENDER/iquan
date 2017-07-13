@@ -3,7 +3,11 @@
 - keywords("折券,折券网,爱券,爱券网,爱卷,爱卷网,内部优惠券,淘宝优惠券,天猫优惠券,优惠券平台,优惠券领取,找券网,搜券网,搜券券,好券网,拿券网,淘券网,猪猪券,妈妈券,券宝宝,淘券网,抢券网")
 - h1("优惠券网站 - 天猫优惠券 - 淘宝优惠券")
 
-= render partial: "diyquan/home_adzone"
-.wrapper.home-wrapper
-  = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/load_more", locals: {path: '/getHomeCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
+.wrapper
+  = render partial: "m_diyquan/header", locals: {need_sort: false, need_ads: false}
+  .recommend-section
+    .banner-area.swiper-container.swiper-container-horizontal
+      #bannerArea.swiper-wrapper
+    .fixed-banner-area
+    = render partial: "m_diyquan/page_js", locals: {path: '/getHomeCouponList', pinyin: '', keyword: '', pagesize: 40, sort_type: 0}
+    = render partial: "m_diyquan/danpai_list", locals: {coupons: @coupons}

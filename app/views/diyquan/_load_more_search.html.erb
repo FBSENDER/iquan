@@ -7,7 +7,7 @@ $(function(){
   //Util.sideFixedMenu($('<%= wclass %>'));
 
   var couponList = $('#couponList'),loadingText = $('.loading-text');
-  var page = 1,pagesize = 20,load = 1, sort = 0,price = 0,channel = 27;
+  var page = 1,pagesize = <%= pagesize %>,load = 1, sort = <%= sort_type %>,price = 0,channel = 27;
 
   var orderTab = $('.order-area .sort-type li');
   orderTab.on('click',function(){

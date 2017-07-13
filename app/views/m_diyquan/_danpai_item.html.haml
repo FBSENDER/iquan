@@ -1,0 +1,27 @@
+- progress = (70..98).to_a.sample
+- buy_url = "/buy/#{coupon["item_id"]}/?activity_id=#{coupon['url'].match(/activityId=(\w+)/)[1]}"
+%a{href: "#{buy_url}", target: "_blank"}
+  .coupon-card-v2
+    .pic-area.lazy{data: {original: "#{coupon['thumbnail_pic']}"}}
+    .info-area
+      .info-top
+        %p.title #{coupon['title']}
+        %p.stat
+          - if coupon['platform_id'] == 2
+            %span.platform.tmall
+          - else
+            %span.platform.taobao
+          %span> 原价￥#{coupon['raw_price']}元
+      .info-bottom
+        .price-area
+          %span.qhj 券后价
+          %span.yen &nbsp;&nbsp;
+          %span.price.number-font> #{coupon['coupon_price']}
+          %span.quan-btn
+            %em.number-font #{coupon['gap_price']}
+            %span> 元券
+        .progress-area
+          %span.pro-desc 已领#{progress}%
+          .pro-container
+            .pro{style: "width: #{progress}%"}
+

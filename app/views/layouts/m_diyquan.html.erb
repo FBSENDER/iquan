@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title><%= yield(:title) %></title>
+    <meta name="keywords" content="<%= yield(:keywords)%>">
+    <meta name="description" content="<%= yield(:head_desc)%>">
+    <link rel="canonical" href="http://www.iquan.net<%= yield(:path) %>">
+    <meta http-equiv="mobile-agent" content="format=html5;url=http://m.iquan.net<%= yield(:path) %>">
+    <meta name="mobile-agent" content="format=html5;url=http://m.iquan.net<%= yield(:path) %>">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="http://m.ibantang.com/css/common.css">
+    <link rel="stylesheet" href="http://m.ibantang.com/css/zhekou.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://7xllts.com2.z0.glb.qiniucdn.com/mjs/swiper3.1.0.min.js"></script>
+  </head>
+
+  <body>
+    <h1 class="sno"><%= yield(:h1)%></h1>
+    <%= yield %>
+    <%= render partial: "layouts/ga_whole_js_mobile" %>
+  </body>
+</html>

@@ -5,10 +5,7 @@
 - path(@path)
 - h1("#{cate_name}内部优惠券")
 
-- if @category
-  = render partial: "diyquan/header_fenlei", locals: {category: @category}
-.wrapper.home-wrapper
-  %div{style: "margin-top:20px"}
-  = render partial: "diyquan/quan_filter"
-  = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/load_more_search", locals: {path: '/getFenleiCouponList', pinyin: @pinyin, keyword: '', sort_type: 0, pagesize: 40, wclass: '.home-wrapper'}
+.wrapper
+  = render partial: "m_diyquan/header", locals: {need_sort: true, need_ads: false}
+  = render partial: "m_diyquan/page_js", locals: {path: '/getFenleiCouponList', pinyin: @pinyin, keyword: '', pagesize: 40, sort_type: 0}
+  = render partial: "m_diyquan/shuangpai_list", locals: {coupons: @coupons}

@@ -7,6 +7,6 @@
 .wrapper.collection-wrapper
   %div{style: "margin-top:20px"}
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/load_more", locals: {path: '/getHotCouponList', pinyin: '', keyword: '', wclass: '.collection-wrapper'}
+  = render partial: "diyquan/load_more", locals: {path: '/getHotCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.collection-wrapper'}
 :javascript
   $('#header_baokuan').addClass('active');

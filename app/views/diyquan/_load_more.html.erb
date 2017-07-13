@@ -14,7 +14,7 @@ $(function(){
   //Util.sideFixedMenu($('<%= wclass %>'));
 
   var couponList = $('#couponList'),loadingText = $('.loading-text');
-  var page = 1,pagesize = 20,load = 1,channel = 27;
+  var page = 1,pagesize = <%= pagesize %>,load = 1,channel = 27;
 
   $(document).on('scroll',function(){
     if(page%4 > 0){

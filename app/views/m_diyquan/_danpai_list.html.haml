@@ -1,0 +1,15 @@
+.coupon-list
+  %p.coupon-list-desc
+    %b
+    %i
+    %span
+      加入收藏，时时关注最优惠！
+    %i
+    %b
+  #couponList1
+    - coupons.each do |coupon|
+      = render partial: "m_diyquan/danpai_item", locals: {coupon: coupon}
+  %p.txt-loading
+  .search-fixed
+    %a{href: "/query/"}
+      %i

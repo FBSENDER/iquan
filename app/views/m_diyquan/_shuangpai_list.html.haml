@@ -1,0 +1,9 @@
+.cate-section{style: "display:block"}
+  .coupon-list
+    #couponList2
+      - coupons.each do |coupon|
+        = render partial: "m_diyquan/shuangpai_item", locals: {coupon: coupon}
+  %p.txt-loading
+  .search-fixed
+    %a{href: "/query/"}
+      %i

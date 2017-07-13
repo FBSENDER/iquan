@@ -4,9 +4,7 @@
 - path(@path)
 - h1("十块购")
 
-.wrapper.collection-wrapper
-  %div{style: "margin-top:20px"}
-  = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/load_more", locals: {path: '/getK20CouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.collection-wrapper'}
-:javascript
-  $('#header_k20').addClass('active');
+.wrapper
+  = render partial: "m_diyquan/header", locals: {need_sort: false, need_ads: true}
+  = render partial: "m_diyquan/page_js", locals: {path: '/getK20CouponList', pinyin: '', keyword: '', pagesize: 20, sort_type: 0}
+  = render partial: "m_diyquan/shuangpai_list", locals: {coupons: @coupons}

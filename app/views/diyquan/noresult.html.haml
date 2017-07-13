@@ -8,4 +8,4 @@
 .wrapper.search-result
   %p.search-res-title 没有找到："#{@keyword}"，为您推荐：
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/load_more_search", locals: {path: '/getHotCouponList', keyword: '', pinyin: '', wclass: '.search-result'}
+  = render partial: "diyquan/load_more_search", locals: {path: '/getHotCouponList', keyword: '', pinyin: '', sort_type: 0, pagesize: 20, wclass: '.search-result'}
