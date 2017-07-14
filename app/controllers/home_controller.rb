@@ -2,9 +2,16 @@ require 'seo_domain'
 require 'net/http'
 class HomeController < ApplicationController
   @@compete_brands = nil
+  @@product_brands = nil
   def index
     if request.host == "www.ichaopai.cc"
       render "ichaopai"
+      return
+    end
+    if !is_robot? && request.host.include?("pinpai.iquan.net")
+      brand = ProductBrand.where(host: request.host, status: 1).select(:search_keyword).take
+      not_found if brand.nil?
+      redirect_to "/zhekou/#{URI.encode(brand.search_keyword)}/", status: 302
       return
     end
     if !is_robot? && request.host != "www.zhequan.cc"
@@ -19,7 +26,11 @@ class HomeController < ApplicationController
     if @@compete_brands.nil? || Time.now.to_i % 600 == 0
       @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
     end
+    if @@product_brands.nil? || Time.now.to_i % 610 == 0
+      @@product_brands = ProductBrand.where(status: 1).select(:title, :keywords, :host, :comments).to_a
+    end
     @compete_brands = @@compete_brands
+    @product_brands = @@product_brands
     @path = "/"
     if request.host == "www.zhequan.cc"
       render "zhequan"
@@ -31,6 +42,14 @@ class HomeController < ApplicationController
       @title = brand.title
       @keywords = brand.keywords
       @description = brand.description
+    end
+    if request.host.include?(".pinpai.iquan.net")
+      brand = ProductBrand.where(host: request.host).take
+      not_found if brand.nil?
+      @title = brand.title
+      @keywords = brand.keywords
+      @description = brand.description
+      @comments = brand.comments
     end
   end
 
