@@ -155,7 +155,7 @@ $(function(){
     if(q.match(/http|\.tmall|\.taobao/)){
       return;
     }
-    window.location.href = '/query/?keyword='+q+'';
+    window.location.href = '/zhekou/' + encodeURIComponent(q) + '/';
   }
 });
 </script>
