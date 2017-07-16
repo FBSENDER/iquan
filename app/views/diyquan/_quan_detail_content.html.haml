@@ -49,8 +49,9 @@
           元
     .tags
       .tag-list
-        - category.each do |cate|
-          %a{href: "/fenlei/#{cate['pinyin']}/", title: "#{cate['name']}内部优惠券", class: "tag-item"} #{cate['name']}
+        - if category
+          - category.each do |cate|
+            %a{href: "/fenlei/#{cate['pinyin']}/", title: "#{cate['name']}内部优惠券", class: "tag-item"} #{cate['name']}
       .coll
         %i
         按

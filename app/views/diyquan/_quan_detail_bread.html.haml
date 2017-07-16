@@ -1,10 +1,12 @@
 %p.bread-area
   %span 内部优惠券：
   %a{href: "/", title: "爱券网"} 爱券网
-  %span &nbsp;&nbsp;#{">"}&nbsp;&nbsp;
-  %a{href: "/zhekou/#{URI.encode(cate)}/", title: "#{cate}折扣"} #{cate}
-  %span &nbsp;&nbsp;#{">"}&nbsp;&nbsp;
-  %a{href: "/zhekou/#{URI.encode(sub_cate)}/", title: "#{sub_cate}折扣"} #{sub_cate}
+  - if cate
+    %span &nbsp;&nbsp;#{">"}&nbsp;&nbsp;
+    %a{href: "/zhekou/#{URI.encode(cate)}/", title: "#{cate}折扣"} #{cate}
+  - if sub_cate
+    %span &nbsp;&nbsp;#{">"}&nbsp;&nbsp;
+    %a{href: "/zhekou/#{URI.encode(sub_cate)}/", title: "#{sub_cate}折扣"} #{sub_cate}
   %span &nbsp;&nbsp;#{">"}&nbsp;&nbsp;
   %span #{title}
 
