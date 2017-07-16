@@ -36,6 +36,10 @@ class HomeController < ApplicationController
       render "zhequan"
       return
     end
+    if request.host == "www.xiongmao123.com"
+      render "xiongmao"
+      return
+    end
     if request.host.include?(".youhui.iquan.net")
       brand = CompeteBrand.where(host: request.host).take
       not_found if brand.nil?
