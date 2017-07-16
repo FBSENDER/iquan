@@ -73,7 +73,7 @@ function create_coupon_list(clist){
           platformstr = 'tmall';
           break;
       }
-      htmlstr += '<a href="/youhui/'+ zk.coupon_id +'/">';
+      htmlstr += '<a href="/youhui/'+ zk.coupon_id +'/" target="_blank">';
       htmlstr += '<div class="coupon-card-v2">';
       htmlstr += '<div class="pic-area lazy new" data-original="'+ zk.thumbnail_pic +'"></div>';
       htmlstr += '<div class="info-area">';
@@ -110,7 +110,7 @@ function create_coupon_list(clist){
     var _w = $('.wrapper').width(),picH = (_w-25)/2;
     for(var i=0,len=clist.length;i<len;i++){
       var zk = clist[i];
-      htmlstr += '<a href="/youhui/'+ zk.coupon_id +'/">';
+      htmlstr += '<a href="/youhui/'+ zk.coupon_id +'/" target="_blank">';
       htmlstr += '<div class="product-item-t2" style="width:'+picH+'px;">';
       htmlstr += '<div class="pic lazy new" data-original="'+ zk.thumbnail_pic +'" style="width: '+picH+'px; height: '+picH+'px;"></div>';
       htmlstr += '<p class="title">';
