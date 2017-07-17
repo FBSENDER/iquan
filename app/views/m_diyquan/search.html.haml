@@ -6,9 +6,10 @@
 .wrapper
   .search-main
     .search-area
-      .inner
-        %i
-        %input{id: "searchInput", class: "search-input", placeholder: "搜索优惠券", type: "search"}
+      %form{action: "#", onsubmit: "return false;"}
+        .inner
+          %i
+          %input{id: "searchInput", class: "search-input", placeholder: "搜索优惠券", type: "search"}
   %div
     %p{style: "background-color:white;padding:0 10px 10px 10px"}
       - @hot_keywords.each do |keyword|
