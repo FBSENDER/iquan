@@ -9,7 +9,7 @@
       %form{action: "#", onsubmit: "return false;"}
         .inner
           %i
-          %input{id: "searchInput", name: "searchInput", class: "search-input", placeholder: "搜索优惠券"}
+          %input{id: "searchInput", name: "searchInput", class: "search-input", placeholder: "搜索优惠券",type: "text"}
   %div
     %p{style: "background-color:white;padding:0 10px 10px 10px"}
       - @hot_keywords.each do |keyword|
