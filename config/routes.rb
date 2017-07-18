@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get "/app/hot", to: "app#hot"
 
   #diyquan
+  post "/refreshCookies", to: "diyquan#refresh_cookies"
   get "/getOperElements", to: "diyquan#get_categories"
   get "/getHomeCouponList", to: "diyquan#get_coupons_index"
   get "/getFenleiCouponList", to: "diyquan#get_coupons_fenlei"
