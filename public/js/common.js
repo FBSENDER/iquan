@@ -201,7 +201,7 @@ Util.createCouponList = function(cl,obj,channel,gaPage){
     var htmlstr = '<div>';
     for(var i=0,len=cl.length;i<len;i++){
         var z = cl[i];
-        var re = /activityId=(\w+)/;
+        var re = /activityId=(\w*)/;
         var buy_url = '/buy/' + z.item_id + '/?activity_id=' + re.exec(z.url)[1];
         var platform = '',platformPic = '';
         switch (z.platform_id*1){
