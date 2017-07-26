@@ -4,6 +4,9 @@
       .yl
         %p.head 友情链接：
         .yl-links
+          - if links
+            - links.each do |link|
+              %a{href: "#{link.url}", target: "_blank"} #{link.anchor}
       .logo-slogan
         .qr-code
           %a{href: "/"}

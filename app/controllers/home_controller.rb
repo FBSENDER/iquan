@@ -1,4 +1,5 @@
 require 'seo_domain'
+require 'iquan'
 require 'net/http'
 class HomeController < ApplicationController
   @@compete_brands = nil
@@ -60,6 +61,7 @@ class HomeController < ApplicationController
   def diyquan_home
     url = "http://z.17gwx.com/web/index/index?client_id=zhekou_app_h5&client_secret=81f454ac98956541b195f2c7f9e53a06&page=0&pagesize=20"
     @coupons = JSON.parse(Net::HTTP.get(URI(url)))["data"]["coupon_list"]
+    @links = Link.where(status: 1).to_a
     render "diyquan/home", layout: "layouts/diyquan"
   end
 

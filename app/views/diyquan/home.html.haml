@@ -7,3 +7,5 @@
 .wrapper.home-wrapper
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/load_more", locals: {path: '/getHomeCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
+
+= render partial: "diyquan/home_footer", locals: {links: @links}

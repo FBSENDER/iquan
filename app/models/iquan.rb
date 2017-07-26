@@ -5,3 +5,7 @@ end
 class ICookie < ApplicationRecord
   self.table_name = 'iquan_cookies'
 end
+
+class Link < ApplicationRecord
+  self.table_name = 'iquan_links'
+end

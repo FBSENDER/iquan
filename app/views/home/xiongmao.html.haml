@@ -9,11 +9,18 @@
       %p.content 熊猫优选官网 - 1折券、2折券、5折券、对折券，淘宝天猫优惠券、折扣券免费领。熊猫优选官方下载，网红力荐。熊猫优选app最新版,IOS 安卓官方下载。
       %p.content 为大家准备了：淘宝内部优惠券网站汇总
 
-    - @compete_brands.each do |brand|
+    - @compete_brands.each_with_index do |brand, index|
       .col-md-12
         %h2.page-header #{brand.title}
         %p.content 网站介绍：#{brand.description}
-        %p.content 关键词：#{brand.keywords}
+        %p.content 
+          关键词：#{brand.keywords} 
+          - if index % 6 == 0
+            %strong 熊猫优选
+          - if index % 6 == 2
+            %strong 熊猫
+          - if index % 6 == 4
+            %strong 优选
         %p.content
           直达链接：
           %a{href: "http://#{brand.host}", target: "_blank"} #{brand.title}
