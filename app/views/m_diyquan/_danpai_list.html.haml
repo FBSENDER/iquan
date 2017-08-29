@@ -10,6 +10,9 @@
     - coupons.each do |coupon|
       = render partial: "m_diyquan/danpai_item", locals: {coupon: coupon}
   %p.txt-loading
+  .download-fixed
+    %a{href: "/lanlan_download/", target: "_blank"}
+      %i
   .search-fixed
     %a{href: "/query/"}
       %i

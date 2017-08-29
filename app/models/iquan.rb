@@ -9,3 +9,7 @@ end
 class Link < ApplicationRecord
   self.table_name = 'iquan_links'
 end
+
+class AppDownload < ApplicationRecord
+  self.table_name = 'iquan_app_downloads'
+end
