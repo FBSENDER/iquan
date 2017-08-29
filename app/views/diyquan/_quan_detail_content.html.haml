@@ -1,10 +1,13 @@
 - buy_url = "/buy/#{coupon["item_id"]}/?activity_id=#{coupon['url'].match(/activityId=(\w*)/)[1]}"
 .zk-content
+  .qrcode
+    %img{src: "/image/love1.jpg", alt: "爱券app下载", height: "100px", width: "100px"}
+    %p.desc 扫码下载APP~
   .img-area
     %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank"}
       %img{src: "#{coupon['pic']}", alt: "#{coupon['title']}"}
   .info-area
-    %h1.title.elli
+    %h1.title.elli{style: "width:400px"}
       - if coupon['post_free'] == 1
         %span 包邮
       #{coupon['title']}
