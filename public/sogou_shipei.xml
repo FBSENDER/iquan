@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- XML文件需以utf-8编码 -->
+<urlset>
+  <url>
+    <!-- 必填,是具体某个链接的定义入口，每一条数据都要用<url>和</url>包含在其中 -->
+    <loc>http://www.iquan.net</loc>
+    <!-- 必填,pattern适用的站点频道,长度不得超过256字节 -->
+    <data>
+      <!-- 必填-->
+      <display>
+        <!-- 必填，所有映射规则和适用版本都要用<display>和</display>包含在其中-->
+        <pc_url_pattern>http://www.iquan.net/zhuanchang/(\d+)/</pc_url_pattern>
+        <!-- 必填，填写pc待映射页面的url或urlpattern-->
+        <url_pattern>http://m.iquan.net/zhuanchang/${1}/</url_pattern>
+        <!-- 必填，填写映射到的wap站页面的url或urlpattern-->
+        <pc_sample>http://www.iquan.net/zhuanchang/3097/</pc_sample>
+        <!-- 必填，给出1个能适用此映射规则的WEB URL示例-->
+        <wap_sample>http://m.iquan.net/zhuanchang/3097/</wap_sample>
+        <!-- 必填，给出1个能适用此映射规则的WAP URL示例-->
+        <version>7</version>
+        <!-- 必填，填写映射规则适合的版本:1只适用于简版，2只适用于彩版 -->
+        <!-- 5只适用于移动版，6适用于彩版和移动版，7适用于简版、彩版、移动版 -->
+      </display>
+    </data>
+  </url>
+  <url>
+    <!-- 必填,是具体某个链接的定义入口，每一条数据都要用<url>和</url>包含在其中 -->
+    <loc>http://www.iquan.net</loc>
+    <!-- 必填,pattern适用的站点频道,长度不得超过256字节 -->
+    <data>
+      <!-- 必填-->
+      <display>
+        <!-- 必填，所有映射规则和适用版本都要用<display>和</display>包含在其中-->
+        <pc_url_pattern>http://www.iquan.net/fenlei/(\w+)/</pc_url_pattern>
+        <!-- 必填，填写pc待映射页面的url或urlpattern-->
+        <url_pattern>http://m.iquan.net/fenlei/${1}/</url_pattern>
+        <!-- 必填，填写映射到的wap站页面的url或urlpattern-->
+        <pc_sample>http://www.iquan.net/fenlei/nvzhuang/</pc_sample>
+        <!-- 必填，给出1个能适用此映射规则的WEB URL示例-->
+        <wap_sample>http://m.iquan.net/fenlei/nvzhuang/</wap_sample>
+        <!-- 必填，给出1个能适用此映射规则的WAP URL示例-->
+        <version>7</version>
+        <!-- 必填，填写映射规则适合的版本:1只适用于简版，2只适用于彩版 -->
+        <!-- 5只适用于移动版，6适用于彩版和移动版，7适用于简版、彩版、移动版 -->
+      </display>
+    </data>
+  </url>
+  <url>
+    <!-- 必填,是具体某个链接的定义入口，每一条数据都要用<url>和</url>包含在其中 -->
+    <loc>http://www.iquan.net</loc>
+    <!-- 必填,pattern适用的站点频道,长度不得超过256字节 -->
+    <data>
+      <!-- 必填-->
+      <display>
+        <!-- 必填，所有映射规则和适用版本都要用<display>和</display>包含在其中-->
+        <pc_url_pattern>http://www.iquan.net/youhui/(\d+)/</pc_url_pattern>
+        <!-- 必填，填写pc待映射页面的url或urlpattern-->
+        <url_pattern>http://m.iquan.net/youhui/${1}/</url_pattern>
+        <!-- 必填，填写映射到的wap站页面的url或urlpattern-->
+        <pc_sample>http://www.iquan.net/youhui/15159306/</pc_sample>
+        <!-- 必填，给出1个能适用此映射规则的WEB URL示例-->
+        <wap_sample>http://m.iquan.net/youhui/15159306/</wap_sample>
+        <!-- 必填，给出1个能适用此映射规则的WAP URL示例-->
+        <version>7</version>
+        <!-- 必填，填写映射规则适合的版本:1只适用于简版，2只适用于彩版 -->
+        <!-- 5只适用于移动版，6适用于彩版和移动版，7适用于简版、彩版、移动版 -->
+      </display>
+    </data>
+  </url>
+  <url>
+    <!-- 必填,是具体某个链接的定义入口，每一条数据都要用<url>和</url>包含在其中 -->
+    <loc>http://www.iquan.net</loc>
+    <!-- 必填,pattern适用的站点频道,长度不得超过256字节 -->
+    <data>
+      <!-- 必填-->
+      <display>
+        <!-- 必填，所有映射规则和适用版本都要用<display>和</display>包含在其中-->
+        <pc_url_pattern>http://www.iquan.net/zhekou/([%\w]+)/</pc_url_pattern>
+        <!-- 必填，填写pc待映射页面的url或urlpattern-->
+        <url_pattern>http://m.iquan.net/zhekou/${1}/</url_pattern>
+        <!-- 必填，填写映射到的wap站页面的url或urlpattern-->
+        <pc_sample>http://www.iquan.net/zhekou/%E5%A5%B3%E8%A3%85/</pc_sample>
+        <!-- 必填，给出1个能适用此映射规则的WEB URL示例-->
+        <wap_sample>http://m.iquan.net/zhekou/%E5%A5%B3%E8%A3%85/</wap_sample>
+        <!-- 必填，给出1个能适用此映射规则的WAP URL示例-->
+        <version>7</version>
+        <!-- 必填，填写映射规则适合的版本:1只适用于简版，2只适用于彩版 -->
+        <!-- 5只适用于移动版，6适用于彩版和移动版，7适用于简版、彩版、移动版 -->
+      </display>
+    </data>
+  </url>
+  <!-- 另一条数据 -->
+</urlset> 
+

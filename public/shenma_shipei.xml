@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- XML文件需以utf-8编码 -->
+<urlset>
+  <url>
+    <!-- 必填,是具体某个链接的定义入口，每一条数据都要用<url>和</url>包含在其中 -->
+    <loc>http://www.iquan.net</loc>
+    <!-- 必填,pattern适用的站点频道,长度不得超过256字节 -->
+    <data>
+      <!-- 必填-->
+      <display>
+        <!-- 必填，所有映射规则和适用版本都要用<display>和</display>包含在其中-->
+        <pc_url_pattern>http://www.iquan.net/zhuanchang/(\d+)/</pc_url_pattern>
+        <!-- 必填，填写pc待映射页面的url或urlpattern-->
+        <html5_url_pattern>http://m.iquan.net/zhuanchang/${1}</html5_url_pattern>
+      </display>
+    </data>
+  </url>
+  <url>
+    <!-- 必填,是具体某个链接的定义入口，每一条数据都要用<url>和</url>包含在其中 -->
+    <loc>http://www.iquan.net</loc>
+    <!-- 必填,pattern适用的站点频道,长度不得超过256字节 -->
+    <data>
+      <!-- 必填-->
+      <display>
+        <!-- 必填，所有映射规则和适用版本都要用<display>和</display>包含在其中-->
+        <pc_url_pattern>http://www.iquan.net/fenlei/(\w+)/</pc_url_pattern>
+        <!-- 必填，填写pc待映射页面的url或urlpattern-->
+        <html5_url_pattern>http://m.iquan.net/fenlei/${1}/</html5_url_pattern>
+      </display>
+    </data>
+  </url>
+  <url>
+    <!-- 必填,是具体某个链接的定义入口，每一条数据都要用<url>和</url>包含在其中 -->
+    <loc>http://www.iquan.net</loc>
+    <!-- 必填,pattern适用的站点频道,长度不得超过256字节 -->
+    <data>
+      <!-- 必填-->
+      <display>
+        <!-- 必填，所有映射规则和适用版本都要用<display>和</display>包含在其中-->
+        <pc_url_pattern>http://www.iquan.net/youhui/(\d+)/</pc_url_pattern>
+        <!-- 必填，填写pc待映射页面的url或urlpattern-->
+        <html5_url_pattern>http://m.iquan.net/youhui/${1}/</html5_url_pattern>
+      </display>
+    </data>
+  </url>
+</urlset> 
+
