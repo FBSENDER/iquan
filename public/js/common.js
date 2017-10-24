@@ -157,7 +157,7 @@ Util.sideFixedMenu = function(container,st){
     htmlStr += '<p>返回顶部</p>';
     htmlStr += '</div>';
 
-    htmlStr += '<a href="/9kuai9/"><div class="menu-item" id="toHis">';
+    htmlStr += '<a href="http://www.iquan.net/9kuai9/"><div class="menu-item" id="toHis">';
     htmlStr += '<i class="history"></i>';
     htmlStr += '<p>十元包邮</p>';
     htmlStr += '</div></a>';
@@ -218,7 +218,7 @@ Util.createCouponList = function(cl,obj,channel,gaPage){
         }
         htmlstr += '<div class="zk-item">';
         htmlstr += '<div class="img-area">';
-        htmlstr += '<a target="_blank" href="/youhui/'+ z.coupon_id +'/'+(channel && channel!=27?'?channel='+channel:'')+'">';
+        htmlstr += '<a target="_blank" href="http://www.iquan.net/youhui/'+ z.coupon_id +'/'+(channel && channel!=27?'?channel='+channel:'')+'">';
         htmlstr += '<div data-ga-event="商品_右上角领券:点击:'+ gaPage +'" class="lq">';
         htmlstr += '<div class="lq-t">';
         htmlstr += '<p class="lq-t-d1">领优惠券</p>';
