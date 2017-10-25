@@ -5,10 +5,6 @@ class HomeController < ApplicationController
   @@compete_brands = nil
   @@product_brands = nil
   def index
-    if request.host == "www.17430.com.cn" && is_device_mobile?
-      redirect_to "http://m.17430.com.cn", status: 302
-      return 
-    end
     if !is_robot? 
       if is_device_mobile?
         #m_diyquan_home
