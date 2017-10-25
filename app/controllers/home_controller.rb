@@ -9,6 +9,10 @@ class HomeController < ApplicationController
       render "ichaopai"
       return
     end
+    if request.host == "www.iquan.net" && is_device_mobile?
+      redirect_to "http://m.iquan.net", status: 302
+      return
+    end
     if !is_robot? && request.host.include?("pinpai.iquan.net")
       brand = ProductBrand.where(host: request.host, status: 1).select(:search_keyword).take
       not_found if brand.nil?
