@@ -1,4 +1,6 @@
-- buy_url = "/buy/#{coupon["item_id"]}/?activity_id=#{coupon['url'].match(/activityId=(\w*)/)[1]}"
+- aaid = coupon['url'].match(/activityId=(\w*)/)
+- aaid = aaid.nil? ? '' : aaid[1]
+- buy_url = "/buy/#{coupon["item_id"]}/?activity_id=#{aaid}"
 .zk-item
   .img-area
     %a{href: "/youhui/#{coupon['coupon_id']}/", title: "#{coupon['title']}", target: "_blank"}
