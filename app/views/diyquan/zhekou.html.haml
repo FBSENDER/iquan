@@ -9,6 +9,7 @@
   %a{href: "/zhekou/#{URI.encode(@keyword)}/tejia/"} 特价#{@keyword}
   %a{href: "/zhekou/#{URI.encode(@keyword)}/dae/"} #{@keyword}大额优惠券
   %a{href: "/zhekou/#{URI.encode(@keyword)}/yizhe/"} 一折#{@keyword}
+= render partial: "diyquan/header_fenlei_zhekou"
 = render partial: "diyquan/suggest_keywords", locals: {keywords: @keywords}
 .wrapper.search-result
   %p.search-res-title "#{@keyword}"搜索结果

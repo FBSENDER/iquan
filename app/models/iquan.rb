@@ -13,3 +13,7 @@ end
 class AppDownload < ApplicationRecord
   self.table_name = 'iquan_app_downloads'
 end
+
+class Page < ApplicationRecord
+  self.table_name = 'iquan_pages'
+end
