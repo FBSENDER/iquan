@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   get "/zhekou/:keyword/yizhe/", to: "diyquan#zhekou_yizhe"
   get "/query/", to: "diyquan#search"
   get "/lanlan_download/", to: "diyquan#lanlan_download"
+  get "/g_:pinyin/", to: "diyquan#page"
 
   get "/query/noresult", to: "diyquan#noresult"
   get "/baokuan/", to: "diyquan#baokuan"

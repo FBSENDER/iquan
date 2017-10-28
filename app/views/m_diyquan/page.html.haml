@@ -1,0 +1,10 @@
+- title(@title)
+- head_desc(@description)
+- keywords(@keywords)
+- path(@path)
+- h1(@title)
+
+.wrapper
+  = render partial: "m_diyquan/header", locals: {need_sort: true, need_ads: false}
+  = render partial: "m_diyquan/page_js", locals: {path: '/getSearchCouponList', pinyin: '', keyword: @search_keyword, pagesize: 20, sort_type: @sort_type}
+  = render partial: "m_diyquan/shuangpai_list", locals: {coupons: @coupons}
