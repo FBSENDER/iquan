@@ -9,6 +9,11 @@
 .wrapper.search-result{style: "margin-top:10px"}
   .sno
     %p #{@desc_ext}
+  .sno
+    %p
+      相关推荐：
+      - @keywords.split(',').each do |k|
+        %strong #{k}
   = render partial: "diyquan/quan_filter"
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/load_more_search", locals: {path: '/getSearchCouponList', keyword: @search_keyword, pinyin: '', sort_type: @sort_type, pagesize: 40, wclass: '.search-result'}
