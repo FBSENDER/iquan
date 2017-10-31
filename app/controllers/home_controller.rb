@@ -13,10 +13,10 @@ class HomeController < ApplicationController
       redirect_to "http://m.iquan.net", status: 302
       return
     end
-    #if request.host == "lanlan.iquan.net"
-    #  render "lanlan_home", layout: nil
-    #  return
-    #end
+    if request.host == "lanlan.iquan.net"
+      render "lanlan_home", layout: nil
+      return
+    end
     if !is_robot? && request.host.include?("pinpai.iquan.net")
       brand = ProductBrand.where(host: request.host, status: 1).select(:search_keyword).take
       not_found if brand.nil?
