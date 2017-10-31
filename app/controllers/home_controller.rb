@@ -25,10 +25,10 @@ class HomeController < ApplicationController
     end
     if !is_robot? 
       if is_device_mobile?
-        #m_diyquan_home
+        m_diyquan_home
         #redirect_to "http://taobao.iquan.net", status: 302
         #redirect_to "http://lanlan.iquan.net", status: 302
-        redirect_to "http://iquan.zhequan.cc", status: 302
+        #redirect_to "http://iquan.zhequan.cc", status: 302
       else
         diyquan_home
       end
