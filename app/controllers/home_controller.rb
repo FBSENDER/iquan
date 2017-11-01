@@ -17,6 +17,10 @@ class HomeController < ApplicationController
       render "lanlan_home", layout: nil
       return
     end
+    if request.host == "zhaoquan.shop" && !is_robot?
+      render "zhaoquan_home", layout: nil
+      return
+    end
     if !is_robot? && request.host.include?("pinpai.iquan.net")
       brand = ProductBrand.where(host: request.host, status: 1).select(:search_keyword).take
       not_found if brand.nil?
@@ -65,6 +69,11 @@ class HomeController < ApplicationController
       @title = "优惠VC_淘宝内部优惠券,淘宝优惠券,淘宝隐藏券"
       @description = "优惠VC——淘宝内部优惠券网站,提供淘宝内部优惠券搜索、查询、免费领取服务，淘宝天猫内部券、隐藏券一键搜索，免费领取后可直接下单抵扣,价格超实惠，千万淘宝天猫优惠券每天更新,上淘宝(天猫)购物先上内部优惠券网站，比双十一双十二更低！"
       @keywords = "优惠vc,淘宝优惠券,淘宝内部券,淘宝隐藏券,淘宝内部优惠券,优惠券网站"
+    end
+    if request.host == "zhaoquan.shop"
+      @title = "找券网_淘宝优惠券,淘宝内部优惠券,天猫优惠券,淘宝内部券领取"
+      @description = "找券网——淘宝内部优惠券网站,提供淘宝内部优惠券搜索、查询、免费领取服务，淘宝天猫内部券、隐藏券一键搜索，免费领取后可直接下单抵扣,价格超实惠，千万淘宝天猫优惠券每天更新,上淘宝(天猫)购物先上找券网，比双十一双十二更低！"
+      @keywords = "找券网,淘宝优惠券,淘宝内部券,淘宝隐藏券,淘宝内部优惠券,天猫优惠券,天猫内部优惠券"
     end
     if request.host.include?(".youhui.iquan.net")
       brand = CompeteBrand.where(host: request.host).take
