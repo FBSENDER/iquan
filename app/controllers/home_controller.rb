@@ -13,7 +13,7 @@ class HomeController < ApplicationController
       redirect_to "http://m.iquan.net", status: 302
       return
     end
-    if request.host == "lanlan.iquan.net"
+    if request.host == "lanlan.iquan.net" && request.host == "m.iquan.net"
       render "lanlan_home", layout: nil
       return
     end
