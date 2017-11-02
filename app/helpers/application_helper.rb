@@ -14,6 +14,9 @@ module ApplicationHelper
   def path(path)
     content_for :path, path
   end
+  def pc_host(pc_host)
+    content_for :pc_host, pc_host
+  end
   def h1(h1)
     content_for :h1, h1
   end
