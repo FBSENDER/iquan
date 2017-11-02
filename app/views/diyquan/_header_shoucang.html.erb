@@ -138,11 +138,11 @@ $(function(){
     if(keycode == 13 && q.trim()){
       goSearch(q.trim());
     }
-    if(q.trim().match(/http|\.tmall|\.taobao/)){
+    /*if(q.trim().match(/http|\.tmall|\.taobao/)){
       errTip.show();
     }else{
       errTip.hide();
-    }
+    }*/
   });
 
   sb.on('click',function(){
@@ -154,6 +154,7 @@ $(function(){
 
   function goSearch(q){
     if(q.match(/http|\.tmall|\.taobao/)){
+      window.location.href = '/tbzk/?keyword=' + encodeURIComponent(q);
       return;
     }
     window.location.href = '/zhekou/' + encodeURIComponent(q) + '/';

@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   get "/buy/:id", to: "diyquan#buy", id: /\d+/
   get "/zhuanchang/:id", to: "diyquan#zhuanchang", id: /\d+/
   get "/fenlei/:pinyin", to: "diyquan#fenlei"
+  get "/tbzk/", to: "diyquan#zhekou"
   get "/zhekou/:keyword/", to: "diyquan#zhekou"
   get "/zhekou/:keyword/rexiao/", to: "diyquan#zhekou_rexiao"
   get "/zhekou/:keyword/tejia/", to: "diyquan#zhekou_tejia"

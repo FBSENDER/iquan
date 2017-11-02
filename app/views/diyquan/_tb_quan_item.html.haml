@@ -1,0 +1,24 @@
+- buy_url = "/buy/#{coupon["num_iid"]}/?activity_id="
+.zk-item
+  .img-area
+    %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank"}
+      %img.lazy{src: "", alt: "#{coupon['title']}", data: {original: "#{coupon['pict_url']}"}, style: "opacity: 1;"}
+
+  %p.title-area.elli
+    %span.post-free 包邮
+    #{coupon['title']}
+  .raw-price-area
+    现价 ￥#{coupon['reserve_price']}
+  .info
+    .price-area
+      %span.price 
+        %span>￥
+        %em.number-font #{coupon['zk_final_price'].to_i}
+        %i
+    .buy-area
+      %a{href: "#{buy_url}", target: "_blank"}
+        %span.coupon-amount 去淘宝
+        %span.btn-title 火速领券
+    .platform-area
+      %img{src: "http://7xlxny.com1.z0.glb.clouddn.com/zhekou/web/platform_taobao.png"}
+      淘宝

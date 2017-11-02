@@ -1,0 +1,12 @@
+.cate-section{style: "display:block"}
+  .coupon-list
+    #couponList2
+      - coupons.each do |coupon|
+        = render partial: "m_diyquan/tb_shuangpai_item", locals: {coupon: coupon}
+  %p.txt-loading
+  .download-fixed
+    %a{href: "/lanlan_download/", target: "_blank"}
+      %i
+  .search-fixed
+    %a{href: "/query/"}
+      %i
