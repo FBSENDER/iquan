@@ -15,10 +15,10 @@ class HomeController < ApplicationController
       redirect_to "http://m.iquan.net", status: 302
       return
     end
-    if request.host == "lanlan.iquan.net" || request.host == "m.iquan.net"
-      render "lanlan_home", layout: nil
-      return
-    end
+    #if request.host == "lanlan.iquan.net" || request.host == "m.iquan.net"
+    #  render "lanlan_home", layout: nil
+    #  return
+    #end
     if request.host == "zhaoquan.shop" && !is_robot?
       render "zhaoquan_home", layout: nil
       return
@@ -31,10 +31,10 @@ class HomeController < ApplicationController
     end
     if !is_robot? 
       if is_device_mobile?
-        m_diyquan_home
+        #m_diyquan_home
         #redirect_to "http://taobao.iquan.net", status: 302
         #redirect_to "http://lanlan.iquan.net", status: 302
-        #redirect_to "http://iquan.zhequan.cc", status: 302
+        redirect_to "http://iquan.zhequan.cc", status: 302
       else
         diyquan_home
       end
