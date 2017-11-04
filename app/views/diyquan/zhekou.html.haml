@@ -12,7 +12,9 @@
 = render partial: "diyquan/header_fenlei_zhekou"
 = render partial: "diyquan/suggest_keywords", locals: {keywords: @keywords}
 .wrapper.search-result
-  %p.search-res-title "#{@keyword}"搜索结果
+  %p.search-res-title 
+    "#{@keyword}"搜索结果:&nbsp;&nbsp;
+    %a{href: "/lanlan_download/",style: "color:blue"} 下载省钱APP - 搜更多内部优惠券
   = render partial: "diyquan/quan_filter"
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/load_more_search", locals: {path: '/getSearchCouponList', keyword: @keyword, pinyin: '', sort_type: @sort_type, pagesize: 40, wclass: '.search-result'}
