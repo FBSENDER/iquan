@@ -1,0 +1,4 @@
+#couponList.zk-list.clearfix
+  - coupons.each do |coupon|
+    - next if coupon["status"] != 1
+    = render partial: "diyquan/uatm_quan_item", locals: {coupon: coupon}

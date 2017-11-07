@@ -17,3 +17,7 @@ end
 class Page < ApplicationRecord
   self.table_name = 'iquan_pages'
 end
+
+class KeywordTbku < ApplicationRecord
+  self.table_name = 'iquan_keyword_tbku'
+end

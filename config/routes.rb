@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "home#index"
   get "/saber/detail", to: "home#index"
   get "/saber/index", to: "home#index"
-  
+
   get "/test/", to: "test#index"
   get "/test/child", to: "test#child"
   get "/article/", to: "article#index"
@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   #diyquan
   post "/refreshCookies", to: "diyquan#refresh_cookies"
+  get "/refreshTbkus", to: "diyquan#refresh_tbkus"
   get "/getOperElements", to: "diyquan#get_categories"
   get "/getHomeCouponList", to: "diyquan#get_coupons_index"
   get "/getFenleiCouponList", to: "diyquan#get_coupons_fenlei"
