@@ -16,7 +16,14 @@
     <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="grey" />
-    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="http://st3.lanlanlife.com/release/static/saber/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="http://st2.lanlanlife.com/release/static/saber/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="http://st2.lanlanlife.com/release/static/saber/css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="http://st2.lanlanlife.com/release/static/saber/css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="http://st2.lanlanlife.com/release/static/saber/css/list.css"/>
+    <script type="text/javascript" src="http://st2.lanlanlife.com/release/static/saber/lib/js.cookie.js"></script>
+    <script type="text/javascript" src="http://st2.lanlanlife.com/release/static/saber/lib/Collect.io.js"></script>
+    <script type="text/javascript" src="http://st2.lanlanlife.com/release/static/saber/js/vendor.js"></script>
     <script type="text/javascript">
 
         var _hmt = _hmt || [];
@@ -71,9 +78,30 @@ ga('send', 'pageview');
         </keep-alive>
     </transition>
 </div>
-<script type="text/javascript" src="/js/cookie_z.js"></script>
-<script type="text/javascript" src="/js/collect_z.js"></script>
-<script type="text/javascript" src="/js/axios_z.js"></script>
-<script type="text/javascript" src="/js/app_z.js"></script>
+<script type="text/javascript" src="http://st1.lanlanlife.com/release/static/saber/lib/js.cookie.js"></script>
+<script type="text/javascript" src="http://st1.lanlanlife.com/release/static/saber/js/app.js"></script>
+<script>
+try{
+  var Collection_TJ = new Collection({
+    url:'http://log.lanlanlife.com/xsj.gif',
+    path: (function(){
+      var path = window.location.search.split('?')[1];
+      if(path == undefined) return '/';
+
+      var pathSplit = path.split('&');
+      var length = pathSplit.length;
+      for(var i = 0;i < length;i++){
+        var arr = pathSplit[i].split("=");
+        if(arr[0] == '_path'){
+          return pathSplit[i];
+        }
+      }
+      return '/';
+    })(),
+    gender: Cookies.get('gender') || 2,
+    cookieName:'CMS_d8e11c84-93fb-e388-2022-55c073109de8'
+  });
+}catch(e){}
+</script>
 </body>
 </html>
