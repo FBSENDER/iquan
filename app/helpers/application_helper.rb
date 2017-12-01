@@ -9,7 +9,7 @@ module ApplicationHelper
     content_for :head_desc, page_description.to_s
   end
   def mobile_url(path)
-    content_for :mobile_url, "#{path}"
+    content_for :mobile_url, "http://m.iquan.net#{path}"
   end
   def path(path)
     content_for :path, path
