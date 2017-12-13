@@ -206,33 +206,29 @@ Util.createCouponList = function(cl,obj,channel,gaPage){
         var platform = '',platformPic = '';
         switch (z.platform_id*1){
             case 1:
-                platform = '淘宝';
-                platformPic = 'http://7xlxny.com1.z0.glb.clouddn.com/zhekou/web/platform_taobao.png';
+                platform = 1;
                 break;
             case 2:
-                platform = '天猫';
-                platformPic = 'http://7xlxny.com1.z0.glb.clouddn.com/zhekou/web/platform_tmall.png';
+                platform = 2;
                 break;
             default:
                 break;
         }
         htmlstr += '<div class="zk-item">';
-        htmlstr += '<div class="img-area">';
         htmlstr += '<a target="_blank" href="/youhui/'+ z.coupon_id +'/'+(channel && channel!=27?'?channel='+channel:'')+'">';
-        htmlstr += '<div data-ga-event="商品_右上角领券:点击:'+ gaPage +'" class="lq">';
-        htmlstr += '<div class="lq-t">';
-        htmlstr += '<p class="lq-t-d1">领优惠券</p>';
-        htmlstr += '<p class="lq-t-d2">省<span>'+ z.gap_price +'</span>元</p>';
-        htmlstr += '</div>';
-        htmlstr += '<div class="lq-b"></div>';
-        htmlstr += '</div>';
+        htmlstr += '<div class="img-area">';
         htmlstr += '<div class="bottom-info">';
         htmlstr += '<p data-endtime="'+ z.dateline +'" class="time-count"></p>';
         htmlstr += '</div>';
         htmlstr += '<img data-ga-event="商品_图片:点击:'+ gaPage +'" class="lazy new" data-original="'+ z.thumbnail_pic +'" alt="'+z.title +'">';
-        htmlstr += '</a>';
         htmlstr += '</div>';
         htmlstr += '<p class="title-area elli">';
+        if(platform == 1){
+            htmlstr += '<i class="i_taobao"></i>';
+        }
+        else{
+            htmlstr += '<i class="i_tmall"></i>';
+        }
         if(z.post_free==1){
             htmlstr += '<span class="post-free">包邮</span>';
         }
@@ -243,14 +239,11 @@ Util.createCouponList = function(cl,obj,channel,gaPage){
         htmlstr += '<span class="price">&yen;<em class="number-font">'+ z.coupon_price.toString().split('.')[0] +'</em>';
         htmlstr += '<em class="decimal">'+(z.coupon_price.toString().split('.').length>1?'.'+z.coupon_price.toString().split('.')[1]:'')+'</em><i></i></span>';
         htmlstr += '</div>';
-        htmlstr += '<div class="buy-area">';
-        htmlstr += '<a data-ga-event="商品_立即领券:点击:'+ gaPage +'" rel="nofollow" target="_blank" href="'+ buy_url +'">';
-        htmlstr += '<span class="coupon-amount">去'+ platform +'</span>';
-        htmlstr += '<span class="btn-title">火速领券</span>';
+        htmlstr += '<span class="coupon_click">券 ';
+        htmlstr += z.gap_price;
+        htmlstr += ' 元</span>';
+        htmlstr += '</div>';
         htmlstr += '</a>';
-        htmlstr += '</div>';
-        htmlstr += '<div class="platform-area"><img src="'+ platformPic +'">'+ platform +'</div>';
-        htmlstr += '</div>';
         htmlstr += '</div>';
     }
     htmlstr += '</div>';
