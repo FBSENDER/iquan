@@ -67,6 +67,26 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-96984648-3', 'auto');
 ga('send', 'pageview');
     </script>
+    <style type="text/css">
+.download-fixed{
+  position: fixed;
+  right: 20px;
+  bottom: 105px;
+  width: 44px;
+  height: 44px;
+  border-radius: 44px;
+  background-color: rgba(255,255,255,.9);
+  border: 1px solid #bfbfbf;
+}
+.download-fixed i{
+  display: block;
+  margin: 0px auto;
+  width: 45px;
+  height: 45px;
+  background: url(/img/download_fixed.png) center no-repeat;
+  background-size: 25px 25px;
+}
+    </style>
 </head>
 
 <body>
@@ -78,6 +98,11 @@ ga('send', 'pageview');
             <router-view></router-view>
         </keep-alive>
     </transition>
+</div>
+<div class="download-fixed">
+  <a href="/lanlan_download/" target="_blank">
+    <i></i>
+  </a>
 </div>
 <script type="text/javascript" src="http://static.lanlanlife.com/saber/js/app.js"></script>
 <script>
