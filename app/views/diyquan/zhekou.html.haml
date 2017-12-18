@@ -16,7 +16,7 @@
 .wrapper.search-result
   %p.search-res-title 
     %a{href: "/", title: "#{home_anchor}"} #{home_anchor}
-    &nbsp;>&nbsp;"#{@keyword}"搜索结果:&nbsp;&nbsp;
+    %span &nbsp;&nbsp;"#{@keyword}"搜索结果:&nbsp;&nbsp;
     %a{href: "/lanlan_download/",style: "color:blue"} 下载省钱APP - 搜更多内部优惠券
   = render partial: "diyquan/quan_filter"
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
