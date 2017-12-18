@@ -21,3 +21,7 @@ end
 class KeywordTbku < ApplicationRecord
   self.table_name = 'iquan_keyword_tbku'
 end
+
+class SuggestKeyword < ApplicationRecord
+  self.table_name = 'iquan_suggest_keywords'
+end
