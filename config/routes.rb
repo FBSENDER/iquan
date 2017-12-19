@@ -61,4 +61,8 @@ Rails.application.routes.draw do
   get "/baokuan/", to: "diyquan#baokuan"
   get "/9kuai9/", to: "diyquan#k9"
   get "/shikuaigou/", to: "diyquan#k20"
+
+  #html sitemap
+  get "/map_k/", to: "diyquan#map_k"
+  get "/map_k/:page", to: "diyquan#map_k"
 end

@@ -1,0 +1,18 @@
+- title(@title)
+- head_desc(@description)
+- keywords(@keywords)
+- path(@path)
+- mobile_url(@path)
+- h1(@h1)
+
+= render partial: "diyquan/header_fenlei_zhekou"
+- @sks.each do |sk|
+  - next if sk.sks.empty?
+  = render partial: "diyquan/suggest_keywords", locals: {keywords: [sk.keyword] + sk.sks.split(',')}
+.hori-cate-area
+  .hot-keywords
+    .wrapper
+      - (1..83).to_a.each do |page|
+        %a{href: "/map_k/#{page}/"} #{page}
+
+= render partial: "diyquan/footer"
