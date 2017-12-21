@@ -24,3 +24,4 @@ Capfile
 /config/deploy.rb
 .DS_Store
 /app/controllers/diyquan_controller.rb
+/lib/zkapi/zk_api.rb

@@ -21,4 +21,13 @@ class ApplicationController < ActionController::Base
   def not_found
     raise ActionController::RoutingError.new('NOT FOUND')
   end
+  def is_keyword_url?(keyword)
+    keyword =~ /(http|taobao|tmall)/i  
+  end
+
+  def get_tb_id(url)
+    m = url.match(/id=(\d+)/i)
+    return m[1] if m
+    nil
+  end
 end
