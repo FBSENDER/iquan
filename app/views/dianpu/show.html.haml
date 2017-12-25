@@ -1,0 +1,61 @@
+- title("【#{@shop.title}】#{@shop.title}优惠券/折扣/首页/评价怎么样_爱券网")
+- head_desc("#{@desc} - 爱券网")
+- keywords("#{@shop.title},#{@shop.title}首页,#{@shop.title}优惠券,#{@shop.title}折扣,#{@shop.title}怎么样,#{@shop.title}评价,#{@shop.title}淘宝,#{@shop.title}天猫")
+- path(@path)
+- mobile_url(@path)
+- h1("#{@shop.title}")
+
+- if @suggest_keywords.size > 0
+  = render partial: "diyquan/suggest_keywords", locals: {keywords: @suggest_keywords}
+
+.wrapper.zk-detail
+  .wrapper-l.zk-main
+    = render partial: "dianpu/shop_bread", locals: {title: @shop.title}
+    .shop
+      .shop-cover
+        %img.shop-cover-img{src:"#{@shop.pic_url}", alt: "#{@shop.title}"}
+        %p.shop-cover-p 
+          %strong #{@shop.title}
+      .shop-info
+        %p.shop-info-h1 #{@shop.title}
+        %p.shop-desc #{@desc}
+        %p.sno
+          #{@shop.title}在售商品：
+          - @items.each do |item|
+            #{item["title"].html_safe}，价格：#{item["price"]}元；
+        .shop-buy
+          %a.shop-buy-a{href: "/",title: "#{@shop.title}", rel: "nofollow"} 去看看
+  .wrapper-r
+    .rel-zk-area{style: "margin-top: 60px"}
+      %p.head
+        %span 正在热销
+        %a.more-his{href: "/baokuan/", title: "淘宝爆款"} 去抢热门券 - GO
+      .hot-zk-list.clearfix.swiper-container.swiper-container-horizontal
+        .swiper-wrapper
+          - swiper_count = @hot_coupons.size / 4
+          - (0..swiper_count-1).each do |num|
+            .swiper-slide
+              - @hot_coupons[num * 4, 4].each do |coupon|
+                %a{href: "/youhui/#{coupon['coupon_id']}/", title: "#{coupon['title']}", class: "zk-img-item"}
+                  %img.lazy{data: {original: "#{coupon['thumbnail_pic']}"}, alt: "#{coupon['title']}", style: "opacity: 1;"}
+
+.wrapper
+  .rel-zk-area{style: "margin-bottom: 30px;"}
+    %p.head
+      %span 推荐店铺
+    .rel-zk-list.clearfix
+      - @shops.each do |shop|
+        .shop-item
+          %a{href: "/dianpu/#{URI.encode(shop.nick)}/", title: "#{shop.title}"}
+            %img.shop-item-img{src: "#{shop.pic_url}", alt: "#{shop.title}"}
+            %p.shop-item-p #{shop.title}
+
+.wrapper
+  .rel-zk-area{style: "margin-bottom: 30px;"}
+    %p.head
+      %span 热门优惠券
+    .rel-zk-list.clearfix
+      = render partial: "diyquan/quan_list", locals: {coupons: @hot_coupons}
+
+= render partial: "diyquan/quan_detail_js"
+= render partial: "diyquan/footer"

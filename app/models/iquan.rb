@@ -29,3 +29,7 @@ end
 class CidKeywordRelation < ApplicationRecord
   self.table_name = 'iquan_coupon_keyword_relations'
 end
+
+class Shop < ApplicationRecord
+  self.table_name = 'iquan_shops'
+end

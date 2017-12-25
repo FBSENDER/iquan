@@ -1,3 +1,4 @@
+require 'iquan'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 #  def set_layout
@@ -29,5 +30,15 @@ class ApplicationController < ActionController::Base
     m = url.match(/id=(\d+)/i)
     return m[1] if m
     nil
+  end
+
+  def get_suggest_keywords_new(keyword)
+    begin
+      sk = SuggestKeyword.where(keyword: keyword).take
+      return [] if sk.nil?
+      sk.sks.split(',')
+    rescue
+      return []
+    end
   end
 end

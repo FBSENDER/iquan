@@ -1,0 +1,15 @@
+- title(@title)
+- head_desc(@description)
+- keywords(@keywords)
+- path(@path)
+- mobile_url(@path)
+- h1(@h1)
+
+= render partial: "diyquan/header_fenlei_zhekou"
+.hori-cate-area
+  .hot-keywords
+    .wrapper
+      - @shops.each do |shop|
+        %a{href: "/dianpu/#{URI.encode(shop.nick)}/", title: "#{shop.title}"} #{shop.title}
+
+= render partial: "diyquan/footer"
