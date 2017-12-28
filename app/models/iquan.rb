@@ -33,3 +33,7 @@ end
 class Shop < ApplicationRecord
   self.table_name = 'iquan_shops'
 end
+
+class CouponSuggestion < ApplicationRecord
+  self.table_name = 'iquan_coupon_suggestions'
+end

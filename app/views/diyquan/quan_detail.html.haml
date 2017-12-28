@@ -1,5 +1,5 @@
 - title("#{@coupon['title']}优惠券_爱券网")
-- head_desc("#{@coupon['title']},原价#{@coupon['raw_price']}元,领券立减#{@coupon['gap_price']}元,月销#{@coupon['month_sales']}件,淘宝/天猫热销中,优惠券马上领 - 爱券网。")
+- head_desc("#{@coupon['title']},原价#{@coupon['raw_price']}元,领券立减#{@coupon['gap_price']}元,月销#{@coupon['month_sales']}件,淘宝/天猫热销中,优惠券马上领。#{@coupon['title']}优惠券如何领取？首先点击页面上的立即领券按钮，来到淘宝天猫的优惠券领取页，在点击立即领券，这时系统会提示您登陆淘宝账户，登录成功后，就可以领取优惠券，下单享受立减优惠了 - 爱券网")
 - keywords("#{@coupon['title']},#{@coupon['title']}优惠券")
 - path(@path)
 - mobile_url(@path)
@@ -7,11 +7,17 @@
 
 - if @suggest_keywords.size > 0
   = render partial: "diyquan/suggest_keywords", locals: {keywords: @suggest_keywords}
-.wrapper.zk-detail
+%article.wrapper.zk-detail
   .wrapper-l.zk-main
     = render partial: "diyquan/quan_detail_bread", locals: {cate: @coupon['cate_info']['name'], sub_cate: @coupon['subcate_info']['name'], title: @coupon['title']}
     = render partial: "diyquan/quan_detail_content", locals: {coupon: @coupon, category: @category}
-    %p.sno #{@coupon['title']},原价#{@coupon['raw_price']}元,领券立减#{@coupon['gap_price']}元,月销#{@coupon['month_sales']}件,淘宝/天猫热销中,优惠券马上领。
+    %p.bread-area.sno 【我剁手都要买的宝贝（#{@coupon['title']}），快来和我一起瓜分红I包】http://m.iquan.net/youhui/#{@coupon['coupon_id']}/ 点击链接，再选择浏览器打开；或复制这条信息￥m.iquan.net￥后打开👉手淘👈
+    %p.bread-area.sno #{@coupon['title']}，原价#{@coupon['raw_price']}元，领券立减#{@coupon['gap_price']}元，月销#{@coupon['month_sales']}件，淘宝/天猫热销中，优惠券马上领。
+    %p.bread-area.sno #{@coupon['title']}淘宝天猫店铺#{@coupon['gap_price']}元优惠券，优惠券有效期至#{Time.at(@coupon["dateline"].to_i).strftime("%Y年%m月%d日")}，在有效期内下单，原价#{@coupon['raw_price']}元,券后价#{@coupon['raw_price'].to_i - @coupon['gap_price'].to_i}元，可立省#{@coupon['gap_price']}元。#{@coupon['title']}最近30天已经售出#{@coupon['month_sales']}件，可以放心购买。
+    %p.bread-area.sno #{@coupon['title']}优惠券如何领取？首先点击页面上的立即领券按钮，来到淘宝天猫的优惠券领取页，在点击立即领券，这时系统会提示您登陆淘宝账户，登录成功后，就可以领取优惠券，下单享受立减优惠了。
+    %p.bread-area.sno 已经领取的优惠券如何使用？在淘宝下单页面，勾选指定的优惠方式即可，某些优惠券无法叠加使用。
+    %p.bread-area.sno 我领取了很多优惠券，在哪里查看我已经领取了哪些呢？登录淘宝，然后依次进入，我的淘宝->我的优惠信息->优惠卡券，在这里就可以看到所有领取的优惠券了，同时能够查看到优惠券的使用条件，有效时间，发行店铺。
+    %p.bread-area.sno 友情提示：#{@coupon['title']}优惠券每个淘宝账户限领取1张，领取后请在优惠券有效期内使用。
   .wrapper-r
     .rel-zk-area{style: "margin-top: 60px"}
       %p.head
@@ -26,7 +32,7 @@
                 %a{href: "/youhui/#{coupon['coupon_id']}/", title: "#{coupon['title']}", class: "zk-img-item"}
                   %img.lazy{data: {original: "#{coupon['thumbnail_pic']}"}, alt: "#{coupon['title']}", style: "opacity: 1;"}
 
-.wrapper
+%aside.wrapper
   .rel-zk-area{style: "margin-bottom: 30px;"}
     %p.head
       %span 相关推荐

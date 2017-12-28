@@ -27,8 +27,12 @@
         %span.ori-price 现价：￥#{coupon['raw_price']}
         %span.price
           ￥
-          %em.int> #{coupon['coupon_price'].to_i}
-          %em.decimal> .#{coupon['coupon_price'].to_s.sub(/\d+\./,'')}
+          - if coupon['coupon_price'].to_i == 0
+            %em.int{style:"padding:0"}> #{coupon['raw_price'].to_i}
+            %em.decimal> .#{coupon['raw_price'].to_s.sub(/\d+\./, '')}
+          - else
+            %em.int{style: "padding:0"}> #{coupon['coupon_price'].to_i}
+            %em.decimal> .#{coupon['coupon_price'].to_s.sub(/\d+\./,'')}
           %i 券后价
       .buy-area
         %p.desc 有效期内领券下单，享受立减优惠！
@@ -49,9 +53,12 @@
             %i
             %i
             %i
-          领券立减
-          %em #{coupon['gap_price']}
-          元
+          - if coupon['coupon_price'].to_i == 0
+            立即购买
+          - else
+            领券立减
+            %em #{coupon['gap_price']}
+            元
     .tags
       .tag-list
         - if category
