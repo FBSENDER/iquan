@@ -18,6 +18,10 @@
     %p.bread-area.sno 已经领取的优惠券如何使用？在淘宝下单页面，勾选指定的优惠方式即可，某些优惠券无法叠加使用。
     %p.bread-area.sno 我领取了很多优惠券，在哪里查看我已经领取了哪些呢？登录淘宝，然后依次进入，我的淘宝->我的优惠信息->优惠卡券，在这里就可以看到所有领取的优惠券了，同时能够查看到优惠券的使用条件，有效时间，发行店铺。
     %p.bread-area.sno 友情提示：#{@coupon['title']}优惠券每个淘宝账户限领取1张，领取后请在优惠券有效期内使用。
+    %p.bread-area.sno
+      相关店铺：
+      - @shops.each do |shop|
+        %a{href: "/dianpu/#{URI.encode(shop.nick)}/"} #{shop.title}
   .wrapper-r
     .rel-zk-area{style: "margin-top: 60px"}
       %p.head
