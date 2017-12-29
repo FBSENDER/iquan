@@ -12,7 +12,12 @@ class DianpuController < ApplicationController
     @suggest_keywords = get_suggest_keywords_new(@shop.search_keyword)
     @path = "#{request.path}/"
     @shops = Shop.where("id > ?", @shop.id).order("id").select(:nick,:pic_url,:title).limit(15)
+    @scoupons = ShopCoupon.where(seller_id: @shop.source_id).to_a
     render "show", layout: "diyquan"
+  end
+
+  def buy
+    redirect_to "https://market.m.taobao.com/apps/aliyx/coupon/detail.html?wh_weex=true&activity_id=#{params[:activity_id]}&seller_id=#{params[:seller_id]}", status: 302
   end
 
   def map_s

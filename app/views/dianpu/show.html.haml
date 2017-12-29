@@ -18,7 +18,16 @@
           %strong #{@shop.title}
       .shop-info
         %p.shop-info-h1 #{@shop.title}
-        %p.shop-desc #{@desc}
+        %p.shop-desc 
+          - if @scoupons.size > 0
+            %strong #{@shop.title}
+            正在发放的优惠券共有#{@scoupons.size}张：
+            %br
+            - @scoupons.each do |sc|
+              #{@shop.title}满#{sc.m_price}元减#{sc.coupon_price}元优惠券 - 有效期至#{Time.at(sc.end_time).strftime("%Y-%m-%d %H:%M")} - 
+              %a{href: "/dianpu_buy/#{sc.seller_id}/?activity_id=#{sc.activity_id}", title: "#{@shop.title}#{sc.coupon_price}元优惠券", style: "color:blue", target: "_blank"} 点我领取
+              %br
+          #{@desc}
         %p.sno
           #{@shop.title}在售商品：
           - @items.each do |item|
