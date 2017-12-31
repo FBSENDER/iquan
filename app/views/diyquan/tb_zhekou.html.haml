@@ -13,7 +13,8 @@
   - @shops.each do |shop|
     %a{href: "/dianpu/#{URI.encode(shop.nick)}/"} #{shop.title}
 = render partial: "diyquan/header_fenlei_zhekou"
-= render partial: "diyquan/suggest_keywords", locals: {keywords: @keywords}
+- if @keywords.size > 0
+  = render partial: "diyquan/suggest_keywords", locals: {keywords: @keywords}
 .wrapper.search-result
   %p.search-res-title
     "#{@keyword}"搜索结果:&nbsp;&nbsp;
