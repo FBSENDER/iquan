@@ -1,4 +1,7 @@
+require 'net/http'
+require 'zkapi/zk_api'
 require 'iquan'
+require 'seo_domain'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 #  def set_layout

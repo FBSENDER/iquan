@@ -41,3 +41,7 @@ end
 class CouponSuggestion < ApplicationRecord
   self.table_name = 'iquan_coupon_suggestions'
 end
+
+class CateCollection < ApplicationRecord
+  self.table_name = 'iquan_cate_collections'
+end
