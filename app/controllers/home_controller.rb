@@ -33,7 +33,8 @@ class HomeController < ApplicationController
         #redirect_to "http://lanlan.iquan.net", status: 302
         #redirect_to "http://iquan.zhequan.cc", status: 302
       else
-        diyquan_home
+        redirect_to "http://taobao.zhequan.cc", status: 302
+        #diyquan_home
       end
       return
     end
