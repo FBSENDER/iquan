@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def is_robot?
     user_agent = request.headers["HTTP_USER_AGENT"]
-    user_agent.present? && user_agent =~ /(bot|spider|slurp)/i
+    user_agent.present? && user_agent =~ /(bot|spider|slurp)/i || user_agent == "Mozilla/5.0"
   end
 
   def is_device_mobile?
