@@ -38,6 +38,10 @@ class ShopCoupon < ApplicationRecord
   self.table_name = 'iquan_shop_coupons'
 end
 
+class Product < ApplicationRecord
+  self.table_name = 'iquan_products'
+end
+
 class CouponSuggestion < ApplicationRecord
   self.table_name = 'iquan_coupon_suggestions'
 end
@@ -45,3 +49,4 @@ end
 class CateCollection < ApplicationRecord
   self.table_name = 'iquan_cate_collections'
 end
+
