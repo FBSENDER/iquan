@@ -33,8 +33,8 @@ class HomeController < ApplicationController
         #redirect_to "http://lanlan.iquan.net", status: 302
         #redirect_to "http://iquan.zhequan.cc", status: 302
       else
-        redirect_to "http://taobao.zhequan.cc", status: 302
-        #diyquan_home
+        #redirect_to "http://taobao.zhequan.cc", status: 302
+        diyquan_home
       end
       return
     end
@@ -98,13 +98,17 @@ class HomeController < ApplicationController
   end
 
   def diyquan_home
-    @coupons = JSON.parse(live_coupon_list(0, 20))["data"]["coupon_list"]
+    if is_robot?
+      @coupons = get_static_coupons('static_new_coupons')
+    else
+      @coupons = []
+    end
     @links = Link.where(status: 1).to_a
     render "diyquan/home", layout: "layouts/diyquan"
   end
 
   def m_diyquan_home
-    @coupons = JSON.parse(live_coupon_list(0,20))["data"]["coupon_list"]
+    @coupons = get_static_coupons('static_new_coupons')
     render "m_diyquan/home", layout: "layouts/m_diyquan"
   end
 end

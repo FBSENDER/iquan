@@ -1,0 +1,16 @@
+- cate_name = @category['name']
+- title("#{cate_name}内部优惠券_爱券网")
+- head_desc("淘宝天猫内部隐藏#{cate_name}优惠券,#{cate_name}折扣，20元50元100元，先领券，再下单，专享淘宝折上折优惠。领取#{cate_name}优惠券，查看#{cate_name}打折特价信息 - 爱券网。")
+- keywords("#{cate_name},#{cate_name}优惠,#{cate_name}优惠券,#{cate_name}内部优惠券,#{cate_name}折扣,特价#{cate_name}")
+- path(@path)
+- mobile_url(@path)
+- h1("#{cate_name}内部优惠券")
+
+- if @category
+  = render partial: "diyquan/header_fenlei", locals: {category: @category}
+.wrapper.home-wrapper
+  %div{style: "margin-top:20px"}
+  = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
+  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanSearchCouponList', keyword: @keyword, pinyin: '', sort_type: 0, pagesize: 20, wclass: '.search-result'}
+
+= render partial: "diyquan/home_footer", locals: {links: @links}

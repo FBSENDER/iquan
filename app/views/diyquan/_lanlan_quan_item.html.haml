@@ -1,0 +1,29 @@
+- aaid = coupon['couponUrl'].match(/activityId=(\w*)/)
+- aaid = aaid.nil? ? '' : aaid[1]
+- buy_url = "/buy/#{coupon["itemId"]}/?activity_id=#{aaid}"
+.zk-item
+  %a{href: "#{buy_url}", title: "#{coupon['title']}", target: "_blank"}
+    .img-area
+      %img.lazy{src: "", alt: "#{coupon['shortTitle']}#{coupon['couponMoney'].to_i}元优惠券", data: {original: "#{coupon['coverImage']}"}, style: "opacity: 1;"}
+
+    %p.title-area.elli
+      - if coupon["shopType"] == "tmall"
+        %i.i_tmall
+      - else 
+        %i.i_taobao
+      %span.post-free 包邮
+      #{coupon['shortTitle']}
+    .raw-price-area
+      现价 ￥#{coupon['price']}
+      %p.sold 已领 #{coupon['monthSales']} 张券
+    .info
+      .price-area
+        %span.price 
+          %span>￥
+          %em.number-font #{coupon['nowPrice'].to_i}
+          %em.decimal> .#{coupon['nowPrice'].to_s.sub(/\d+\./,'')}
+          %i
+      %span.coupon_click
+        券
+        #{coupon['couponMoney'].to_i}
+        元

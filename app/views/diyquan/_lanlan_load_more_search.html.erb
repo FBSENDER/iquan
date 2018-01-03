@@ -1,0 +1,96 @@
+<div class="more-coupon">
+  <span id="moreCoupon" class="btn loading-text">查看更多优惠券</span>
+</div>
+<script type="text/javascript">
+$(function(){
+  globalChannel=27;
+  //Util.sideFixedMenu($('<%= wclass %>'));
+
+  var couponList = $('#couponList'),loadingText = $('.loading-text');
+  var page = 2,pagesize = <%= pagesize %>,load = 1, sort = <%= sort_type %>,price = 0,channel = 27;
+
+  var orderTab = $('.order-area .sort-type li');
+  orderTab.on('click',function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      $('.order-area .sort-type li.active').removeClass('active');
+      _this.addClass('active');
+      var t = _this.data('sort');
+      sort = t;
+      initLanlanCouponList();
+      getLanlanCouponList();
+    }
+  });
+
+  var priceFilter = $('.order-area .price-filter li');
+  priceFilter.on('click',function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      $('.order-area .price-filter li.active').removeClass('active');
+      _this.addClass('active');
+      price = _this.data('price');
+    }else {
+      _this.removeClass('active');
+      price = 0;
+    }
+    initLanlanCouponList();
+    getLanlanCouponList();
+  });
+
+  function initLanlanCouponList(){
+    page = 1;
+    load = 1;
+    couponList.html('');
+  }
+
+  $(document).on('scroll',function(){
+    if(page%4 > 0){
+      var _top = $(document).scrollTop(),
+        scroll_height = Util.pageSize()['scrollHeight'],
+        client_height = Util.pageSize()['clientHeight'];
+        if(_top + client_height >= (scroll_height-800)){
+          getLanlanCouponList();
+        }
+    }
+  });
+
+  loadingText.on('click',function(){
+    getLanlanCouponList();
+  });
+
+  function getLanlanCouponList(){
+    if(!load){
+      return;
+    }
+    $.ajax({
+      url:'<%= path %>',
+      type:'GET',
+      dataType:'json',
+      data:{
+        'sort_type':sort,
+        'price':price,
+        'pinyin':'<%= pinyin %>',
+        'keyword':'<%= keyword %>',
+        'page':page,
+        'pagesize':pagesize
+      },
+      beforeSend:function(){
+        load = 0;
+        loadingText.html('努力加载中...');
+      },
+      success:function(data){
+        if(data.status.code == 1001){
+          Util.createLanlanCouponList(data.result,couponList,channel,'搜索结果页');
+          if(data.result.length >= pagesize){
+            page ++;
+            load = 1;
+            loadingText.html('查看更多优惠券');
+          }else{
+            loadingText.html('没有更多了');
+          }
+        }
+      }
+    });
+  }
+});
+</script>

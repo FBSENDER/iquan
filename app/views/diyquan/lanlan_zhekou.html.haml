@@ -1,0 +1,34 @@
+- title(@title)
+- head_desc(@description)
+- keywords(@page_keywords)
+- path(@path)
+- mobile_url(@path)
+- h1(@h1)
+- home_anchor = ['内部券','内部优惠券','优惠券网站','天猫内部优惠券','淘宝内部券'].sample
+
+%p.sno #{@keyword}优惠专场，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，全场低至1折起包邮，敬请关注！这些#{@keyword}优惠券，是爱券网从全网各处（app、优惠网站、优惠qq群、优惠微信群）搜集而来，先领优惠券，再下单，价格可以更低一点。为了方便您找券，您可以将#{@keyword}优惠信息按照销量、价格、优惠额、优惠率等维度进行排序，也可以直接查找#{@keyword}大额优惠券。
+- if @keywords.size > 0
+  %p.sno 您可能还在找：#{@keywords.join('，')}，直接点击下面的链接，可以查询对应的优惠折扣信息。
+%p.bread-area.sno
+  相关店铺：
+  - @shops.each do |shop|
+    %a{href: "/dianpu/#{URI.encode(shop.nick)}/"} #{shop.title}
+%p.sno
+  %a{href: "/zhekou/#{URI.encode(@keyword)}/rexiao/"} 热销#{@keyword}
+  %a{href: "/zhekou/#{URI.encode(@keyword)}/tejia/"} 特价#{@keyword}
+  %a{href: "/zhekou/#{URI.encode(@keyword)}/dae/"} #{@keyword}大额优惠券
+  %a{href: "/zhekou/#{URI.encode(@keyword)}/yizhe/"} 一折#{@keyword}
+= render partial: "diyquan/header_fenlei_zhekou"
+- if @keywords.size > 0
+  = render partial: "diyquan/suggest_keywords", locals: {keywords: @keywords}
+.wrapper.search-result
+  %p.search-res-title 
+    %a{href: "/", title: "#{home_anchor}"} #{home_anchor}
+    %span &nbsp;&nbsp;"#{@keyword}"搜索结果:&nbsp;&nbsp;
+    %a{href: "/lanlan_download/",style: "color:blue"} 下载省钱APP - 搜更多内部优惠券
+  = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
+  = render partial: "diyquan/lanlan_load_more_search", locals: {path: '/getLanlanSearchCouponList', keyword: @keyword, pinyin: '', sort_type: @sort_type, pagesize: 20, wclass: '.search-result'}
+:javascript
+  $('#li-sort-#{@sort_type}').addClass('active');
+
+= render partial: "diyquan/footer"
