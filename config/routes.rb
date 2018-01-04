@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
   get "/saber/detail", to: "home#index"
+  get "/saber/search", to: "home#index"
   get "/saber/index", to: "home#index"
 
   get "/test/", to: "test#index"
