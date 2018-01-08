@@ -11,5 +11,7 @@
     .wrapper
       - @shops.each do |shop|
         %a{href: "/dianpu/#{URI.encode(shop.nick)}/", title: "#{shop.title}"} #{shop.title}
+      - (@page..@total_page).to_a.each do |page|
+        %a{href: "/dianpu/?page=#{page}"} #{page}
 
 = render partial: "diyquan/footer"
