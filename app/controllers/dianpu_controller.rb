@@ -8,7 +8,8 @@ class DianpuController < ApplicationController
 还在等什么？快去#{@shop.title}逛一逛~"
     @items = JSON.parse(@shop.auctions_inshop)
     #@hot_coupons = get_hot_coupons(0, 0, 20)
-    @hot_coupons = []
+    #@hot_coupons = []
+    @hot_coupons = get_static_coupons('static_hot_coupons')
     @suggest_keywords = get_suggest_keywords_new(@shop.search_keyword)
     @path = "#{request.path}/"
     @shops = Shop.where("id > ?", @shop.id).order("id").select(:nick,:pic_url,:title).limit(15)
