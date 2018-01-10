@@ -37,6 +37,23 @@
                   %img.lazy{data: {original: "#{coupon['thumbnail_pic']}"}, alt: "#{coupon['title']}", style: "opacity: 1;"}
 
 %aside.wrapper
+  - if @related_coupons && @related_coupons.size > 0
+    .rel-zk-area{style: "margin-bottom: 30px;"}
+      %p.head
+        %span 相关推荐
+      .rel-zk-list.clearfix
+        = render partial: "diyquan/quan_list", locals: {coupons: @related_coupons}
+  - if @same_seller_coupons && @same_seller_coupons.size > 0
+    .rel-zk-area{style: "margin-bottom: 30px;"}
+      %p.head
+        %span 同店优惠商品
+      .rel-zk-list.clearfix
+        = render partial: "diyquan/quan_list", locals: {coupons: @same_seller_coupons}
+  .rel-zk-area{style: "margin-bottom: 30px;"}
+    %p.head
+      %span 今日上新
+    .rel-zk-list.clearfix
+      = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
   .rel-zk-area{style: "margin-bottom: 30px;"}
     %p.head
       %span 相关推荐

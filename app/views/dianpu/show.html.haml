@@ -59,6 +59,13 @@
             %img.shop-item-img{src: "#{shop.pic_url}", alt: "#{shop.title}"}
             %p.shop-item-p #{shop.title}
 
+- if @coupons && @coupons.size > 0
+  .wrapper
+    .rel-zk-area{style: "margin-bottom: 30px;"}
+      %p.head
+        %span #{@shop.title}优惠折扣商品
+      .rel-zk-list.clearfix
+        = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
 .wrapper
   .rel-zk-area{style: "margin-bottom: 30px;"}
     %p.head
