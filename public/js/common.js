@@ -202,7 +202,8 @@ Util.createCouponList = function(cl,obj,channel,gaPage){
     for(var i=0,len=cl.length;i<len;i++){
         var z = cl[i];
         var re = /activityId=(\w*)/;
-        var buy_url = '/buy/' + z.item_id + '/?activity_id=' + re.exec(z.url)[1];
+        var buy_url = '/buy/' + z.item_id + '/?activity_id=';
+        buy_url += re.exec(z.url)[1];
         var platform = '',platformPic = '';
         switch (z.platform_id*1){
             case 1:
@@ -236,6 +237,8 @@ Util.createCouponList = function(cl,obj,channel,gaPage){
         htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.raw_price +'<p class="sold">'+ z.subtitle +'</p></div>';
         htmlstr += '<div class="info">';
         htmlstr += '<div class="price-area">';
+        if(z.coupon_price == null)
+          z.coupon_price = z.raw_price - z.zk_price;
         htmlstr += '<span class="price">&yen;<em class="number-font">'+ z.coupon_price.toString().split('.')[0] +'</em>';
         htmlstr += '<em class="decimal">'+(z.coupon_price.toString().split('.').length>1?'.'+z.coupon_price.toString().split('.')[1]:'')+'</em><i></i></span>';
         htmlstr += '</div>';

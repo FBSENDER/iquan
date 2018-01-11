@@ -23,10 +23,10 @@
       .price-area
         %span.price 
           %span>￥
-          %em.number-font #{coupon['coupon_price'].to_i}
-          %em.decimal> .#{coupon['coupon_price'].to_s.sub(/\d+\./,'')}
+          %em.number-font #{(coupon['coupon_price'] || coupon['zk_price']).to_i}
+          %em.decimal> .#{(coupon['coupon_price'] || coupon['zk_price']).to_f.round(2).to_s.sub(/\d+\./,'')}
           %i
       %span.coupon_click
         券
-        #{coupon['gap_price']}
+        #{coupon['gap_price'] || coupon['raw_price'].to_i - coupon['zk_price'].to_i}
         元

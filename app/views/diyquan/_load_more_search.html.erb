@@ -79,7 +79,7 @@ $(function(){
         loadingText.html('努力加载中...');
       },
       success:function(data){
-        if(data.status == 1){
+        if(data.status == 1 || data.status_code == 1){
           Util.createCouponList(data.data.coupon_list,couponList,channel,'搜索结果页');
           if(data.data.coupon_list.length >= pagesize){
             page ++;
