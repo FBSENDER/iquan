@@ -53,3 +53,7 @@ end
 class SearchResult < ApplicationRecord
   self.table_name = 'iquan_search_results'
 end
+
+class SearchUrlLog < ApplicationRecord
+  self.table_name = 'iquan_search_item_url_logs'
+end
