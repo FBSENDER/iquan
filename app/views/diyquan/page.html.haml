@@ -9,7 +9,9 @@
 = render partial: "diyquan/suggest_keywords", locals: {keywords: @suggest_keywords}
 .wrapper.search-result{style: "margin-top:10px"}
   .sno
-    %p #{@desc_ext}
+    %p #{@description} 更新于#{Time.now.strftime("%Y年%m月%d日")}
+  .sno
+    %p #{@desc_ext.gsub(@keyword, "<strong>#{@keyword}</strong>").html_safe}
   .sno
     %p
       相关推荐：
@@ -17,6 +19,8 @@
         %strong #{k}
   = render partial: "diyquan/quan_filter"
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
+  .sno
+    %p #{@description}
   = render partial: "diyquan/load_more_search", locals: {path: '/getSearchCouponList', keyword: @search_keyword, pinyin: '', sort_type: @sort_type, pagesize: 40, wclass: '.search-result'}
 
 :javascript
