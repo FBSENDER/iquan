@@ -6,7 +6,7 @@
 .zk-item
   %a{href: "/youhui/#{coupon['coupon_id']}/", title: "#{seo_k}#{coupon['title']}", target: "_blank"}
     .img-area
-      %img.lazy{src: "", alt: "#{seo_k}#{coupon['title']}#{coupon['gap_price']}元优惠券", data: {original: "#{coupon['thumbnail_pic']}"}, style: "opacity: 1;"}
+      %img.lazy{src: "#{coupon['thumbnail_pic']}", alt: "#{seo_k}#{coupon['title']}#{coupon['gap_price']}元优惠券", style: "opacity: 1;"}
 
     %p.title-area.elli
       - if coupon["platform_id"] == 2
