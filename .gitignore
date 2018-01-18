@@ -21,6 +21,7 @@ Capfile
 /config/deploy/production.rb
 /config/deploy/staging.rb
 /config/deploy/17430.rb
+/config/deploy/ali5.rb
 /config/deploy.rb
 .DS_Store
 /app/controllers/diyquan_controller.rb
