@@ -10,9 +10,7 @@
 .wrapper.search-result{style: "margin-top:10px"}
   .sno
     %p #{@description} 更新于#{Time.now.strftime("%Y年%m月%d日")}
-  .sno
-    %p #{@desc_ext.gsub(@keyword, "<strong>#{@keyword}</strong>").html_safe}
-  .sno
+    %p #{@desc_ext.html_safe}
     %p
       相关推荐：
       - @keywords.split(',').each do |k|
