@@ -1,8 +1,13 @@
 .cate-section{style: "display:block"}
   .coupon-list
     #couponList2
-      - coupons.each do |coupon|
-        = render partial: "m_diyquan/tb_shuangpai_item", locals: {coupon: coupon}
+      - if coupons
+        - coupons.each do |coupon|
+          = render partial: "m_diyquan/tb_shuangpai_item", locals: {coupon: coupon}
+      - if zhekous
+        - zhekous.each do |zhekou|
+          = render partial: "m_diyquan/tb_zhekou_shuangpai_item", locals: {coupon: zhekou}
+
   %p.txt-loading
   .download-fixed
     %a{href: "/lanlan_download/", target: "_blank"}

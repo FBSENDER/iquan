@@ -33,7 +33,7 @@
           - @items.each do |item|
             #{item["title"].html_safe}，价格：#{item["price"]}元；
         .shop-buy
-          %a.shop-buy-a{href: "/",title: "#{@shop.title}", rel: "nofollow"} 去看看
+          %a.shop-buy-a{href: "#{@shop.shop_url}",isconvert: 1, title: "#{@shop.title}", rel: "nofollow", target: "_blank"} 去看看
   .wrapper-r
     .rel-zk-area{style: "margin-top: 60px"}
       %p.head
@@ -73,5 +73,6 @@
     .rel-zk-list.clearfix
       = render partial: "diyquan/quan_list", locals: {coupons: @hot_coupons}
 
+= render partial: "layouts/taobao_js"
 = render partial: "diyquan/quan_detail_js"
 = render partial: "diyquan/footer"

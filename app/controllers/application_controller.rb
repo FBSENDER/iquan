@@ -46,4 +46,8 @@ class ApplicationController < ActionController::Base
       return []
     end
   end
+
+  def is_taobao_title?(keyword)
+    keyword.size > 18
+  end
 end

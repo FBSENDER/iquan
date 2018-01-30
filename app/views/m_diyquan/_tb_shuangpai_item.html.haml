@@ -1,5 +1,8 @@
 - progress = (60..98).to_a.sample
 - buy_url = "/buy/#{coupon["num_iid"]}/?activity_id="
+- coupon_price = coupon["coupon_info"].match(/减(\d+)元/)[1].to_i
+- now_price = coupon["zk_final_price"].to_f - coupon_price
+
 %a{href: "#{buy_url}", target: "_blank"}
   .product-item-t2
     .pic.lazy{data: {original: "#{coupon['pict_url']}"}}
@@ -12,9 +15,9 @@
         .pro{data: {pro: "#{progress / 100.0}"}, style: "width:#{progress}%"}
     .price-area
       %p.gap-price
-        %em.number-font X
+        %em.number-font #{coupon_price}
         %span> 元券
       .price
         %span> 券后价￥
-        %em.number-font #{coupon['zk_final_price']}
+        %em.number-font #{now_price}
 
