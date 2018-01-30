@@ -1,5 +1,9 @@
 class DianpuController < ApplicationController
   def show
+    if request.host == 'www.iquan.net' && is_device_mobile?
+      redirect_to "http://m.iquan.net#{request.path}/", status: 302
+      return
+    end
     @shop = Shop.where(nick: params[:nick]).take
     not_found if @shop.nil?
     @dsr_info = JSON.parse(@shop.dsr_info)
@@ -15,7 +19,11 @@ class DianpuController < ApplicationController
     @path = "#{request.path}/"
     @shops = Shop.where("id > ?", @shop.id).order("id").select(:nick,:pic_url,:title).limit(15)
     @scoupons = ShopCoupon.where(seller_id: @shop.source_id).to_a
-    render "show", layout: "diyquan"
+    if is_device_mobile?
+      render "m_show", layout: "m_diyquan"
+    else
+      render "show", layout: "diyquan"
+    end
   end
 
   def buy

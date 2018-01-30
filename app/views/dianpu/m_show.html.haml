@@ -1,0 +1,43 @@
+- title("【#{@shop.title}】#{@shop.title}优惠券/折扣/首页/评价怎么样_爱券网")
+- head_desc("#{@desc} - 爱券网")
+- keywords("#{@shop.title},#{@shop.title}首页,#{@shop.title}优惠券,#{@shop.title}折扣,#{@shop.title}怎么样,#{@shop.title}评价,#{@shop.title}淘宝,#{@shop.title}天猫")
+- path(@path)
+- h1("#{@shop.title}")
+
+.wrapper
+  = render partial: "m_diyquan/header", locals: {need_sort: false, need_ads: true}
+  .sno
+    = render partial: "dianpu/shop_bread", locals: {title: @shop.title}
+  .shop-header
+    %h2 #{@shop.title}
+    %p.sno #{@desc}
+    %p.sno
+      #{@shop.title}在售商品：
+      - @items.each do |item|
+        #{item["title"].html_safe}，价格：#{item["price"]}元；
+  .coupon
+    %a{href: "#{@shop.shop_url}", isconvert: 1, target: "_blank", rel: "nofollow"}
+      %span.new-product 今日上新
+      %span.go-coupon 进店看看
+  - if @scoupons.size > 0
+    - @scoupons.each do |sc|
+      .coupon
+        %a{href: "/dianpu_buy/#{sc.seller_id}/?activity_id=#{sc.activity_id}", title: "#{@shop.title}#{sc.coupon_price}元优惠券", target: "_blank"}
+          %span.amount
+            %s ￥
+            %b #{sc.coupon_price}
+          %span.time
+            %s
+              %i 优惠券
+              使用期限
+            %b 至 #{Time.at(sc.end_time).strftime("%Y-%m-%d %H:%M")}
+          %span.go-coupon 立即领券
+
+        %p.sno
+          #{@shop.title}在售商品：
+          - @items.each do |item|
+            #{item["title"].html_safe}，价格：#{item["price"]}元；
+  - if @coupons && @coupons.size > 0
+    = render partial: "m_diyquan/shuangpai_list", locals: {coupons: @coupons}
+  = render partial: "m_diyquan/page_js", locals: {path: '/getSearchCouponList', pinyin: '', keyword: @shop.title, pagesize: 20, sort_type: 0}
+  = render partial: "layouts/taobao_mobile_js"
