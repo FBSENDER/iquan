@@ -155,7 +155,7 @@ $(function(){
       window.location.href = '/tbzk/?keyword=' + encodeURIComponent(q);
       return;
     }
-    window.location.href = '/zhekou/' + encodeURIComponent(q) + '/';
+    window.location.href = '/zhekou/' + encodeURIComponent(q).replace(/\x/g, "%") + '/';
   }
 });
 </script>
