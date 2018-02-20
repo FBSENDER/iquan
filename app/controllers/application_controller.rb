@@ -1,3 +1,4 @@
+require 'common_config'
 require 'net/http'
 require 'zkapi/zk_api'
 require 'zkapi/lanlan_api'
@@ -6,9 +7,6 @@ require 'seo_domain'
 require 'timeout'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-#  def set_layout
-#    "m" if request.host == 'm.bighaowu.com'
-#  end
 
   def is_robot?
     user_agent = request.headers["HTTP_USER_AGENT"]
@@ -20,9 +18,11 @@ class ApplicationController < ActionController::Base
     user_agent.present? && user_agent =~ /\b(Android|iPhone|Windows Phone|Opera Mobi|Kindle|BackBerry|PlayBook|UCWEB|Mobile)\b/i
   end
   def redirect_pc_to_mobile
-    if request.host == 'pc domain' && is_device_mobile?
-      redirect_to "http://mobile domain#{request.path}"
+    if request.host == $pc_host && is_device_mobile?
+      redirect_to "http://#{$mobile_host}#{request.path}/", status: 302
+      return true
     end
+    return false
   end
   def not_found
     raise ActionController::RoutingError.new('NOT FOUND')

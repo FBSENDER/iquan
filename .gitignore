@@ -24,6 +24,6 @@ Capfile
 /config/deploy/ali5.rb
 /config/deploy.rb
 .DS_Store
-/app/controllers/diyquan_controller.rb
 /lib/zkapi/zk_api.rb
 /lib/zkapi/lanlan_api.rb
+/lib/common_config.rb

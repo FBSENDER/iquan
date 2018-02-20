@@ -1,9 +1,9 @@
-- title("#{@coupon['title']}优惠券_爱券网")
-- head_desc("#{@coupon['title']},原价#{@coupon['raw_price']}元,领券立减#{@coupon['gap_price']}元,月销#{@coupon['month_sales']}件,淘宝/天猫热销中,优惠券马上领。#{@coupon['title']}优惠券如何领取？首先点击页面上的立即领券按钮，来到淘宝天猫的优惠券领取页，在点击立即领券，这时系统会提示您登陆淘宝账户，登录成功后，就可以领取优惠券，下单享受立减优惠了 - 爱券网")
-- keywords("#{@coupon['title']},#{@coupon['title']}优惠券")
+- title(@title)
+- head_desc(@description)
+- keywords(@page_keywords)
 - path(@path)
 - mobile_url(@path)
-- h1("#{@coupon['title']}优惠券")
+- h1(@h1)
 
 - if @suggest_keywords.size > 0
   = render partial: "diyquan/suggest_keywords", locals: {keywords: @suggest_keywords}
