@@ -22,6 +22,7 @@ Capfile
 /config/deploy/staging.rb
 /config/deploy/17430.rb
 /config/deploy/ali5.rb
+/config/deploy/shikuai.rb
 /config/deploy.rb
 .DS_Store
 /lib/zkapi/zk_api.rb
