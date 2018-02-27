@@ -7,7 +7,7 @@ class ICookie < ApplicationRecord
 end
 
 class Link < ApplicationRecord
-  self.table_name = 'iquan_links'
+  self.table_name = 'shikuai_links'
 end
 
 class AppDownload < ApplicationRecord
