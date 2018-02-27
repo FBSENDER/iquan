@@ -38,7 +38,7 @@ module DiyquanHelper
 
   def zhekou_dae_tdk
     @keyword = params[:keyword].force_encoding('utf-8')
-    @title= "#{@keyword}大额优惠券】"
+    @title= "#{@keyword}大额优惠券"
     @description = "【#{@keyword}大额优惠券】淘宝天猫#{@keyword}优惠券，20元50元100元，先领券，再下单，专享淘宝折上折优惠。领取#{@keyword}优惠券，查看#{@keyword}打折特价信息——#{$website_name}"
     @page_keywords = "#{@keyword}大额优惠券,#{@keyword},#{@keyword}优惠,#{@keyword}优惠券,#{@keyword}折扣,特价#{@keyword}"
     @big_keywords = $big_keywords
@@ -109,11 +109,11 @@ module DiyquanHelper
   end
   
   def quan_detail_tdk
-    @title = "#{@coupon['title']}优惠券_#{$website_name}"
+    @title = "#{@coupon['title']}"
     @description = "#{@coupon['title']},原价#{@coupon['raw_price']}元,领券立减#{@coupon['gap_price']}元,月销#{@coupon['month_sales']}件,淘宝/天猫热销中,优惠券马上领。#{@coupon['title']}优惠券如何领取？首先点击页面上的立即领券按钮，来到淘宝天猫的优惠券领取页，在点击立即领券，这时系统会提示您登陆淘宝账户，登录成功后，就可以领取优惠券，下单享受立减优惠了 - #{$website_name}"
     @page_keywords = "#{@coupon['title']},#{@coupon['title']}优惠券"
     @big_keywords = $big_keywords
-    @h1 = "#{@coupon['title']}优惠券"
+    @h1 = "#{@coupon['title']}"
     @path = request.path + "/"
     @links = []
   end
