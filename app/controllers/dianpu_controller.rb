@@ -16,6 +16,7 @@ class DianpuController < ApplicationController
     @path = "#{request.path}/"
     @shops = Shop.where("id > ?", @shop.id).order("id").select(:nick,:pic_url,:title).limit(15)
     @scoupons = ShopCoupon.where(seller_id: @shop.source_id).to_a
+    @big_keywords = $big_keywords
     if is_device_mobile?
       render "m_show", layout: "m_diyquan"
     else
@@ -33,14 +34,14 @@ class DianpuController < ApplicationController
     @shops = Shop.order("id desc").limit(1000).offset(1000 * @page).select(:title, :nick).to_a
     not_found if @shops.size.zero?
     if @page > 0
-      @title = "淘宝天猫旗舰店排行榜_爱券网_第#{@page}页"
+      @title = "淘宝天猫旗舰店排行榜-女装男装居家数码美妆箱包_十块购_第#{@page}页"
     else
-      @title = "淘宝天猫旗舰店排行榜_爱券网"
+      @title = "淘宝天猫旗舰店排行榜-女装男装居家数码美妆箱包_十块购"
     end
     @total_page = @page + 20
     @h1 = "淘宝天猫旗舰店排行榜"
     @keywords = "天猫旗舰店,淘宝店铺,淘宝店铺大全,淘宝店铺排行榜"
-    @description = "淘宝天猫旗舰店排行榜，女装、男装、居家、数码、美妆、箱包、母婴、宠物、配饰等多种类别的淘宝天猫店铺大排行，淘宝天猫店铺用户评价，卖的商品怎么样？店铺打折信息，内部优惠券，这里都查得到 - 爱券网"
+    @description = "淘宝天猫旗舰店排行榜，女装、男装、居家、数码、美妆、箱包、母婴、宠物、配饰等多种类别的淘宝天猫店铺大排行，淘宝天猫店铺用户评价，卖的商品怎么样？店铺打折信息，内部优惠券，这里都查得到 - 十块购"
     @path = "/dianpu/"
     render "map_s", layout: "diyquan"
   end

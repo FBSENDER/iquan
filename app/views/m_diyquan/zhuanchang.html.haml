@@ -1,8 +1,8 @@
-- title("#{@title}_爱券网")
-- head_desc("专场特卖- #{@title} - 爱券网。")
-- keywords(@title)
+- title(@title)
+- head_desc(@description)
+- keywords(@page_keywords)
 - path(@path)
-- h1(@title)
+- h1(@h1)
 
 .wrapper
   = render partial: "m_diyquan/header", locals: {need_sort: false, need_ads: true}

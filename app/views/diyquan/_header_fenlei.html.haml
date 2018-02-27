@@ -3,11 +3,11 @@
     .wrapper 
       - category['cate'].each do |cate|
         - is_active = cate['cate_collection_id'] == category['cate_collection_id'] || cate['cate_collection_id'] == category['pid'] ? 'active' : ''
-        %a{href: "/fenlei/#{cate['pinyin']}/", title: "#{cate['name']}内部优惠券", class: "#{is_active}"} #{cate['name']}
+        %a{href: "/fenlei/#{cate['pinyin']}/", title: "#{cate['name']}淘宝优惠券", class: "#{is_active}"} #{cate['name']}
   - if category['subclass']
     .cate-l-2
       .wrapper
         - category['subclass'].each do |cate|
           - is_active = cate['cate_collection_id'] == category['cate_collection_id'] ? 'active' : ''
-          %a{href: "/fenlei/#{cate['pinyin']}/", title: "#{cate['name']}内部优惠券", class: "#{is_active}"} #{cate['name']}
+          %a{href: "/fenlei/#{cate['pinyin']}/", title: "#{cate['name']}淘宝优惠券", class: "#{is_active}"} #{cate['name']}
 
