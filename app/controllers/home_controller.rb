@@ -17,7 +17,8 @@ class HomeController < ApplicationController
 
   def diyquan_home
     if is_robot?
-      @coupons = get_static_coupons('static_new_coupons')
+      #@coupons = get_static_coupons('static_new_coupons')
+      @coupons = []
     else
       @coupons = []
     end
