@@ -40,4 +40,4 @@
   - if @coupons && @coupons.size > 0
     = render partial: "m_diyquan/shuangpai_list", locals: {coupons: @coupons}
   = render partial: "m_diyquan/page_js", locals: {path: '/getSearchCouponList', pinyin: '', keyword: @shop.title, pagesize: 20, sort_type: 0}
-  = render partial: "layouts/taobao_mobile_js"
+  = render partial: "layouts/taobao_js", locals: {pid: @taodianjin_pid}

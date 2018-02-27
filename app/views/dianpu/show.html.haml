@@ -73,6 +73,6 @@
     .rel-zk-list.clearfix
       = render partial: "diyquan/quan_list", locals: {coupons: @hot_coupons}
 
-= render partial: "layouts/taobao_js"
+= render partial: "layouts/taobao_js", locals: {pid: @taodianjin_pid}
 = render partial: "diyquan/quan_detail_js"
 = render partial: "diyquan/footer"

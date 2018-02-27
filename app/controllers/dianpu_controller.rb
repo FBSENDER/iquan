@@ -3,6 +3,7 @@ class DianpuController < ApplicationController
     return if redirect_pc_to_mobile
     @shop = Shop.where(nick: params[:nick]).take
     not_found if @shop.nil?
+    @taodianjin_pid = is_device_mobile? ? $taodianjin_mobile_pid : $taodianjin_pc_pid
     @dsr_info = JSON.parse(@shop.dsr_info)
     ind = JSON.parse(@dsr_info["dsrStr"])["ind"]
     @desc = "#{@shop.title}是一家经营信誉良好、获得消费者广泛好评的一家#{@shop.is_tmall == 1 ? '天猫' : '淘宝'}店铺。店铺掌柜为#{@shop.nick}，如果大家有任何关于#{@shop.title}的问题，都可以向其进行咨询。店铺的注册地点在#{@shop.provcity}，全国包邮哦，看到合适的宝贝赶快拍下，#{@shop.provcity}附近的朋友们可能在当天就收到快递喽。#{@shop.title}在售的宝贝有#{@shop.totalsold}件，有木有很多！近30天的销量为#{@shop.procnt}件，代掌柜#{@shop.nick}感谢大家的大力支持。#{@shop.title}主营类目为#{ind}，具体有#{@shop.main_auction}，欢迎大家选购。#{@shop.title}的综合评分还是不错的，在宝贝描述相符、服务态度、物流服务上均在平均水平之上，大家可以放心选购自己心仪的宝贝。
