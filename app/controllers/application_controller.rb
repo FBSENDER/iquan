@@ -47,6 +47,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def get_suggest_keywords_new_new(keyword)
+    begin
+      sk = SuggestKeywordNew.where(keyword: keyword).take
+      return [] if sk.nil?
+      sk.sks.split(',').sample(20)
+    rescue
+      return []
+    end
+  end
+
   def is_taobao_title?(keyword)
     keyword.size > 18
   end

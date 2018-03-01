@@ -26,6 +26,10 @@ class SuggestKeyword < ApplicationRecord
   self.table_name = 'iquan_suggest_keywords'
 end
 
+class SuggestKeywordNew < ApplicationRecord
+  self.table_name = 'iquan_suggest_keywords_new'
+end
+
 class CidKeywordRelation < ApplicationRecord
   self.table_name = 'iquan_coupon_keyword_relations'
 end
@@ -56,4 +60,8 @@ end
 
 class SearchUrlLog < ApplicationRecord
   self.table_name = 'iquan_search_item_url_logs'
+end
+
+class Tag < ApplicationRecord
+  self.table_name = 'iquan_tags'
 end

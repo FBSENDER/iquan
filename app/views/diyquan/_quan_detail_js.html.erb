@@ -15,7 +15,7 @@ $(function(){
   function dateCountDown(){
     var now = Math.floor(new Date().getTime()/1000)*1;
     if(now > endTime){
-      timeArea.html('优惠券已失效');
+      timeArea.html('折扣商品限量抢购中！');
     }else{
       var gap = endTime - now;
       var dd = Math.floor(gap/(60*60*24));

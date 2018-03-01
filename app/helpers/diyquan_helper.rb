@@ -72,6 +72,18 @@ module DiyquanHelper
     @links = []
   end
 
+  def k_pinyin_tdk
+    @keyword = @tag.keyword
+    @title= "#{@keyword}_#{@keyword}价格_#{@keyword}品牌/报价/怎么样_#{$website_name}"
+    @description = "找#{@keyword}，就上爱券网iquan.net，数以万计的#{@keyword}优质商品供您挑选，包括品牌，价格，图片，厂家，产地，材料等，爱券网让网购更加方便又省钱！"
+    @page_keywords = "#{@keyword},#{@keyword}价格,#{@keyword}报价,#{@keyword}品牌,#{@keyword}怎么样,#{@keyword}厂家,#{@keyword}店铺,#{@keyword}图片"
+    @big_keywords = $big_keywords
+    @h1 = @keyword
+    @seo_k = @h1
+    @path = request.path + "/"
+    @links = []
+  end
+
   def baokuan_tdk
     @title = "淘宝爆款_#{$website_name}"
     @description = "#{$website_name} - 淘宝爆款热销产品,爆款热卖进行中,网站内最热门的优惠券免费领！"

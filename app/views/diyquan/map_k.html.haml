@@ -6,13 +6,16 @@
 - h1(@h1)
 
 = render partial: "diyquan/header_fenlei_zhekou"
-- @sks.each do |sk|
-  - next if sk.sks.empty?
-  = render partial: "diyquan/suggest_keywords", locals: {keywords: [sk.keyword] + sk.sks.split(',')}
+= render partial: "diyquan/suggest_keywords", locals: {keywords: @ks.map{|k| k.keyword}}
 .hori-cate-area
   .hot-keywords
     .wrapper
-      - (1..83).to_a.each do |page|
+      - @kss.each do |kss|
+        %a{href: "/k_#{kss.pinyin}/", title: "#{kss.keyword}"} #{kss.keyword}
+.hori-cate-area
+  .hot-keywords
+    .wrapper
+      - (1..23).to_a.each do |page|
         %a{href: "/map_k/#{page}/"} #{page}
 
 = render partial: "diyquan/footer"

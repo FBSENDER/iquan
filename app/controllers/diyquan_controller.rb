@@ -389,21 +389,11 @@ class DiyquanController < ApplicationController
       return
     end
     #可能没有推荐 要兜底
-    unless is_robot?
-      #@coupons = get_rec_coupons_by_id(params[:id])
-      @coupons = get_static_coupons('static_new_coupons', 20)
-    else
-      @coupons = get_static_coupons('static_new_coupons', 20)
-    end
+    @coupons = get_static_coupons('static_new_coupons', 20)
+    @hot_coupons = get_static_coupons('static_hot_coupons', 20)
     cate_collection_id = 0
     if(@category && @category.size > 0)
       cate_collection_id = @category[0]["cate_collection_id"]
-    end
-    unless is_robot?
-      #@hot_coupons = get_hot_coupons(cate_collection_id, (0..20).to_a.sample, 20)
-      @hot_coupons = get_static_coupons('static_hot_coupons', 20)
-    else
-      @hot_coupons = get_static_coupons('static_hot_coupons', 20)
     end
     @suggest_keywords = get_sk_by_coupon_id(params[:id].to_i)
     if @suggest_keywords.size.zero? && @category && @category.size > 0
@@ -411,6 +401,15 @@ class DiyquanController < ApplicationController
     end
     @shops ||= Shop.where(id: (1..1000).to_a.sample(20)).select(:title, :nick)
     quan_detail_tdk
+    unless is_robot? && @coupon["coupon_price"].to_i == 0
+      mmcoupon = apply_high_commission(@coupon["item_id"], $pid)
+      if mmcoupon["coupon_start_time"]
+        @coupon["gap_price"] = mmcoupon["coupon_info"].match(/减(\d+)元/)[1].to_i
+        @coupon["coupon_price"] = (@coupon["raw_price"].to_f - @coupon["gap_price"]).round(2)
+        tt = mmcoupon["coupon_end_time"].match(/(\d+)-(\d+)-(\d+)/)
+        @coupon["dateline"] = Time.new(tt[1].to_i, tt[2].to_i, tt[3].to_i).to_i
+      end
+    end
     render :quan_detail
     save_coupon_suggestion(@coupon)
   end
@@ -486,6 +485,22 @@ class DiyquanController < ApplicationController
     end
   end
 
+  def k_pinyin
+    return if redirect_pc_to_mobile
+    @tag = Tag.where(pinyin: params[:pinyin]).take
+    not_found if @tag.nil?
+    @coupons = get_static_coupons(@tag.keyword)
+    not_found if(@coupons.nil? || @coupons.size <= 0)
+    @keywords = get_suggest_keywords_new_new(@tag.keyword)
+    @shops = Shop.where(source_id: @coupons.map{|c| c["seller_id"]}.uniq).select(:title, :nick)
+    k_pinyin_tdk
+    if is_device_mobile?
+      render "m_diyquan/zhekou", layout: "layouts/m_diyquan"
+    else
+      render "zhekou", layout: "layouts/diyquan"
+    end
+  end
+
   def get_tbk_search_json(keyword, page_no)
     tbk = Tbkapi::Taobaoke.new
     JSON.parse(tbk.taobao_tbk_item_get(keyword, $taobao_app_id, $taobao_app_secret, page_no + 1,50))
@@ -504,9 +519,10 @@ class DiyquanController < ApplicationController
   def map_k
     @page = params[:page].to_i
     @page = @page == 0 ? 0 : @page - 1
-    @sks = SuggestKeyword.select(:id, :keyword, :sks).limit(100).offset(100 * @page)
-    @total_page = @page + 100
-    not_found if @sks.size.zero?
+    @ks = SearchResult.where("coupon_count >= 100").select(:id, :keyword).order(:id).limit(500).offset(500 * @page)
+    @kss = Tag.where("coupon_count >= 100").select(:id, :keyword, :pinyin).order(:id).limit(500).offset(500 * @page)
+    @total_page = 20
+    not_found if @ks.size.zero?
     map_k_tdk
   end
 
