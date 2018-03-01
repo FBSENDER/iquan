@@ -320,6 +320,7 @@ class DiyquanController < ApplicationController
 
   def get_coupon_by_id
     return if redirect_pc_to_mobile
+    @taodianjin_pid = is_device_mobile? ? $taodianjin_mobile_pid : $taodianjin_pc_pid
     if is_robot?
       cp = CouponSuggestion.where(coupon_id: params[:id].to_i).take
       product = Product.where(item_id: cp.item_id).take unless cp.nil?
@@ -389,21 +390,11 @@ class DiyquanController < ApplicationController
       return
     end
     #可能没有推荐 要兜底
-    unless is_robot?
-      #@coupons = get_rec_coupons_by_id(params[:id])
-      @coupons = get_static_coupons('static_new_coupons', 20)
-    else
-      @coupons = get_static_coupons('static_new_coupons', 20)
-    end
+    @coupons = get_static_coupons('static_new_coupons', 20)
+    @hot_coupons = get_static_coupons('static_hot_coupons', 20)
     cate_collection_id = 0
     if(@category && @category.size > 0)
       cate_collection_id = @category[0]["cate_collection_id"]
-    end
-    unless is_robot?
-      #@hot_coupons = get_hot_coupons(cate_collection_id, (0..20).to_a.sample, 20)
-      @hot_coupons = get_static_coupons('static_hot_coupons', 20)
-    else
-      @hot_coupons = get_static_coupons('static_hot_coupons', 20)
     end
     @suggest_keywords = get_sk_by_coupon_id(params[:id].to_i)
     if @suggest_keywords.size.zero? && @category && @category.size > 0
@@ -411,6 +402,15 @@ class DiyquanController < ApplicationController
     end
     @shops ||= Shop.where(id: (1..1000).to_a.sample(20)).select(:title, :nick)
     quan_detail_tdk
+    unless is_robot? && @coupon["coupon_price"].to_i == 0
+      mmcoupon = apply_high_commission(@coupon["item_id"], $pid)
+      if mmcoupon["coupon_start_time"]
+        @coupon["gap_price"] = mmcoupon["coupon_info"].match(/减(\d+)元/)[1].to_i
+        @coupon["coupon_price"] = (@coupon["raw_price"].to_f - @coupon["gap_price"]).round(2)
+        tt = mmcoupon["coupon_end_time"].match(/(\d+)-(\d+)-(\d+)/)
+        @coupon["dateline"] = Time.new(tt[1].to_i, tt[2].to_i, tt[3].to_i).to_i
+      end
+    end
     render :quan_detail
     save_coupon_suggestion(@coupon)
   end
