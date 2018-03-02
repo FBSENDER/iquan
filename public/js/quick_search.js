@@ -7,7 +7,11 @@ function clear_content(){
 }
 
 function get_title(data){
-  var m = /【.*\((.*)\)】/.exec(data);
+  var m = /【.*\((.*)\).*】/.exec(data);
+  if(m != null){
+    return m[1]
+  }
+  m = /【.*（(.*)）.*】/.exec(data);
   if(m != null){
     return m[1]
   }
@@ -16,6 +20,10 @@ function get_title(data){
     return m[1]
   }
   m = /\((.*)\)/.exec(data);
+  if(m != null){
+    return m[1]
+  }
+  m = /（(.*)）/.exec(data);
   if(m != null){
     return m[1]
   }

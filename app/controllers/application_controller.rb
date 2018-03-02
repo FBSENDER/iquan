@@ -60,4 +60,10 @@ class ApplicationController < ActionController::Base
   def is_taobao_title?(keyword)
     keyword.size > 18
   end
+
+  def get_referer_search_keyword
+  end
+
+  def get_title_from_search_keyword
+  end
 end
