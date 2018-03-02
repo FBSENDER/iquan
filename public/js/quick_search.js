@@ -15,6 +15,10 @@ function get_title(data){
   if(m != null){
     return m[1]
   }
+  m = /\((.*)\)/.exec(data);
+  if(m != null){
+    return m[1]
+  }
   return data;
 }
 
