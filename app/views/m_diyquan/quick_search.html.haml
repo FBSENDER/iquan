@@ -1,0 +1,40 @@
+- title("优惠券搜索平台 - 爱券网")
+- head_desc("爱券网 - 找券搜券淘券抢券拿券妈妈券宝宝券猪猪券内部券一网打尽，提供淘宝优惠券、天猫优惠券、内部优惠券、内部优惠卷、隐藏优惠券、隐藏券、隐藏优惠卷等实时查询服务，先搜索领券，再淘宝下单，专享爱券网折上折。每日更新大额优惠券、品牌优惠券、一折特价底价专场、9块9包邮白菜价好东西，加入搜藏，天天省钱 - 爱券网。") 
+- keywords("折券,折券网,爱券,爱券网,爱卷,爱卷网,内部优惠券,淘宝优惠券,天猫优惠券,优惠券平台,优惠券领取,找券网,搜券网,搜券券,好券网,拿券网,淘券网,猪猪券,妈妈券,券宝宝,淘券网,抢券网")
+- h1("优惠券搜索")
+
+.wrapper
+  .search-main
+    .search-area{style: "height:430px"}
+      %form{action: "#", onsubmit: "return false;"}
+        .inner{style: "height:160px;border-radius:5px;padding-left:5px;"}
+          %textarea{id: "search_input", name: "searchInput", class: "search-input", placeholder: "\n\n点这里 粘贴宝贝信息",type: "text",style: "font-size:30px;height:145px;margin:5px 0 5px 0;width:98%;text-align:center;"}
+      %div{style: "margin:0 20px 0 20px;"}
+        %button#btn_clear{style: "height:40px;width:100%;background-color:#448CBB;color:#FFF;font-size:16px;border-radius:5px;", onclick: "clear_content();"} 清空内容
+        %button{style: "margin-top:10px;height:40px;width:100%;background-color:#FF6434;color:#FFF;font-size:16px;border-radius:5px;", onclick: "begin_quick_search();"} 查询优惠
+        %p{style: "margin-top:12px;padding:0 5px 0 5px;line-height:20px;"}
+          %span{style: "font-size:18px;color:#FF6434;"} 爱券网
+          为您提供方便的优惠券查询服务
+        %p{style: "padding: 0 5px 0 5px;line-height:20px;"} 复制粘贴，马上找券！
+        %textarea#query_info{style: "border: 0;width:98%;height:90px;margin-top: 5px;padding: 0 5px 0 5px;line-height:20px;font-size: 18px;color:green;line-height:22px;", disabled: "disabled", readonly: "readonly"}
+  %a{id: "coupon_link", href: "", target: "_blank"}
+    #btn_coupon.coupon{style: "display:none"}
+      %span.amount
+        %s ￥
+        %b#coupon_price 10
+      %span.time
+        %s
+          %i 优惠券
+          使用期限
+        %b#coupon_end_time 至 2018-12-31
+      %span.go-coupon 立即领券
+  #btn_product.coupon{style: "display:none"}
+    %a{id: "product_link", href: "", isconvert: 1, target: "_blank", rel: "nofollow"}
+      %span.new-product#product_price 积分返利
+      %span.go-coupon 折扣购买
+  #btn_app.coupon{style: "display:none"}
+    %a{href: "/lanlan_download/", isconvert: 1, target: "_blank", rel: "nofollow"}
+      %span.new-product 优惠券查找器
+      %span.go-coupon 下载APP
+
+= render partial: "layouts/taobao_js", locals: {pid: @taodianjin_pid}

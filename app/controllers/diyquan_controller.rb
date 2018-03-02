@@ -237,7 +237,7 @@ class DiyquanController < ApplicationController
   end
 
   def quick_search
-    @hot_keywords = get_hot_keywords
+    @taodianjin_pid = is_device_mobile? ? $taodianjin_mobile_pid : $taodianjin_pc_pid
     render "m_diyquan/quick_search", layout: "layouts/m_diyquan"
   end
 
@@ -274,6 +274,17 @@ class DiyquanController < ApplicationController
     end
     render json: {status: -1}
     quick_search_log(-1, @is_taokouling, 1)
+  end
+
+  def quick_search_log(status, is_taokouling, is_title)
+    log = QuickSearchLog.new
+    log.host = request.host
+    log.ip = request.ip
+    log.keyword = @keyword
+    log.status = status
+    log.is_taokouling = is_taokouling
+    log.is_title = is_title
+    log.save
   end
 
   def noresult
