@@ -15,14 +15,14 @@
       #{@shop.title}在售商品：
       - @items.each do |item|
         #{item["title"].html_safe}，价格：#{item["price"]}元；
-  .coupon
-    %a{href: "#{@shop.shop_url}", isconvert: 1, target: "_blank", rel: "nofollow"}
+  %a{href: "#{@shop.shop_url}", isconvert: 1, target: "_blank", rel: "nofollow"}
+    .coupon
       %span.new-product 今日上新
       %span.go-coupon 进店看看
   - if @scoupons.size > 0
     - @scoupons.each do |sc|
-      .coupon
-        %a{href: "/dianpu_buy/#{sc.seller_id}/?activity_id=#{sc.activity_id}", title: "#{@shop.title}#{sc.coupon_price}元优惠券", target: "_blank"}
+      %a{href: "/dianpu_buy/#{sc.seller_id}/?activity_id=#{sc.activity_id}", title: "#{@shop.title}#{sc.coupon_price}元优惠券", target: "_blank"}
+        .coupon
           %span.amount
             %s ￥
             %b #{sc.coupon_price}

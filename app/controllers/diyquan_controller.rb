@@ -236,6 +236,58 @@ class DiyquanController < ApplicationController
     render "m_diyquan/search", layout: "layouts/m_diyquan"
   end
 
+  def quick_search
+    @hot_keywords = get_hot_keywords
+    render "m_diyquan/quick_search", layout: "layouts/m_diyquan"
+  end
+
+  def quick_search_title
+    @keyword = params[:keyword].strip
+    @is_taokouling = params[:kouling].nil? ? 0 : params[:kouling].to_i
+    unless is_taobao_title?(@keyword)
+      render json: {status: 5, url: "/zhekou/#{URI.encode(@keyword)}/"}
+      quick_search_log(5, @is_taokouling, 0)
+      return
+    end
+    tb_coupon_result = get_tbk_coupon_search_json(@keyword, 218532065, 0)
+    if tb_coupon_result && tb_coupon_result["tbk_dg_item_coupon_get_response"]["results"]  && tb_coupon_result["tbk_dg_item_coupon_get_response"]["results"]["tbk_coupon"] && tb_coupon_result["tbk_dg_item_coupon_get_response"]["results"]["tbk_coupon"].size == 1
+      cp = tb_coupon_result["tbk_dg_item_coupon_get_response"]["results"]["tbk_coupon"].first
+      coupon_price = cp["coupon_info"].match(/减(\d+)元/)[1]
+      render json: {status: 1, url: "/buy/#{cp["num_iid"]}/", price: coupon_price, end_time: cp["coupon_end_time"]}
+      quick_search_log(1, @is_taokouling, 1)
+      return
+    elsif tb_coupon_result && tb_coupon_result["tbk_dg_item_coupon_get_response"]["results"]  && tb_coupon_result["tbk_dg_item_coupon_get_response"]["results"]["tbk_coupon"] && tb_coupon_result["tbk_dg_item_coupon_get_response"]["results"]["tbk_coupon"].size > 1
+      render json: {status: 2, url: "/zhekou/#{URI.encode(@keyword)}/", price: 5}
+      quick_search_log(2, @is_taokouling, 1)
+      return
+    end
+    tb_result = get_tbk_search_json(@keyword, 0)
+    p tb_result
+    if tb_result && tb_result["tbk_item_get_response"]["total_results"] == 1
+      pd = tb_result["tbk_item_get_response"]["results"]["n_tbk_item"].first
+      render json: {status: 3, url: "http://item.taobao.com/item.htm?id=#{pd["num_iid"]}", price: pd["zk_final_price"]}
+      quick_search_log(3, @is_taokouling, 1)
+      return 
+    elsif tb_result && tb_result["tbk_item_get_response"]["total_results"] > 1
+      render json: {status: 4, url: "/zhekou/#{URI.encode(@keyword)}/"}
+      quick_search_log(4, @is_taokouling, 1)
+      return
+    end
+    render json: {status: -1}
+    quick_search_log(-1, @is_taokouling, 1)
+  end
+
+  def quick_search_log(status, is_taokouling, is_title)
+    log = QuickSearchLog.new
+    log.host = request.host
+    log.ip = request.ip
+    log.keyword = @keyword
+    log.status = status
+    log.is_taokouling = is_taokouling
+    log.is_title = is_title
+    log.save
+  end
+
   def noresult
     @keyword = params[:keyword]
     @coupons = JSON.parse(baokuan_coupon_list(0, 40))["data"]["coupon_list"]
@@ -350,6 +402,10 @@ class DiyquanController < ApplicationController
         @category = nil
       end
     else
+      if is_device_mobile?
+        redirect_to "/quick_query/", status: 302
+        return
+      end
       result = JSON.parse(get_coupon_json(params[:id]))
       @coupon = result["data"]["coupon_info"]
       to_lanlan = 0
