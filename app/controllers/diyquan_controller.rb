@@ -262,7 +262,6 @@ class DiyquanController < ApplicationController
       return
     end
     tb_result = get_tbk_search_json(@keyword, 0)
-    p tb_result
     if tb_result && tb_result["tbk_item_get_response"]["total_results"] == 1
       pd = tb_result["tbk_item_get_response"]["results"]["n_tbk_item"].first
       render json: {status: 3, url: "http://item.taobao.com/item.htm?id=#{pd["num_iid"]}", price: pd["zk_final_price"]}
