@@ -57,3 +57,7 @@ end
 class SearchUrlLog < ApplicationRecord
   self.table_name = 'iquan_search_item_url_logs'
 end
+
+class QuickSearchLog < ApplicationRecord
+    self.table_name = 'iquan_quick_search_logs'
+end
