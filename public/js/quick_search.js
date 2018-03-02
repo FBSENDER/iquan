@@ -88,4 +88,9 @@ function begin_quick_search(){
 
 $(document).ready(function(){
   fix_coupon_position();
+  $("#search_input").on("keypress", function(e){
+    if(e.keyCode == 13){
+      begin_quick_search();
+    }
+  });
 });
