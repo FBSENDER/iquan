@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
     uri = URI(request.referer)
     return nil if uri.query.nil?
     ps = CGI.parse(uri.query)
-    ks = ps["keyword"] 
+    ks = ps["keyword"] || ps["word"]
     if ks && ks.size > 0
       return ks.first
     else
