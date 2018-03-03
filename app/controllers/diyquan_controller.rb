@@ -401,10 +401,10 @@ class DiyquanController < ApplicationController
         @category = nil
       end
     else
-      if is_device_mobile?
-        redirect_to "/quick_query/", status: 302
-        return
-      end
+      #if is_device_mobile?
+      #  redirect_to "/quick_query/", status: 302
+      #  return
+      #end
       result = JSON.parse(get_coupon_json(params[:id]))
       @coupon = result["data"]["coupon_info"]
       to_lanlan = 0
