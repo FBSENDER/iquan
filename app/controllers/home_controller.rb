@@ -101,8 +101,8 @@ class HomeController < ApplicationController
     if is_robot?
       @coupons = get_static_coupons('static_new_coupons')
     else
-      @coupons = get_static_coupons('static_new_coupons')
-      #@coupons = []
+      #@coupons = get_static_coupons('static_new_coupons')
+      @coupons = []
     end
     @links = Link.where(status: 1).to_a
     render "diyquan/home", layout: "layouts/diyquan"
