@@ -62,8 +62,30 @@ class ApplicationController < ActionController::Base
   end
 
   def get_referer_search_keyword
+    return nil if request.referer.nil?
+    uri = URI(request.referer)
+    return nil if uri.query.nil?
+    ps = CGI.parse(uri.query)
+    ks = ps["keyword"] 
+    if ks && ks.size > 0
+      return ks.first
+    else
+      return nil
+    end
   end
 
-  def get_title_from_search_keyword
+  def get_title_from_search_keyword(keyword)
+    return nil if keyword.nil? || keyword.empty?
+    m = keyword.match(/【.*\((.*)\).*】/)
+    return m[1] if m
+    m = keyword.match(/【.*（(.*)）.*】/)
+    return m[1] if m 
+    m = keyword.match(/【(.*)】/)
+    return m[1] if m
+    m = keyword.match(/（(.*)）/)
+    return m[1] if m
+    m = keyword.match(/\((.*)\)/)
+    return m[1] if m
+    nil
   end
 end
