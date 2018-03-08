@@ -38,7 +38,7 @@
           直达链接：
           %a{href: "http://#{brand.host}", target: "_blank", title: "#{brand.title}"} #{brand.title}
     .col-md-12
-      %h2.page-header 热销商品
+      %h2.page-header 热销商品 - 更新于 #{Time.now.strftime("%Y-%m-%d")}
       %p.content
         - @coupons.each do |c|
           %a{href: "http://www.iquan.net/youhui/#{c["coupon_id"]}/"} #{c["title"]}
