@@ -95,6 +95,7 @@ class HomeController < ApplicationController
       @description = brand.description
       @comments = brand.comments
     end
+    @coupons = get_static_coupons('static_new_coupons')
   end
 
   def diyquan_home
