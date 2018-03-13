@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>优优好店-领券享优惠,天天九块九特价购</title>
+    <meta charset="UTF-8" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <link rel="shortcut icon" href="http://www.iquan.net/favicon.ico">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="grey" />
+           <link rel="stylesheet" type="text/css" href="http://st3.lanlanlife.com/release/static/saber/css/style-b0786293bb.css"/>
+   <link rel="stylesheet" type="text/css" href="http://st3.lanlanlife.com/release/static/saber/css/base-61de2441e0.css"/>
+   <link rel="stylesheet" type="text/css" href="http://st3.lanlanlife.com/release/static/saber/css/index-73ee9ff15b.css"/>
+   <link rel="stylesheet" type="text/css" href="http://st3.lanlanlife.com/release/static/saber/css/list-8184f7963c.css"/>
+    <script type="text/javascript" src="http://st3.lanlanlife.com/release/static/saber/lib/js-6e9eb1f53a.cookie.js"></script>
+    <script type="text/javascript" src="http://st3.lanlanlife.com/release/static/saber/lib/Collect-c2e236f8e0.io.js"></script>
+    <script type="text/javascript" src="http://st3.lanlanlife.com/release/static/saber/js/vendor-8d9338a851.js"></script>
+    
+
+    <script type="text/javascript">
+
+        var _hmt = _hmt || [];
+
+        // 过滤 详情页发单 ,导购搜索页 和 app
+                // lovelytao
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?62ef26cf1b961bfc81b47eef2fb3d1df";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        
+        window.mobileUtil = (function () {
+            var UA = navigator.userAgent,
+                isAndroid = /android|adr/gi.test(UA),
+                isIOS = /iphone|ipod|ipad/gi.test(UA) && !isAndroid,
+                isBlackBerry = /BlackBerry/i.test(UA),
+                isWindowPhone = /IEMobile/i.test(UA),
+                isUCBrowser = /UCBrowser/i.test(UA),
+                isQuark = /Quark/i.test(UA),
+                isQQ = /QQ/gi.test(UA),
+                isWeixin = /MicroMessenger/gi.test(UA),
+                isMobile = isAndroid || isIOS || isBlackBerry || isWindowPhone;
+            return {
+                isAndroid: isAndroid,
+                isIOS: isIOS,
+                isMobile: isMobile,
+                isWeixin: isWeixin,
+                isQQ: isQQ,
+                isPC: !isMobile,
+                isUCBrowser: isUCBrowser,
+                isQuark: isQuark
+            };
+        })();
+
+        !(function (doc, win) {
+            var docEl = doc.documentElement, resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize', fsize,
+                fn = function () {
+                    var cWidth = !mobileUtil.isMobile ? 750 : docEl.clientWidth;
+                    fsize = cWidth / 7.5;
+                    cWidth && (docEl.style.fontSize = 2 * fsize + 'px');
+                };
+            fn();
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, fn, false);
+        })(document, window);
+
+    </script>
+</head>
+
+<body>
+
+<div id="app">
+    <h1 style="display:none">优优好店</h1>
+    <transition>
+        <keep-alive include="app,detail,search,list,wall,find">
+            <router-view></router-view>
+        </keep-alive>
+    </transition>
+</div>
+
+    <script type="text/javascript" src="http://st2.lanlanlife.com/release/static/saber/js/app-cfb16d5af8.js"></script>
+
+<script>
+    try{
+        var Collection_TJ = new Collection({
+            url:'http://log.lanlanlife.com/xsj.gif',
+            path: (function(){
+                var path = window.location.search.split('?')[1];
+                if(path == undefined) return '/';
+
+                var pathSplit = path.split('&');
+                var length = pathSplit.length;
+                for(var i = 0;i < length;i++){
+                    var arr = pathSplit[i].split("=");
+                    if(arr[0] == '_path'){
+                        return pathSplit[i];
+                    }
+                }
+                return '/';
+            })(),
+            gender: Cookies.get('gender') || 2,
+            cookieName:'CMS_62953bb5-7108-28b6-ea97-4b18b3f2e11c'
+        });
+    }catch(e){}
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ed0295502c4debb1b3e34356c07ab121";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-96984648-11"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-96984648-11');
+</script>
+</body>
+</html>

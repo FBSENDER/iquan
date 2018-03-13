@@ -16,6 +16,10 @@ class HomeController < ApplicationController
       render "lanlan_home", layout: nil
       return
     end
+    if request.host == "wap.uuhaodian.com"
+      render "uuhaodian_home", layout: nil
+      return
+    end
     if request.host == "zhaoquan.shop" && !is_robot?
       render "zhaoquan_home", layout: nil
       return
