@@ -224,8 +224,9 @@ class DiyquanController < ApplicationController
     return if redirect_pc_to_mobile
     @zhuanchang_id = params[:id]
     zhuanchang_tdk
-    result = JSON.parse(zhuanchang_coupon_list(params[:id]))
-    @coupons = result["data"]["coupon_list"]
+    #result = JSON.parse(zhuanchang_coupon_list(params[:id]))
+    @coupons = get_static_coupons('static_new_coupons')
+    #@coupons = result["data"]["coupon_list"]
     if is_device_mobile?
       render "m_diyquan/zhuanchang", layout: "layouts/m_diyquan"
     end
