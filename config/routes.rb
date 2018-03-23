@@ -66,6 +66,8 @@ Rails.application.routes.draw do
   get "/lanlan_download/", to: "diyquan#lanlan_download"
   get "/g_:pinyin/", to: "diyquan#page"
   get "/k_:pinyin/", to: "diyquan#k_pinyin"
+  #sem duoshou
+  get "/ds/", to: "diyquan#duoshou"
 
   get "/query/noresult", to: "diyquan#noresult"
   get "/baokuan/", to: "diyquan#baokuan"

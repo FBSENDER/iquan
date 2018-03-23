@@ -588,4 +588,17 @@ class DiyquanController < ApplicationController
     map_k_tdk
   end
 
+  def duoshou
+    rk = get_referer_search_keyword
+    rt = get_title_from_search_keyword(rk)
+    if rt
+      redirect_to "http://m.iquan.net/zhekou/#{URI.encode(rt)}/?source=baidusem_d", status: 302
+      @keyword = rt
+      quick_search_log(7, 1, 1)
+      return
+    else
+      redirect_to "http://m.uuhaodian.com/index.php?r=index/wap&source=baidusem_d", status: 302
+    end
+  end
+
 end
