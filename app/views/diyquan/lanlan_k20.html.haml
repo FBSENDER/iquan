@@ -10,9 +10,9 @@
 .wrapper.home-wrapper
   %div{style: "margin-top:20px"}
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanTypeCouponList', type: 4, sort_type: 0, pagesize: 20, keyword: '', pinyin: '', wclass: '.search-result'}
+  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanTypeCouponList', type: 1, sort_type: 0, pagesize: 20, keyword: '', pinyin: '', wclass: '.search-result'}
 
 :javascript
-  $('#header_k9').addClass('active');
+  $('#header_k20').addClass('active');
 
 = render partial: "diyquan/home_footer", locals: {links: @links}

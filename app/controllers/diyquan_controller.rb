@@ -196,9 +196,19 @@ class DiyquanController < ApplicationController
   def baokuan
     return if redirect_pc_to_mobile
     baokuan_tdk
-    @coupons = get_static_coupons('static_hot_coupons')
+    if is_robot?
+      @coupons = get_static_coupons('static_hot_coupons')
+    else
+      @coupons = []
+    end
     if is_device_mobile?
       render "m_diyquan/baokuan", layout: "layouts/m_diyquan"
+    else
+      if is_robot?
+        render "diyquan/baokuan", layout: "layouts/diyquan"
+      else
+        render "diyquan/lanlan_baokuan", layout: "layouts/diyquan"
+      end
     end
   end
 
@@ -224,9 +234,19 @@ class DiyquanController < ApplicationController
   def k20
     return if redirect_pc_to_mobile
     k20_tdk
-    @coupons = get_static_coupons('static_k20_coupons')
+    if is_robot?
+      @coupons = get_static_coupons('static_k20_coupons')
+    else
+      @coupons = []
+    end
     if is_device_mobile?
       render "m_diyquan/k20", layout: "layouts/m_diyquan"
+    else
+      if is_robot?
+        render "diyquan/k20", layout: "layouts/diyquan"
+      else
+        render "diyquan/lanlan_k20", layout: "layouts/diyquan"
+      end
     end
   end
 
