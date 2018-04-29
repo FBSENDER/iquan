@@ -27,7 +27,7 @@
     %span &nbsp;&nbsp;"#{@keyword}"搜索结果:&nbsp;&nbsp;
     %a{href: "/lanlan_download/",style: "color:blue"} 下载省钱APP - 搜更多内部优惠券
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/lanlan_load_more_search", locals: {path: '/getLanlanSearchCouponList', keyword: @keyword, pinyin: '', sort_type: @sort_type, pagesize: 20, wclass: '.search-result'}
+  = render partial: "diyquan/lanlan_load_more_search", locals: {path: '/getLanlanSearchCouponList', keyword: @keyword, pinyin: '', sort_type: @sort_type,type: 2, pagesize: 20, wclass: '.search-result'}
 :javascript
   $('#li-sort-#{@sort_type}').addClass('active');
 

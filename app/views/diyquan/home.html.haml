@@ -7,6 +7,6 @@
 = render partial: "diyquan/home_adzone"
 .wrapper.home-wrapper
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanHomeCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
+  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanHomeCouponList', pinyin: '', keyword: '', sort_type: 0,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 
 = render partial: "diyquan/home_footer", locals: {links: @links}

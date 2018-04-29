@@ -205,9 +205,19 @@ class DiyquanController < ApplicationController
   def k9
     return if redirect_pc_to_mobile
     k9_tdk
-    @coupons = get_static_coupons('static_k9_coupons')
+    if is_robot?
+      @coupons = get_static_coupons('static_k9_coupons')
+    else
+      @coupons = []
+    end
     if is_device_mobile?
       render "m_diyquan/k9", layout: "layouts/m_diyquan"
+    else
+      if is_robot?
+        render "diyquan/k9", layout: "layouts/diyquan"
+      else
+        render "diyquan/lanlan_k9", layout: "layouts/diyquan"
+      end
     end
   end
 
@@ -316,6 +326,10 @@ class DiyquanController < ApplicationController
 
   def get_lanlan_coupons_search
     render json: lanlan_search_coupon_list(params[:keyword], params[:sort_type], params[:price], params[:page], params[:pagesize])
+  end
+
+  def get_lanlan_coupons_type
+    render json: lanlan_type_coupon_list(params[:type], params[:sort_type], params[:page], params[:pagesize])
   end
 
   def get_coupons_hot

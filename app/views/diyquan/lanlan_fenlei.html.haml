@@ -11,6 +11,6 @@
 .wrapper.home-wrapper
   %div{style: "margin-top:20px"}
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanSearchCouponList', keyword: @keyword, pinyin: '', sort_type: 0, pagesize: 20, wclass: '.search-result'}
+  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanSearchCouponList', keyword: @keyword, pinyin: '', sort_type: 0, type: 0,pagesize: 20, wclass: '.search-result'}
 
 = render partial: "diyquan/home_footer", locals: {links: @links}

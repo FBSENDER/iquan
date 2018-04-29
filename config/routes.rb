@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   get "/getLanlanHomeCouponList", to: "diyquan#get_lanlan_coupons_index"
   get "/getLanlanFenleiCouponList", to: "diyquan#get_lanlan_coupons_fenlei"
   get "/getLanlanSearchCouponList", to: "diyquan#get_lanlan_coupons_search"
+  get "/getLanlanTypeCouponList", to: "diyquan#get_lanlan_coupons_type"
 
   get "/youhui/:id", to: "diyquan#get_coupon_by_id", id: /\d+/
   get "/zk/:id", to: "diyquan#old_zk", id: /\d+/
