@@ -1,0 +1,13 @@
+.hori-cate-area
+  .cate-l-1
+    .wrapper 
+      - categories.each do |cate|
+        - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
+        %a{href: "/category/#{cate['cid']}/", class: "#{is_active}"} #{cate['name']}
+- if @lanlan_category['list']
+  %div{style: "margin: 10px auto;width: 1100px;height:105px;background-color:white;"}
+    - @lanlan_category['list'].each do |cate|
+      - is_active = cate['cid'] == @cid ? 'red' : '#666'
+      %a{href: "/category/#{cate['cid']}/?cid_1=#{@lanlan_category['cid']}&category_name=#{URI.encode(cate['name'])}", style: "width:137px;height:105px;float:left;"}
+        %img{src: "#{cate['image']}", style: "width:60px;height:60px;margin: 10px auto;"}
+        %p{style: "font-size:14px;color:#{is_active};line-height:20px;text-align:center;"} #{cate['name']}

@@ -14,7 +14,7 @@ $(function(){
   //Util.sideFixedMenu($('<%= wclass %>'));
 
   var couponList = $('#couponList'),loadingText = $('.loading-text');
-  var page = 1,pagesize = <%= pagesize %>,load = 1,channel = 27;
+  var page = 1,pagesize = <%= pagesize %>,load = 1,channel = 27,sort = <%= sort_type || 7%>;
   getLanlanCouponList();
 
   $(document).on('scroll',function(){
@@ -43,7 +43,8 @@ $(function(){
       data:{
         'pinyin': '<%= pinyin || '' %>',
         'keyword': '<%= keyword || ''%>',
-        'sort_type': '<%= sort_type || ''%>',
+        'cid': '<%= cid || 0%>',
+        'sort_type': sort,
         'price': '<%= keyword || ''%>',
         'type': '<%= type || 0%>',
         'page':page,
@@ -78,6 +79,16 @@ $(function(){
       var i = _this.data('index');
       $('.s-tab .content p.active').removeClass('active');
       $('.s-tab .content p[data-index='+i+']').addClass('active');
+    }
+  });
+  $('.sort_li').on('click', function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      $('.sort_li.active').removeClass('active');
+      _this.addClass('active');
+      sort = _this.data('sort');
+      $('#couponList').html('');
+      getLanlanCouponList();
     }
   });
 });

@@ -64,6 +64,21 @@ class DiyquanController < ApplicationController
     end
   end
 
+  def lanlan_fenlei
+    return if redirect_pc_to_mobile
+    @cid = params[:cid]
+    @cid_1 = params[:cid_1]
+    @lanlan_cates = $lanlan_cates.sort{|a, b| a["cid"].to_i <=> b["cid"].to_i}
+    @lanlan_category = $lanlan_cates.select{|c| c["cid"] == @cid || c["cid"] == params[:cid_1]}.first
+    if @lanlan_category.nil?
+      not_found
+      return
+    end
+    @category_name = params[:category_name] || @lanlan_category["name"]
+    @coupons = []
+    render "diyquan/lanlan_fenlei_new", layout: "layouts/diyquan"
+  end
+
   def zhekou_rexiao
     zhekou_rexiao_tdk
     zhekou_render(1)
@@ -333,7 +348,7 @@ class DiyquanController < ApplicationController
   end
 
   def get_lanlan_coupons_index
-    render json: lanlan_index_coupon_list(params[:page], params[:pagesize])
+    render json: lanlan_coupon_list(0, 7, params[:page], params[:pagesize])
   end
 
   def get_coupons_fenlei
@@ -342,6 +357,10 @@ class DiyquanController < ApplicationController
 
   def get_coupons_search
     render json: search_coupon_list(params[:keyword], params[:sort_type], params[:price], params[:page], params[:pagesize])
+  end
+
+  def get_lanlan_coupons_fenlei
+    render json: lanlan_coupon_list(params[:cid], params[:sort_type], params[:page], params[:pagesize])
   end
 
   def get_lanlan_coupons_search

@@ -10,7 +10,7 @@
 .wrapper.home-wrapper
   %div{style: "margin-top:20px"}
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanTypeCouponList', type: 2, sort_type: 0, pagesize: 20, keyword: '', pinyin: '', wclass: '.search-result'}
+  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanTypeCouponList', type: 2, cid:0, sort_type: 0, pagesize: 20, keyword: '', pinyin: '', wclass: '.search-result'}
 
 :javascript
   $('#header_baokuan').addClass('active');
