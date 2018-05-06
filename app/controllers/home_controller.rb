@@ -108,6 +108,7 @@ class HomeController < ApplicationController
     else
       #@coupons = get_static_coupons('static_new_coupons')
       @coupons = []
+      @banners = Banner.select(:link_url, :img_url).order("id desc").limit(5)
     end
     @links = Link.where(status: 1).to_a
     render "diyquan/home", layout: "layouts/diyquan"

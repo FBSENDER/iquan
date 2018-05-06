@@ -69,12 +69,11 @@
   <div class="banner-top" style="height:240px;">
     <div class="banner-area swiper-container swiper-container-horizontal" style="width: 600px;height:240px;">
       <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-660px, 0px, 0px);">
-        <a data-ga-event="首页:点击:首页_banner1" class="swiper-slide" href="http://zhequan123.lovelytao.com/h5/collection/detail?id=858&channel=4&banner=858&pid=mm_32854514_34792441_141956402" target="_blank">
-          <img style="width: 100%;" src="http://oss.lanlanlife.com/c1ba22d31da2977be302fa6c37e5fc08_300x750.jpg">
-        </a>
-        <a data-ga-event="首页:点击:首页_banner2" class="swiper-slide" href="http://zhequan123.lovelytao.com/h5/collection/detail?id=857&channel=4&banner=857&pid=mm_32854514_34792441_141956402" target="_blank">
-          <img style="width: 100%;" src="http://oss1.lanlanlife.com/d95940e2a9263644729a022a03e4eebd_300x750.jpg">
-        </a>
+        <% @banners.each do |banner| %>
+          <a class="swiper-slide" href="<%= banner["link_url"] %>" target="_blank">
+            <img style="width: 100%;" src="<%= banner["img_url"]%>">
+          </a>
+        <% end %>
       </div>
       <div class="swiper-bottom">
         <div class="swiper-pager"></div>

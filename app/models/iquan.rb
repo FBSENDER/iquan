@@ -69,3 +69,7 @@ end
 class Tag < ApplicationRecord
   self.table_name = 'iquan_tags'
 end
+
+class Banner < ApplicationRecord
+  self.table_name = 'iquan_banners'
+end
