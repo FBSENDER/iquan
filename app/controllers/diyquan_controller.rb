@@ -557,7 +557,7 @@ class DiyquanController < ApplicationController
     #else
     #  redirect_to "http://apphtml.ffquan.com/index.php?r=index/down&app_id=550416?t=1512729543", status: 302
     #end
-    redirect_to "http://u.51huiyou.cn/x/5539e674", status: 302
+    redirect_to "http://u.pingouwu.cn/x/839a0ca8", status: 302
     if !is_robot?
       one_click = AppDownload.new
       one_click.ip = request.remote_ip
