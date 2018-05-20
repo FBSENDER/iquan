@@ -5,7 +5,12 @@
 - mobile_url("/")
 
 = render partial: "diyquan/home_adzone"
-.wrapper.home-wrapper
+.wrapper 
+  %div{style: "padding-left:15px;background-color: white;line-height: 45px;"} 
+    %span{style: "font-size:20px;font-weight:700;color:#FF472B;"}精选推荐
+    %a{href: "/baokuan/"} 
+      %span{style: "float:right;padding-right:20px;"} 查看更多
+.wrapper.home-wrapper{style: "margin-top: 10px;"}
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanFenleiCouponList', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 

@@ -366,11 +366,11 @@ $(function(){
     }
     $('#backToTop').click(toTop);
     $(window).on('scroll',function(){
-        var scrollTop = document.body.scrollTop;
+        var scrollTop = document.documentElement.scrollTop;
         if(scrollTop > 1500){
-            $('#backToTop').fadeIn(100);
+          $('#backToTop').fadeIn(100);
         }else{
-            $('#backToTop').fadeOut(100);
+          $('#backToTop').fadeOut(100);
         }
     });
 });
