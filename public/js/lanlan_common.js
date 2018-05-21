@@ -4,14 +4,15 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
     for(var i=0,len=cl.length;i<len;i++){
         var z = cl[i];
         var re = /activityId=(\w*)/;
-        var buy_url = '/buy/' + z.itemId + '/?activity_id=' + re.exec(z.couponUrl)[1];
+        //var buy_url = '/buy/' + z.itemId + '/?activity_id=' + re.exec(z.couponUrl)[1];
+        var buy_url = '/yh/' + z.itemId + '/';
         var platform = '',platformPic = '';
         if(z.shopType == 'tmall')
           platform = 2;
         else
           platform = 1;
         htmlstr += '<div class="zk-item">';
-        htmlstr += '<a target="_blank" href="'+ buy_url +'">';
+        htmlstr += '<a href="'+ buy_url +'">';
         htmlstr += '<div class="img-area">';
         htmlstr += '<div class="bottom-info">';
         htmlstr += '<p data-endtime="'+ z.couponEndTime +'" class="time-count"></p>';

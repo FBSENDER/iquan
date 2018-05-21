@@ -1,0 +1,55 @@
+.zk-content{
+  width: 1100px;
+  height: 350px;
+}
+
+.zk-content .img-area{
+  height: 350px;
+  width: 350px;
+}
+
+.zk-content .info-area{
+  width: 680px;
+}
+
+.zk-content .small-img-area{
+  height: 108px;
+  padding-top: 20px;
+}
+
+.zk-content .small-img-area img{
+  height: 100px;
+  width: 100px;
+  float: left;
+  margin-left: 10px;
+  border: 1px solid #fff;
+}
+
+.zk-content .small-img-area img:hover{
+  border: 1px solid #FF2B22;
+  cursor: pointer;
+}
+
+.zk-content .recommend{
+  color:#FF2B22;
+  margin-top:10px;
+  height:42px;
+  overflow: hidden;
+}
+
+.zk-content .info-area .platform{
+  padding-top: 25px;
+}
+
+.zk-content .info-area .stat{
+  padding-top: 0;
+}
+
+.zk-content .info-area .price-area{
+  margin-top: 30px;
+}
+
+.zk-content .oprice{
+  color: #666;
+  text-decoration: line-through;
+}

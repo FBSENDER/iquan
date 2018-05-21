@@ -655,4 +655,23 @@ class DiyquanController < ApplicationController
     end
   end
 
+  def lanlan_detail_page
+    id = params[:id].to_i
+    detail_json = lanlan_coupon_detail(id)
+    @detail = JSON.parse(detail_json)
+    if @detail["result"].nil? || @detail["status"]["code"] != 1001
+      redirect_to "/buy/#{id}/", status: 302
+      return
+    end
+    @detail = @detail["result"]
+    @title = "#{@detail["title"]}_#{$website_name}"
+    @description = @detail["recommend"]
+    @page_keywords = []
+    @path = "/yh/#{id}/"
+    @mobile_path = ""
+    @h1 = @detail["title"]
+
+    render :lanlan_detail
+  end
+
 end

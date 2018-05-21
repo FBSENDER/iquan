@@ -1,0 +1,20 @@
+- title(@title)
+- head_desc(@description)
+- keywords(@page_keywords)
+- path(@path)
+- mobile_url(@path)
+- h1(@h1)
+
+%article.wrapper.zk-detail
+  .wrapper
+    = render partial: "diyquan/lanlan_quan_detail_content"
+
+%aside.wrapper
+  .rel-zk-area{style: "margin-bottom: 30px;"}
+    %p.head
+      %span 相关推荐
+  #couponList.zk-list.clearfix
+  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanSearchCouponList', keyword: @detail["category"], pinyin: '',cid: 0, sort_type: 0, type: 0,pagesize: 20, wclass: '.search-result'}
+= render partial: "diyquan/quan_detail_js"
+
+= render partial: "diyquan/footer"
