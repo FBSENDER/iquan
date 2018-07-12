@@ -1,7 +1,7 @@
 - aaid = coupon['url'].match(/activityId=(\w*)/)
 - aaid = aaid.nil? ? '' : aaid[1]
 - buy_url = coupon["coupon_price"].to_f > 0 ? "/buy/#{coupon["item_id"]}/?activity_id=#{aaid}" : "http://item.taobao.com/item.htm?id=#{coupon['item_id']}"
-.zk-content
+.zk-content-old
   .qrcode
     %img{src: "/image/love1.jpg", alt: "爱券app下载", height: "100px", width: "100px"}
     %p.desc 扫码下载APP~

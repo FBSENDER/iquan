@@ -1217,28 +1217,28 @@ body{
 .zk-main .bread-area a:hover{
     text-decoration: underline;
 }
-.zk-content{
+.zk-content-old{
     width: 780px;
     height: 260px;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 4px rgba(0,0,0,.1);
 }
-.zk-content .img-area{
+.zk-content-old .img-area{
     float: left;
     width: 260px;
     height: 260px;
     background-color: #f4f4f4;
 }
-.zk-content .img-area img{
+.zk-content-old .img-area img{
     width: 100%;
 }
-.zk-content .info-area{
+.zk-content-old .info-area{
     float: left;
     width: 500px;
     padding-left: 20px;
 }
-.zk-content .info-area .title{
+.zk-content-old .info-area .title{
     font-size: 20px;
     line-height: 34px;
     height: 34px;
@@ -1246,7 +1246,7 @@ body{
     color: #444;
     font-weight: normal;
 }
-.zk-content .info-area .title span{
+.zk-content-old .info-area .title span{
     position: relative;
     top: -3px;
     display: inline-block;
@@ -1259,25 +1259,25 @@ body{
     background-color: #FFA248;
     margin-right: 7px;
 }
-.zk-content .info-area .endtime{
+.zk-content-old .info-area .endtime{
     height: 22px;
     padding-top: 10px;
     font-size: 16px;
     color: #999;
 }
-.zk-content .info-area .endtime em{
+.zk-content-old .info-area .endtime em{
     font-style: normal;
     color: #FD6363;
     padding: 0 3px;
 }
-.zk-content .info-area .platform{
+.zk-content-old .info-area .platform{
     height: 20px;
     padding-top: 15px;
     font-size: 16px;
     color: #a9a9a9;
     line-height: 20px;
 }
-.zk-content .info-area .platform i{
+.zk-content-old .info-area .platform i{
     position: relative;
     top: 4px;
     display: inline-block;
@@ -1287,21 +1287,21 @@ body{
     background-size: 20px 20px;
     margin-right: 6px;
 }
-.zk-content .info-area .stat{
+.zk-content-old .info-area .stat{
     padding-top: 20px;
     height: 81px;
 }
-.zk-content .info-area .stat .price-area{
+.zk-content-old .info-area .stat .price-area{
     float: left;
 }
-.zk-content .info-area .stat .price-area .ori-price{
+.zk-content-old .info-area .stat .price-area .ori-price{
     display: block;
     font-size: 16px;
     line-height: 30px;
     height: 30px;
     color: #999;
 }
-.zk-content .info-area .stat .price-area .price{
+.zk-content-old .info-area .stat .price-area .price{
     position: relative;
     display: block;
     font-family: 'Arial';
@@ -1310,7 +1310,7 @@ body{
     line-height: 40px;
     font-weight: bold;
 }
-.zk-content .info-area .stat .price-area .price i {
+.zk-content-old .info-area .stat .price-area .price i {
     position: absolute;
     bottom: 15px;
     right: -64px;
@@ -1323,7 +1323,7 @@ body{
     text-align: center;
     background-color: #FF2B22;
 }
-.zk-content .info-area .stat .price-area .price i:after{
+.zk-content-old .info-area .stat .price-area .price i:after{
     position: absolute;
     display: table;
     content: '';
@@ -1334,30 +1334,30 @@ body{
     left: -6px;
     top: 9px;
 }
-.zk-content .info-area .stat .price-area .price em.int{
+.zk-content-old .info-area .stat .price-area .price em.int{
     font-style: normal;
     font-size: 50px;
     line-height: 50px;
     padding-left: 5px;
 }
-.zk-content .info-area .stat .price-area .price em.decimal{
+.zk-content-old .info-area .stat .price-area .price em.decimal{
     font-style: normal;
     font-size: 30px;
     line-height: 50px;
 }
-.zk-content .info-area .stat .buy-area{
+.zk-content-old .info-area .stat .buy-area{
     float: right;
     width: 230px;
     height: 84px;
 }
-.zk-content .info-area .stat .buy-area .desc{
+.zk-content-old .info-area .stat .buy-area .desc{
     font-size: 14px;
     line-height: 20px;
     padding-bottom: 5px;
     color: #787878;
     text-align: center;
 }
-.zk-content .info-area .stat .buy-area .buy-btn{
+.zk-content-old .info-area .stat .buy-area .buy-btn{
     position: relative;
     display: block;
     width: 214px;
@@ -1370,18 +1370,18 @@ body{
     margin-left: 5px;
     text-align: center;
 }
-.zk-content .info-area .stat .buy-area .buy-btn .line{
+.zk-content-old .info-area .stat .buy-area .buy-btn .line{
     position: absolute;
     width: 4px;
     height: 48px;
 }
-.zk-content .info-area .stat .buy-area .buy-btn .line.line-l{
+.zk-content-old .info-area .stat .buy-area .buy-btn .line.line-l{
     left: -2px;
 }
-.zk-content .info-area .stat .buy-area .buy-btn .line.line-r{
+.zk-content-old .info-area .stat .buy-area .buy-btn .line.line-r{
     right: -2px;
 }
-.zk-content .info-area .stat .buy-area .buy-btn .line i{
+.zk-content-old .info-area .stat .buy-area .buy-btn .line i{
     display: block;
     width: 4px;
     height: 4px;
@@ -1389,24 +1389,24 @@ body{
     background-color: #fff;
     margin-top: 3px;
 }
-.zk-content .info-area .stat .buy-area .buy-btn em{
+.zk-content-old .info-area .stat .buy-area .buy-btn em{
     font-size: 30px;
     font-style: normal;
     color: #FFFA00;
     padding: 0 5px;
 }
-.zk-content .info-area .tags{
+.zk-content-old .info-area .tags{
     margin-top: 8px;
     padding-top: 20px;
     border-top: 1px solid #eee;
 }
-.zk-content .info-area .tags .tag-list{
+.zk-content-old .info-area .tags .tag-list{
     float: left;
     width: 280px;
     height: 28px;
     overflow: hidden;
 }
-.zk-content .info-area .tags .tag-item{
+.zk-content-old .info-area .tags .tag-item{
     display: inline-block;
     height: 28px;
     line-height: 28px;
@@ -1418,17 +1418,17 @@ body{
     color: #666;
     border-radius: 2px;
 }
-.zk-content .info-area .tags .tag-item:hover{
+.zk-content-old .info-area .tags .tag-item:hover{
     color: #fff;
     background-color: #FF4B2E;
 }
-.zk-content .info-area .tags .coll{
+.zk-content-old .info-area .tags .coll{
     float: right;
     font-size: 14px;
     color: #666;
     line-height: 28px;
 }
-.zk-content .info-area .tags .coll i{
+.zk-content-old .info-area .tags .coll i{
     float: left;
     display: block;
     width: 18px;
@@ -1437,7 +1437,7 @@ body{
     background-size: 18px 18px;
     margin: 4px 5px 0 0;
 }
-.zk-content .info-area .tags .coll em{
+.zk-content-old .info-area .tags .coll em{
     font-style: normal;
     font-weight: bold;
     padding: 0 5px;
