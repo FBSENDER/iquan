@@ -5,7 +5,7 @@ Util.createLanlanCouponList = function(cl,obj,channel,gaPage){
         var z = cl[i];
         var re = /activityId=(\w*)/;
         //var buy_url = '/buy/' + z.itemId + '/?activity_id=' + re.exec(z.couponUrl)[1];
-        var buy_url = 'http://www.uuhaodian.com/yh/' + z.itemId + '/?from=iquan';
+        var buy_url = 'http://www.uuhaodian.com/yh/' + z.itemId + '/?from=iquan#coupon';
         var platform = '',platformPic = '';
         if(z.shopType == 'tmall')
           platform = 2;
