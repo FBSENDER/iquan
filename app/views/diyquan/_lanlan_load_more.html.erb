@@ -1,7 +1,6 @@
 <div class="more-coupon">
   <span id="moreCoupon" class="btn loading-text">查看更多优惠券</span>
 </div>
-<script type="text/javascript" src="/js/swiper3.1.0.min.js"></script>
 <script type="text/javascript">
 var globalChannel = 27;
 $(function(){
@@ -9,6 +8,11 @@ $(function(){
     autoplay: 3000,
     loop:true,
     pagination: '.swiper-pager'
+  });
+  var sww = new Swiper('.wide-banner',{
+    loop: true,
+    prevButton:'.swiper-button-prev',
+    nextButton:'.swiper-button-next'
   });
 
   //Util.sideFixedMenu($('<%= wclass %>'));

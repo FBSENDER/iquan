@@ -7,10 +7,12 @@
 = render partial: "diyquan/home_adzone"
 .wrapper 
   %div{style: "padding-left:15px;background-color: white;line-height: 45px;"} 
-    %span{style: "font-size:20px;font-weight:700;color:#FF472B;"}精选推荐
-    %a{href: "/baokuan/"} 
+    %span{style: "font-size:20px;font-weight:700;color:#FF472B;"} 九块九包邮
+    %a{href: "http://www.uuhaodian.com/collection/4/?from=iquan"} 
       %span{style: "float:right;padding-right:20px;"} 查看更多
+  = render partial: "diyquan/wide_banner", locals: {items: @coupons_9kuai9}
 .wrapper.home-wrapper{style: "margin-top: 10px;"}
+  = render partial: "diyquan/lanlan_quan_filter"
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanFenleiCouponList', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 

@@ -7,6 +7,7 @@ require 'seo_domain'
 require 'timeout'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  $coupon_9kuai9_data = {}
 
   def is_robot?
     user_agent = request.headers["HTTP_USER_AGENT"]
@@ -88,4 +89,21 @@ class ApplicationController < ActionController::Base
     return m[1] if m
     nil
   end
+
+  def get_coupon_9kuai9_data
+    if $coupon_9kuai9_data["update_at"].nil? || $coupon_9kuai9_data["items"].nil? || $coupon_9kuai9_data["items"].size.zero? || Time.now.to_i - $coupon_9kuai9_data["update_at"] > 3600
+      url = "http://api.uuhaodian.com/uu/jiukuaijiu_list"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["status"] && json["status"]["code"] == 1001
+        $coupon_9kuai9_data["items"] = json["result"]
+        $coupon_9kuai9_data["update_at"] = Time.now.to_i
+        return $coupon_9kuai9_data["items"]
+      else
+        return []
+      end
+    end
+    return $coupon_9kuai9_data["items"]
+  end
+
 end
