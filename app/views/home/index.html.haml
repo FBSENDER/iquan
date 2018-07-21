@@ -20,28 +20,33 @@
         %span 内部优惠券网站
         汇总
 
-    - @compete_brands.each do |brand|
+    - @compete_brands.each_with_index do |brand, index|
       .col-md-12
         %h2.page-header #{brand.title}
-        %p.content 网站介绍：#{brand.description.gsub('内部优惠券', '<strong>内部优惠券</strong>').gsub('内部券','<strong>内部券</strong>').gsub('找券网', '<strong>找券网</strong>').html_safe}
+        %p.content 网站介绍：#{brand.description.gsub('内部优惠券', '<strong>内部优惠券</strong>').gsub('内部券','<strong>内部券</strong>').gsub('找券网', '<strong>找券网</strong>').html_safe} 【淘宝优惠券】【天猫优惠券】网站排名-#{index+1}
         %p.content 关键词：#{brand.keywords}
         %p.content
           直达链接：
           %a{href: "http://#{brand.host}", target: "_blank", title: "#{brand.title}"} #{brand.title}
 
-    - @product_brands.each do |brand|
+    - @product_brands.each_with_index do |brand, index|
       .col-md-12
         %h2.page-header #{brand.title}
         %p.content 品牌介绍：#{brand.comments}
         %p.content 关键词：#{brand.keywords}
         %p.content
           直达链接：
-          %a{href: "http://#{brand.host}", target: "_blank", title: "#{brand.title}"} #{brand.title}
+          %a{href: "http://#{brand.host}", target: "_blank", title: "#{brand.title}"} #{brand.title}【内部优惠券】品牌券网站排名 - #{index + 1}
     .col-md-12
       %h2.page-header 热销商品 - 更新于 #{Time.now.strftime("%Y-%m-%d")}
-      %p.content
-        - @coupons.each do |c|
-          %a{href: "http://www.iquan.net/youhui/#{c["coupon_id"]}/"} #{c["title"]}
+      - @coupons.each_with_index do |c, index|
+        %a{href: "https://www.iquan.net/youhui/#{c["coupon_id"]}/", title: "#{c["title"]}#{c["gap_price"]}元淘宝优惠券"}
+          .col-md-3
+            %img.img-responsive{src: "#{c["thumbnail_pic"]}", alt: "#{c["title"]},可领#{c["gap_price"]}元淘宝优惠券"}
+
+            %p.content 【原价】#{c["raw_price"]}元，【天猫淘宝优惠券】#{c["gap_price"]}元，券后价#{c["coupon_price"]}元，#{c["title"]}，月售#{c["month_sales"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
+        - if index % 4 == 3
+          .clearfix
 
 %section
   .container
@@ -54,17 +59,15 @@
       .col-md-12
         %h3 更多品牌天猫优惠券
         %p
-          %a.btn.btn-default{href: "http://www.iquan.net/g_yaojingdekoudai/",style: "margin-bottom:5px"} 妖精的口袋优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/g_baicaowei/",style: "margin-bottom:5px"} 百草味淘宝优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/g_sanzhisongshu/",style: "margin-bottom:5px"} 三只松鼠优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/g_liangpinpuzi/",style: "margin-bottom:5px"} 良品铺子优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/g_loulanmiyu/",style: "margin-bottom:5px"} 楼兰蜜语优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/g_zhouheiya/",style: "margin-bottom:5px"} 周黑鸭优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/g_qiushuiyiren/",style: "margin-bottom:5px"} 秋水伊人优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/g_xiawazhixiu/",style: "margin-bottom:5px"} 夏娃之秀优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/g_nuoshilan/",style: "margin-bottom:5px"} 诺诗兰优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/g_balabala/",style: "margin-bottom:5px"} 巴拉巴拉优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/map_k/",style: "margin-bottom:5px"} 通用优惠券
-          %a.btn.btn-default{href: "http://www.iquan.net/dianpu/",style: "margin-bottom:5px"} 淘宝天猫旗舰店排行榜
-          %a.btn.btn-default{href: "http://www.gssjly.com",style: "margin-bottom:5px"} 红枸杞 
-          %a.btn.btn-default{href: "http://www.sbcun.com",style: "margin-bottom:5px"} 精仿手表
+          %a.btn.btn-default{href: "https://www.iquan.net/g_yaojingdekoudai/",style: "margin-bottom:5px"} 妖精的口袋优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_baicaowei/",style: "margin-bottom:5px"} 百草味淘宝优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_sanzhisongshu/",style: "margin-bottom:5px"} 三只松鼠优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_liangpinpuzi/",style: "margin-bottom:5px"} 良品铺子优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_loulanmiyu/",style: "margin-bottom:5px"} 楼兰蜜语优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_zhouheiya/",style: "margin-bottom:5px"} 周黑鸭优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_qiushuiyiren/",style: "margin-bottom:5px"} 秋水伊人优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_xiawazhixiu/",style: "margin-bottom:5px"} 夏娃之秀优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_nuoshilan/",style: "margin-bottom:5px"} 诺诗兰优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_balabala/",style: "margin-bottom:5px"} 巴拉巴拉优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/map_k/",style: "margin-bottom:5px"} 通用优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/dianpu/",style: "margin-bottom:5px"} 淘宝天猫旗舰店排行榜
