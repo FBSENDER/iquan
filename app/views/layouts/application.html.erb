@@ -20,13 +20,11 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= render partial: "layouts/header" %>
     <%= yield %>
-    <%= render partial: "layouts/ga_js_script" %>
     <%= render partial: "layouts/footer" %>
   </body>
 </html>
