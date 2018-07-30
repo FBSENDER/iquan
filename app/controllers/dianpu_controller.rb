@@ -10,12 +10,12 @@ class DianpuController < ApplicationController
     @items = JSON.parse(@shop.auctions_inshop.empty? || @shop.auctions_inshop == 'null' ? "[]" : @shop.auctions_inshop)
     #@hot_coupons = get_hot_coupons(0, 0, 20)
     #@hot_coupons = []
-    @hot_coupons = get_static_coupons('static_hot_coupons', 20)
-    @coupons = get_static_coupons_by_seller_id(@shop.source_id, 40)
-    @suggest_keywords = get_suggest_keywords_new(@shop.search_keyword)
+    @hot_coupons = []
+    @coupons = []
+    @suggest_keywords = []
     @path = "#{request.path}/"
     @shops = Shop.where("id > ?", @shop.id).order("id").select(:nick,:pic_url,:title).limit(15)
-    @scoupons = ShopCoupon.where(seller_id: @shop.source_id).to_a
+    @scoupons = []
     if is_device_mobile?
       render "m_show", layout: "m_diyquan"
     else
