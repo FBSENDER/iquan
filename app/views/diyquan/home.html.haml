@@ -14,6 +14,6 @@
 .wrapper.home-wrapper{style: "margin-top: 10px;"}
   = render partial: "diyquan/lanlan_quan_filter"
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanFenleiCouponList', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
+  = render partial: "diyquan/lanlan_load_more", locals: {path: 'http://api.uuhaodian.com/uu/home_list', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 
 = render partial: "diyquan/home_footer", locals: {links: @links}
