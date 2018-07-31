@@ -149,6 +149,14 @@ class DiyquanController < ApplicationController
       redirect_to "https://www.iquan.net", status: 301
       return
     else
+      unless is_robot?
+        if is_device_mobile?
+          redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=1&kw=#{URI.encode_www_form_component(product.title)}&from=m_iquan", status: 302
+        else
+          redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(product.title)}/?from=iquan", status: 302
+        end
+        return
+      end
       @shops = Shop.where(source_id: product.seller_id).select(:nick, :title).to_a
       @related_coupons = []
       @same_seller_coupons = []
