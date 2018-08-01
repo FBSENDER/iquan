@@ -18,6 +18,11 @@ class DiyquanController < ApplicationController
       end
       return
     end
+    @zhekous = []
+    data  = get_tbk_search_json(@keyword, 1)
+    if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
+      @zhekous = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+    end
     if is_robot?
       render "diyquan/fenlei", layout: "layouts/diyquan"
     else
@@ -59,7 +64,12 @@ class DiyquanController < ApplicationController
       return
     else
       @coupons = []
-      @shops = Shop.where(source_id: @coupons.map{|c| c["seller_id"]}.uniq).select(:title, :nick)
+      @zhekous = []
+      data  = get_tbk_search_json(@keyword, 1)
+      if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
+        @zhekous = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+      end
+      @shops = []
       @sort_type = sort_type
     end
     @keywords = []
@@ -282,6 +292,11 @@ class DiyquanController < ApplicationController
     @total_page = @page + 100
     not_found if @sks.size.zero?
     map_k_tdk
+  end
+
+  def get_tbk_search_json(keyword, page_no)
+    tbk = Tbkapi::Taobaoke.new
+    JSON.parse(tbk.taobao_tbk_item_get(keyword, $taobao_app_id, $taobao_app_secret, page_no + 1,50))
   end
 
 end
