@@ -40,7 +40,7 @@
     .col-md-12
       %h2.page-header 热销商品 - 更新于 #{Time.now.strftime("%Y-%m-%d")}
       - @coupons.each_with_index do |c, index|
-        %a{href: "https://www.iquan.net/youhui/#{c["coupon_id"]}/", title: "#{c["title"]}#{c["gap_price"]}元淘宝优惠券"}
+        %a{href: "#", title: "#{c["title"]}#{c["gap_price"]}元淘宝优惠券"}
           .col-md-3
             %img.img-responsive{src: "#{c["thumbnail_pic"]}", alt: "#{c["title"]},可领#{c["gap_price"]}元淘宝优惠券"}
 

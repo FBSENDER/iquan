@@ -15,13 +15,8 @@
       相关推荐：
       - @keywords.split(',').each do |k|
         %strong #{k}
-  = render partial: "diyquan/quan_filter"
-  = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
+  = render partial: "diyquan/tb_quan_list", locals: {zhekous: @zhekous, coupons: []}
   .sno
     %p #{@description}
-  = render partial: "diyquan/load_more_search", locals: {path: '/getSearchCouponList', keyword: @search_keyword, pinyin: '', sort_type: @sort_type, pagesize: 40, wclass: '.search-result'}
-
-:javascript
-  $('#li-sort-#{@sort_type}').addClass('active');
 
 = render partial: "diyquan/home_footer", locals: {links: @links}
