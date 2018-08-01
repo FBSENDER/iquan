@@ -1,60 +1,60 @@
-- title("网红进口零食网-猪肉脯,面包干,猕猴桃干,丸太九州拉面,嗨吃家酸辣粉")
-- head_desc("网红进口零食网,休闲食品商城,24小时提供：好吃的零食,零食团购,零食加盟,进口零食,零食特产,低热量零食,健康零食等各种更多休闲食品；正品保证,让您尽享美味安全食品！")
-- keywords("零食,零食网,网红零食,进口零食,十大最好吃的网红零食,女生爱吃的零食排行榜,猪肉脯,面包干,猕猴桃干,丸太拉面,丸太九州拉面,嗨吃家酸辣粉")
+- title("牛仔裤,男款牛仔裤,女式牛仔裤,李维斯牛仔裤,lee牛仔裤,CK牛仔裤-瓜牛网")
+- head_desc("瓜牛网guanew.net - 提供牛仔裤优惠折扣信息查询，每日更新男款牛仔裤、新款女式牛仔裤，各种品牌牛仔裤，比如lee牛仔裤、ck牛仔裤等等。")
+- keywords("牛仔裤,男款牛仔裤,女式牛仔裤,男士牛仔裤,女款牛仔裤,李维斯牛仔裤,lee牛仔裤,ck牛仔裤,瓜牛网,新款牛仔裤")
 - pc_host(@pc_host)
-- mobile_url(@mobile_url || 'http://m.flowlover.com')
+- mobile_url(@mobile_url || 'http://m.guanew.net')
 
 .container
   .row
     .col-md-12
-      %h1.page-heade 网红进口零食网-猪肉脯,面包干,猕猴桃干,丸太九州拉面,嗨吃家酸辣粉
-      %p.content 网红进口零食网,休闲食品商城,24小时提供：好吃的零食,零食团购,零食加盟,进口零食,零食特产,低热量零食,健康零食等各种更多休闲食品；正品保证,让您尽享美味安全食品!
+      %h1.page-heade 牛仔裤,男款牛仔裤,女式牛仔裤,李维斯牛仔裤,lee牛仔裤,CK牛仔裤-瓜牛网
+      %p.content 瓜牛网guanew.net - 提供牛仔裤优惠折扣信息查询，每日更新男款牛仔裤、新款女式牛仔裤，各种品牌牛仔裤，比如lee牛仔裤、ck牛仔裤等等。
     .col-md-12
-      %h2.page-header 面包干 
+      %h2.page-header 男款牛仔裤
       - @c1.each_with_index do |c, index|
-        %a{href: "#", title: "猪肉脯#{c["title"]}"}
+        %a{href: "#", title: "男款牛仔裤#{c["title"]}"}
           .col-md-3
-            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食猪肉脯"}
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},牛仔裤男款"}
 
             %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
         - if index % 4 == 3
           .clearfix
     .col-md-12
-      %h2.page-header 面包干 
+      %h2.page-header 女式牛仔裤
       - @c2.each_with_index do |c, index|
-        %a{href: "#", title: "面包干#{c["title"]}"}
+        %a{href: "#", title: "女式牛仔裤#{c["title"]}"}
           .col-md-3
-            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食面包干"}
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},牛仔裤女款"}
 
             %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
         - if index % 4 == 3
           .clearfix
     .col-md-12
-      %h2.page-header 猕猴桃干
+      %h2.page-header 李维斯牛仔裤 levi's
       - @c3.each_with_index do |c, index|
-        %a{href: "#", title: "猕猴桃干#{c["title"]}"}
+        %a{href: "#", title: "李维斯牛仔裤#{c["title"]}"}
           .col-md-3
-            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食猕猴桃干"}
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},levi's李维斯牛仔裤"}
 
             %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
         - if index % 4 == 3
           .clearfix
     .col-md-12
-      %h2.page-header 丸太九州拉面
+      %h2.page-header lee牛仔裤
       - @c4.each_with_index do |c, index|
-        %a{href: "#", title: "丸太九州拉面#{c["title"]}"}
+        %a{href: "#", title: "lee牛仔裤#{c["title"]}"}
           .col-md-3
-            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食丸太九州拉面"}
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},新款lee牛仔裤"}
 
             %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
         - if index % 4 == 3
           .clearfix
     .col-md-12
-      %h2.page-header 嗨吃家酸辣粉
+      %h2.page-header ck牛仔裤
       - @c5.each_with_index do |c, index|
-        %a{href: "#", title: "嗨吃家酸辣粉#{c["title"]}"}
+        %a{href: "#", title: "ck牛仔裤#{c["title"]}"}
           .col-md-3
-            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食嗨吃家酸辣粉"}
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},新款ck牛仔裤"}
 
             %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
         - if index % 4 == 3
@@ -66,7 +66,7 @@
       .col-md-12
         %h3 相关搜索
         %p.content
-          - %w(零食 零食网 网红零食 进口零食 十大最好吃的网红零食 女生爱吃的零食排行榜 猪肉脯 面包干 猕猴桃干 丸太拉面 丸太九州拉面 嗨吃家酸辣粉).each do |w|
+          - %w(牛仔裤 男款牛仔裤 女式牛仔裤 新款牛仔裤 ck牛仔裤 lee牛仔裤 李维斯牛仔裤).each do |w|
             %strong #{w}
       .col-md-12
         %h3 更多品牌天猫优惠券
