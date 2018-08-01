@@ -1,8 +1,52 @@
 class HomeController < ApplicationController
   @@compete_brands = nil
   @@product_brands = nil
+  $c1 = []
+  $c2 = []
+  $c3 = []
+  $c4 = []
+  $c5 = []
   def index
     @pc_host = request.host
+    if request.host == "www.flowlover.com" || request.host == 'm.flowlover.com'
+      if $c1.size.zero?
+        data  = get_tbk_search_json("猪肉脯", 1)
+        if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
+          $c1 = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+        end
+      end
+      if $c2.size.zero?
+        data  = get_tbk_search_json("面包干", 1)
+        if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
+          $c2 = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+        end
+      end
+      if $c3.size.zero?
+        data  = get_tbk_search_json("猕猴桃干", 1)
+        if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
+          $c3 = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+        end
+      end
+      if $c4.size.zero?
+        data  = get_tbk_search_json("丸太拉面", 1)
+        if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
+          $c4 = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+        end
+      end
+      if $c5.size.zero?
+        data  = get_tbk_search_json("酸辣粉", 1)
+        if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
+          $c5 = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+        end
+      end
+      @c1 = $c1
+      @c2 = $c2
+      @c3 = $c3
+      @c4 = $c4
+      @c5 = $c5
+      render 'lingshi', layout: 'lingshi'
+      return
+    end
     if request.host == "www.ichaopai.cc"
       @mobile_url = ''
       render "ichaopai"

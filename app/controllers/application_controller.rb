@@ -106,4 +106,9 @@ class ApplicationController < ActionController::Base
     return $coupon_9kuai9_data["items"]
   end
 
+  def get_tbk_search_json(keyword, page_no)
+    tbk = Tbkapi::Taobaoke.new
+    JSON.parse(tbk.taobao_tbk_item_get(keyword, $taobao_app_id, $taobao_app_secret, page_no + 1,50))
+  end
+
 end

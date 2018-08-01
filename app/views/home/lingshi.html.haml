@@ -1,0 +1,85 @@
+- title("网红进口零食网-猪肉脯,面包干,猕猴桃干,丸太九州拉面,嗨吃家酸辣粉")
+- head_desc("网红进口零食网,休闲食品商城,24小时提供：好吃的零食,零食团购,零食加盟,进口零食,零食特产,低热量零食,健康零食等各种更多休闲食品；正品保证,让您尽享美味安全食品！")
+- keywords("零食,零食网,网红零食,进口零食,十大最好吃的网红零食,女生爱吃的零食排行榜,猪肉脯,面包干,猕猴桃干,丸太拉面,丸太九州拉面,嗨吃家酸辣粉")
+- pc_host(@pc_host)
+- mobile_url(@mobile_url || 'http://m.flowlover.com')
+
+.container
+  .row
+    .col-md-12
+      %h1.page-heade 网红进口零食网-猪肉脯,面包干,猕猴桃干,丸太九州拉面,嗨吃家酸辣粉
+      %p.content 网红进口零食网,休闲食品商城,24小时提供：好吃的零食,零食团购,零食加盟,进口零食,零食特产,低热量零食,健康零食等各种更多休闲食品；正品保证,让您尽享美味安全食品!
+    .col-md-12
+      %h2.page-header 面包干 
+      - @c1.each_with_index do |c, index|
+        %a{href: "#", title: "猪肉脯#{c["title"]}"}
+          .col-md-3
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食猪肉脯"}
+
+            %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
+        - if index % 4 == 3
+          .clearfix
+    .col-md-12
+      %h2.page-header 面包干 
+      - @c1.each_with_index do |c, index|
+        %a{href: "#", title: "面包干#{c["title"]}"}
+          .col-md-3
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食面包干"}
+
+            %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
+        - if index % 4 == 3
+          .clearfix
+    .col-md-12
+      %h2.page-header 猕猴桃干
+      - @c1.each_with_index do |c, index|
+        %a{href: "#", title: "猕猴桃干#{c["title"]}"}
+          .col-md-3
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食猕猴桃干"}
+
+            %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
+        - if index % 4 == 3
+          .clearfix
+    .col-md-12
+      %h2.page-header 丸太九州拉面
+      - @c1.each_with_index do |c, index|
+        %a{href: "#", title: "丸太九州拉面#{c["title"]}"}
+          .col-md-3
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食丸太九州拉面"}
+
+            %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
+        - if index % 4 == 3
+          .clearfix
+    .col-md-12
+      %h2.page-header 嗨吃家酸辣粉
+      - @c1.each_with_index do |c, index|
+        %a{href: "#", title: "嗨吃家酸辣粉#{c["title"]}"}
+          .col-md-3
+            %img.img-responsive{src: "#{c["pict_url"]}", alt: "#{c["title"]},网红进口零食嗨吃家酸辣粉"}
+
+            %p.content 【原价】#{c["reserve_price"]}元，【天猫淘宝优惠券】折扣价价#{c["zk_final_price"]}元，#{c["title"]}，月售#{c["volume"]}件，剁手都要买的宝贝，打开【手机淘宝】即可购买
+        - if index % 4 == 3
+          .clearfix
+
+%section
+  .container
+    .row
+      .col-md-12
+        %h3 相关搜索
+        %p.content
+          - %w(零食 零食网 网红零食 进口零食 十大最好吃的网红零食 女生爱吃的零食排行榜 猪肉脯 面包干 猕猴桃干 丸太拉面 丸太九州拉面 嗨吃家酸辣粉).each do |w|
+            %strong #{w}
+      .col-md-12
+        %h3 更多品牌天猫优惠券
+        %p
+          %a.btn.btn-default{href: "https://www.iquan.net/g_yaojingdekoudai/",style: "margin-bottom:5px"} 妖精的口袋优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_baicaowei/",style: "margin-bottom:5px"} 百草味淘宝优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_sanzhisongshu/",style: "margin-bottom:5px"} 三只松鼠优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_liangpinpuzi/",style: "margin-bottom:5px"} 良品铺子优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_loulanmiyu/",style: "margin-bottom:5px"} 楼兰蜜语优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_zhouheiya/",style: "margin-bottom:5px"} 周黑鸭优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_qiushuiyiren/",style: "margin-bottom:5px"} 秋水伊人优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_xiawazhixiu/",style: "margin-bottom:5px"} 夏娃之秀优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_nuoshilan/",style: "margin-bottom:5px"} 诺诗兰优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/g_balabala/",style: "margin-bottom:5px"} 巴拉巴拉优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/map_k/",style: "margin-bottom:5px"} 通用优惠券
+          %a.btn.btn-default{href: "https://www.iquan.net/dianpu/",style: "margin-bottom:5px"} 淘宝天猫旗舰店排行榜
