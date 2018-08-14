@@ -48,7 +48,6 @@ class QixiController < ApplicationController
     user = QxUser.where(open_id: open_id).take || QxUser.new
     user.open_id = open_id
     user.union_id = ''
-    user.access_token = ''
     user.session_key = ''
     user.from_user_id = from_user_id
     user.gz = gz
