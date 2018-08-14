@@ -58,4 +58,6 @@ Rails.application.routes.draw do
 
   post "qx/gzh_reply", to: "qixi#gzh_reply"
   get "qx/gzh_reply", to: "qixi#check_post_message"
+  get "qx/result", to: "qixi#qixi_result"
+  post "qx/address/:id", to: "qixi#address"
 end
