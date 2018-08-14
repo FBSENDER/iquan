@@ -9,6 +9,7 @@ class QixiController < ApplicationController
       xml = Nokogiri::XML request.body.read
       open_id = xml.xpath('//FromUserName').text
       token = UuToken.where(id: 3).take.token
+      Rails.logger.info token
       if xml.xpath('//MsgType').text == 'event'
         if xml.xpath('//Event').text == 'unsubscribe'
           unsubscribe(open_id)
@@ -43,6 +44,7 @@ class QixiController < ApplicationController
 
   def create_user(open_id, access_token, from_user_id = 0, gz = 1)
     url_1 = "https://api.weixin.qq.com/sns/userinfo?access_token=#{access_token}&openid=#{open_id}"
+    Rails.logger.info "#{url_1}"
     result_1 = Net::HTTP.get(URI(URI.encode(url_1)))
     Rails.logger.info "#{result_1}"
     data_1 = JSON.parse(result_1)
