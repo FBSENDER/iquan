@@ -18,13 +18,15 @@ class QixiController < ApplicationController
         elsif xml.xpath('//Event').text == 'subscribe'
           from_id = 0
           if xml.xpath('//EventKey').text != ''
-            Rails.logger.info "eventKey: #{xml.xpath('EventKey').text}"
+            s_id = xml.xpath('//EventKey').text.split('_')
+            from_id = s_id[1].to_i if s_id.size == 2
           end
           user = create_user(open_id, token, from_id)
           return if user[:id] == 0
           create_qrcode(user, token)
-          reply_text(token, open_id, '1')
-          reply_text(token, open_id, 'www.jd.com')
+          reply_text(token, open_id, '欢迎参加七夕免费送绘本活动。活动截止日期:8月18日24点。转发下方个人定制海报，邀请三位好友，即可免费领取，包邮到家。查看已扫码好友。你也可以原价直接购买。
+↓↓↓↓转发下方海报↓↓↓↓↓')
+          reply_text(token, open_id, '<a href="http://www.jd.com>京东</a><br/>立即购买')
           get_qixi_image(user)
           upload_image(user, token)
           reply_image(token, open_id, user[:media_id])
@@ -50,7 +52,7 @@ class QixiController < ApplicationController
     result_1 = Net::HTTP.get(URI(URI.encode(url_1)))
     data_1 = JSON.parse(result_1)
     user = QxUser.where(open_id: open_id).take
-    unless user.nil?
+    if user && user.gz == 1 
       return {id: 0}
     end
     user = QxUser.new
