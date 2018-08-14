@@ -92,7 +92,7 @@ class QixiController < ApplicationController
     File.open("qixi_#{user[:id]}.txt", "r") do |f|
       data = f.read
       data1 = JSON.parse(data)
-      user[:media_id] = data["media_id"]
+      user[:media_id] = data1["media_id"]
     end
   end
 
