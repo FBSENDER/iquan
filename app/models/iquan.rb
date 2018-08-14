@@ -23,5 +23,5 @@ class QxUserDetail < ApplicationRecord
 end
 
 class UuToken < ApplicationRecord
-  self.talbe_name = 'uu_tokens'
+  self.table_name = 'uu_tokens'
 end
