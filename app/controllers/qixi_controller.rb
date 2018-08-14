@@ -44,6 +44,7 @@ class QixiController < ApplicationController
   def create_user(open_id, access_token, from_user_id = 0, gz = 1)
     url_1 = "https://api.weixin.qq.com/sns/userinfo?access_token=#{access_token}&openid=#{open_id}"
     result_1 = Net::HTTP.get(URI(URI.encode(url_1)))
+    Rails.logger.info "#{result_1}"
     data_1 = JSON.parse(result_1)
     user = QxUser.where(open_id: open_id).take || QxUser.new
     user.open_id = open_id
