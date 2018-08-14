@@ -12,6 +12,7 @@ namespace :deploy do
       execute "docker kill 17430_1 || echo 1"
       execute "docker rm 17430_1 || echo 1"
       execute "docker run -v /tmp/17430/17430_1/:/tmp/ -v /home/work/17430/shared/public/assets/:/usr/src/app/public/assets/ -v /home/work/17430/shared/log_1/:/usr/src/app/log/ -d --name 17430_1 17430_docker"
+      execute "docker cp /home/work/17430/shared/simsun.ttc 17430_1:/usr/share/fonts/"
 
     end
   end

@@ -24,9 +24,12 @@ class QixiController < ApplicationController
           user = create_user(open_id, token, from_id)
           return if user[:id] == 0
           create_qrcode(user, token)
-          reply_text(token, open_id, '欢迎参加七夕免费送绘本活动。活动截止日期:8月18日24点。转发下方个人定制海报，邀请三位好友，即可免费领取，包邮到家。查看已扫码好友。你也可以原价直接购买。
+          reply_text(token, open_id, '欢迎参加七夕免费送绘本活动。活动截止日期:8月18日24点。转发下方个人定制海报，邀请三位好友，即可免费领取，包邮到家。
+查看已扫码好友。
+你也可以原价直接购买。
 ↓↓↓↓转发下方海报↓↓↓↓↓')
-          reply_text(token, open_id, '<a href="http://www.jd.com>京东</a><br/>立即购买')
+          reply_text(token, open_id, '<a href="http://www.jd.com">京东</a>
+                     立即购买')
           get_qixi_image(user)
           upload_image(user, token)
           reply_image(token, open_id, user[:media_id])
@@ -55,7 +58,7 @@ class QixiController < ApplicationController
     if user && user.gz == 1 
       return {id: 0}
     end
-    user = QxUser.new
+    user = QxUser.new if user.nil?
     user.open_id = open_id
     user.union_id = ''
     user.session_key = ''
