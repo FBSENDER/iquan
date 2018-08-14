@@ -6,6 +6,7 @@ class QixiController < ApplicationController
   def gzh_reply
     render plain: "success"
     begin
+      Rails.logger.info request.body.read
       xml = Nokogiri::XML request.body.read
       open_id = xml.xpath('//FromUserName').text
       token = UuToken.where(id: 3).take.token
@@ -83,8 +84,8 @@ class QixiController < ApplicationController
   end
 
   def upload_image(user, access_token)
-    `curl -F media=@"public/qixi_#{user[:id]}.jpg" "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=#{access_token}&type=image" > "public/qixi_#{user[:id]}.txt"`
-    File.open("public/qixi_#{user[:id]}.txt", "r") do |f|
+    `curl -F media=@qixi_#{user[:id]}.jpg "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=#{access_token}&type=image" > qixi_#{user[:id]}.txt`
+    File.open("qixi_#{user[:id]}.txt", "r") do |f|
       data = f.read
       data1 = JSON.parse(data)
       user[:media_id] = data["media_id"]
@@ -105,7 +106,7 @@ class QixiController < ApplicationController
 
   def get_qixi_image(user)
     kit = IMGKit.new("<html><head><meta charset='UTF-8'></head><body style='height:1920px;width: 800px;margin:0;padding:0;'><img src='http://www.uuhaodian.com/qixi.jpg' style='height:1920px;width:1024px;'/><img src='#{user[:qr_code]}' style='height:256px;width:256px;position:relative;top:-294px;left:698px;'/><img src='#{user[:imgurl]}' style='height:100px;width: 100px;position:relative;top:-704px;left:-192px;'/><p style='color:#532b6d;position: relative;top:-832px;left:205px;font-size:38px;font-weight: bold;'>#{user[:nick]}正在参加：<br/>七夕儿童绘本免费送活动</p></body></html>")
-    kit.to_file("public/qixi_#{user[:id]}.jpg")
+    kit.to_file("qixi_#{user[:id]}.jpg")
   end
 
   def reply_text(token, open_id, content)
