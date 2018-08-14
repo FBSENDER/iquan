@@ -43,7 +43,7 @@ class QixiController < ApplicationController
   end
 
   def create_user(open_id, access_token, from_user_id = 0, gz = 1)
-    url_1 = "https://api.weixin.qq.com/sns/userinfo?access_token=#{access_token}&openid=#{open_id}"
+    url_1 = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=#{access_token}&openid=#{open_id}"
     Rails.logger.info "#{url_1}"
     result_1 = Net::HTTP.get(URI(URI.encode(url_1)))
     Rails.logger.info "#{result_1}"
