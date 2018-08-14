@@ -55,4 +55,7 @@ Rails.application.routes.draw do
   get "/baokuan/", to: "diyquan#baokuan"
   get "/9kuai9/", to: "diyquan#k9"
   get "/shikuaigou/", to: "diyquan#k20"
+
+  post "qx/gzh_reply", to: "qx#gzh_reply"
+  get "qx/gzh_reply", to: "qx#check_post_message"
 end

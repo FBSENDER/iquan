@@ -13,3 +13,11 @@ end
 class AppDownload < ApplicationRecord
   self.table_name = 'iquan_app_downloads'
 end
+
+class QxUser < ApplicationRecord
+  self.table_name = 'qx_users'
+end
+
+class QxUserDetail < ApplicationRecord
+  self.table_name = 'qx_user_details'
+end
