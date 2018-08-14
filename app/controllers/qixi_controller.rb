@@ -27,7 +27,8 @@ class QixiController < ApplicationController
         elsif xml.xpath('//Event').text == 'SCAN'
         end
       end
-    rescue
+    rescue Exception => ex
+      Rails.logger.fatal "#{ex}"
       Rails.logger.fatal "ERROR: gzh_reply"
     end
   end
