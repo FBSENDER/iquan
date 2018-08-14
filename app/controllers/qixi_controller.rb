@@ -17,10 +17,11 @@ class QixiController < ApplicationController
           unsubscribe(open_id)
         elsif xml.xpath('//Event').text == 'subscribe'
           from_id = 0
-          if xml.xpath('//EventKey') != nil
+          if xml.xpath('//EventKey').text != ''
             Rails.logger.info "eventKey: #{xml.xpath('EventKey').text}"
           end
           user = create_user(open_id, token, from_id)
+          return if user[:id] == 0
           create_qrcode(user, token)
           reply_text(token, open_id, '1')
           reply_text(token, open_id, 'www.jd.com')
@@ -46,11 +47,13 @@ class QixiController < ApplicationController
 
   def create_user(open_id, access_token, from_user_id = 0, gz = 1)
     url_1 = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=#{access_token}&openid=#{open_id}"
-    Rails.logger.info "#{url_1}"
     result_1 = Net::HTTP.get(URI(URI.encode(url_1)))
-    Rails.logger.info "#{result_1}"
     data_1 = JSON.parse(result_1)
-    user = QxUser.where(open_id: open_id).take || QxUser.new
+    user = QxUser.where(open_id: open_id).take
+    unless user.nil?
+      return {id: 0}
+    end
+    user = QxUser.new
     user.open_id = open_id
     user.union_id = ''
     user.session_key = ''
@@ -106,7 +109,7 @@ class QixiController < ApplicationController
   end
 
   def get_qixi_image(user)
-    kit = IMGKit.new("<html><head><meta charset='UTF-8'></head><body style='height:1920px;width: 800px;margin:0;padding:0;'><img src='http://www.uuhaodian.com/qixi.jpg' style='height:1920px;width:1024px;'/><img src='#{user[:qr_code]}' style='height:256px;width:256px;position:relative;top:-294px;left:698px;'/><img src='#{user[:imgurl]}' style='height:100px;width: 100px;position:relative;top:-704px;left:-192px;'/><p style='color:#532b6d;position: relative;top:-832px;left:205px;font-size:38px;font-weight: bold;'>#{user[:nick]}正在参加：<br/>七夕儿童绘本免费送活动</p></body></html>")
+    kit = IMGKit.new("<html><head><meta charset='UTF-8'></head><body style='height:1920px;width: 800px;margin:0;padding:0;'><img src='http://www.uuhaodian.com/qixi.jpg' style='height:1920px;width:1024px;'/><img src='#{user[:qr_code]}' style='height:256px;width:256px;position:relative;top:-294px;left:698px;'/><img src='#{user[:imgurl]}' style='height:100px;width: 100px;position:relative;top:-704px;left:-192px;'/><p style='color:#532b6d;position: relative;top:-832px;left:205px;font-size:38px;font-weight: bold;'>#{user[:nick]}正在参加：<br/>七夕儿童绘本免费送活动</p></body></html>", width: 800, height: 1920)
     kit.to_file("qixi_#{user[:id]}.jpg")
   end
 
@@ -129,6 +132,7 @@ class QixiController < ApplicationController
   
   def reply_image(token, open_id, media_id)
     url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=#{token}"
+    Rails.logger.info "media_id: #{media_id}"
     qq = {
       "touser" => open_id,
       "msgtype" => 'image',
