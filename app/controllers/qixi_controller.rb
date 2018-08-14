@@ -6,8 +6,9 @@ class QixiController < ApplicationController
   def gzh_reply
     render plain: "success"
     begin
-      Rails.logger.info request.body.read
-      xml = Nokogiri::XML request.body.read
+      bd = request.body.read
+      Rails.logger.info bd
+      xml = Nokogiri::XML bd
       open_id = xml.xpath('//FromUserName').text
       token = UuToken.where(id: 3).take.token
       Rails.logger.info token
@@ -21,10 +22,10 @@ class QixiController < ApplicationController
           end
           user = create_user(open_id, token, from_id)
           create_qrcode(user, token)
-          get_qixi_image(user)
-          upload_image(user, token)
           reply_text(token, open_id, '1')
           reply_text(token, open_id, 'www.jd.com')
+          get_qixi_image(user)
+          upload_image(user, token)
           reply_image(token, open_id, user[:media_id])
         elsif xml.xpath('//Event').text == 'SCAN'
         end
