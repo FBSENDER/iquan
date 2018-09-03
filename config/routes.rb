@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get "/dianpu/", to: "dianpu#map_s"
   get "/dianpu/:nick/", to: "dianpu#show"
   get "/dianpu_buy/:seller_id/", to: "dianpu#buy"
+  get "/buy/:id", to: "diyquan#buy"
 
   #html sitemap
   get "/map_k/", to: "diyquan#map_k"

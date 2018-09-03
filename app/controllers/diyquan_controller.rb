@@ -299,4 +299,8 @@ class DiyquanController < ApplicationController
     JSON.parse(tbk.taobao_tbk_item_get(keyword, $taobao_app_id, $taobao_app_secret, page_no + 1,50))
   end
 
+  def buy
+    redirect_to "http://www.uuhaodian.com/yh/#{params[:id]}/#coupon", status: 302
+  end
+
 end
