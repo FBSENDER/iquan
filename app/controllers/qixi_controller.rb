@@ -117,6 +117,11 @@ dwz.cn/TcIpe4CN
   end
 
   def get_qixi_image(user)
+    kit = IMGKit.new("<html><head><meta charset='UTF-8'></head><body style='height:1920px;width: 800px;margin:0;padding:0;'><img src='http://www.uuhaodian.com/zhongqiu.jpg' style='height:1920px;width:1024px;'/><img src='#{user[:qr_code]}' style='height:256px;width:256px;position:relative;top:-294px;left:698px;'/><img src='#{user[:imgurl]}' style='height:100px;width: 100px;position:relative;top:-704px;left:-192px;'/><p style='color:#d2b570;position: relative;top:-832px;left:205px;font-size:38px;font-weight: bold;'>#{user[:nick]}正在参加：<br/>中秋儿童绘本免费送活动</p></body></html>", width: 800, height: 1920)
+    kit.to_file("qixi_#{user[:id]}.jpg")
+  end
+
+  def get_qixi_image_old(user)
     kit = IMGKit.new("<html><head><meta charset='UTF-8'></head><body style='height:1920px;width: 800px;margin:0;padding:0;'><img src='http://www.uuhaodian.com/qixi.jpg' style='height:1920px;width:1024px;'/><img src='#{user[:qr_code]}' style='height:256px;width:256px;position:relative;top:-294px;left:698px;'/><img src='#{user[:imgurl]}' style='height:100px;width: 100px;position:relative;top:-704px;left:-192px;'/><p style='color:#532b6d;position: relative;top:-832px;left:205px;font-size:38px;font-weight: bold;'>#{user[:nick]}正在参加：<br/>七夕儿童绘本免费送活动</p></body></html>", width: 800, height: 1920)
     kit.to_file("qixi_#{user[:id]}.jpg")
   end
