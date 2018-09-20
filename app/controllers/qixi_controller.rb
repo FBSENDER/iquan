@@ -24,13 +24,13 @@ class QixiController < ApplicationController
           user = create_user(open_id, token, from_id)
           return if user[:id] == 0
           create_qrcode(user, token)
-          reply_text(token, open_id, "欢迎参加七夕免费送绘本活动。
-活动截止日期:8月18日24点。
-转发下方个人定制海报，邀请三位好友，即可免费领取，包邮到家。
+          reply_text(token, open_id, "欢迎参加中秋免费送绘本活动。
+活动截止日期:10月15日24点。
+转发下方个人定制海报，邀请5位好友，即可免费领取，包邮到家。
 查看已扫码好友：
 www.17430.com.cn/qx/result?id=#{user[:id]}
 你也可以原价直接购买：
-dwz.cn/TcIpe4CN
+dwz.cn/iuRmqpnw
 ↓↓↓↓转发下方海报↓↓↓↓↓")
           reply_text(token, open_id, '个人海报即将生成，请稍候。')
           get_qixi_image(user)
