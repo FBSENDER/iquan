@@ -11,6 +11,6 @@
 .wrapper.home-wrapper
   = render partial: "ddk/ddk_quan_filter"
   = render partial: "ddk/ddk_quan_list"
-  = render partial: "ddk/ddk_load_more", locals: {path: 'http://api.uuhaodian.com/ddk/search', pinyin: '', keyword: '时尚',cid: 0, sort_type: 0,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
+  = render partial: "ddk/ddk_load_more", locals: {path: 'https://api.uuhaodian.com/ddk/search', pinyin: '', keyword: '时尚',cid: 0, sort_type: 0,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 
 = render partial: "diyquan/home_footer", locals: {links: @links}

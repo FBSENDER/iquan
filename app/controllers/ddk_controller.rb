@@ -3,7 +3,7 @@ class DdkController < ApplicationController
     @keyword = params[:keyword]
     @cates = get_cate_data
     @top_keywords = get_hot_keywords_data.sample(8)
-    @path = "http://api.uuhaodian.com/ddk/search"
+    @path = "https://api.uuhaodian.com/ddk/search"
   end
 
   def product_detail
@@ -23,7 +23,7 @@ class DdkController < ApplicationController
       @promtion_url = pjson["result"]["we_app_web_view_short_url"]
     end
     @top_keywords = get_hot_keywords_data.sample(8)
-    @path = "http://api.uuhaodian.com/ddk/search"
+    @path = "https://api.uuhaodian.com/ddk/search"
   end
 
   def category
@@ -37,6 +37,6 @@ class DdkController < ApplicationController
     end
     @category_name = params[:category_name] || @lanlan_category["name"]
     @top_keywords = get_hot_keywords_data.sample(8)
-    @path = "http://api.uuhaodian.com/ddk/search"
+    @path = "https://api.uuhaodian.com/ddk/search"
   end
 end
