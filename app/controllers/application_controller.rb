@@ -8,6 +8,8 @@ require 'timeout'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   $coupon_9kuai9_data = {}
+  $cate_data = {}
+  $hot_keywords_data = {}
 
   def is_robot?
     user_agent = request.headers["HTTP_USER_AGENT"]
@@ -109,6 +111,41 @@ class ApplicationController < ActionController::Base
   def get_tbk_search_json(keyword, page_no)
     tbk = Tbkapi::Taobaoke.new
     JSON.parse(tbk.taobao_tbk_item_get(keyword, $taobao_app_id, $taobao_app_secret, page_no + 1,50))
+  end
+
+  def get_cate_data
+    if $cate_data.nil? || $cate_data["update_at"].nil? || $cate_data["cate"].nil? || $cate_data["cate"].size.zero? || Time.now.to_i - $cate_data["update_at"] > 3600
+      url = "http://api.uuhaodian.com/uu/category_list"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["status"] && json["status"]["code"] == 1001
+        $cate_data["cate"] = json["result"].sort{|a, b| a["cid"].to_i <=> b["cid"].to_i}
+        $cate_data["cate"].each do |c|
+          c["img_url"] = c["list"][0]["image"]
+        end
+        $cate_data["update_at"] = Time.now.to_i
+        return $cate_data["cate"]
+      else
+        return []
+      end
+    end
+    return $cate_data["cate"]
+  end
+
+  def get_hot_keywords_data
+    if $hot_keywords_data["update_at"].nil? || $hot_keywords_data["keywords"].nil? || $hot_keywords_data["keywords"].size.zero? || Time.now.to_i - $hot_keywords_data["update_at"] > 3600
+      url = "http://api.uuhaodian.com/uu/hot_keywords"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["status"] && json["status"]["code"] == 1001
+        $hot_keywords_data["keywords"] = json["result"]
+        $hot_keywords_data["update_at"] = Time.now.to_i
+        return $hot_keywords_data["keywords"]
+      else
+        return []
+      end
+    end
+    return $hot_keywords_data["keywords"]
   end
 
 end

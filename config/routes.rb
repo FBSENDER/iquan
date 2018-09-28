@@ -22,4 +22,10 @@ Rails.application.routes.draw do
   #html sitemap
   get "/map_k/", to: "diyquan#map_k"
   get "/map_k/:page", to: "diyquan#map_k"
+
+  #ddk
+  get "/ddk/:id", to: "ddk#product_detail", id: /\d+/
+  get "/ddkyh/:keyword/", to: "ddk#youhui"
+  get "/ddkcate/:cid", to: "ddk#category", cid: /\d+/
+
 end

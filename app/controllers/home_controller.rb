@@ -114,6 +114,14 @@ class HomeController < ApplicationController
       redirect_to "http://www.iquan.net/zhekou/#{URI.encode(brand.search_keyword)}/", status: 302
       return
     end
+    if !is_robot? && !is_device_mobile? && request.host == "www.iquan.net"
+      ddk_home
+      return
+    end
+    if !is_robot? && is_device_mobile? && request.host == "m.iquan.net"
+      redirect_to "https://mobile.yangkeduo.com/duo_cms_mall.html?pid=1781779_28436974&cpsSign=CM1781779_28436974_f3988bbc4a1c69301e6ccc9941f8c54c&duoduo_type=2", status: 302
+      return
+    end
     if !is_robot? 
       if is_device_mobile?
         m_diyquan_home
@@ -198,9 +206,19 @@ class HomeController < ApplicationController
     @links = Link.where(status: 1).to_a
     render "diyquan/home", layout: "layouts/diyquan"
   end
-
   def m_diyquan_home
     @coupons = get_static_coupons('static_new_coupons')
     render "m_diyquan/home", layout: "layouts/m_diyquan"
   end
+  def ddk_home
+    @banners = [{"link_url" => "https://a.toutiaonanren.com/api/d/8mSezH", "img_url" => "http://www.zhaoll.com/images/banner.png"}]
+    @links = Link.where(status: 1).to_a
+    @cates = get_cate_data
+    @coupons_9kuai9 = get_coupon_9kuai9_data
+    @coupons = []
+    @top_keywords = get_hot_keywords_data.sample(8)
+    @links = Link.where(status: 1).to_a
+    render "ddk/home", layout: "layouts/ddk"
+  end
+
 end

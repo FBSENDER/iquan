@@ -1,0 +1,13 @@
+.lanlan-category-area-all
+  - @cates.each do |cate|
+    - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'red' : ''
+    %a{href: "/ddkcate/#{cate['cid']}/", class: "#{is_active}"}
+      %img{src: "#{cate['img_url']}"}
+      %p{style:"color:#{is_active};"} #{cate['name']}
+- if @lanlan_category && @lanlan_category['list']
+  .lanlan-category-area
+    - @lanlan_category['list'].each do |cate|
+      - is_active = cate['cid'] == @cid ? 'color:red;' : ''
+      %a{href: "/ddkcate/#{cate['cid']}/?cid_1=#{@lanlan_category['cid']}&category_name=#{URI.encode(cate['name'])}"}
+        %img{src: "#{cate['image']}"}
+        %p{style:"#{is_active}"} #{cate['name']}

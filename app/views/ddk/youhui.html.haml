@@ -1,0 +1,12 @@
+- title("#{@keyword}拼多多优惠券_爱券网")
+- keywords("#{@keyword},#{@keyword}优惠券,#{@keyword}拼多多优惠券")
+- head_desc("爱券网 - 拼多多搜索结果 - #{@keyword}")
+
+= render partial: "header_common"
+= render partial: "ddk_fenlei"
+
+.wrapper
+  = render partial: "ddk_quan_filter"
+  .zk-list.clearfix#couponList
+  = render partial: "ddk_load_more", locals: {path: @path, pagesize: 20, sort_type: 0, pinyin: '', keyword: @keyword, cid: 0,sort: 0, type: 0}
+

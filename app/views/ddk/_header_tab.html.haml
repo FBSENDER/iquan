@@ -1,0 +1,17 @@
+.tab-area#tab_area
+  .wrapper
+    .cate-area
+      %a.cate-item.jxtj.active{href: "/"}
+        %span.cate-rec
+      %a.cate-item.hot{href: "https://a.toutiaonanren.com/api/d/8n3paa", target: "_blank"} 转盘抽免单
+      %a.cate-item{href: "/"} 拼多多优惠券已全面上线，拼购更优惠！
+    .search-area
+      %i
+      %input.search-input.unfocus{type: "text", placeholder: "粘贴宝贝标题或输入关键词"}
+  .hori-cate-area
+    .cate-l-1
+      .wrapper
+        - if @cates
+          - @cates.each do |cate|
+            - is_active = cate['cid'] == @cid || cate['cid'] == @cid_1 ? 'active' : ''
+            %a{href: "/ddkcate/#{cate["cid"]}/", class: "#{is_active}"} #{cate["name"]}

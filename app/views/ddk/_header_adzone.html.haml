@@ -1,0 +1,67 @@
+.home-oper-area.wrapper
+  .cate-area
+    %a.cate-item.with-line{href: "/ddkcate/1321/"}
+      .inner
+        %i.cate-icon.ci-nvzhuang
+        女装
+    %a.cate-item{href: "/ddkcate/1327/"}
+      .inner
+        %i.cate-icon.ci-nanzhuang
+        男装
+    %a.cate-item.with-line{href: "/ddkcate/1325/"}
+      .inner
+        %i.cate-icon.ci-xiezi
+        鞋包
+    %a.cate-item{href: "/ddkcate/1324/"}
+      .inner
+        %i.cate-icon.ci-meizhuang
+        美妆
+    %a.cate-item.with-line{href: "/ddkcate/1323/"}
+      .inner
+        %i.cate-icon.ci-shenghuo
+        百货
+    %a.cate-item{href: "/ddkcate/1322/"}
+      .inner
+        %i.cate-icon.ci-meishi
+        美食
+    %a.cate-item.with-line{href: "/ddkcate/1326/"}
+      .inner
+        %i.cate-icon.ci-neiyi
+        内衣
+    %a.cate-item{href: "/ddkcate/1328/"}
+      .inner
+        %i.cate-icon.ci-muying
+        母婴
+    %a.cate-item.with-line{href: "/ddkcate/1330/"}
+      .inner
+        %i.cate-icon.ci-peishi
+        配饰
+    %a.cate-item{href: "/ddkcate/1332/"}
+      .inner
+        %i.cate-icon.ci-chengren
+        成人
+    %a.cate-item.with-line.last{href: "/ddkcate/1329/"}
+      .inner
+        %i.cate-icon.ci-shuma
+        手机
+    %a.cate-item.last{href: "/ddkcate/1331/"}
+      .inner
+        %i.cate-icon.ci-jujia
+        其他
+  .banner-top
+    .banner-area.swiper-container.swiper-container-horizontal
+      .swiper-wrapper
+        - if @banners && @banners.size > 0
+          - @banners.each do |b|
+            %a.swiper-slide{href: "#{b["link_url"]}", target: "_blank", onclick: "ga_event(this);", data:{ga: "大banner:首页:首页_大banner"}}
+              %img{src: "#{b["img_url"]}", style: "margin:25px 0;"}
+      .swiper-bottom
+        .swiper-pager
+    .top-right-banner
+      %img{src: "/img/lbanner1.png"}
+      %p 
+        关注公众号
+        %br
+        回复 红包 
+        %br
+        领取最高100元福利金！

@@ -1,0 +1,38 @@
+- title("#{@detail["shortTitle"]}_爱券网")
+- keywords("#{@detail["shortTitle"]},#{@detail["title"]}")
+- head_desc("爱券网 - 拼多多商品详情 - #{@detail["shortTitle"]}")
+
+= render partial: "header_common"
+.wrapper
+  = render partial: "quan_detail_content"
+.qrcode-wrapper{style: "display:none;"}
+  %img{src: "//t16img.yangkeduo.com/mms_static/6b899e7e8395b448bca235576751a096.png"}
+  .qr-text
+    %img.close{src: "//t16img.yangkeduo.com/mms_static/6e1914ef2bc444e25da2a78e33553472.png"}
+    %p 微信扫码 领券购物
+    .padding
+      #qrcode.qr
+    .know 我知道啦
+%aside.wrapper
+  .rel-zk-area
+    %p.head
+      %span 更多推荐
+    .zk-list.clearfix#couponList
+    = render partial: "ddk_load_more", locals: {path: @path, pagesize: 20, sort_type: 0, pinyin: '', keyword: @detail["category"], cid: 0,sort: 7, type: 0}
+
+:javascript
+  $('#qrcode').qrcode({
+    render: "canvas",
+    width: 300,
+    height: 300,
+    text: "#{@promtion_url}"
+  });
+  $('.buy-btn').click(function(){
+    $('.qrcode-wrapper').css("display",'');
+  });
+  $('.qr-text .close').click(function(){
+    $('.qrcode-wrapper').css("display", "none");
+  });
+  $('.qr-text .know').click(function(){
+    $('.qrcode-wrapper').css("display", "none");
+  });
