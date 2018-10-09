@@ -96,7 +96,8 @@ class HomeController < ApplicationController
       if is_robot?
         render "lanlan_home", layout: nil
       else
-        redirect_to "https://mobile.yangkeduo.com/duo_cms_mall.html?pid=1781779_28436974&cpsSign=CM1781779_28436974_f3988bbc4a1c69301e6ccc9941f8c54c&duoduo_type=2", status: 302
+        redirect_to "http://ls.iquan.net", status: 302
+        #redirect_to "https://mobile.yangkeduo.com/duo_cms_mall.html?pid=1781779_28436974&cpsSign=CM1781779_28436974_f3988bbc4a1c69301e6ccc9941f8c54c&duoduo_type=2", status: 302
       end
       return
     end
