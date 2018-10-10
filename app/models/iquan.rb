@@ -73,3 +73,7 @@ end
 class Banner < ApplicationRecord
   self.table_name = 'iquan_banners'
 end
+
+class OutLink < ApplicationRecord
+  self.table_name = 'iquan_outlinks'
+end

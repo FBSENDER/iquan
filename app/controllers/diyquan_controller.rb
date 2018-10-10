@@ -222,10 +222,11 @@ class DiyquanController < ApplicationController
     unless is_robot?
       if is_device_mobile?
         redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=0&kw=#{URI.encode_www_form_component(@page_info.search_keyword)}&from=m_iquan", status: 302
-      else
-        redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@page_info.search_keyword)}/?from=iquan", status: 302
+      #else
+      #  redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@page_info.search_keyword)}/?from=iquan", status: 302
+      #end
+        return
       end
-      return
     end
     @zhekous = []
     data  = get_tbk_search_json(@page_info.search_keyword, 1)
@@ -247,6 +248,7 @@ class DiyquanController < ApplicationController
     @seo_k = @page_info.search_keyword 
     @keyword = @page_info.search_keyword 
     @links = Page.select(:anchor, :url)
+    @outlinks = OutLink.where(url: request.original_url).select(:keyword, :outurl)
     @h1 = @page_info.anchor
     if is_device_mobile?
       render "m_diyquan/page", layout: "layouts/m_diyquan"

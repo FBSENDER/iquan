@@ -1,0 +1,22 @@
+.footer
+  .footer-top
+    .wrapper
+      .yl
+        %p.head 友情链接：
+        .yl-links
+          - if links
+            - links.each do |link|
+              %a{href: "#{link.url}", target: "_blank"} #{link.anchor}
+          - if outlinks
+            - outlinks.each do |link|
+              %a{href: "#{link.outurl}", target: "_blank"} #{link.keyword}
+      .logo-slogan
+        .qr-code
+          %a{href: "/"}
+            %img{src: "/image/love1.jpg"}
+        .txt
+          %p.s1 扫码下载爱券网APP
+          %p.s2 一折特卖，天天省钱！
+  .footer-bootom
+    .wrapper
+      %p 爱券网 - 京ICP备17027610号
