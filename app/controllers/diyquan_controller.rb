@@ -248,7 +248,7 @@ class DiyquanController < ApplicationController
     @seo_k = @page_info.search_keyword 
     @keyword = @page_info.search_keyword 
     @links = Page.select(:anchor, :url)
-    @outlinks = OutLink.where(url: request.original_url).select(:keyword, :outurl)
+    @outlinks = OutLink.where(url: request.url).select(:keyword, :outurl)
     @h1 = @page_info.anchor
     if is_device_mobile?
       render "m_diyquan/page", layout: "layouts/m_diyquan"
