@@ -116,11 +116,13 @@ class HomeController < ApplicationController
       return
     end
     if !is_robot? && !is_device_mobile? && request.host == "www.iquan.net"
-      ddk_home
+      #ddk_home
+      redirect_to "http://ls.iquan.net"
       return
     end
     if !is_robot? && is_device_mobile? && request.host == "m.iquan.net"
-      redirect_to "https://mobile.yangkeduo.com/duo_cms_mall.html?pid=1781779_28436974&cpsSign=CM1781779_28436974_f3988bbc4a1c69301e6ccc9941f8c54c&duoduo_type=2", status: 302
+      redirect_to "http://ls.iquan.net"
+      #redirect_to "https://mobile.yangkeduo.com/duo_cms_mall.html?pid=1781779_28436974&cpsSign=CM1781779_28436974_f3988bbc4a1c69301e6ccc9941f8c54c&duoduo_type=2", status: 302
       return
     end
     if !is_robot? 
