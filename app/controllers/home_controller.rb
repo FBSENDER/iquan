@@ -116,8 +116,8 @@ class HomeController < ApplicationController
       return
     end
     if !is_robot? && !is_device_mobile? && request.host == "www.iquan.net"
-      #ddk_home
-      redirect_to "http://www.uuhaodian.com/?from=iquan_home"
+      ddk_home
+      #redirect_to "http://www.uuhaodian.com/?from=iquan_home"
       return
     end
     if !is_robot? && is_device_mobile? && request.host == "m.iquan.net"
