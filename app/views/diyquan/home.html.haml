@@ -1,11 +1,44 @@
 - title("「十块购官网」粉丝福利购,淘宝天猫特价好货,天天特价,今日特价!")
 - head_desc("十块购官网（ShiKuaiGou.Com）消费导购平台，淘宝粉丝福利购，提供淘宝优惠券搜索，淘宝内部优惠券查询，方便搜找淘宝隐藏券，天猫优惠券，天猫内部优惠券，天猫隐藏券，天天提供淘宝天猫特价好货，天天特价，今日特价！十块购为您提供精明的购物决策，我们致力于以客观中立的态度，为您推荐最具品质和性价比的特价好货。")
-- keywords("十块购,十元包邮,10块购,十块邮,十块购官网,福利购,粉丝福利购,天天特价,特价好货,今日特价,今日特价网")
+- keywords("十块购,十元包邮,10块购,十块邮,十块购官网,福利购,粉丝福利购,天天特价,特价好货,今日特价,今日特价网,十块,天猫特价")
 - mobile_url("/")
+- h1("十块购官网")
 
 = render partial: "diyquan/home_adzone"
-.wrapper.home-wrapper
+%article.wrapper.home-wrapper
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanHomeCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
-
+  %div{style: "background-color: white;padding:10px;margin-bottom: 20px;"}
+    %h2 粉丝福利购
+    %p
+      为您推荐以下内容：
+      %br
+      - %w(怎么找粉丝福利购 淘宝粉丝福利购入口 粉丝福利购怎么进去 粉丝福利优惠券哪来的 粉丝福利购是真的吗 粉丝福利购怎么赚佣金 淘宝怎么进粉丝福利购 粉丝福利购是骗局吗 粉丝福利购是假货吗).each do |k|
+        %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank"} #{k}
+        |
+      粉丝福利购
+    %h2 福利购
+    %p
+      为您推荐以下内容：
+      %br
+      - %w(福利购怎么赚佣金 福利购是骗局吗 猫粉丝福利购是真假 淘宝粉丝福利购入口 福利购是真的吗 粉丝福利购空白 福利购是正品吗 福利购的东西怎样 福利购怎么返利).each do |k|
+        %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank"} #{k}
+        |
+      福利购
+    %h2 天天特价
+    %p
+      为您推荐以下内容：
+      %br
+      - %w(天天特价淘宝网 淘宝天天特价 天天特价里的东西好吗 tsobao淘宝网天天特价 天天特价.com 天天特价活动报名 淘抢购 淘宝特卖 天天特价是只有一天吗?).each do |k|
+        %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank"} #{k}
+        |
+      天天特价
+    %h2 今日特价
+    %p
+      为您推荐以下内容：
+      %br
+      - %w(今日秒杀特价 聚划算官网今日特价 今日特价手机 今日特价图片 今日特价是什么 今日特价秒杀图片 今日特价怎么写好看 聚划算今日特价).each do |k|
+        %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank"} #{k}
+        |
+      今日特价
 = render partial: "diyquan/home_footer", locals: {links: @links}
