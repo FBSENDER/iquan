@@ -57,7 +57,8 @@ class DiyquanController < ApplicationController
     unless is_robot?
       if is_device_mobile?
         s_type = is_taobao_title?(@keyword) ? 1 : 0
-        redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=#{s_type}&kw=#{URI.encode_www_form_component(@keyword)}&from=m_shikuai", status: 302
+        #redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=#{s_type}&kw=#{URI.encode_www_form_component(@keyword)}&from=m_shikuai", status: 302
+        redirect_to "http://www.uuhaodian.com/dz/#{URI.encode_www_form_component(@keyword)}/?from=m_shikuai", status: 302
       else
         redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=shikuai", status: 302
       end
