@@ -73,7 +73,7 @@ class DiyquanController < ApplicationController
       @shops = []
       @sort_type = sort_type
     end
-    @keywords = []
+    @keywords = ZhekouKeyword.where(keyword: @keyword).pluck(:word)
     @path = request.path + "/"
     if is_device_mobile?
       render "m_diyquan/zhekou", layout: "layouts/m_diyquan"

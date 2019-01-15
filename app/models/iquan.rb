@@ -59,5 +59,9 @@ class SearchUrlLog < ApplicationRecord
 end
 
 class QuickSearchLog < ApplicationRecord
-    self.table_name = 'iquan_quick_search_logs'
+  self.table_name = 'iquan_quick_search_logs'
+end
+
+class ZhekouKeyword < ApplicationRecord
+  self.table_name = 'iquan_zhekou_keywords'
 end
