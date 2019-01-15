@@ -1,10 +1,10 @@
 - title(@title)
 - head_desc(@description)
-- keywords(@page_keywords)
+- keywords(@page_keywords + ',' + @keywords[0,20].join(','))
 - path(@path)
 - h1(@h1)
 
 .wrapper
   = render partial: "m_diyquan/header", locals: {need_sort: true, need_ads: false}
   = render partial: "m_diyquan/page_js", locals: {path: '/getFenleiCouponList', pinyin: @pinyin, keyword: '', pagesize: 40, sort_type: 0}
-  = render partial: "m_diyquan/shuangpai_list", locals: {coupons: @coupons}
+  = render partial: "m_diyquan/tb_shuangpai_list", locals: {zhekous: @zhekous, coupons: @coupons}

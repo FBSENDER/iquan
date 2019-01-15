@@ -23,10 +23,11 @@ class DiyquanController < ApplicationController
     if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
       @zhekous = data["tbk_item_get_response"]["results"]["n_tbk_item"]
     end
-    if is_robot?
-      render "diyquan/fenlei", layout: "layouts/diyquan"
+    @keywords = ZhekouKeyword.where(keyword: params[:pinyin]).pluck(:word)
+    if is_device_mobile?
+      render "m_diyquan/fenlei", layout: "layouts/m_diyquan"
     else
-      render "diyquan/lanlan_fenlei", layout: "layouts/diyquan"
+      render "diyquan/fenlei", layout: "layouts/diyquan"
     end
   end
 

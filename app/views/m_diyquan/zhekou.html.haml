@@ -7,4 +7,4 @@
 .wrapper
   = render partial: "m_diyquan/header", locals: {need_sort: true, need_ads: false}
   = render partial: "m_diyquan/page_js", locals: {path: '/getSearchCouponList', pinyin: '', keyword: @keyword, pagesize: 20, sort_type: @sort_type}
-  = render partial: "m_diyquan/shuangpai_list", locals: {coupons: @coupons}
+  = render partial: "m_diyquan/tb_shuangpai_list", locals: {coupons: @coupons, zhekous: @zhekous}
