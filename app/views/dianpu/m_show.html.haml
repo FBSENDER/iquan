@@ -39,5 +39,6 @@
             #{item["title"].html_safe}，价格：#{item["price"]}元；
   - if @coupons && @coupons.size > 0
     = render partial: "m_diyquan/shuangpai_list", locals: {coupons: @coupons}
+  = render partial: "m_diyquan/tb_shuangpai_list", locals: {coupons: @coupons, zhekous: @zhekous}
   = render partial: "m_diyquan/page_js", locals: {path: '/getSearchCouponList', pinyin: '', keyword: @shop.title, pagesize: 20, sort_type: 0}
   = render partial: "layouts/taobao_js", locals: {pid: @taodianjin_pid}

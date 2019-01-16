@@ -71,7 +71,7 @@
     %p.head
       %span 热门优惠券
     .rel-zk-list.clearfix
-      = render partial: "diyquan/quan_list", locals: {coupons: @hot_coupons}
+      = render partial: "diyquan/tb_quan_list", locals: {zhekous: @zhekous, coupons: []}
 
 = render partial: "layouts/taobao_js", locals: {pid: @taodianjin_pid}
 = render partial: "diyquan/quan_detail_js"
