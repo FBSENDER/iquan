@@ -3,9 +3,9 @@ module DiyquanHelper
   def fenlei_tdk
     cate_name = @category['name']
     @title = "#{cate_name}淘宝优惠券_#{$website_name}"
-    @description = "淘宝天猫内部隐藏#{cate_name}优惠券,#{cate_name}折扣，20元50元100元，先领券，再下单，专享淘宝折上折优惠。领取#{cate_name}优惠券，查看#{cate_name}打折特价信息 - #{$website_name}。"
-    @page_keywords = "#{cate_name},#{cate_name}优惠,#{cate_name}优惠券,#{cate_name}内部优惠券,#{cate_name}折扣,特价#{cate_name}"
-    @h1 = "#{cate_name}内部优惠券"
+    @description = "淘宝天猫隐藏#{cate_name}优惠券,#{cate_name}折扣，20元50元100元，先领券，再下单，专享淘宝折上折优惠。领取#{cate_name}优惠券，查看#{cate_name}打折特价信息 - #{$website_name}。"
+    @page_keywords = "#{cate_name},#{cate_name}优惠,#{cate_name}优惠券,#{cate_name}淘宝优惠券,#{cate_name}折扣,特价#{cate_name}"
+    @h1 = "#{cate_name}淘宝优惠券"
     @keyword = cate_name.split('/').first
     @seo_k = @keyword
     @path = request.path + "/"
@@ -63,7 +63,7 @@ module DiyquanHelper
   def zhekou_tdk
     @keyword = params[:keyword].force_encoding('utf-8')
     @title= "#{@keyword}_#{@keyword}折扣优惠券"
-    @description = "淘宝天猫内部隐藏#{@keyword}优惠券,#{@keyword}折扣，20元50元100元，先领券，再下单，专享淘宝折上折优惠。领取#{@keyword}优惠券，查看#{@keyword}打折特价信息 - #{$website_name}。"
+    @description = "淘宝天猫隐藏#{@keyword}优惠券,#{@keyword}折扣，20元50元100元，先领券，再下单，专享淘宝折上折优惠。领取#{@keyword}优惠券，查看#{@keyword}打折特价信息 - #{$website_name}。"
     @page_keywords = "#{@keyword},#{@keyword}优惠,#{@keyword}优惠券,#{@keyword}折扣,特价#{@keyword}"
     @big_keywords = $big_keywords
     @h1 = @keyword
