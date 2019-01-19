@@ -17,22 +17,22 @@
       %img.img-responsive{src: "http://omqxp8we2.bkt.clouddn.com/coupon/2017/7/1/150210187400047347_400x400", alt: "美食优惠券"}
       %p.content 
         为大家准备了：淘宝天猫
-        %span 内部优惠券网站
+        %span 优惠券网站
         汇总
     .col-md-12
       %h2.page-header 淘宝优惠券如何领取
       %p.content 淘宝优惠券如何领取？现在很多淘宝天猫商家对商品设置了优惠券，有些面额还特别大，领取优惠券之后可以享受折上折优惠，大家现在只需登录优优好店www.uuhaodian.com，搜索关键词或者淘宝宝贝标题，如果有券，就都搜得到，有些商品没有优惠券，在优优好店也可以领取福利红包获得优惠！
     .col-md-12 
-      %h2.page-header 领淘宝内部优惠券的网站有哪些
-      %p.content 从前淘宝内部优惠券，就是所谓的商家券，但是这些券现在已经不再发放了，改为了妈妈券，就是说只有有券，在哪里都搜的到。推荐大家去优优好店www.uuhaodian.com领优惠券，那里不但搜券方便，还会每日更新大额券、超值商品，让大家买的便宜、买的值！
+      %h2.page-header 领淘宝优惠券的网站有哪些
+      %p.content 从前淘宝优惠券，就是所谓的商家券，但是这些券现在已经不再发放了，改为了妈妈券，就是说只有有券，在哪里都搜的到。推荐大家去优优好店www.uuhaodian.com领优惠券，那里不但搜券方便，还会每日更新大额券、超值商品，让大家买的便宜、买的值！
     .col-md-12
-      %h2.page-header 内部优惠券公众号
+      %h2.page-header 优惠券公众号
       %p.content 优优好店，关注同名微信公众号可以领淘宝天猫优惠券了，现在关注还送福利红包，最高能领100元！同时，优优好店小程序也已经上线，可以在微信里便捷的领取淘宝优惠券了。
 
     - @compete_brands.each_with_index do |brand, index|
       .col-md-12
         %h2.page-header #{brand.title}
-        %p.content 网站介绍：#{brand.description.gsub('内部优惠券', '<strong>内部优惠券</strong>').gsub('内部券','<strong>内部券</strong>').gsub('找券网', '<strong>找券网</strong>').html_safe} 【淘宝优惠券】【天猫优惠券】网站排名-#{index+1}
+        %p.content 网站介绍：#{brand.description.gsub('优惠券', '<strong>优惠券</strong>').gsub('折扣券','<strong>折扣券</strong>').gsub('找券网', '<strong>找券网</strong>').html_safe} 【淘宝优惠券】【天猫优惠券】网站排名-#{index+1}
         %p.content 关键词：#{brand.keywords}
         %p.content
           直达链接：
@@ -45,7 +45,7 @@
         %p.content 关键词：#{brand.keywords}
         %p.content
           直达链接：
-          %a{href: "http://#{brand.host}", target: "_blank", title: "#{brand.title}"} #{brand.title}【内部优惠券】品牌券网站排名 - #{index + 1}
+          %a{href: "http://#{brand.host}", target: "_blank", title: "#{brand.title}"} #{brand.title}【优惠券】品牌券网站排名 - #{index + 1}
     .col-md-12
       %h2.page-header 热销商品 - 更新于 #{Time.now.strftime("%Y-%m-%d")}
       - @coupons.each_with_index do |c, index|
@@ -63,7 +63,7 @@
       .col-md-12
         %h3 相关搜索
         %p.content
-          - %w(优惠券网站 内部优惠券 天猫内部优惠券 天猫内部券官网 天猫宝内部优惠券平台 天猫隐藏优惠券 淘宝优惠券 商家内部券网站 内部优惠券去撸券 优惠券网 优惠券平台 商家内部券网 优惠券查询 淘宝劵平台 天猫优惠券网站 搜劵 内部优惠券去撸券 商家内部券网站 天猫内部券 淘券基地 淘宝内部优惠券平台 淘宝内部券 天猫优惠券免费领取 美丽折 天猫优惠券 淘宝优惠券发券网 商家内部优惠券网址 淘宝优惠券平台 今日劵官网 大淘优惠券 内部优惠券平台 淘宝的折扣平台 淘宝内部优惠券网址 免费优惠券平台 精选购物优惠券).each do |w|
+          - %w(优惠券网站 优惠券 天猫优惠券 天猫券官网 天猫宝优惠券平台 天猫隐藏优惠券 淘宝优惠券 商家券网站 优惠券去撸券 优惠券网 优惠券平台 商家券网 优惠券查询 淘宝劵平台 天猫优惠券网站 搜劵 优惠券去撸券 商家券网站 天猫券 淘券基地 淘宝优惠券平台 淘宝券 天猫优惠券免费领取 美丽折 天猫优惠券 淘宝优惠券发券网 商家优惠券网址 淘宝优惠券平台 今日劵官网 大淘优惠券 优惠券平台 淘宝的折扣平台 淘宝优惠券网址 免费优惠券平台 精选购物优惠券).each do |w|
             %strong #{w}
       .col-md-12
         %h3 更多品牌天猫优惠券
