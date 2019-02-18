@@ -6,7 +6,10 @@
 
 %iframe#iframepage{src: "http://ls.iquan.net", width: "100%", frameborder: "no",  onload:"changeFrameHeight()", height: "1000px;"}
 
-= render partial: "diyquan/home_footer", locals: {links: @links}
+%footer{style: "background: rgba(30,30,30,1);color: rgba(255,255,255,.6);font-size: 12px;padding: 5px 60px;"}
+  友情链接:
+  - @links.each do |link|
+    %a{href: "#{link.url}", target: "_blank"} #{link.anchor}
 
 %script
   function changeFrameHeight(){var ifm= document.getElementById("iframepage");ifm.height=document.documentElement.clientHeight;}
