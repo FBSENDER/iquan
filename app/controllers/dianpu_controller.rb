@@ -1,6 +1,6 @@
 class DianpuController < ApplicationController
   def show
-    if is_root?
+    if is_robot?
       return if redirect_pc_to_mobile
     else
       if request.host != 'shop.iquan.net'
