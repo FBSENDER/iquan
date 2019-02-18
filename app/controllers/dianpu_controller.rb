@@ -3,8 +3,8 @@ class DianpuController < ApplicationController
     if is_robot?
       return if redirect_pc_to_mobile
     else
-      if request.host != 'shop.iquan.net'
-        redirect_to "http://shop.iquan.net#{request.path}/", status: 302
+      if request.host != 'tt.uuhaodian.com'
+        redirect_to "http://tt.uuhaodian.com#{request.path}/", status: 302
         return
       end
     end
