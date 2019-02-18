@@ -112,10 +112,13 @@ class HomeController < ApplicationController
     if !is_robot? && request.host.include?("pinpai.iquan.net")
       brand = ProductBrand.where(host: request.host, status: 1).select(:search_keyword).take
       not_found if brand.nil?
-      redirect_to "http://www.iquan.net/zhekou/#{URI.encode(brand.search_keyword)}/", status: 302
+      redirect_to "https://www.iquan.net/zhekou/#{URI.encode(brand.search_keyword)}/", status: 302
       return
     end
     if !is_robot? && !is_device_mobile? && request.host == "www.iquan.net"
+      if request.ssl? 
+        redirect_to "http://www.iquan.net", status: 302
+      end
       frame_home
       #ddk_home
       #redirect_to "http://www.uuhaodian.com/?from=iquan_home"
