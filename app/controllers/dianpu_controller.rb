@@ -1,6 +1,13 @@
 class DianpuController < ApplicationController
   def show
-    return if redirect_pc_to_mobile
+    if is_robot?
+      return if redirect_pc_to_mobile
+    else
+      if request.host != 'shop.iquan.net'
+        redirect_to "http://shop.iquan.net#{request.path}/", status: 302
+        return
+      end
+    end
     @shop = Shop.where(nick: params[:nick]).select(:id, :title, :nick, :provcity, :shop_url, :pic_url, :dsr_info, :is_tmall, :totalsold, :procnt, :main_auction, :search_keyword).take
     not_found if @shop.nil?
     @taodianjin_pid = is_device_mobile? ? $taodianjin_mobile_pid : $taodianjin_pc_pid
