@@ -1,6 +1,13 @@
 class DianpuController < ApplicationController
   def show
-    return if redirect_pc_to_mobile
+    if is_root?
+      return if redirect_pc_to_mobile
+    else
+      if request.host != 'shop.iquan.net'
+        redirect_to "http://shop.iquan.net#{request.path}/", status: 302
+        return
+      end
+    end
     @shop = Shop.where(nick: params[:nick]).take
     not_found if @shop.nil?
     @dsr_info = JSON.parse(@shop.dsr_info)
