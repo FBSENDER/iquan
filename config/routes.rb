@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
-  
+  get "/index.html", to: "home#frame_home"  
+
   get "/youhui/:id", to: "diyquan#get_coupon_by_id", id: /\d+/
   get "/fenlei/:pinyin", to: "diyquan#fenlei"
   get "/tbzk/", to: "diyquan#zhekou"

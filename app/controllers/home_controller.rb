@@ -116,10 +116,7 @@ class HomeController < ApplicationController
       return
     end
     if !is_robot? && !is_device_mobile? && request.host == "www.iquan.net"
-      if request.url.start_with?('https')
-        redirect_to "http://www.iquan.net", status: 302
-      end
-      frame_home
+      redirect_to "http://www.iquan.net/index.html"
       #ddk_home
       #redirect_to "http://www.uuhaodian.com/?from=iquan_home"
       return
