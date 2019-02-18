@@ -1,0 +1,14 @@
+- title("爱券网_淘宝优惠券,天猫优惠券,找券网优惠券网站")
+- head_desc("爱券网 - 找券网,券大娘,券搜搜,找券搜券淘券抢券拿券妈妈券宝宝券猪猪券一网打尽，提供淘宝优惠券、天猫优惠券、优惠卷等实时查询服务找券网服务，先搜索领券，再淘宝下单，专享爱券网折上折。每日更新大额优惠券、品牌优惠券、一折特价底价专场、9块9包邮白菜价好东西，加入搜藏，天天省钱，找券就来 - 爱券网。") 
+- keywords("爱券网,爱券,天猫优惠券,淘宝优惠券,找券网,优惠券网站,券搜搜,丁丁特价,券大娘,优惠卷,优惠券")
+- mobile_url("/")
+- h1("淘宝天猫优惠券")
+
+%iframe#iframepage{src: "http://ls.iquan.net", width: "100%", frameborder: "no",  onload:"changeFrameHeight()", height: "1000px;"}
+
+= render partial: "diyquan/home_footer", locals: {links: @links}
+
+%script
+  function changeFrameHeight(){var ifm= document.getElementById("iframepage");ifm.height=document.documentElement.clientHeight;}
+  function changeFrameHeight(){var ifm= document.getElementById("iframepage");ifm.height=document.documentElement.clientHeight;}
+

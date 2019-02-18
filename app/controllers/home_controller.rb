@@ -116,7 +116,8 @@ class HomeController < ApplicationController
       return
     end
     if !is_robot? && !is_device_mobile? && request.host == "www.iquan.net"
-      ddk_home
+      frame_home
+      #ddk_home
       #redirect_to "http://www.uuhaodian.com/?from=iquan_home"
       return
     end
@@ -222,6 +223,10 @@ class HomeController < ApplicationController
     @top_keywords = get_hot_keywords_data.sample(8)
     @links = Link.where(status: 1).to_a
     render "ddk/home", layout: "layouts/ddk"
+  end
+  def frame_home
+    @links = Link.where(status: 1).to_a
+    render "home/frame_iquan", layout: "layouts/frame"
   end
 
 end
