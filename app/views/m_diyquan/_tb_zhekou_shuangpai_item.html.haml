@@ -1,6 +1,6 @@
 - progress = (60..98).to_a.sample
 
-%a{href: "#{coupon['item_url']}", target: "_blank", isconvert: 1}
+%a{href: "#{coupon['item_url']}", target: "_blank", isconvert: 1, rel: "nofollow"}
   .product-item-t2
     .pic.lazy{data: {original: "#{coupon['pict_url']}"}}
     %p.title
