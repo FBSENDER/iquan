@@ -9,7 +9,11 @@ class HomeController < ApplicationController
       return
     end
     if is_device_mobile?
-      render "lanlan_home", layout: nil
+      if is_robot?
+        render "lanlan_home", layout: nil
+      else
+        redirect_to "http://m.uuhaodian.com/index.php?r=index/wap&source=m_shikuai"
+      end
     else
       diyquan_home
     end
