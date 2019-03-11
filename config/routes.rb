@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   #ddk
   get "/ddk/:id", to: "ddk#product_detail", id: /\d+/
-  get "/ddkyh/:keyword/", to: "ddk#youhui"
+  get "/ddkyh/:keyword/", to: "ddk#youhui", keyword: /.+/
   get "/ddkcate/:cid", to: "ddk#category", cid: /\d+/
 
 end

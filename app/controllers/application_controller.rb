@@ -1,4 +1,4 @@
-require 'common_config'
+#require 'common_config'
 require 'net/http'
 require 'zkapi/zk_api'
 require 'zkapi/lanlan_api'
@@ -133,6 +133,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_hot_keywords_data
+    return %w(鼠标 瑜伽垫 包包 卫生巾 防晒霜 连衣裙 口红 女鞋 针织衫 面膜)
     if $hot_keywords_data["update_at"].nil? || $hot_keywords_data["keywords"].nil? || $hot_keywords_data["keywords"].size.zero? || Time.now.to_i - $hot_keywords_data["update_at"] > 3600
       url = "http://api.uuhaodian.com/uu/hot_keywords"
       result = Net::HTTP.get(URI(url))
