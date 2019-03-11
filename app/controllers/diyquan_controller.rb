@@ -74,7 +74,7 @@ class DiyquanController < ApplicationController
     if is_keyword_url?(@keyword)
       id = get_tb_id(@keyword)
       if id
-        redirect_to "http://api.uuhaodian.com/buy/#{id}/?activity_id=", status: 302
+        redirect_to "http://api.uuhaodian.com/uu/buy?id=#{id}&channel=2", status: 302
         log = SearchUrlLog.new
         log.item_id = id.to_i
         log.save
