@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
   $cate_data = {}
   $hot_keywords_data = {}
 
+  def is_baiduspider?
+    user_agent = request.headers["HTTP_USER_AGENT"]
+    user_agent.present? && user_agent =~ /(baiduspider)/i
+  end
   def is_robot?
     user_agent = request.headers["HTTP_USER_AGENT"]
     user_agent.present? && user_agent =~ /(bot|spider|slurp)/i || user_agent == "Mozilla/5.0"

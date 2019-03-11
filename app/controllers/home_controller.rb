@@ -4,6 +4,10 @@ class HomeController < ApplicationController
   $c1,$c2,$c3,$c4,$c5 = [],[],[],[],[]
   $cc1,$cc2,$cc3,$cc4,$cc5 = [],[],[],[],[]
   def index
+    if request.host == "www.iquan.net" && is_baiduspider?
+      not_found
+      return
+    end
     @pc_host = request.host
     if request.host == "www.guanew.net" || request.host == 'm.guanew.net'
       if $cc1.size.zero?
