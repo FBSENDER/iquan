@@ -1,4 +1,4 @@
-#require 'common_config'
+require 'common_config'
 require 'net/http'
 require 'zkapi/zk_api'
 require 'zkapi/lanlan_api'
