@@ -1,6 +1,6 @@
-- title('百香果(鸡蛋果)果汁之王_百香果【功效/作用/禁忌/营养价值/怎么吃】')
-- keywords('百香果,鸡蛋果,鸡蛋果和百香果的区别,鸡蛋果的功效与作用,鸡蛋果的营养价值,鸡蛋果怎么吃,水果鸡蛋果,鸡蛋果多少钱一斤,鸡蛋果的功效和禁忌,百香果的籽可以吃吗,百香果一天吃几个最好') 
-- head_desc('百香果又叫鸡蛋果，果汁含量特别高，被大家称为【果汁之王】。本站为大家提供百香果(鸡蛋果)大家关注问题的解答：百香果和鸡蛋果的区别？百香果的吃法？百香果的功效与作用？百香果多少钱一斤？等等问题。有关百香果的各种信息查询，请看www.jidanguo.top')
+- title("#{@detail["title"]}_鸡蛋果TOP")
+- keywords("#{@detail["title"]},#{@detail["category"]}") 
+- head_desc("#{@detail["title"]}，#{@detail["recommend"]} 今日价格/优惠/折扣，请看鸡蛋果TOP www.jidanguo.top")
 
 = render partial: "header"
 .container
@@ -22,7 +22,14 @@
         %a{href: "/ddh/#{item["itemId"]}/"}
           .col-md-3
             %img.img-responsive{src: "#{item["coverImage"]}", style:"padding: 5px;", alt: "#{item["title"]}"}
-            %p{style: "padding:5px"} #{@detail["title"]}
+            %p{style: "padding:5px"} #{item["title"]}
+            %p{style: "padding:0 5px"} 今日价格#{item["nowPrice"]}元，可领取#{item["couponMoney"]}元优惠券
+    .col-md-12.page-header
+    .col-md-12
+      %p
+        大家都在找：
+        - @keywords.each do |k|
+          %a{href: "/bxg/#{URI.encode(k)}/"} #{k}
 
 
 = render partial: "footer"
