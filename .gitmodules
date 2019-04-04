@@ -1,0 +1,4 @@
+[submodule "vendor/articles"]
+	path = vendor/articles
+	url = https://github.com/FBSENDER/seo_articles.git
+	branch = jidanguo
