@@ -11,7 +11,7 @@ namespace :deploy do
       execute "cd #{deploy_to}/current && docker build -t iquan_docker . --no-cache"
       execute "docker kill iquan_1 || echo 1"
       execute "docker rm iquan_1 || echo 1"
-      execute "docker run -v /tmp/iquan/iquan_1/:/tmp/ -v /home/work/iquan/shared/public/assets/:/usr/src/app/public/assets/ -v /home/work/iquan/shared/log_1/:/usr/src/app/log/  -d --name iquan_1 iquan_docker"
+      execute "docker run -v /tmp/iquan/iquan_1/:/tmp/ -v /home/work/iquan/shared/public/assets/:/usr/src/app/public/assets/ -v /home/work/iquan/shared/log_1/:/usr/src/app/log/ -v /home/work/iquan/shared/vendor/articles/:/usr/src/app/vendor/articles  -d --name iquan_1 iquan_docker"
       execute "docker rmi iquan_docker:old || echo 1"
     end
   end
