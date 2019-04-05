@@ -1,0 +1,10 @@
+- title("#{@meta[:title]}_鸡蛋果TOP")
+- keywords(@meta[:keywords]) 
+- head_desc(@meta[:description])
+
+= render partial: "header"
+.container
+  .col-md-12
+    = @html.html_safe
+
+= render partial: "footer"

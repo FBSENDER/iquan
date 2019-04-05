@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "/", to: "jidanguo#home", constraints: {domain: 'jidanguo.top'}
   get "/ddh/:id", to: "jidanguo#ddh", constraints: {domain: 'jidanguo.top'}
   get "/bxg/:keyword", to: "jidanguo#query", constraints: {domain: 'jidanguo.top'}
+  get "/article/:id.html", to: "jidanguo#article", constraints: {domain: 'jidanguo.top'}
 
   root "home#index"
   get "/index.html", to: "home#frame_home"  

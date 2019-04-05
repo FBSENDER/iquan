@@ -116,6 +116,8 @@
           大家都在找：
           - @keywords.each do |k|
             %a{href: "/bxg/#{URI.encode(k)}/"} #{k}
+          - @meta[:articles].each do |at|
+            %a{href: "/article/#{at[:id]}.html"} #{at[:title]}
         %p 这就是本站鸡蛋果TOP对百香果的全部信息说明了，希望对大家有所帮助！
 
     %aside.col-md-4.col-sm-12
