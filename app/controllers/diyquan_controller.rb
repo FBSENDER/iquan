@@ -75,10 +75,20 @@ class DiyquanController < ApplicationController
       @sort_type = sort_type
     end
     @keywords = ZhekouKeyword.where(keyword: @keyword).pluck(:word)
+    @sks = [] 
+    @nicks = []
     @path = request.path + "/"
     if is_device_mobile?
       render "m_diyquan/zhekou", layout: "layouts/m_diyquan"
     else
+      sk = SuggestKeyword.where(keyword: @keyword).select(:sks).take
+      ss = SuggestShop.where(keyword: @keyword).select(:nicks).take
+      unless sk.nil?
+        @sks = sk.sks.split(',')
+      end
+      unless ss.nil?
+        @nicks = ss.nicks.split(',')
+      end
       render "zhekou", layout: "layouts/diyquan"
     end
   end
