@@ -1,0 +1,11 @@
+- title(@meta[:title])
+- head_desc(@meta[:description])
+- keywords(@meta[:keywords])
+
+%article.wrapper.zk-detail
+  .wrapper-l.zk-main
+    %div{style: "background-color: #fff;padding: 10px;margin: 20px 0;min-height: 300px;"}
+      = @html.html_safe
+= render partial: "diyquan/quan_detail_js"
+
+= render partial: "diyquan/footer"

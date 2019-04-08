@@ -305,4 +305,27 @@ class DiyquanController < ApplicationController
     redirect_to "http://www.uuhaodian.com/yh/#{params[:id]}/#coupon", status: 302
   end
 
+  def article
+    meta = get_articles_meta
+    if meta.size.zero?
+      not_found
+      return
+    end
+    sac = meta[:articles].select{|m| m[:id] == params[:id]}.first
+    if sac.nil?
+      not_found
+      return
+    end
+    file = Rails.root.join("vendor/articles").join(sac[:file])
+    html = Rails.root.join("vendor/articles").join("#{sac[:id]}.html")
+    if !File.exists?(file) || !File.exists?(html)
+      not_found
+      return
+    end
+    f = File.read(file)
+    content = f.split("######")
+    @meta = YAML.load(content[0])[:article]
+    @html = File.read(html)
+  end
+
 end

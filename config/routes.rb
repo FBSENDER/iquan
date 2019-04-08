@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get "/baokuan/", to: "diyquan#baokuan"
   get "/9kuai9/", to: "diyquan#k9"
   get "/shikuaigou/", to: "diyquan#k20"
+  get "/article/:id.html", to: "diyquan#article"
 
   get "/dianpu/", to: "dianpu#map_s"
   get "/dianpu/:nick/", to: "dianpu#show"

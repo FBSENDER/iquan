@@ -26,6 +26,7 @@ class HomeController < ApplicationController
     else
       @coupons = []
     end
+    @meta = get_articles_meta
     @links = Link.where(status: 1).to_a
     render "diyquan/home", layout: "layouts/diyquan"
   end

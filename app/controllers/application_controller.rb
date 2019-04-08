@@ -78,4 +78,24 @@ class ApplicationController < ActionController::Base
     return m[1] if m
     nil
   end
+  $article_meta = {
+    meta: {},
+    updated_at: 0
+  }
+  def update_articles_meta
+    meta_yaml = Rails.root.join("vendor/articles").join("meta.yaml")
+    if File.exists?(meta_yaml)
+      meta = YAML.load(File.read(meta_yaml))
+      $article_meta = {
+        updated_at: Time.now.to_i,
+        meta: meta
+      }
+    end
+  end
+  def get_articles_meta
+    if Time.now.to_i - $article_meta[:updated_at] > 1000
+      update_articles_meta
+    end
+    $article_meta[:meta]
+  end
 end
