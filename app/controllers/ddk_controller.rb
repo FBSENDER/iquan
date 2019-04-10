@@ -39,4 +39,12 @@ class DdkController < ApplicationController
     @top_keywords = get_hot_keywords_data.sample(8)
     @path = "https://api.uuhaodian.com/ddk/search"
   end
+
+  def rec
+    @type = params[:type].to_i - 1
+    @title = @type == 0 ? '1.9包邮' : @type == 1 ? '今日爆款' : '品牌清仓'
+    @keywords = @title
+    @top_keywords = get_hot_keywords_data.sample(8)
+    @path = "https://api.uuhaodian.com/ddk/rec_list"
+  end
 end

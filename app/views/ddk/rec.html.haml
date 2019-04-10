@@ -1,0 +1,13 @@
+- title("#{@title}_爱券网")
+- keywords("#{@keywords}")
+- head_desc("爱券网 - 拼多多优惠券 - #{@title}")
+
+= render partial: "header_common"
+.wrapper{style: "margin: 10px auto;"}
+  %div{style: "padding-left:15px;background-color:#fff;line-height:45px;"}
+    %p{style: "text-align:center;font-size:20px;font-weight:700;color:#FF472B;"} #{@title}
+.wrapper
+  .zk-list.clearfix#couponList
+  = render partial: "ddk_load_more", locals: {path: @path, pagesize: 20, sort_type: 7, pinyin: '', keyword: @category_name, cid: 0,sort: 0, type: @type}
+
+= render partial: "footer"

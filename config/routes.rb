@@ -28,5 +28,6 @@ Rails.application.routes.draw do
   get "/ddk/:id", to: "ddk#product_detail", id: /\d+/
   get "/ddkyh/:keyword/", to: "ddk#youhui", keyword: /.+/
   get "/ddkcate/:cid", to: "ddk#category", cid: /\d+/
+  get "/ddkrec/:type", to: "ddk#rec", id: /\d+/
 
 end
