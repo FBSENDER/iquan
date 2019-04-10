@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
+  get "/yh/:id", to: "home#yh"
+
   get "/test/", to: "test#index"
   get "/test/child", to: "test#child"
   get "/article/", to: "article#index"
