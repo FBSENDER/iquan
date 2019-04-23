@@ -30,6 +30,8 @@
         大家都在找：
         - @keywords.each do |k|
           %a{href: "/bxg/#{URI.encode(k)}/"} #{k}
+        - @ams[:articles].each do |at|
+          %a{href: "/article/#{at[:id]}.html"} #{at[:title]}
 
 
 = render partial: "footer"

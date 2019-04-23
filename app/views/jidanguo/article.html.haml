@@ -4,7 +4,25 @@
 
 = render partial: "header"
 .container
-  .col-md-12
+  %article.col-md-8.col-sm-12
     = @html.html_safe
+    .page-header
+    %p
+      大家都在找：
+      - @keywords.each do |k|
+        %a{href: "/bxg/#{URI.encode(k)}/"} #{k}
+      - @ams[:articles].each do |at|
+        %a{href: "/article/#{at[:id]}.html"} #{at[:title]}
+  %aside.col-md-4.col-sm-12
+    %h2 今日百香果
+    %hr
+    - @items.each do |item|
+      %a{href: "/ddh/#{item["itemId"]}/", title: "#{item["title"]}"}
+        .row{style: "padding: 10px 0;border-bottom: 1px solid #f6f6f6;"}
+          .col-md-4
+            %img.img-responsive{src: "#{item["coverImage"]}", alt: "#{item["title"]}"} 
+          .col-md-8
+            %p #{item["shortTitle"]}
+            %p 今日价格#{item["price"]}元，可以领#{item["couponMoney"]}元优惠券，实际到手价格#{item["nowPrice"]}元，月销#{item["monthSales"]}件。
 
 = render partial: "footer"

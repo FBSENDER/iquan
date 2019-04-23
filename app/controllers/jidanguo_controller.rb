@@ -68,6 +68,7 @@ class JidanguoController < ApplicationController
     @detail = json["result"]
     @items = get_home_item_list
     @keywords = $keywords
+    @ams = get_articles_meta
   end
 
   def query
@@ -84,6 +85,7 @@ class JidanguoController < ApplicationController
     if json["status"]["code"] == 1001
       @items = json["result"]
     end
+    @ams = get_articles_meta
   end
 
   def article
@@ -107,6 +109,9 @@ class JidanguoController < ApplicationController
     content = f.split("######")
     @meta = YAML.load(content[0])[:article]
     @html = File.read(html)
+    @items = get_home_item_list
+    @keywords = $keywords
+    @ams = get_articles_meta
   end
 
 end
