@@ -9,6 +9,8 @@
           %a{href: "http://www.vxixi.com", target: "_blank"} 羽毛球
           %a{href: "http://www.jidanguo.top", target: "_blank"} 百香果
           %a{href: "http://www.ddzhusu.com", target: "_blank"} 滴滴住宿
+          - @kk.each do |k|
+            %a{href: "/wp/#{k[0]}.html"} #{k[1]}
       .logo-slogan
         .qr-code
           %a{href: "/", title: "全网优惠券"}
