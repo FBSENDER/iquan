@@ -11,7 +11,7 @@ class DiyquanController < ApplicationController
     fenlei_tdk
     unless is_robot?
       if is_device_mobile?
-        redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=0&kw=#{URI.encode_www_form_component(@keyword)}&from=m_iquan", status: 302
+        redirect_to "http://m.uuhaodian.com/index.php?r=index/classify&hot=2&kw=#{URI.encode_www_form_component(@keyword)}&from=m_iquan", status: 302
       else
         redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=iquan", status: 302
       end
@@ -87,7 +87,7 @@ class DiyquanController < ApplicationController
     unless is_robot?
       if is_device_mobile?
         s_type = is_taobao_title?(@keyword) ? 1 : 0
-        redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=#{s_type}&kw=#{URI.encode_www_form_component(@keyword)}&from=m_iquan", status: 302
+        redirect_to "http://m.uuhaodian.com/index.php?r=index/classify&hot=2&kw=#{URI.encode_www_form_component(@keyword)}&from=m_iquan", status: 302
       else
         redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=iquan", status: 302
       end
@@ -219,7 +219,7 @@ class DiyquanController < ApplicationController
     not_found if @page_info.nil?
     unless is_robot?
       if is_device_mobile?
-        redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=0&kw=#{URI.encode_www_form_component(@page_info.search_keyword)}&from=m_iquan", status: 302
+        redirect_to "http://m.uuhaodian.com/index.php?r=index/classify&hot=2&kw=#{URI.encode_www_form_component(@page_info.search_keyword)}&from=m_iquan", status: 302
       #else
       #  redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@page_info.search_keyword)}/?from=iquan", status: 302
       #end
