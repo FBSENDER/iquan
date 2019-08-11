@@ -84,15 +84,15 @@ class DiyquanController < ApplicationController
       return
     end
     
-    #unless is_robot?
-    #  if is_device_mobile?
-    #    s_type = is_taobao_title?(@keyword) ? 1 : 0
-    #    redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=#{s_type}&kw=#{URI.encode_www_form_component(@keyword)}&from=m_iquan", status: 302
-    #  else
-    #    redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=iquan", status: 302
-    #  end
-    #  return
-    #else
+    unless is_robot?
+      if is_device_mobile?
+        s_type = is_taobao_title?(@keyword) ? 1 : 0
+        redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=#{s_type}&kw=#{URI.encode_www_form_component(@keyword)}&from=m_iquan", status: 302
+      else
+        redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=iquan", status: 302
+      end
+      return
+    else
       @items = get_dg_items(@keyword)
       infos = get_dg_keyword_infos(@keyword)
       @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
@@ -100,7 +100,7 @@ class DiyquanController < ApplicationController
       @selectors = infos && infos["selector"] ? infos["selector"] : []
       @shops = []
       @sort_type = sort_type
-    #end
+    end
     @path = request.path + "/"
     if is_device_mobile?
       render "m_diyquan/zhekou", layout: "layouts/m_diyquan"
