@@ -1,0 +1,18 @@
+- progress = (60..98).to_a.sample
+
+%a{href: "http://api.uuhaodian.com/uu/buy?id=#{coupon['item_id']}", target: "_blank", isconvert: 1, rel: "nofollow"}
+  .product-item-t2
+    .pic.lazy{data: {original: "#{coupon['pict_url']}"}}
+    %p.title
+      %span.post-free 包邮
+      #{coupon["short_title"]}
+    .progress-area
+      %p.pro-text 热销#{progress}%
+      .pro-container
+        .pro{data: {pro: "#{progress / 100.0}"}, style: "width:#{progress}%"}
+    .price-area
+      .price{style: "float:left"}
+        %span> 折扣价￥
+        %em.number-font #{coupon['zk_final_price']}
+        %span{style: "color:#a8a8a8;text-decoration:line-through"} ￥#{coupon['reserve_price']}
+

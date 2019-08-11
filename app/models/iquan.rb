@@ -77,3 +77,7 @@ end
 class OutLink < ApplicationRecord
   self.table_name = 'iquan_outlinks'
 end
+
+class TbKeyword < ApplicationRecord
+  self.table_name = 'tb_keywords'
+end

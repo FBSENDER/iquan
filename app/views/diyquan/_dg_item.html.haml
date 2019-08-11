@@ -1,0 +1,36 @@
+- buy_url = "https://api.uuhaodian.com/uu/buy?id=#{coupon["item_id"]}"
+- seo_k = @seo_k.nil? ? '' : "#{@seo_k}_"
+- strong_k = @keyword.nil? ? '' : @keyword
+- coupon_price = coupon["coupon_amount"].to_i
+- now_price = coupon["zk_final_price"].to_f - coupon_price
+
+.zk-item
+  %a{href: "#{buy_url}", title: "#{seo_k}#{coupon['title']}", target: "_blank"}
+    .img-area
+      %img.lazy{src: "", alt: "#{seo_k}#{coupon['title']}优惠券", data: {original: "#{coupon['pict_url']}"}, style: "opacity: 1;"}
+
+    %p.title-area.elli
+      %span.post-free 包邮
+      #{coupon['title'].gsub(strong_k, "<strong>#{strong_k}</strong>").html_safe}
+    .raw-price-area
+      - if coupon_price > 0
+        原价 ￥#{coupon['zk_final_price']}
+      - else
+        原价 ￥#{coupon['reserve_price']}
+      %p.sold 已领 #{coupon['volume']} 张券
+    .info
+      .price-area
+        %span.price 
+          %span>￥
+          %em.number-font #{now_price.to_i}
+          %em.decimal> .#{now_price.to_s.sub(/\d+\./,'')}
+          - if coupon_price > 0
+            %i
+      - if coupon_price > 0
+        %span.coupon_click
+          券
+          #{coupon_price}
+          元
+      - else
+        %span.coupon_click
+          #{(now_price * 10 / coupon["reserve_price"].to_f).round(1)} 折

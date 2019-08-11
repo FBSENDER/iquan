@@ -84,25 +84,23 @@ class DiyquanController < ApplicationController
       return
     end
     
-    unless is_robot?
-      if is_device_mobile?
-        s_type = is_taobao_title?(@keyword) ? 1 : 0
-        redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=#{s_type}&kw=#{URI.encode_www_form_component(@keyword)}&from=m_iquan", status: 302
-      else
-        redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=iquan", status: 302
-      end
-      return
-    else
-      @coupons = []
-      @zhekous = []
-      data  = get_tbk_search_json(@keyword, 1)
-      if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
-        @zhekous = data["tbk_item_get_response"]["results"]["n_tbk_item"]
-      end
+    #unless is_robot?
+    #  if is_device_mobile?
+    #    s_type = is_taobao_title?(@keyword) ? 1 : 0
+    #    redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=#{s_type}&kw=#{URI.encode_www_form_component(@keyword)}&from=m_iquan", status: 302
+    #  else
+    #    redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=iquan", status: 302
+    #  end
+    #  return
+    #else
+      @items = get_dg_items(@keyword)
+      infos = get_dg_keyword_infos(@keyword)
+      @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
+      @cats = infos && infos["r_cats"] ? infos["r_cats"] : []
+      @selectors = infos && infos["selector"] ? infos["selector"] : []
       @shops = []
       @sort_type = sort_type
-    end
-    @keywords = []
+    #end
     @path = request.path + "/"
     if is_device_mobile?
       render "m_diyquan/zhekou", layout: "layouts/m_diyquan"
@@ -207,7 +205,7 @@ class DiyquanController < ApplicationController
   end
 
   def lanlan_download
-    redirect_to "http://u.llnru.cn/x/9910cb41", status: 302
+    redirect_to "http://uuhaodian.com/index.php?r=app/download&u=550416", status: 302
     if !is_robot?
       one_click = AppDownload.new
       one_click.ip = request.remote_ip
@@ -275,8 +273,7 @@ class DiyquanController < ApplicationController
   def map_k
     @page = params[:page].to_i
     @page = @page == 0 ? 0 : @page - 1
-    @ks = SearchResult.where("coupon_count >= 100").select(:id, :keyword).order(:id).limit(500).offset(500 * @page)
-    @kss = Tag.where("coupon_count >= 100").select(:id, :keyword, :pinyin).order(:id).limit(500).offset(500 * @page)
+    @ks = TbKeyword.select(:id, :keyword).order(:id).limit(500).offset(500 * @page)
     @total_page = 20
     not_found if @ks.size.zero?
     map_k_tdk

@@ -10,11 +10,6 @@
 .hori-cate-area
   .hot-keywords
     .wrapper
-      - @kss.each do |kss|
-        %a{href: "/k_#{kss.pinyin}/", title: "#{kss.keyword}"} #{kss.keyword}
-.hori-cate-area
-  .hot-keywords
-    .wrapper
       - (1..23).to_a.each do |page|
         %a{href: "/map_k/#{page}/"} #{page}
 

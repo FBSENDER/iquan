@@ -121,7 +121,7 @@ class HomeController < ApplicationController
     end
     if !is_device_mobile? && request.host == "www.iquan.net"
       #redirect_to "http://www.iquan.net/index.html"
-      ddk_home
+      diyquan_home
       #redirect_to "http://www.uuhaodian.com/?from=iquan_home"
       return
     end

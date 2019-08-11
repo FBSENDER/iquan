@@ -4,6 +4,8 @@
       .yl
         %p.head 友情链接：
         .yl-links
+          %a{href: "/map_k/", title: "淘宝天猫旗舰店铺通用优惠券"} 通用优惠券
+          %a{href: "/dianpu/", title: "淘宝天猫旗舰店铺排行榜"} 淘宝天猫旗舰店排行榜
           - if links
             - links.each do |link|
               %a{href: "#{link.url}", target: "_blank"} #{link.anchor}

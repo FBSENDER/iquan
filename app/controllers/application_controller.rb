@@ -117,6 +117,28 @@ class ApplicationController < ActionController::Base
     JSON.parse(tbk.taobao_tbk_item_get(keyword, $taobao_app_id, $taobao_app_secret, page_no + 1,50))
   end
 
+  def get_dg_items(keyword)
+    url = "http://api.uuhaodian.com/uu/dg_goods_list?keyword=#{keyword}&is_simple=1"
+    result = Net::HTTP.get(URI(URI.encode(url)))
+    json = JSON.parse(result)
+    if json["status"] == 1
+      return json["results"]
+    else
+      return []
+    end
+  end
+
+  def get_dg_keyword_infos(keyword)
+    url = "http://api.uuhaodian.com/uu/keyword_infos?keyword=#{keyword}"
+    result = Net::HTTP.get(URI(URI.encode(url)))
+    json = JSON.parse(result)
+    if json["status"] == 1
+      return json["result"]
+    else
+      return nil
+    end
+  end
+
   def get_cate_data
     if $cate_data.nil? || $cate_data["update_at"].nil? || $cate_data["cate"].nil? || $cate_data["cate"].size.zero? || Time.now.to_i - $cate_data["update_at"] > 3600
       url = "http://api.uuhaodian.com/uu/category_list"
