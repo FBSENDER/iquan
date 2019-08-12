@@ -30,4 +30,7 @@ Rails.application.routes.draw do
   get "/ddkcate/:cid", to: "ddk#category", cid: /\d+/
   get "/ddkrec/:type", to: "ddk#rec", id: /\d+/
 
+  #amp
+  get "/amp/zhekou/:keyword/", to: "amp#zhekou"
+
 end

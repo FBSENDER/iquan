@@ -8,6 +8,9 @@ module ApplicationHelper
   def head_desc(page_description = "")
     content_for :head_desc, page_description.to_s
   end
+  def amp_path(path)
+    content_for :amp_path, "https://www.iquan.net/amp#{path}"
+  end
   def mobile_url(path)
     content_for :mobile_url, "http://m.iquan.net#{path}"
   end
