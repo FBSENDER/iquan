@@ -14,7 +14,7 @@
       <a href="/" style="color:#999;"><%= home_anchor %></a>
       >
       <% @cats.each do |cat| %>
-        <a href="/amp/zhekou/<%= URI.encode(cat["name"]) %>/" style="color:#999;"><%= cat["name"] %></a>
+        <a href="/zhekou/<%= URI.encode(cat["name"]) %>/" style="color:#999;"><%= cat["name"] %></a>
         >
       <% end %>
       <%= @keyword %>
