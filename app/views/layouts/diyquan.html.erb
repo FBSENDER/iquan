@@ -6,7 +6,7 @@
     <meta name="keywords" content="<%= yield(:keywords)%>">
     <meta name="description" content="<%= yield(:head_desc)%>">
     <link rel="canonical" href="http://www.iquan.net<%= yield(:path) %>">
-    <link rel="amphtml" href="<%= yield(:amp_path)%>">
+    <%= yield(:amp_path) %>
     <meta http-equiv="mobile-agent" content="format=html5;url=<%= yield(:mobile_url) %>">
     <meta name="mobile-agent" content="format=html5;url=<%= yield(:mobile_url) %>">
     <meta http-equiv="Cache-Control" content="no-transform">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html amp>
+<html amp lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
@@ -7,7 +7,7 @@
     <meta name="keywords" content="<%= yield(:keywords)%>">
     <meta name="description" content="<%= yield(:head_desc)%>">
     <link rel="canonical" href="<%= yield(:path) %>">
-    <link rel="amphtml" href="<%= yield(:amp_path)%>">
+    <%= yield(:amp_path) %>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <style amp-custom>
