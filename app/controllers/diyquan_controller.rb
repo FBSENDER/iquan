@@ -226,19 +226,13 @@ class DiyquanController < ApplicationController
         return
       end
     end
-    @zhekous = []
-    data  = get_tbk_search_json(@page_info.search_keyword, 1)
-    if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
-      @zhekous = data["tbk_item_get_response"]["results"]["n_tbk_item"]
-    end
-    @sort_type = 0
-    @coupons = []
     @title = @page_info.title
     @description = @page_info.description
     @desc_ext = @page_info.desc_ext
     @page_info.core_keywords.split(',').each do |k|
       @desc_ext = @desc_ext.gsub(k, "<strong>#{k}</strong>")
     end
+    @items = get_dg_items(@page_info.search_keyword)
     @keywords = @page_info.keywords
     @search_keyword = @page_info.search_keyword
     @suggest_keywords = get_suggest_keywords_new(@page_info.search_keyword)
@@ -265,7 +259,7 @@ class DiyquanController < ApplicationController
     @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
     @cats = infos && infos["r_cats"] ? infos["r_cats"] : []
     @selectors = infos && infos["selector"] ? infos["selector"] : []
-    @shops = Shop.where(source_id: @items.map{|c| c["seller_id"]}.uniq).select(:title, :nick)
+    #@shops = Shop.where(source_id: @items.map{|c| c["seller_id"]}.uniq).select(:title, :nick)
     if is_device_mobile?
       render "m_diyquan/zhekou", layout: "layouts/m_diyquan"
     else

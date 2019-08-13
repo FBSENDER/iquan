@@ -2,9 +2,14 @@
 - head_desc(@description)
 - keywords(@keywords)
 - path(@path)
+- mobile_url(@path)
+- amp_path(@path)
 - h1(@h1)
 
 .wrapper
   = render partial: "m_diyquan/header", locals: {need_sort: true, need_ads: false}
   = render partial: "m_diyquan/page_js", locals: {path: '/getSearchCouponList', pinyin: '', keyword: @search_keyword, pagesize: 20, sort_type: @sort_type}
-  = render partial: "m_diyquan/shuangpai_list", locals: {coupons: @coupons}
+  .coupon-list
+    #couponList2
+      - @items.each do |item|
+        = render partial: "m_diyquan/dg_item", locals: {coupon: item}

@@ -275,6 +275,12 @@ body{
     float: left;
     margin-top: 30px;
     overflow: hidden;
+    width: 310px;
+    height: 70px;
+}
+.header .header-top .logo-area img{
+  width: 252px;
+  height: 56px;
 }
 .header .header-top .logo-area .logo{
     float: left;

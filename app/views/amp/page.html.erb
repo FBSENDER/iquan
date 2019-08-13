@@ -1,0 +1,57 @@
+<% title(@title) %>
+<% head_desc(@description) %>
+<% keywords(@page_keywords) %>
+<% path(@path) %>
+<% amp_path(@path) %>
+<% h1(@h1) %>
+
+<header class="col-12" style="background-color:#FF6434;color:#fff;height:40px;line-height:40px;text-align:center;">爱券网</header>
+<article class="container" style="max-width:1200px;margin: 0 auto;min-height:500px;background-color:#f6f6f6;padding-bottom: 20px;">
+  <div class="columns">
+    <div class="col-12" style="background-color:#fff;padding:10px;margin: 10px;">
+      <p style="margin:0;font-size:14px;">
+      <%= "#{@description} 更新于#{Time.now.strftime('%Y年%m月%d日')}" %>
+      </p>
+    </div>
+    <% @items.each do |item|%>
+      <% coupon_money = item["coupon_amount"] ? item["coupon_amount"].to_i : 0 %>
+      <% now_price = (item["zk_final_price"].to_f - coupon_money).round(2) %>
+      <% zhe = (now_price * 10.0 / item["reserve_price"].to_f).round(1) %>
+      <div class="col-3 col-sm-6 column" style="margin-top: 10px;">
+        <div class="col-12 item">
+          <amp-img src="<%= item["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
+          <p class="title"><%= item["short_title"] %></p>
+          <p class="o-price">
+          原价 ￥<%= coupon_money > 0 ? item["zk_final_price"] : item["reserve_price"] %>
+        <span style="float:right"><%= item["volume"] %>人已付款</span>
+          </p>
+          <p style="margin:0;padding: 0 5px 5px 5px;">
+            <span style="font-size:16px;color:red;">￥<%= now_price%><span>
+                <span class="coupon">
+                  <%= coupon_money > 0 ? "券 #{coupon_money} 元" : "#{zhe} 折" %>
+                </span>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-12 column" style="margin: 20px 0;overflow: auto;height: 60px;line-height:60px;">
+    <% @suggest_keywords.each do |k| %>
+      <a href="/zhekou/<%= URI.encode(k) %>/" class="k"><%= k %></a>
+    <% end %>
+  </div>
+  <div class="col-12 column" style="background-color:#fff;padding:10px;margin: 20px 0;">
+    <p style="margin:0;font-size:14px;">
+      <%= @desc_ext.html_safe %>
+      <br/>
+      相关推荐：
+      <% @keywords.split(',').each do |k| %>
+        <strong><%= k %></strong>
+      <% end %>
+    </p>
+  </div>
+  <h1 layout="nodisplay"><%= @keyword %></h1>
+</article>
+<footer style="text-align:center;font-size:12px;padding: 20px 0;">
+  爱券网 - 淘宝天猫优惠券 - 京ICP备17027610号
+</footer>

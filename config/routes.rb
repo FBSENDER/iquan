@@ -32,5 +32,7 @@ Rails.application.routes.draw do
 
   #amp
   get "/amp/zhekou/:keyword/", to: "amp#zhekou"
+  get "/amp/g_:pinyin/", to: "amp#page"
+  get "/amp/k_:pinyin/", to: "amp#k_pinyin"
 
 end
