@@ -259,10 +259,13 @@ class DiyquanController < ApplicationController
     return if redirect_pc_to_mobile
     @tag = Tag.where(pinyin: params[:pinyin]).take
     not_found if @tag.nil?
-    @coupons = []
-    @keywords = get_suggest_keywords_new_new(@tag.keyword)
-    @shops = Shop.where(source_id: @coupons.map{|c| c["seller_id"]}.uniq).select(:title, :nick)
     k_pinyin_tdk
+    @items = get_dg_items(@keyword)
+    infos = get_dg_keyword_infos(@keyword)
+    @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
+    @cats = infos && infos["r_cats"] ? infos["r_cats"] : []
+    @selectors = infos && infos["selector"] ? infos["selector"] : []
+    @shops = Shop.where(source_id: @items.map{|c| c["seller_id"]}.uniq).select(:title, :nick)
     if is_device_mobile?
       render "m_diyquan/zhekou", layout: "layouts/m_diyquan"
     else
