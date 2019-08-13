@@ -203,19 +203,15 @@ class HomeController < ApplicationController
   end
 
   def diyquan_home
-    if is_robot?
-      @coupons = get_static_coupons('static_new_coupons')
-    else
-      #@coupons = get_static_coupons('static_new_coupons')
-      @coupons = []
-      @coupons_9kuai9 = get_coupon_9kuai9_data
-      @banners = Banner.where(status: 1).select(:link_url, :img_url).order("id desc").limit(5)
-    end
+    @coupons = []
+    @banners = Banner.where(status: 1).select(:link_url, :img_url).order("id desc").limit(5)
+    @coupons_9kuai9 = get_coupon_9kuai9_data
     @links = Link.where(status: 1).to_a
     render "diyquan/home", layout: "layouts/diyquan"
   end
   def m_diyquan_home
     @coupons = get_static_coupons('static_new_coupons')
+    @banners = []
     render "m_diyquan/home", layout: "layouts/m_diyquan"
   end
   def ddk_home
