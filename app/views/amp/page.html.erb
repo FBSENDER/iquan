@@ -18,20 +18,22 @@
       <% now_price = (item["zk_final_price"].to_f - coupon_money).round(2) %>
       <% zhe = (now_price * 10.0 / item["reserve_price"].to_f).round(1) %>
       <div class="col-3 col-sm-6 column" style="margin-top: 10px;">
-        <div class="col-12 item">
-          <amp-img src="<%= item["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
-          <p class="title"><%= item["short_title"] %></p>
-          <p class="o-price">
-          原价 ￥<%= coupon_money > 0 ? item["zk_final_price"] : item["reserve_price"] %>
-        <span style="float:right"><%= item["volume"] %>人已付款</span>
-          </p>
-          <p style="margin:0;padding: 0 5px 5px 5px;">
-            <span style="font-size:16px;color:red;">￥<%= now_price%><span>
-                <span class="coupon">
-                  <%= coupon_money > 0 ? "券 #{coupon_money} 元" : "#{zhe} 折" %>
-                </span>
-          </p>
-        </div>
+        <a href="https://api.uuhaodian.com/uu/buy?id=<%= item["item_id"]%>&channel=12" target="_blank" style="color:#3b4351;">
+          <div class="col-12 item">
+            <amp-img src="<%= item["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
+            <p class="title"><%= item["short_title"] %></p>
+            <p class="o-price">
+            原价 ￥<%= coupon_money > 0 ? item["zk_final_price"] : item["reserve_price"] %>
+          <span style="float:right"><%= item["volume"] %>人已付款</span>
+            </p>
+            <p style="margin:0;padding: 0 5px 5px 5px;">
+              <span style="font-size:16px;color:red;">￥<%= now_price%><span>
+                  <span class="coupon">
+                    <%= coupon_money > 0 ? "券 #{coupon_money} 元" : "#{zhe} 折" %>
+                  </span>
+            </p>
+          </div>
+        </a>
       </div>
     <% end %>
   </div>
