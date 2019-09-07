@@ -61,7 +61,7 @@ class KefuController < ApplicationController
   end
 
   def receive_message_2(open_id)
-    msg = "9.9天猫划算节,每满200减20：https://s.click.taobao.com/sTPcV1w \n淘宝新人188元红包：https://s.click.taobao.com/86NcV1w \n天猫超市中秋大促：https://s.click.taobao.com/j41cV1w \n 每日10点,精选好货：https://s.click.taobao.com/J2vbV1w"
+    msg = "9.9天猫划算节,每满200减20：s.click.taobao.com/sTPcV1w \n淘宝新人188元红包：s.click.taobao.com/86NcV1w \n天猫超市中秋大促：s.click.taobao.com/j41cV1w \n 每日10点,精选好货：s.click.taobao.com/J2vbV1w"
     send_message(open_id, msg)
   end
 
@@ -81,7 +81,7 @@ class KefuController < ApplicationController
   end
 
   def receive_message_other(open_id)
-    msg = "回复 2 ,查看最新优惠活动\n回复 3 ,商家合作\n回复 4 ,官方网站与APP下载\n回复 5 ,好店推荐"
+    msg = "回复 2 查看最新优惠活动\n回复 3 商家合作\n回复 4 官方网站与APP下载\n回复 5 好店推荐"
     send_message(open_id, msg)
   end
 
