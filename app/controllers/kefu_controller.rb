@@ -25,6 +25,18 @@ class KefuController < ApplicationController
       m.save
       if m.mtype == 1 && m.content == '1'
         receive_message_1(m.user_id)
+        receive_message_other(m.user_id)
+      elsif m.mtype == 1 && m.content == '2'
+        receive_message_2(m.user_id)
+      else
+      elsif m.mtype == 1 && m.content == '3'
+        receive_message_3(m.user_id)
+      else
+      elsif m.mtype == 1 && m.content == '4'
+        receive_message_4(m.user_id)
+      else
+      elsif m.mtype == 1 && m.content == '5'
+        receive_message_5(m.user_id)
       else
         receive_message_other(m.user_id)
       end
@@ -37,13 +49,13 @@ class KefuController < ApplicationController
   def receive_message_1(open_id)
     ids = SwanUser.where(open_id: open_id).pluck(:swan_id)
     if ids.size.zero?
-      msg = "更多优惠优优好店官网：uuu.uuhaodian.com"
+      msg = "未能获取购买链接"
       send_message(open_id, msg)
       return
     end
     click = KefuClick.where(swan_id: ids).order("id desc").take
     if click.nil?
-      msg = "更多优惠优优好店官网：uuu.uuhaodian.com"
+      msg = "未能获取购买链接"
       send_message(open_id, msg)
       return
     end
@@ -51,8 +63,28 @@ class KefuController < ApplicationController
     send_message(open_id, msg)
   end
 
+  def receive_message_2(open_id)
+    msg = "9.9天猫划算节,每满200减20：https://s.click.taobao.com/sTPcV1w \n淘宝新人188元红包：https://s.click.taobao.com/86NcV1w \n天猫超市中秋大促：https://s.click.taobao.com/j41cV1w \n 每日10点,精选好货：https://s.click.taobao.com/J2vbV1w"
+    send_message(open_id, msg)
+  end
+
+  def receive_message_3(open_id)
+    msg = "关注微信公众号「优优好店」查看合作详情"
+    send_message(open_id, msg)
+  end
+
+  def receive_message_4(open_id)
+    msg = "官网与APP下载：uuu.uuhaodian.com"
+    send_message(open_id, msg)
+  end
+
+  def receive_message_5(open_id)
+    msg = "好店推荐：shop381966684.m.taobao.com"
+    send_message(open_id, msg)
+  end
+
   def receive_message_other(open_id)
-    msg = "更多优惠优优好店官网：uuu.uuhaodian.com"
+    msg = "回复 2 ,查看最新优惠活动\n回复 3 ,商家合作\n回复 4 ,官方网站与APP下载\n回复 5 ,好店推荐"
     send_message(open_id, msg)
   end
 
