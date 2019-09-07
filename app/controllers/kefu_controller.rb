@@ -67,7 +67,7 @@ class KefuController < ApplicationController
       user_type: 2,
       open_id: open_id,
       msg_type: 'text',
-      content: msg
+      content: msg,
       pic_url: ''
     }
     uri = URI(url)
