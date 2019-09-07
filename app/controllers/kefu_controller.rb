@@ -28,13 +28,10 @@ class KefuController < ApplicationController
         receive_message_other(m.user_id)
       elsif m.mtype == 1 && m.content == '2'
         receive_message_2(m.user_id)
-      else
       elsif m.mtype == 1 && m.content == '3'
         receive_message_3(m.user_id)
-      else
       elsif m.mtype == 1 && m.content == '4'
         receive_message_4(m.user_id)
-      else
       elsif m.mtype == 1 && m.content == '5'
         receive_message_5(m.user_id)
       else
