@@ -23,12 +23,12 @@ class KefuController < ApplicationController
       m.content = params[:Content] || params[:PicUrl]
       m.mid = params[:MsgId].to_i
       m.save
-      render plain: 'success'
       if m.mtype == 1 && m.content == '1'
         receive_message_1(m.user_id)
       else
         receive_message_other(m.user_id)
       end
+      render plain: 'success'
     rescue
       render plain: 'success'
     end
@@ -41,7 +41,7 @@ class KefuController < ApplicationController
       send_message(open_id, msg)
       return
     end
-    click = KefuClick.where(swan_id: ids).order("id desc").limit(1)
+    click = KefuClick.where(swan_id: ids).order("id desc").take
     if click.nil?
       msg = "更多优惠优优好店官网：uuu.uuhaodian.com"
       send_message(open_id, msg)
