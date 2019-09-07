@@ -1,5 +1,6 @@
 require 'kefu'
 class KefuController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def check_post_message
     arr = ['uuapi', params[:timestamp], params[:nonce]].sort
     tmp_str = arr.join('')
