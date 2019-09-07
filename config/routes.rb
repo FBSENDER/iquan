@@ -38,5 +38,6 @@ Rails.application.routes.draw do
   #kefu
   #post "kefu/bd_post_message", to: "kefu#check_post_message"
   post "kefu/bd_post_message", to: "kefu#receive_message"
+  get "kefu/s", to: "kefu#send_message"
 
 end
