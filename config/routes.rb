@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get "/amp/k_:pinyin/", to: "amp#k_pinyin"
 
   #kefu
-  post "kefu/bd_post_message", to: "kefu#check_post_message"
+  #post "kefu/bd_post_message", to: "kefu#check_post_message"
+  post "kefu/bd_post_message", to: "kefu#receive_message"
 
 end
