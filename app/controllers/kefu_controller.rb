@@ -81,7 +81,7 @@ class KefuController < ApplicationController
   end
 
   def receive_message_other(open_id)
-    msg = "回复 2  查看最新优惠活动\n回复 3  商家合作\n回复 4  官方网站与APP下载\n回复 5  好店推荐\n关注微信公众号「优优好店」领券更方便"
+    msg = "回复 1  获取购买链接\n回复 2  查看最新优惠活动\n回复 3  商家合作\n回复 4  官方网站与APP下载\n回复 5  好店推荐\n关注微信公众号「优优好店」领券更方便"
     send_message(open_id, msg)
   end
 
