@@ -56,8 +56,13 @@ class KefuController < ApplicationController
       send_message(open_id, msg)
       return
     end
-    msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18"
-    send_message(open_id, msg)
+    if click.kouling.nil?
+      msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18"
+      send_message(open_id, msg)
+    else
+      msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买"
+      send_message(open_id, msg)
+    end
   end
 
   def receive_message_2(open_id)
