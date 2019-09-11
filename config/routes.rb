@@ -38,4 +38,7 @@ Rails.application.routes.draw do
   #html sitemap
   get "/map_k/", to: "diyquan#map_k"
   get "/map_k/:page", to: "diyquan#map_k"
+
+  #amp
+  get "/amp/qq/:keyword", to: "amp#qq"
 end

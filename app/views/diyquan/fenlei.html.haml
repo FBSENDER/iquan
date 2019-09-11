@@ -19,6 +19,6 @@
       - @keywords.sample(20).each do |k|
         %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank"} #{k}
         |
-      #{@keyword}
+      %a{href: "/amp/qq/#{URI.encode(@keyword)}/"} #{@keyword}
 
 = render partial: "diyquan/home_footer", locals: {links: @links}

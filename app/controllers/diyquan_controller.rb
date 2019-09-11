@@ -12,7 +12,7 @@ class DiyquanController < ApplicationController
     @coupons = []
     unless is_robot?
       if is_device_mobile?
-        redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=0&kw=#{URI.encode_www_form_component(@keyword)}&from=m_shikuai", status: 302
+        redirect_to "http://m.uuhaodian.com/index.php?r=index/classify&kw=#{URI.encode_www_form_component(@keyword)}", status: 302
       else
         redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=shikuai", status: 302
       end

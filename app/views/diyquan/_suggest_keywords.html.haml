@@ -3,4 +3,5 @@
     .hot-keywords
       .wrapper
         - keywords.each do |keyword|
-          %a{href: "/zhekou/#{URI.encode(keyword)}/", title: "#{keyword}折扣"} #{keyword}
+          %a{href: "/zhekou/#{URI.encode(keyword)}/", title: "#{keyword}折扣"} #{keyword}优惠券
+          %a{href: "/amp/qq/#{URI.encode(keyword)}/"} #{keyword}
