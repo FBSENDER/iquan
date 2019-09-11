@@ -20,8 +20,8 @@ class DiyquanController < ApplicationController
     end
     @zhekous = []
     data  = get_tbk_search_json(@keyword, 1)
-    if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
-      @zhekous = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+    if data["tbk_dg_material_optional_response"] && data["tbk_dg_material_optional_response"]["result_list"] && data["tbk_dg_material_optional_response"]["result_list"]["map_data"].size > 0
+      @zhekous = data["tbk_dg_material_optional_response"]["result_list"]["map_data"]
     end
     @keywords = ZhekouKeyword.where(keyword: params[:pinyin]).pluck(:word)
     if is_device_mobile?
@@ -68,8 +68,8 @@ class DiyquanController < ApplicationController
       @coupons = []
       @zhekous = []
       data  = get_tbk_search_json(@keyword, 1)
-      if(data["tbk_item_get_response"] && data["tbk_item_get_response"]["total_results"] > 0)
-        @zhekous = data["tbk_item_get_response"]["results"]["n_tbk_item"]
+      if data["tbk_dg_material_optional_response"] && data["tbk_dg_material_optional_response"]["result_list"] && data["tbk_dg_material_optional_response"]["result_list"]["map_data"].size > 0
+        @zhekous = data["tbk_dg_material_optional_response"]["result_list"]["map_data"]
       end
       @shops = []
       @sort_type = sort_type
