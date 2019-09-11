@@ -2,7 +2,7 @@
 - strong_k = @keyword.nil? ? '' : @keyword
 
 .zk-item
-  %a{href: "#{coupon['item_url']}", title: "#{seo_k}#{coupon['title']}", target: "_blank", isconvert: 1, rel: "nofollow"}
+  %a{href: "javascript:;", title: "#{seo_k}#{coupon['title']}", target: "_blank", isconvert: 1, rel: "nofollow"}
     .img-area
       %img.lazy{src: "", alt: "#{seo_k}#{coupon['title']}优惠券", data: {original: "#{coupon['pict_url']}"}, style: "opacity: 1;"}
 

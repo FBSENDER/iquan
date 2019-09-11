@@ -308,7 +308,7 @@ class DiyquanController < ApplicationController
 
   def get_tbk_search_json(keyword, page_no)
     tbk = Tbkapi::Taobaoke.new
-    JSON.parse(tbk.taobao_tbk_item_get(keyword, $taobao_app_id, $taobao_app_secret, page_no + 1,50))
+    JSON.parse(tbk.taobao_tbk_dg_material_optional(keyword, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, '6707', $taobao_app_id_material, $taobao_app_secret_material, $taobao_adzone_id_material, page_no, 20 ))
   end
 
   def buy
