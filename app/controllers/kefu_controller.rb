@@ -57,11 +57,21 @@ class KefuController < ApplicationController
       return
     end
     if click.kouling.nil?
-      msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18"
-      send_message(open_id, msg)
+      if click.taobao_url.nil?
+        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18"
+        send_message(open_id, msg)
+      else
+        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}"
+        send_message(open_id, msg)
+      end
     else
-      msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买"
-      send_message(open_id, msg)
+      if click.taobao_url.nil?
+        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买"
+        send_message(open_id, msg)
+      else
+        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买"
+        send_message(open_id, msg)
+      end
     end
   end
 
