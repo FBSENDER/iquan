@@ -23,6 +23,7 @@ class KefuController < ApplicationController
       m.content = params[:Content] || params[:PicUrl]
       m.mid = params[:MsgId].to_i
       m.save
+      render plain: 'success'
       if m.mtype == 1 && m.content == '1'
         receive_message_1(m.user_id)
         receive_message_other(m.user_id)
@@ -37,9 +38,7 @@ class KefuController < ApplicationController
       else
         receive_message_other(m.user_id)
       end
-      render plain: 'success'
     rescue
-      render plain: 'success'
     end
   end
 
@@ -58,18 +57,18 @@ class KefuController < ApplicationController
     end
     if click.kouling.nil?
       if click.taobao_url.nil?
-        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18"
+        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n如果不展示商品，就再点一次链接~"
         send_message(open_id, msg)
       else
-        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}"
+        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}\n如果不展示商品，就再点一次链接~"
         send_message(open_id, msg)
       end
     else
       if click.taobao_url.nil?
-        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买"
+        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买\n如果不展示商品，就再点一次链接~"
         send_message(open_id, msg)
       else
-        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买"
+        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买\n如果不展示商品，就再点一次链接~"
         send_message(open_id, msg)
       end
     end
@@ -100,7 +99,12 @@ class KefuController < ApplicationController
     send_message(open_id, msg)
   end
 
-  def send_message(open_id, msg)
+  def send_message(open_id, msg, rty = 2)
+    rr = rty
+    if rr <= 0 
+      return
+    end
+    rr = rr - 1
     if $swan_token.nil? || Time.now.to_i - $swan_token[:update_time] > 3600
       t = KefuToken.take.token
       $swan_token = {:token => t, :update_time => Time.now.to_i}
@@ -120,5 +124,9 @@ class KefuController < ApplicationController
     request = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
     request.body = URI.encode_www_form(qq)
     response = http.request(request)
+    unless response.body.include?('success')
+      sleep(1)
+      send_message(open_id, msg, rr)
+    end
   end
 end
