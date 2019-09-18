@@ -10,18 +10,6 @@
     <%= yield(:amp_path) %>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-    <amp-analytics type="gtag" data-credentials="include">
-      <script type="application/json">
-        {
-          "vars" : {
-            "gtag_id": "UA-96984648-1",
-            "config" : {
-              "UA-96984648-1": { "groups": "default" }
-            }
-          }
-        }
-      </script>
-    </amp-analytics>
     <style amp-custom>
       <%= render partial: "layouts/amp_spectre_css" %>
       .item{
@@ -71,6 +59,18 @@
   </head>
 
   <body>
+    <amp-analytics type="gtag" data-credentials="include">
+      <script type="application/json">
+        {
+          "vars" : {
+            "gtag_id": "UA-96984648-1",
+            "config" : {
+              "UA-96984648-1": { "groups": "default" }
+            }
+          }
+        }
+      </script>
+    </amp-analytics>
     <%= yield %>
   </body>
 </html>
