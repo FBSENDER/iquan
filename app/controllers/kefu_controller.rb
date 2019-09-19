@@ -26,7 +26,6 @@ class KefuController < ApplicationController
       render plain: 'success'
       if m.mtype == 1 && m.content == '1'
         receive_message_1(m.user_id)
-        receive_message_other(m.user_id)
       elsif m.mtype == 1 && m.content == '2'
         receive_message_2(m.user_id)
       elsif m.mtype == 1 && m.content == '3'
@@ -51,24 +50,24 @@ class KefuController < ApplicationController
     end
     click = KefuClick.where(swan_id: ids).order("id desc").take
     if click.nil?
-      msg = "未能获取购买链接"
+      msg = "未能获取购买链接\n回复 1  获取购买链接\n回复 2  查看最新优惠活动\n回复 3  商家合作\n回复 4  官方网站与APP下载\n回复 5  好店推荐\n如何购买？m.uuhaodian.com/ggg/guide1.html\n更多优惠 uuu.uuhaodian.com"
       send_message(open_id, msg)
       return
     end
     if click.kouling.nil?
       if click.taobao_url.nil?
-        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n如果不展示商品，就再点一次链接~"
+        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n如果不展示商品，就再点一次链接~\n\n回复 1  获取购买链接\n回复 2  查看最新优惠活动\n回复 3  商家合作\n回复 4  官方网站与APP下载\n回复 5  好店推荐\n如何购买？m.uuhaodian.com/ggg/guide1.html\n更多优惠 uuu.uuhaodian.com"
         send_message(open_id, msg)
       else
-        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}\n如果不展示商品，就再点一次链接~"
+        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}\n如果不展示商品，就再点一次链接~\n\n回复 1  获取购买链接\n回复 2  查看最新优惠活动\n回复 3  商家合作\n回复 4  官方网站与APP下载\n回复 5  好店推荐\n如何购买？m.uuhaodian.com/ggg/guide1.html\n更多优惠 uuu.uuhaodian.com"
         send_message(open_id, msg)
       end
     else
       if click.taobao_url.nil?
-        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买\n如果不展示商品，就再点一次链接~"
+        msg = "购买链接：www.gouwuzhinan.cn/uu/buy?id=#{click.item_id}&channel=18\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买\n如果不展示商品，就再点一次链接~\n\n回复 1  获取购买链接\n回复 2  查看最新优惠活动\n回复 3  商家合作\n回复 4  官方网站与APP下载\n回复 5  好店推荐\n如何购买？m.uuhaodian.com/ggg/guide1.html\n更多优惠 uuu.uuhaodian.com"
         send_message(open_id, msg)
       else
-        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买\n如果不展示商品，就再点一次链接~"
+        msg = "购买链接：www.gouwuzhinan.cn/uu/g/#{click.id}\n长按复制#{click.kouling} 打开「手机淘宝」可以直接购买\n如果不展示商品，就再点一次链接~\n\n回复 1  获取购买链接\n回复 2  查看最新优惠活动\n回复 3  商家合作\n回复 4  官方网站与APP下载\n回复 5  好店推荐\n如何购买？m.uuhaodian.com/ggg/guide1.html\n更多优惠 uuu.uuhaodian.com"
         send_message(open_id, msg)
       end
     end
