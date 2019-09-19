@@ -27,7 +27,7 @@
         <a href="https://api.uuhaodian.com/uu/buy?id=<%= item["item_id"]%>&channel=12" target="_blank" style="color:#3b4351;" rel="nofollow">
           <div class="col-12 item">
             <amp-img src="<%= item["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
-            <p class="title"><%= item["short_title"] %></p>
+            <p class="title"><%= item["title"] %></p>
             <p class="o-price">
             原价 ￥<%= coupon_money > 0 ? item["zk_final_price"] : item["reserve_price"] %>
           <span style="float:right"><%= item["volume"] %>人已付款</span>
