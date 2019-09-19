@@ -124,6 +124,7 @@ class KefuController < ApplicationController
     request = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
     request.body = URI.encode_www_form(qq)
     response = http.request(request)
+    logger.info(response.body)
     unless response.body.include?('success')
       sleep(1)
       send_message(open_id, msg, rr)
