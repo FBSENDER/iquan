@@ -23,8 +23,9 @@
       <% coupon_money = item["coupon_amount"] ? item["coupon_amount"].to_i : 0 %>
       <% now_price = (item["zk_final_price"].to_f - coupon_money).round(2) %>
       <% zhe = (now_price * 10.0 / item["reserve_price"].to_f).round(1) %>
+      <% buy_url = coupon_money <= 0 ? item["url"] : "https://api.uuhaodian.com/uu/buy?id=#{item["item_id"]}&channel=12" %>
       <div class="col-3 col-sm-6 column" style="margin-top: 10px;">
-        <a href="https://api.uuhaodian.com/uu/buy?id=<%= item["item_id"]%>&channel=12" target="_blank" style="color:#3b4351;" rel="nofollow">
+        <a href="<%= buy_url %>" target="_blank" style="color:#3b4351;" rel="nofollow">
           <div class="col-12 item">
             <amp-img src="<%= item["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
             <p class="title"><%= item["title"] %></p>
