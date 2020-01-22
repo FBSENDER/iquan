@@ -13,37 +13,30 @@
     %p
       为您推荐以下内容：
       %br
-      - %w(怎么找粉丝福利购 淘宝粉丝福利购入口 粉丝福利购怎么进去 粉丝福利优惠券哪来的 粉丝福利购是真的吗 粉丝福利购怎么赚佣金 淘宝怎么进粉丝福利购 粉丝福利购是骗局吗 粉丝福利购是假货吗).each do |k|
+      - %w(福利购是真的吗 福利购app哪里下载 淘宝粉丝福利购在哪进 淘宝粉丝福利购入口在哪里 天猫粉丝福利购怎么弄 粉丝福利购怎么做推广 粉丝福利购券怎么找).each do |k|
         %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank"} #{k}
         |
       粉丝福利购
-    %h2 福利购
-    %p
-      为您推荐以下内容：
-      %br
-      - %w(福利购怎么赚佣金 福利购是骗局吗 猫粉丝福利购是真假 淘宝粉丝福利购入口 福利购是真的吗 粉丝福利购空白 福利购是正品吗 福利购的东西怎样 福利购怎么返利).each do |k|
-        %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank", rel: "nofollow"} #{k}
-        |
-      福利购
     %h2 天天特价
     %p
       为您推荐以下内容：
       %br
-      - %w(天天特价淘宝网 淘宝天天特价 天天特价里的东西好吗 tsobao淘宝网天天特价 天天特价.com 天天特价活动报名 淘抢购 淘宝特卖 天天特价是只有一天吗?).each do |k|
+      - %w(下载天天特价 2019淘宝天天特价规则 天天特价.com 淘宝网天天特价入口 天天特价淘宝商城).each do |k|
         %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank", rel: "nofollow"} #{k}
         |
-      - @meta[:articles].each do |sac|
-        %a{href: "/article/#{sac[:id]}.html"} #{sac[:title]}
-        |
+      - if !@meta[:articles].nil?
+        - @meta[:articles].each do |sac|
+          %a{href: "/article/#{sac[:id]}.html"} #{sac[:title]}
+          |
       天天特价
     %h2 今日推荐
-    - %w(休闲零食 肉干肉脯 豆干辣条 膨化食品 奶酪奶片 药食同源 减肥塑身 增强免疫 男性健康 石斛枫斗 坚果蜜饯 坚果炒货 蜜饯果干 枣类制品 花草果茶 南北干货 方便食品 腊味熟食 懒人火锅 粉丝泡).each do |k|
+    - %w(zara 连衣裙 hm t恤女 牛仔裤 衬衫 牛仔裤女 女装 t恤女短袖 运动裤女 白色t恤女 牛仔外套女 短袖女 运动套装女 风衣 衬衫女 外套 防晒衣 半身裙 卫衣女).each do |k|
       %a{href: "/amp/qq/#{URI.encode(k)}/"} #{k}
     %h2 今日特价
     %p
       为您推荐以下内容：
       %br
-      - %w(今日秒杀特价 聚划算官网今日特价 今日特价手机 今日特价图片 今日特价是什么 今日特价秒杀图片 今日特价怎么写好看 聚划算今日特价).each do |k|
+      - %w(今日秒杀特价 聚划算官网今日特价 今日特价手机 今日特价图片 今日特价是什么 今日特价秒杀图片 今日特价怎么写好看 淘宝9.9元天天特价).each do |k|
         %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank", rel: "nofollow"} #{k}
         |
       今日特价
