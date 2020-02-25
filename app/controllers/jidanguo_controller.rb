@@ -40,6 +40,13 @@ class JidanguoController < ApplicationController
         updated_at: Time.now.to_i,
         meta: meta
       }
+    else
+      $article_meta = {
+        updated_at: 0,
+        meta: {
+          articles: []
+        }
+      }
     end
   end
 
@@ -61,7 +68,7 @@ class JidanguoController < ApplicationController
     url = "http://api.uuhaodian.com/ddk/product?id=#{params[:id]}"
     result = Net::HTTP.get(URI(URI.encode(url)))
     json = JSON.parse(result)
-    if json["status"]["code"] != 1001
+    if json["status"] == 0 || json["status"]["code"] != 1001
       not_found
       return
     end
