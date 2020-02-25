@@ -10,7 +10,7 @@
 .hori-cate-area
   .hot-keywords
     .wrapper
-      - (1..23).to_a.each do |page|
+      - @pages.each do |page|
         %a{href: "/map_k/#{page}/"} #{page}
 
 = render partial: "diyquan/footer"

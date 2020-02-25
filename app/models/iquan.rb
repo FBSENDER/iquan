@@ -79,5 +79,5 @@ class OutLink < ApplicationRecord
 end
 
 class TbKeyword < ApplicationRecord
-  self.table_name = 'tb_keywords'
+  self.table_name = 'qixiu_keywords'
 end

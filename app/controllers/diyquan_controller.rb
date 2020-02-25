@@ -270,8 +270,15 @@ class DiyquanController < ApplicationController
   def map_k
     @page = params[:page].to_i
     @page = @page == 0 ? 0 : @page - 1
-    @ks = TbKeyword.select(:id, :keyword).order(:id).limit(500).offset(500 * @page)
-    @total_page = 20
+    @ks = TbKeyword.where(status: 1).select(:id, :keyword).order(:id).limit(500).offset(500 * @page)
+    #@total_page = 900
+    pg = @page + 2
+    @pages = []
+    loop do
+      break if pg > 916 || @pages.size > 20 
+      @pages << pg 
+      pg += 1
+    end
     not_found if @ks.size.zero?
     map_k_tdk
   end

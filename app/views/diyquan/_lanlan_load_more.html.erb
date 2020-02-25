@@ -48,14 +48,18 @@ var callback = function(data){
 $(function(){
   getLanlanCouponList();
   var sw = new Swiper('.banner-area',{
-    autoplay: 3000,
+    autoplay: true,
     loop:true,
-    pagination: '.swiper-pager'
+    pagination: {
+      el: '.swiper-pager'
+    }
   });
   var sww = new Swiper('.wide-banner',{
     loop: true,
-    prevButton:'.swiper-button-prev',
-    nextButton:'.swiper-button-next'
+    navigation:{
+      prevEl:'.swiper-button-prev',
+      nextEl:'.swiper-button-next'
+    }
   });
 
   $(document).on('scroll',function(){

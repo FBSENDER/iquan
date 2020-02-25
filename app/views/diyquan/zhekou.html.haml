@@ -13,7 +13,7 @@
     %a{href: "/", title: "#{home_anchor}"} #{home_anchor}
     >
     - @cats.each do |cat|
-      %a{href: "/zhekou/#{URI.encode(cat["name"])}/"} #{cat["name"]}
+      %a{href: "/zhekou/#{URI.encode(cat["name"].gsub('/',' '))}/"} #{cat["name"]}
       >
     %span 
       #{@keyword}
