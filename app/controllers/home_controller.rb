@@ -152,8 +152,12 @@ class HomeController < ApplicationController
     @product_brands = @@product_brands
     @path = "/"
     if request.host == "www.zhequan.cc"
-      render "zhequan"
-      return
+      if is_robot?
+        render "zhequan"
+        return
+      else
+        redirect_to "https://www.iquan.net"
+      end
     end
     if request.host == "www.xiongmao123.com"
       @mobile_url = "http://m.xiongmao123.com"
