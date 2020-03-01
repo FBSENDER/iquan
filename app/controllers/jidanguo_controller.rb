@@ -58,9 +58,9 @@ class JidanguoController < ApplicationController
   end
 
   def home
-    @items = get_home_item_list
-    @keywords = $keywords
-    @meta = get_articles_meta
+  #  @items = get_home_item_list
+  #  @keywords = $keywords
+  #  @meta = get_articles_meta
     render :home, layout: "layouts/jidanguo"
   end
 

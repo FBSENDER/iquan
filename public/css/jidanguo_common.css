@@ -1,0 +1,250 @@
+body{
+  background-color: #f7f7f7;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  font-family:Microsoft YaHei;
+}
+a{
+  color: #333;
+  text-decoration: none;
+}
+
+header{
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.06);
+  height: 110px;
+}
+header .logo{
+  float: left;
+  width: 320px;
+  height: 110px;
+}
+header .link-area{
+  float: left;
+  height: 50px;
+  padding: 30px;
+  width: 520px;
+  line-height: 50px;
+}
+header .link-area a{
+  font-size: 24px;
+  color: #999;
+  padding: 0 20px;
+}
+header .link-area a.active{
+  color: #FF472B;
+}
+header .right-area{
+  float: left;
+  width: 300px;
+  padding: 10px 0;
+  color: #999;
+  text-align: right;
+}
+footer{
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.06);
+  margin-top: 20px;
+  padding-top: 20px;
+}
+footer p{
+  margin: 0;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.mt-5{
+  margin-top: 5px;
+}
+.container{
+  width: 1200px;
+  margin: 0 auto;
+}
+.fr{
+  display: flex;
+  flex-direction:row;
+}
+.fr-title{
+  font-size: 20px;
+  line-height: 50px;
+  padding-left: 20px;
+  font-weight: bold;
+  margin: 0;
+  border-bottom: 1px solid #f7f7f7;
+}
+.fr-more{
+  font-size: 14px;
+  float:right;
+  padding-right:20px;
+  font-weight: normal;
+}
+.fr-9{
+  width: 900px;
+}
+.fr-4{
+  width: 300px;
+}
+.home-bang{
+  margin: 10px 10px 10px 0;
+  width: 890px;
+  background-color: #fff;
+}
+.home-bang .goods-area{
+  padding: 10px 5px;
+  width: 880px; 
+  height: 220px;
+}
+.home-bang .goods-area .goods{
+  height: 220px;
+  width: 168px;
+  margin-left: 5px;
+  float: left;
+  border: 1px solid #f0f0f0;
+}
+.home-bang .goods-area .goods .pic{
+  height: 168px;
+  width: 168px;
+}
+.home-bang .goods-area .goods .t1{
+  padding: 5px 5px 0 5px;
+  margin: 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+.home-bang .goods-area .goods .t2{
+  padding: 5px;
+  padding: 5px 5px 0 5px;
+  margin: 0;
+  color: #999;
+  font-size: 12px;
+}
+.bang-order{
+  z-index: 10;
+  position: relative;
+  top: -215px;
+  left: 6px;
+  display: block;
+  height: 24px;
+  width: 24px;
+  background-color: #FF472B;
+  line-height: 36px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+}
+.bang-order::before{
+  left: 0;
+  bottom: -10px;
+  border-color: #FF472B transparent transparent #FF2B22;
+  border-width: 5px 12px;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.bang-order::after{
+  right: 0;
+  bottom: -10px;
+  border-color: transparent #FF472B transparent transparent;
+  border-width: 4px 11px;
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.home-all{
+  margin: 0;
+  width: 900px;
+}
+.home-all .tags{
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #f7f7f7;
+  overflow: hidden;
+  padding: 0 20px;
+  background-color: #fff;
+  width: 850px;
+}
+.home-all .tags a{
+  padding: 0 20px 0 0;
+}
+.home-all .tags a.active{
+  color: #FF472B;
+}
+.home-all .product-area{
+  margin: 0;
+  width: 900px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.home-all .product-area .product{
+  width: 215px;
+  margin: 10px 10px 0 0;
+  background-color: #fff;
+  padding-bottom: 5px;
+}
+.home-all .product-area .product .pic{
+  width: 215px;
+  height: 215px;
+}
+.home-all .product-area .product .t1{
+  padding: 5px 5px 0 5px;
+  margin: 0;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.home-all .product-area .product .t2{
+  padding: 5px;
+  padding: 5px 5px 0 5px;
+  margin: 0;
+  color: #999;
+  font-size: 12px;
+}
+.home-all .product-area .product .t2 .tag{
+  color: #FF472B;
+  border: 1px solid #FF472B;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+.home-all .product-area .product .t2 .price{
+  color: #FF472B;
+  font-size: 20px;
+  font-weight: bold;
+}
+.home-all .product-area .product .lg{
+  height: 0;
+  line-height: 20px;
+  position: relative; 
+  top: -20px;
+  float: right;
+  padding-right: 5px;
+  z-index: 10;
+  color: #aaa;
+  font-size: 10px;
+  opacity: 0.8;
+}
+.right-area{
+  background-color: #fff;
+  margin: 10px 0 0 0;
+  width: 300px;
+  padding: 0;
+}
+.right-area .content{
+  padding: 10px;
+  line-height: 1.5;
+}
+.right-area .content p{
+  margin: 0;
+  padding-bottom: 10px;
+}
