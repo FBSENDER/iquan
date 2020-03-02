@@ -1,0 +1,60 @@
+- title("#{@tag.tag}_#{@tag.tag}价格/图片/店铺_鸡蛋果TOP")
+- keywords("#{@tag.tag},#{@tag.tag}价格,#{@tag.tag}图片,#{@tag.tag}店铺") 
+- head_desc("本站精选优质#{@tag.tag}，为您推荐#{@tag.tag}果品与百香果店铺。每日可以查询#{@tag.tag}价格、#{@tag.tag}图片、#{@tag.tag}店铺等，更多#{@tag.tag}相关信息，请看鸡蛋果TOP www.jidanguo.top")
+
+= render partial: "header"
+
+.container.fr
+  .fr-9
+    .home-bang
+      %h1.fr-title #{@tag.tag} - 商品推荐
+    .home-all
+      .tags
+        %a.active{href: "#"} #{@tag.tag}
+        - @tags.each do |tg|
+          - if tg.id != @tag.id
+            %a{href: "/bxgtag/#{tg.pinyin}.html"} #{tg.tag}
+      .product-area
+        - @products.each do |g|
+          %a{href: "/bxgbuy/#{g[:item_id]}/", target: "_blank", rel: "nofollow"}
+            .product
+              %img.pic{src: "#{g[:pict_url]}", alt: "#{g[:title]}"}
+              %p.t1 #{g[:title]}
+              %p.t2{style: "padding-top: 12px;"}
+                %span.tag #{g[:shop_type] == 0 ? '淘宝' : g[:shop_type] == 1 ? '天猫' : '其他'}
+                %span{style: "float:right;"} #{g[:volume]}
+                %span{style: "float:right;"} 月销：
+              %p.t2
+                价格 ￥
+                %span.price #{g[:price]}
+              .lg 百香果
+  .fr-3
+    .right-area
+      %h2.fr-title 百香果网站说明
+      .content
+        %p 本站每日更新天猫、淘宝、京东、拼多多平台上热销中的百香果相关产品。
+        %p 您可以浏览到热销商品、优质店铺以及百香果的价格趋势。
+        %p 如果您认为自己的百香果更优质更实惠，欢迎联系本站，本站将视实际情况为您的商品安排展示位置。
+    .right-area
+      %h2.fr-title 百香果资讯
+      .content
+        - @ams[:articles].each do |at|
+          %p
+            %a{href: "/article/#{at[:id]}.html"} #{at[:title]}
+    .right-area
+      %h2.fr-title 百香果小视频
+      - @shipin.each do |v|
+        .r-video
+          %img.pic{src: "#{v[:pic]}", alt: "#{v[:title]}"}
+          .t1 
+            %a{href: "#{v[:src]}", target: "_blank", rel: "nofollow"}#{v[:title]}
+          .t2 #{v[:views]}次观看
+    .right-area
+      %h2.fr-title 百香果#正在讨论的话题#
+      - @topics.each do |t|
+        .r-topic
+          %p ##{t[:title]}#
+          %div{style: "text-align:right;"}
+            %a{href: "#{t[:src]}", target: "_blank", rel: "nofollow",style: "text-decoration: underline;"} 去讨论
+        
+= render partial: "footer"

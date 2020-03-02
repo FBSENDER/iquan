@@ -248,3 +248,32 @@ footer p{
   margin: 0;
   padding-bottom: 10px;
 }
+.r-video{
+  padding: 10px;
+  width: 280px;
+  border-bottom: 1px solid #f7f7f7;
+}
+.r-video .pic{
+  width: 280px;
+}
+.r-video .t1{
+  padding: 5px;
+  text-decoration: underline;
+}
+.r-video .t2{
+  font-size: 12;
+  text-align: right;
+  color: #999;
+}
+.r-topic{
+  padding: 10px;
+  width: 280px;
+  border-bottom: 1px solid #f7f7f7;
+}
+.article{
+  margin: 10px 10px 10px 0;
+  background-color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+}

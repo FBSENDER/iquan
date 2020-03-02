@@ -1,0 +1,34 @@
+- title('百香果商品列表_鸡蛋果TOP')
+- keywords('百香果,百香果商品列表,百香果商品大全') 
+- head_desc('本站精选优质百香果，为您推荐百香果果品与百香果店铺。每日可以查询百香果价格、百香果图片、百香果店铺等，更多百香果相关信息，请看鸡蛋果TOP www.jidanguo.top')
+
+= render partial: "header"
+
+.container.fr
+  .fr-9
+    .home-bang
+      %h1.fr-title 百香果商品列表
+    .home-all
+      .product-area
+        - @products.each do |g|
+          %a{href: "/bxgbuy/#{g[:item_id]}/", target: "_blank", rel: "nofollow"}
+            .product
+              %img.pic{src: "#{g[:pict_url]}", alt: "#{g[:title]}"}
+              %p.t1 #{g[:title]}
+              %p.t2{style: "padding-top: 12px;"}
+                %span.tag #{g[:shop_type] == 0 ? '淘宝' : g[:shop_type] == 1 ? '天猫' : '其他'}
+                %span{style: "float:right;"} #{g[:volume]}
+                %span{style: "float:right;"} 月销：
+              %p.t2
+                价格 ￥
+                %span.price #{g[:price]}
+              .lg 百香果
+  .fr-3
+    .right-area
+      %h2.fr-title 百香果网站说明
+      .content
+        %p 本站每日更新天猫、淘宝、京东、拼多多平台上热销中的百香果相关产品。
+        %p 您可以浏览到热销商品、优质店铺以及百香果的价格趋势。
+        %p 如果您认为自己的百香果更优质更实惠，欢迎联系本站，本站将视实际情况为您的商品安排展示位置。
+        
+= render partial: "footer"

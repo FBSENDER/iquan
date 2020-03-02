@@ -1,139 +1,72 @@
-- title('百香果果汁之王_百香果【功效/作用/禁忌/营养价值/怎么吃】_鸡蛋果TOP')
-- keywords('百香果,鸡蛋果,鸡蛋果和百香果的区别,鸡蛋果的功效与作用,鸡蛋果的营养价值,鸡蛋果怎么吃,水果鸡蛋果,鸡蛋果多少钱一斤,鸡蛋果的功效和禁忌,百香果的籽可以吃吗,百香果一天吃几个最好') 
-- head_desc('百香果又叫鸡蛋果，果汁含量特别高，被大家称为【果汁之王】。本站为大家提供百香果(鸡蛋果)大家关注问题的解答：百香果和鸡蛋果的区别？百香果的吃法？百香果的功效与作用？百香果多少钱一斤？等等问题。有关百香果的各种信息查询，请看鸡蛋果TOP www.jidanguo.top')
+- title('精选优质百香果_百香果价格/图片/店铺_鸡蛋果TOP')
+- keywords('百香果,百香果价格,百香果图片,百香果店铺,鸡蛋果,鸡蛋果和百香果的区别,鸡蛋果的功效与作用,鸡蛋果的营养价值,鸡蛋果怎么吃,水果鸡蛋果,鸡蛋果多少钱一斤,鸡蛋果的功效和禁忌,百香果的籽可以吃吗,百香果一天吃几个最好') 
+- head_desc('本站精选优质百香果，为您推荐百香果果品与百香果店铺。每日可以查询百香果价格、百香果图片、百香果店铺等，更多百香果相关信息，请看鸡蛋果TOP www.jidanguo.top')
 
 = render partial: "header"
 
 .container.fr
-  .fr-8
+  .fr-9
     .home-bang
-      %p.fr-title
-        百香果销量榜
-        %span.fr-more 查看更多
+      %h1.fr-title
+        百香果商品热销榜 
+        %span.fr-more{style: "display:none;"} 查看更多
       .goods-area
-        .goods
-          %img.pic{src: "https://img.alicdn.com/bao/uploaded/i2/1995786020/O1CN01rGQIzn1uLCtx7CI8A_!!0-item_pic.jpg"}
-          %p.t1 王小二的旗舰店
-          %p.t2 
-            福建 漳州 
-            %span{style: "float:right;color:red;"}7776
-            %span{style: "float:right;"}月销：
-          .bang-order 1
+        - @goods.each_with_index do |g, index|
+          %a{href: "/bxgbuy/#{g.item_id}/", target: "_blank", rel: "nofollow"}
+            .goods
+              %img.pic{src: "#{g.pict_url}", alt: "#{g.title}"}
+              %p.t1 #{g.shop_title}
+              %p.t2
+                #{g.provcity}
+                %span{style: "float:right;color:red;"} #{g.volume}
+                %span{style: "float:right;"}月销：
+              .bang-order #{index + 1}
     .home-all
       .tags
-        %a.active 精选
+        %a.active{href: "#"} 精选
+        - @tags.each do |tg|
+          %a{href: "/bxgtag/#{tg.pinyin}.html"} #{tg.tag}
       .product-area
-        .product
-          %img.pic{src: "https://t00img.yangkeduo.com/goods/images/2019-11-28/21a326b6021ed86c0f7e4181224827d5.jpeg"}
-          %p.t1 美肤宝朱正廷水薄清透隔离防晒霜50二合一秋冬面部女学生防紫外线
-          %p.t2{style: "padding-top: 12px;"}
-            %span.tag 天猫
-            %span{style: "float:right;"}7776
-            %span{style: "float:right;"}月销：
-          %p.t2
-            价格 ￥
-            %span.price 19.6
-          .lg 百香果
-        .product
-          %img.pic{src: "https://t00img.yangkeduo.com/goods/images/2019-11-28/21a326b6021ed86c0f7e4181224827d5.jpeg"}
-          %p.t1 美肤宝朱正廷水薄清透隔离防晒霜50二合一秋冬面部女学生防紫外线
-          %p.t2{style: "padding-top: 12px;"}
-            %span.tag 天猫
-            %span{style: "float:right;"}7776
-            %span{style: "float:right;"}月销：
-          %p.t2
-            价格 ￥
-            %span.price 19.6
-          .lg 百香果
-        .product
-          %img.pic{src: "https://t00img.yangkeduo.com/goods/images/2019-11-28/21a326b6021ed86c0f7e4181224827d5.jpeg"}
-          %p.t1 美肤宝朱正廷水薄清透隔离防晒霜50二合一秋冬面部女学生防紫外线
-          %p.t2{style: "padding-top: 12px;"}
-            %span.tag 天猫
-            %span{style: "float:right;"}7776
-            %span{style: "float:right;"}月销：
-          %p.t2
-            价格 ￥
-            %span.price 19.6
-          .lg 百香果
-        .product
-          %img.pic{src: "https://t00img.yangkeduo.com/goods/images/2019-11-28/21a326b6021ed86c0f7e4181224827d5.jpeg"}
-          %p.t1 美肤宝朱正廷水薄清透隔离防晒霜50二合一秋冬面部女学生防紫外线
-          %p.t2{style: "padding-top: 12px;"}
-            %span.tag 天猫
-            %span{style: "float:right;"}7776
-            %span{style: "float:right;"}月销：
-          %p.t2
-            价格 ￥
-            %span.price 19.6
-          .lg 百香果
-        .product
-          %img.pic{src: "https://t00img.yangkeduo.com/goods/images/2019-11-28/21a326b6021ed86c0f7e4181224827d5.jpeg"}
-          %p.t1 美肤宝朱正廷水薄清透隔离防晒霜50二合一秋冬面部女学生防紫外线
-          %p.t2{style: "padding-top: 12px;"}
-            %span.tag 天猫
-            %span{style: "float:right;"}7776
-            %span{style: "float:right;"}月销：
-          %p.t2
-            价格 ￥
-            %span.price 19.6
-          .lg 百香果
-        .product
-          %img.pic{src: "https://t00img.yangkeduo.com/goods/images/2019-11-28/21a326b6021ed86c0f7e4181224827d5.jpeg"}
-          %p.t1 美肤宝朱正廷水薄清透隔离防晒霜50二合一秋冬面部女学生防紫外线
-          %p.t2{style: "padding-top: 12px;"}
-            %span.tag 天猫
-            %span{style: "float:right;"}7776
-            %span{style: "float:right;"}月销：
-          %p.t2
-            价格 ￥
-            %span.price 19.6
-          .lg 百香果
-        .product
-          %img.pic{src: "https://t00img.yangkeduo.com/goods/images/2019-11-28/21a326b6021ed86c0f7e4181224827d5.jpeg"}
-          %p.t1 美肤宝朱正廷水薄清透隔离防晒霜50二合一秋冬面部女学生防紫外线
-          %p.t2{style: "padding-top: 12px;"}
-            %span.tag 天猫
-            %span{style: "float:right;"}7776
-            %span{style: "float:right;"}月销：
-          %p.t2
-            价格 ￥
-            %span.price 19.6
-          .lg 百香果
-        .product
-          %img.pic{src: "https://t00img.yangkeduo.com/goods/images/2019-11-28/21a326b6021ed86c0f7e4181224827d5.jpeg"}
-          %p.t1 美肤宝朱正廷水薄清透隔离防晒霜50二合一秋冬面部女学生防紫外线
-          %p.t2{style: "padding-top: 12px;"}
-            %span.tag 天猫
-            %span{style: "float:right;"}7776
-            %span{style: "float:right;"}月销：
-          %p.t2
-            价格 ￥
-            %span.price 19.6
-          .lg 百香果
-  .fr-4
+        - @products.each do |g|
+          %a{href: "/bxgbuy/#{g.item_id}/", target: "_blank", rel: "nofollow"}
+            .product
+              %img.pic{src: "#{g.pict_url}", alt: "#{g.title}"}
+              %p.t1 #{g.title}
+              %p.t2{style: "padding-top: 12px;"}
+                %span.tag #{g.shop_type == 0 ? '淘宝' : g.shop_type == 1 ? '天猫' : '其他'}
+                %span{style: "float:right;"} #{g.volume}
+                %span{style: "float:right;"} 月销：
+              %p.t2
+                价格 ￥
+                %span.price #{g.price}
+              .lg 百香果
+  .fr-3
     .right-area
-      .fr-title 网站说明
+      %h2.fr-title 百香果网站说明
       .content
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
+        %p 本站每日更新天猫、淘宝、京东、拼多多平台上热销中的百香果相关产品。
+        %p 您可以浏览到热销商品、优质店铺以及百香果的价格趋势。
+        %p 如果您认为自己的百香果更优质更实惠，欢迎联系本站，本站将视实际情况为您的商品安排展示位置。
     .right-area
-      .fr-title 网站说明
+      %h2.fr-title 百香果资讯
       .content
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
+        - @meta[:articles].each do |at|
+          %p
+            %a{href: "/article/#{at[:id]}.html"} #{at[:title]}
     .right-area
-      .fr-title 网站说明
-      .content
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-        %p lsdfjkasdfjlaskdfjals
-= render partial: "footer"
+      %h2.fr-title 百香果小视频
+      - @shipin.each do |v|
+        .r-video
+          %img.pic{src: "#{v[:pic]}", alt: "#{v[:title]}"}
+          .t1 
+            %a{href: "#{v[:src]}", target: "_blank", rel: "nofollow"}#{v[:title]}
+          .t2 #{v[:views]}次观看
+    .right-area
+      %h2.fr-title 百香果#正在讨论的话题#
+      - @topics.each do |t|
+        .r-topic
+          %p ##{t[:title]}#
+          %div{style: "text-align:right;"}
+            %a{href: "#{t[:src]}", target: "_blank", rel: "nofollow",style: "text-decoration: underline;"} 去讨论
+        
+= render partial: "home_footer"

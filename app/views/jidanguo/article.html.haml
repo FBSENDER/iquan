@@ -3,26 +3,40 @@
 - head_desc(@meta[:description])
 
 = render partial: "header"
-.container
-  %article.col-md-8.col-sm-12
-    = @html.html_safe
-    .page-header
-    %p
-      大家都在找：
-      - @keywords.each do |k|
-        %a{href: "/bxg/#{URI.encode(k)}/"} #{k}
-      - @ams[:articles].each do |at|
-        %a{href: "/article/#{at[:id]}.html"} #{at[:title]}
-  %aside.col-md-4.col-sm-12
-    %h2 今日百香果
-    %hr
-    - @items.each do |item|
-      %a{href: "/ddh/#{item["itemId"]}/", title: "#{item["title"]}"}
-        .row{style: "padding: 10px 0;border-bottom: 1px solid #f6f6f6;"}
-          .col-md-4
-            %img.img-responsive{src: "#{item["coverImage"]}", alt: "#{item["title"]}"} 
-          .col-md-8
-            %p #{item["shortTitle"]}
-            %p 今日价格#{item["price"]}元，可以领#{item["couponMoney"]}元优惠券，实际到手价格#{item["nowPrice"]}元，月销#{item["monthSales"]}件。
+.container.fr
+  .fr-9
+    %article.article
+      = @html.html_safe
+    %section{style: "margin: 10px 10px 10px 0;"}
+      = render partial: "changyan"
+
+  .fr-3
+    .right-area
+      %h2.fr-title 百香果网站说明
+      .content
+        %p 本站每日更新天猫、淘宝、京东、拼多多平台上热销中的百香果相关产品。
+        %p 您可以浏览到热销商品、优质店铺以及百香果的价格趋势。
+        %p 如果您认为自己的百香果更优质更实惠，欢迎联系本站，本站将视实际情况为您的商品安排展示位置。
+    .right-area
+      %h2.fr-title 百香果资讯
+      .content
+        - @ams[:articles].each do |at|
+          %p
+            %a{href: "/article/#{at[:id]}.html"} #{at[:title]}
+    .right-area
+      %h2.fr-title 百香果小视频
+      - @shipin.each do |v|
+        .r-video
+          %img.pic{src: "#{v[:pic]}", alt: "#{v[:title]}"}
+          .t1 
+            %a{href: "#{v[:src]}", target: "_blank", rel: "nofollow"}#{v[:title]}
+          .t2 #{v[:views]}次观看
+    .right-area
+      %h2.fr-title 百香果#正在讨论的话题#
+      - @topics.each do |t|
+        .r-topic
+          %p ##{t[:title]}#
+          %div{style: "text-align:right;"}
+            %a{href: "#{t[:src]}", target: "_blank", rel: "nofollow",style: "text-decoration: underline;"} 去讨论
 
 = render partial: "footer"
