@@ -15,6 +15,12 @@ Rails.application.routes.draw do
   get "/k_:pinyin/", to: "diyquan#k_pinyin"
   get "/category/:cid", to: "diyquan#lanlan_fenlei"
 
+  # Ying
+  get "/peishi", to: "ying#peishi"
+  get "/peishi/:id", to: "ying#peishi_product", id: /\d+/
+  get "/meizhuang", to: "ying#meizhuang"
+  get "/meizhuang/:id", to: "ying#meizhuang_product", id: /\d+/
+
   get "/query/noresult", to: "diyquan#noresult"
   get "/dianpu/", to: "dianpu#map_s"
   get "/dianpu/:nick/", to: "dianpu#show"

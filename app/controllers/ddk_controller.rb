@@ -10,7 +10,7 @@ class DdkController < ApplicationController
     url = "http://api.uuhaodian.com/ddk/product?id=#{params[:id]}"
     result = Net::HTTP.get(URI(URI.encode(url)))
     json = JSON.parse(result)
-    if json["status"]["code"] != 1001
+    if json["status"] == 0 || json["status"]["code"] != 1001
       not_found
       return
     end

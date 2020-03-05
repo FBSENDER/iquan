@@ -1,0 +1,11 @@
+- title("美妆个护天猫淘宝折扣_爱券网")
+- keywords("美妆,个护")
+- head_desc("美妆个护天猫淘宝折扣_爱券网")
+- path("/meizhuang/")
+
+
+%section.wrapper
+  .rel-zk-area
+    = render partial: "tb_pc_product_list", locals: {products: @products, path: "/meizhuang/"}
+
+= render partial: "footer", locals: {links: @links}

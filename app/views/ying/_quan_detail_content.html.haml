@@ -1,0 +1,54 @@
+- product = @product
+- buy_url = "https://api.uuhaodian.com/uu/pcbuy/?id=#{product.item_id}&channel=25"
+
+#coupon.zk-content
+  .img-area
+    %a{href: "#{buy_url}", title: "#{product.title}", target: "_blank", onclick: "ga_event(this);", data:{ga: "直接购买:详情页:详情页_直接购买_图片"}}
+      %img#cover_image{src: "#{product.pict_url}", alt: "#{product.title}"}
+  .info-area
+    .title
+      %h1.elli
+        #{product.title}
+    %p.recommend{style: "color:#FF2B22;margin-top:10px;height:42px;overflow: hidden;"}
+      微信扫一扫下方二维码，关注公众号"优优好店"，领券更方便！
+    .small-img-area
+      - JSON.parse(product.pics)[0,5].each_with_index do |img_url, index|
+        %img.small_img{src: "#{img_url}", style:"#{'margin-left:0' if index == 0}", alt: "#{product.title}图片#{index + 1}"}
+      %img.small_img{src: "https://www.iquan.net/image/uuercode.png"}
+    .platform
+      %span #{product.is_tmall == 1 ? '天猫' : '淘宝'} - #{product.nick} - 已有 
+      %span{style: "color:#FF2B22"} #{product.volume + 1 + rand(100)}
+      %span 人购买
+    .stat
+      %p.price-area
+        %span.price
+          %span.oprice 原价 ￥#{product.o_price}&nbsp;&nbsp;
+          ￥
+          %em.int{style: "padding:0"}> #{product.price.to_i}
+          %em.decimal> .#{product.price.to_s.sub(/\d+\./,'')}
+          %i 折扣价
+      .buy-area
+        %p.desc &nbsp;折扣商品限量抢购中！
+        %a{href: "#{buy_url}", class: "buy-btn", onclick: "ga_event(this);", data:{ga: "直接购买:详情页:详情页_直接购买_按钮"}, target: "_blank"}
+          .line.line-l
+            %i
+            %i
+            %i
+            %i
+            %i
+            %i
+            %i
+          .line.line-r
+            %i
+            %i
+            %i
+            %i
+            %i
+            %i
+            %i
+          立即购买
+
+:javascript
+  $(".small_img").hover(function(){
+    $("#cover_image").attr("src", $(this).attr("src"));  
+  })

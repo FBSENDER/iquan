@@ -1,0 +1,15 @@
+- title("#{@product.title}_天猫淘宝折扣_爱券网")
+- keywords("#{@product.keywords},#{@product.title}")
+- head_desc("天猫淘宝折扣商品热卖中！#{@product.title}，当前天猫淘宝折扣价#{@product.price}元，本月销量#{@product.volume}件，#{@product.provcity}店铺掌柜#{@product.nick}。")
+- path(@path)
+
+%article.wrapper
+  = render partial: "quan_detail_content"
+
+%aside.wrapper
+  .rel-zk-area
+    %p.head
+      %span 更多推荐
+    = render partial: "tb_pc_product_list", locals: {products: @products, path: @product_path}
+
+= render partial: "footer", locals: {links: @links}

@@ -1,23 +1,21 @@
-.footer
+%footer.footer
   .footer-top
     .wrapper
       .yl
         %p.head 友情链接：
         .yl-links
           %a{href: "/meizhuang/", target: "_blank"} 美妆个护
-          %a{href: "/peishi/", title: "饰品配饰"} 饰品配饰
-          %a{href: "/map_k/", title: "淘宝天猫旗舰店铺通用优惠券"} 通用优惠券
-          %a{href: "/dianpu/", title: "淘宝天猫旗舰店铺排行榜"} 淘宝天猫旗舰店排行榜
+          %a{href: "/peishi/", target: "_blank"} 饰品配饰
           - if links
             - links.each do |link|
-              %a{href: "#{link.url}", target: "_blank"} #{link.anchor}
+              %a{href: "#{link[:url]}", target: "_blank"} #{link[:anchor]}
       .logo-slogan
         .qr-code
           %a{href: "/", title: "优惠券"}
             %img{src: "/image/love.jpg"}
         .txt
-          %p.s1 扫码下载爱券网APP
-          %p.s2 一折特卖，天天省钱！
+          %p.s1 淘宝优惠券天猫优惠券 
+          %p.s2 领券找券-爱券网
   .footer-bottom
     .wrapper
       %p 

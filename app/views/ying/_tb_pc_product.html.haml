@@ -1,0 +1,22 @@
+.zk-item
+  %a{href: "#{path}#{product.id}/", title: "#{product.title}"}
+    .img-area
+      %img{src: "#{product.pict_url}", alt: "#{product.title}图片"}
+
+    %p.title-area.elli
+      - if product.is_tmall == 1
+        %span.mall 天猫
+      - else 
+        %span.mall 淘宝
+      #{product.title}
+    .raw-price-area
+      原价 ￥#{product.o_price}
+      %p.sold 已售 #{product.volume + 1 + rand(100)}
+    .info
+      .price-area
+        %span.price 
+          %span>￥
+          %em.number-font #{product.price.to_i}
+          %em.decimal> .#{product.price.to_s.sub(/\d+\./,'')}
+      %span.coupon_click
+        折扣特价

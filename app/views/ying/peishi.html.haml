@@ -1,0 +1,11 @@
+- title("装饰饰品天猫淘宝折扣_爱券网")
+- keywords("饰品,配饰")
+- head_desc("装饰饰品天猫淘宝折扣_爱券网")
+- path("/peishi/")
+
+
+%section.wrapper
+  .rel-zk-area
+    = render partial: "tb_pc_product_list", locals: {products: @products, path: "/peishi/"}
+
+= render partial: "footer", locals: {links: @links}
