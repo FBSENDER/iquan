@@ -1,4 +1,7 @@
 class DdkController < ApplicationController
+  def not_found
+    render "not_found", status: 404
+  end
   def youhui
     @keyword = params[:keyword]
     @cates = get_cate_data
