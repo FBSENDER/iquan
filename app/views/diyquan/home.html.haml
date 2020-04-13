@@ -9,35 +9,7 @@
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanHomeCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
   %div{style: "background-color: white;padding:10px;margin-bottom: 20px;"}
-    %h2 粉丝福利购
-    %p
-      为您推荐以下内容：
-      %br
-      - %w(淘宝粉丝福利购在哪进 粉丝福利购为什么那么便宜 粉丝优惠购 天猫粉丝福利购 怎么加入淘宝粉丝福利购 粉丝福利购官网商城 淘宝天猫粉丝福利券入口 淘宝粉丝福利购).each do |k|
-        %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank"} #{k}
-        |
-      粉丝福利购
-    %h2 天天特价
-    %p
-      为您推荐以下内容：
-      %br
-      - %w(如何加入天天特价 淘宝网天天特价首页 淘抢购 天天特价活动报名 淘宝特卖 天天特卖).each do |k|
-        %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank", rel: "nofollow"} #{k}
-        |
-      - if !@meta[:articles].nil?
-        - @meta[:articles].each do |sac|
-          %a{href: "/article/#{sac[:id]}.html"} #{sac[:title]}
-          |
-      天天特价
     %h2 今日推荐
     - %w(zara 连衣裙 hm t恤女 牛仔裤 衬衫 牛仔裤女 女装 t恤女短袖 运动裤女 白色t恤女 牛仔外套女 短袖女 运动套装女 风衣 衬衫女 外套 防晒衣 半身裙 卫衣女).each do |k|
       %a{href: "/amp/qq/#{URI.encode(k)}/"} #{k}
-    %h2 今日特价
-    %p
-      为您推荐以下内容：
-      %br
-      - %w(淘宝9.9元天天特价 搜狗天天特价 特价一天官网 特价批发网 天天特价批发).each do |k|
-        %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank", rel: "nofollow"} #{k}
-        |
-      今日特价
 = render partial: "diyquan/home_footer", locals: {links: @links}
