@@ -1,0 +1,53 @@
+- title("【#{@shop_name}】#{@shop_name}优惠券/折扣/首页/评价怎么样_爱券网")
+- head_desc("#{@desc} - 爱券网")
+- keywords("#{@shop_name},#{@shop_name}首页,#{@shop_name}优惠券,#{@shop_name}折扣,#{@shop_name}怎么样,#{@shop_name}评价")
+- path(@path)
+- h1("#{@shop_name}")
+
+.wrapper
+  = render partial: "m_diyquan/header", locals: {need_sort: false, need_ads: true}
+  .sno
+    = render partial: "dianpu/shop_bread", locals: {title: @shop_name}
+  .shop-header
+    %h2 #{@shop_name}
+    %p.sno #{@desc}
+
+  %a{href: "#", target: "_blank", rel: "nofollow"}
+    .coupon
+      %span.new-product 今日上新
+      %span.go-coupon 进店看看
+  %div{style: "margin-top: 20px;"}
+    %a{href: "#", data:{type: 2, tmpl:"336x280", tmplid:"53",rd: "2",style:"2", border: "1"}, biz:{keyword: '女装'}}
+  - if @coupons.size > 0
+    - @coupons.each do |sc|
+      %a{href: "javascript:;", title: "#{@shop_name}#{sc["discount"]}元优惠券", target: "_blank"}
+        .coupon
+          %span.amount
+            %s ￥
+            %b #{sc["discount"]}
+          %span.time
+            %s
+              %i 优惠券
+              使用条件
+            %b 满#{sc["quota"]}元可用
+          %span.go-coupon 立即领券
+
+  .cate-section{style: "display:block"}
+    .coupon-list
+      - @products.each do |coupon|
+        %a{href: "http://www.uuhaodian.com/jd/#{coupon["item_id"]}/", title: "#{coupon['title']}", target: "_blank"}
+          .product-item-t2
+            %img.pic.lazy{data: {original: "#{coupon['pict_url']}"}, style: "width:100%;"}
+            %p.title
+              %span.post-free 京东
+              #{coupon['title']}
+            .price-area
+              %p.gap-price
+                折扣
+              .price
+                %span> 到手价￥
+                %em.number-font #{coupon['lowest_price']}
+
+
+  = render partial: "m_diyquan/page_js", locals: {path: '/getSearchCouponList', pinyin: '', keyword: @cid3s[0]["cname3"], pagesize: 20, sort_type: 0}
+  = render partial: "layouts/taobao_mobile_js"

@@ -1,4 +1,27 @@
 class DianpuController < ApplicationController
+  def jd_show
+    return if redirect_pc_to_mobile
+    s = JdShop.where(shop_id: params[:id].to_i).select(:id, :content).take
+    not_found if s.nil?
+    c = JSON.parse(s.content)
+    d = c["result"]
+    @shop_id = d["shop_id"]
+    @shop_name = d["shop_name"]
+    @coupons = d["coupons"]
+    @products = d["products"]
+    @brands = d["brands"]
+    @cid3s = d["cid3s"]
+    @related = d["related"]
+    @desc = "#{@shop_name}是一家经营信誉良好、获得消费者广泛好评的一家京东店铺。#{@shop_name}主要经营：#{@cid3s.map{|c| c["cname3"]}.join('，')}。店内正在销售#{@brands.map{|b| b["brand_name"]}.join('，')}品牌商品。近日店铺有优惠券发放，欢迎大家关注！#{@coupons.map{|c| "满#{c["quota"]}元减#{c["discount"]}元"}.join('、')} 热销商品有：#{@products.sample(3).map{|r| r["title"]}.join('，')} 喜欢的话常来店铺逛逛呀！"
+    @path = "#{request.path}/"
+    @suggest_keywords = @cid3s.map{|c| c["cname3"]}
+    if is_device_mobile?
+      render "m_jd_show", layout: "m_diyquan"
+    else
+      render "jd_show", layout: "diyquan"
+    end
+  end
+
   def show
     if is_robot?
       return if redirect_pc_to_mobile
@@ -37,17 +60,17 @@ class DianpuController < ApplicationController
   def map_s
     @page = params[:page].to_i
     @page = @page == 0 ? 0 : @page - 1
-    @shops = Shop.order("id desc").limit(1000).offset(1000 * @page).select(:title, :nick).to_a
+    @shops = JdShop.order("id desc").limit(1000).offset(1000 * @page).select(:id, :shop_id, :shop_name).to_a
     not_found if @shops.size.zero?
     if @page > 0
-      @title = "淘宝天猫旗舰店排行榜_爱券网_第#{@page}页"
+      @title = "淘宝天猫京东旗舰店排行榜_爱券网_第#{@page}页"
     else
-      @title = "淘宝天猫旗舰店排行榜_爱券网"
+      @title = "淘宝天猫京东旗舰店排行榜_爱券网"
     end
     @total_page = @page + 20
-    @h1 = "淘宝天猫旗舰店排行榜"
-    @keywords = "天猫旗舰店,淘宝店铺,淘宝店铺大全,淘宝店铺排行榜"
-    @description = "淘宝天猫旗舰店排行榜，女装、男装、居家、数码、美妆、箱包、母婴、宠物、配饰等多种类别的淘宝天猫店铺大排行，淘宝天猫店铺用户评价，卖的商品怎么样？店铺打折信息，内部优惠券，这里都查得到 - 爱券网"
+    @h1 = "淘宝天猫京东旗舰店排行榜"
+    @keywords = "京东旗舰店,天猫旗舰店,淘宝店铺,淘宝店铺大全,淘宝店铺排行榜"
+    @description = "淘宝天猫京东旗舰店排行榜，女装、男装、居家、数码、美妆、箱包、母婴、宠物、配饰等多种类别的淘宝天猫店铺大排行，淘宝天猫店铺用户评价，卖的商品怎么样？店铺打折信息，内部优惠券，这里都查得到 - 爱券网"
     @path = "/dianpu/"
     render "map_s", layout: "diyquan"
   end

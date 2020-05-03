@@ -1,0 +1,74 @@
+- title("【#{@shop_name}】#{@shop_name}优惠券/折扣/首页/评价怎么样_爱券网")
+- head_desc("#{@desc} - 爱券网")
+- keywords("#{@shop_name},#{@shop_name}首页,#{@shop_name}优惠券,#{@shop_name}折扣,#{@shop_name}怎么样,#{@shop_name}评价")
+- path(@path)
+- mobile_url(@path)
+- h1("#{@shop_name}")
+
+- if @suggest_keywords.size > 0
+  = render partial: "diyquan/suggest_keywords", locals: {keywords: @suggest_keywords}
+
+.wrapper.zk-detail
+  .wrapper-l.zk-main
+    = render partial: "dianpu/shop_bread", locals: {title: @shop_name}
+    .shop
+      .shop-cover
+        %img.shop-cover-img{src:"#{@products[0]["pict_url"]}", alt: "#{@shop_name}"}
+        %p.shop-cover-p 
+          %strong #{@shop_name}
+      .shop-info
+        %p.shop-info-h1 #{@shop_name}
+        %p.shop-desc 
+          #{@desc}
+        .shop-buy
+          %a.shop-buy-a{href: "#", title: "#{@shop_name}", rel: "nofollow", target: "_blank"} 去看看
+  .wrapper-r
+    .rel-zk-area{style: "margin-top: 60px"}
+      %p.head
+        %span 店铺优惠券
+        %a.more-his{href: "/", title: "淘宝优惠券网站"} 去抢热门券 - GO
+      .hot-zk-list.clearfix.swiper-container.swiper-container-horizontal{style: "overflow:scroll;"}
+        - @coupons.each do |coupon|
+          %div{style: "height:30px;line-height:30px;border-bottom:1px solid #f7f7f7;padding: 0 10px;"}
+            优惠券#{coupon["discount"]}元 - 满#{coupon["quota"]}元可用
+
+
+- if @products && @products.size > 0
+  .wrapper
+    .rel-zk-area{style: "margin-bottom: 30px;"}
+      %p.head
+        %span #{@shop_name}优惠折扣商品
+      .rel-zk-list.clearfix
+        - @products.each do |coupon|
+
+          .zk-item
+            %a{href: "http://www.uuhaodian.com/jd/#{coupon["item_id"]}/", title: "#{coupon['title']}", target: "_blank"}
+              .img-area
+                %img.lazy{src: "#{coupon['pict_url']}", alt: "#{coupon['title']}", style: "opacity: 1;"}
+          
+              %p.title-area.elli
+                %span.post-free 京东
+                #{coupon['title']}
+              .raw-price-area
+                原价 ￥#{coupon['o_price']}
+                %p.sold 已售 #{coupon['sales']} 件
+              .info
+                .price-area
+                  %span.price 
+                    %span>￥
+                    %em.number-font #{coupon['lowest_price'].to_i}
+                    %em.decimal> .#{coupon['lowest_price'].to_f.round(2).to_s.sub(/\d+\./,'')}
+                %span.coupon_click 折扣
+
+.wrapper
+  .rel-zk-area{style: "margin-bottom: 30px;"}
+    %p.head
+      %span 推荐店铺
+    .rel-zk-list.clearfix
+      - @related.each do |shop|
+        .shop-item
+          %a{href: "/dianpu/jd_#{shop["id"]}/", title: "#{shop["name"]}"}
+            %img.shop-item-img{src: "/image/love.jpg", alt: "#{shop["name"]}"}
+            %p.shop-item-p #{shop["name"]}
+
+= render partial: "diyquan/footer"

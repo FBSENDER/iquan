@@ -89,3 +89,7 @@ end
 class MeizhuangProduct < ApplicationRecord
   self.table_name = 'meizhuang_products'
 end
+
+class JdShop < ApplicationRecord 
+  self.table_name = 'jd_shop_seo_jsons'
+end
