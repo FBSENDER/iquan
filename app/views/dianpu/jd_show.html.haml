@@ -13,7 +13,7 @@
     = render partial: "dianpu/shop_bread", locals: {title: @shop_name}
     .shop
       .shop-cover
-        %img.shop-cover-img{src:"#{@products[0]["pict_url"]}", alt: "#{@shop_name}"}
+        %img.shop-cover-img{src:"#{@products.size > 0 ? @products[0]["pict_url"] : '/image/love.jpg'}", alt: "#{@shop_name}"}
         %p.shop-cover-p 
           %strong #{@shop_name}
       .shop-info
