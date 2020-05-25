@@ -3,6 +3,62 @@
 </div>
 <script type="text/javascript">
 var globalChannel = 27;
+var couponList = $('#couponList'),loadingText = $('.loading-text');
+var page = 1,pagesize = <%= pagesize %>,load = 1,channel = 27;
+var createCouponList = function(cl,obj,channel,gaPage){
+    gaPage = gaPage || '未知';
+    var htmlstr = '<div>';
+    for(var i=0,len=cl.length;i<len;i++){
+        var z = cl[i];
+        var platform = '',platformPic = '';
+        htmlstr += '<div class="zk-item">';
+        htmlstr += '<div class="img-area">';
+        htmlstr += '<a target="_blank" href="/yh/' + z.itemId+ '/">';
+        htmlstr += '<div class="lq">';
+        htmlstr += '<div class="lq-t">';
+        htmlstr += '<p class="lq-t-d1">领优惠券</p>';
+        htmlstr += '<p class="lq-t-d2">省<span>'+ parseInt(z.couponMoney) +'</span>元</p>';
+        htmlstr += '</div>';
+        htmlstr += '<div class="lq-b"></div>';
+        htmlstr += '</div>';
+        htmlstr += '<img class="lazy new" data-original="'+ z.coverImage +'" alt="'+z.title +'">';
+        htmlstr += '</a>';
+        htmlstr += '</div>';
+        htmlstr += '<p class="title-area elli">';
+        htmlstr +=  z.title +'</p>';
+        htmlstr += '<div class="raw-price-area">现价：&yen;'+ z.price +'<p class="sold">'+ z.subtitle +'</p></div>';
+        htmlstr += '<div class="info">';
+        htmlstr += '<div class="price-area">';
+        htmlstr += '<span class="price">&yen;<em class="number-font">'+ z.nowPrice.toString().split('.')[0] +'</em>';
+        htmlstr += '<em class="decimal">'+(z.nowPrice.toString().split('.').length>1?'.'+z.nowPrice.toString().split('.')[1]:'')+'</em><i></i></span>';
+        htmlstr += '</div>';
+        htmlstr += '<div class="buy-area">';
+        htmlstr += '<a rel="nofollow" target="_blank" href="/yh/'+ z.itemId +'/">';
+        htmlstr += '<span class="coupon-amount">去淘宝</span>';
+        htmlstr += '<span class="btn-title">火速领券</span>';
+        htmlstr += '</a>';
+        htmlstr += '</div>';
+        htmlstr += '</div>';
+        htmlstr += '</div>';
+    }
+    htmlstr += '</div>';
+    htmlstr = $(htmlstr);
+    obj.append(htmlstr);
+    Util.lazyLoad('lazy.new');
+    $('.lazy.new').removeClass('new');
+}
+var callback = function(data){
+  if(data.status.code == 1001){
+    createCouponList(data.result,couponList,channel,'首页');
+    if(data.result.length >= pagesize){
+      page ++;
+      load = 1;
+      loadingText.html('查看更多优惠券');
+    }else{
+      loadingText.html('没有更多了');
+    }
+  }
+};
 $(function(){
   var sw = new Swiper('.banner-area',{
     autoplay: 3000,
@@ -12,8 +68,6 @@ $(function(){
 
   //Util.sideFixedMenu($('<%= wclass %>'));
 
-  var couponList = $('#couponList'),loadingText = $('.loading-text');
-  var page = 1,pagesize = <%= pagesize %>,load = 1,channel = 27;
 
   $(document).on('scroll',function(){
     if(page%4 > 0){
@@ -30,6 +84,7 @@ $(function(){
     getCouponList();
   });
 
+
   function getCouponList(){
     if(!load){
       return;
@@ -37,30 +92,21 @@ $(function(){
     $.ajax({
       url: '<%= path %>',
       type: 'GET',
-      dataType: 'json',
+      dataType: 'jsonp',
       data:{
         'pinyin': '<%= pinyin || '' %>',
         'keyword': '<%= keyword || ''%>',
         'sort_id': '<%= keyword || ''%>',
         'price': '<%= keyword || ''%>',
         'page':page,
-        'pagesize':pagesize
+        'pagesize':pagesize,
+        'callback': 'callback'
       },
       beforeSend:function(){
         load = 0;
         loadingText.html('努力加载中...');
       },
       success:function(data){
-        if(data.status == 1){
-          Util.createCouponList(data.data.coupon_list,couponList,channel,'首页');
-          if(data.data.coupon_list.length >= pagesize){
-            page ++;
-            load = 1;
-            loadingText.html('查看更多优惠券');
-          }else{
-            loadingText.html('没有更多了');
-          }
-        }
       }
     });
   }
@@ -77,5 +123,6 @@ $(function(){
       $('.s-tab .content p[data-index='+i+']').addClass('active');
     }
   });
+  getCouponList();
 });
 </script>

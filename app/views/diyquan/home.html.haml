@@ -1,11 +1,11 @@
-- title("打折促销活动,便宜好货超值购,全网网购优惠券_17430优惠券")
-- head_desc("17430优惠券（www.17430.com.cn）为大家筛选全网的打折促销活动，天天有便宜好货等着您！这里有超值购、人工精选的全网优惠券、网购优惠券、店铺优惠券，找打折促销，就来17430优惠券！")
-- keywords("17430优惠券,优惠券,网购优惠券,全网优惠券,促销,打折促销,便宜好货,超值购")
+- title("618打折促销活动,便宜好货超值购,全网网购优惠券_17430优惠券")
+- head_desc("17430优惠券（www.17430.com.cn）为大家筛选618全网的打折促销活动，天天有便宜好货等着您！这里有超值购、人工精选的全网优惠券、网购优惠券、店铺优惠券，找打折促销，就来17430优惠券！")
+- keywords("17430优惠券,优惠券,网购优惠券,全网优惠券,618促销,打折促销,便宜好货,超值购")
 - h1("17430优惠券")
 
 = render partial: "diyquan/home_adzone"
 .wrapper.home-wrapper
   = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/load_more", locals: {path: '/getHomeCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
+  = render partial: "diyquan/load_more", locals: {path: 'https://api.uuhaodian.com/uu/home_list', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
 
 = render partial: "diyquan/home_footer"
