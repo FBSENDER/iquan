@@ -45,6 +45,7 @@ class DianpuController < ApplicationController
     @suggest_keywords = []
     @path = "#{request.path}/"
     @shops = Shop.where("id > ?", @shop.id).order("id").select(:nick,:pic_url,:title).limit(15)
+    @jd_shops = JdShop.where("id > ?", @shop.id / 20).select(:shop_id, :shop_name).limit(15)
     @scoupons = []
     if is_device_mobile?
       render "m_show", layout: "m_diyquan"

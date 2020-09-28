@@ -68,7 +68,7 @@
       - @related.each do |shop|
         .shop-item
           %a{href: "/dianpu/jd_#{shop["id"]}/", title: "#{shop["name"]}"}
-            %img.shop-item-img{src: "/image/love.jpg", alt: "#{shop["name"]}"}
+            %img.shop-item-img{src: "/image/love.jpg"}
             %p.shop-item-p #{shop["name"]}
 
 = render partial: "diyquan/footer"
