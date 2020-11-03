@@ -27,4 +27,13 @@
       相关推荐：
       - @keywords.split(',').each do |k|
         %strong #{k}
+  .rel-zk-area{style: "margin-bottom: 30px;"}
+    %p.head
+      %span 店铺推荐
+    .rel-zk-list.clearfix
+      - @shops.each do |shop|
+        .shop-item
+          %a{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"}
+            %img.shop-item-img{src: "#{shop.img_url}"}
+            %p.shop-item-p #{shop.shop_name}
 = render partial: "diyquan/outlink_footer", locals: {links: @links, outlinks: @outlinks}

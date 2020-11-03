@@ -16,4 +16,14 @@
   = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
   = render partial: "diyquan/lanlan_load_more", locals: {path: 'https://api.uuhaodian.com/uu/home_list', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 
+  .rel-zk-area{style: "margin-bottom: 30px;"}
+    %p.head
+      %span 精选店铺推荐
+    .rel-zk-list.clearfix
+      - @shops.each do |shop|
+        .shop-item
+          %a{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"}
+            %img.shop-item-img{src: "#{shop.img_url}"}
+            %p.shop-item-p #{shop.shop_name}
+
 = render partial: "diyquan/home_footer", locals: {links: @links}

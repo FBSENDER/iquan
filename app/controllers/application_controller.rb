@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   $coupon_9kuai9_data = {}
   $cate_data = {}
   $hot_keywords_data = {}
+  $jd_shops = {}
 
   def is_baiduspider?
     user_agent = request.headers["HTTP_USER_AGENT"]
@@ -173,6 +174,14 @@ class ApplicationController < ActionController::Base
       end
     end
     return $hot_keywords_data["keywords"]
+  end
+
+  def get_jd_shops
+    if $jd_shops["update_at"].nil? || $jd_shops["shops"].nil? || $jd_shops["shops"].size.zero? || Time.now.to_i - $jd_shops["update_at"] > 3600
+      $jd_shops["shops"] = JdShop.where(status: 1).select(:shop_id, :shop_name, :img_url).offset(10 * rand(5000)).limit(10)
+      $jd_shops["update_at"] = Time.now.to_i
+    end
+    return $jd_shops["shops"]
   end
 
 end

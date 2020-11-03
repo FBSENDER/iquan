@@ -209,6 +209,7 @@ class HomeController < ApplicationController
     @banners = Banner.where(status: 1).select(:link_url, :img_url).order("id desc").limit(5)
     @coupons_9kuai9 = get_coupon_9kuai9_data
     @links = Link.where(status: 1).to_a
+    @shops = get_jd_shops
     render "diyquan/home", layout: "layouts/diyquan"
   end
   def m_diyquan_home

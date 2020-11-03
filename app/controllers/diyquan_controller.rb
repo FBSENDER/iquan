@@ -98,7 +98,8 @@ class DiyquanController < ApplicationController
       @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
       @cats = infos && infos["r_cats"] ? infos["r_cats"] : []
       @selectors = infos && infos["selector"] ? infos["selector"] : []
-      @shops = []
+      rr = rand(10)
+      @shops = get_jd_shops
       @sort_type = sort_type
     end
     @path = request.path + "/"
@@ -242,6 +243,7 @@ class DiyquanController < ApplicationController
     @links = Page.select(:anchor, :url)
     @outlinks = OutLink.where(url: request.url).select(:keyword, :outurl)
     @h1 = @page_info.anchor
+    @shops = get_jd_shops
     if is_device_mobile?
       render "m_diyquan/page", layout: "layouts/m_diyquan"
     else
