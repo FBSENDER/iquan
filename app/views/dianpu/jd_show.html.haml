@@ -13,7 +13,7 @@
     = render partial: "dianpu/shop_bread", locals: {title: @shop_name}
     .shop
       .shop-cover
-        %img.shop-cover-img{src:"#{@products.size > 0 ? @products[0]["pict_url"] : '/image/love.jpg'}", alt: "#{@shop_name}"}
+        %img.shop-cover-img{src:"#{@img_url}", alt: "#{@shop_name}"}
         %p.shop-cover-p 
           %strong #{@shop_name}
       .shop-info
@@ -21,7 +21,7 @@
         %p.shop-desc 
           #{@desc}
         .shop-buy
-          %a.shop-buy-a{href: "#", title: "#{@shop_name}", rel: "nofollow", target: "_blank"} 去看看
+          %a.shop-buy-a{href: "#{@hurl}", title: "#{@shop_name}", rel: "nofollow", target: "_blank"} 去看看
   .wrapper-r
     .rel-zk-area{style: "margin-top: 60px"}
       %p.head
@@ -68,7 +68,17 @@
       - @related.each do |shop|
         .shop-item
           %a{href: "/dianpu/jd_#{shop["id"]}/", title: "#{shop["name"]}"}
-            %img.shop-item-img{src: "/image/love.jpg"}
+            %img.shop-item-img{src: "#{shop["img_url"].nil? || shop["img_url"].empty? ? "/image/love.jpg" : shop["img_url"]}"}
+            %p.shop-item-p #{shop["name"]}
+
+  .rel-zk-area{style: "margin-bottom: 30px;"}
+    %p.head
+      %span 更多店铺
+    .rel-zk-list.clearfix
+      - @more.each do |shop|
+        .shop-item
+          %a{href: "/dianpu/jd_#{shop["id"]}/", title: "#{shop["name"]}"}
+            %img.shop-item-img{src: "#{shop["img_url"].nil? || shop["img_url"].empty? ? "/image/love.jpg" : shop["img_url"]}"}
             %p.shop-item-p #{shop["name"]}
 
 = render partial: "diyquan/footer"

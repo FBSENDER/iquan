@@ -23,7 +23,7 @@
         %span.price 
           %span>￥
           %em.number-font #{now_price.to_i}
-          %em.decimal> .#{now_price.to_s.sub(/\d+\./,'')}
+          %em.decimal> .#{now_price.round(2).to_s.sub(/\d+\./,'')}
           - if coupon_price > 0
             %i
       - if coupon_price > 0

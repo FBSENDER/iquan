@@ -1,20 +1,29 @@
 class DianpuController < ApplicationController
   def jd_show
     return if redirect_pc_to_mobile
-    s = JdShop.where(shop_id: params[:id].to_i).select(:id, :content).take
+    s = JdShop.where(shop_id: params[:id].to_i).select(:id, :content, :img_url).take
     not_found if s.nil?
     c = JSON.parse(s.content)
     d = c["result"]
     @shop_id = d["shop_id"]
     @shop_name = d["shop_name"]
+    @img_url = s.img_url.nil? || s.img_url.empty? ? "/image/love.jpg" : s.img_url
     @coupons = d["coupons"]
     @products = d["products"]
     @brands = d["brands"]
     @cid3s = d["cid3s"]
-    @related = d["related"]
+    @related = d["related"] || []
+    @more = d["more"] || []
     @desc = "#{@shop_name}是一家经营信誉良好、获得消费者广泛好评的一家京东店铺。#{@shop_name}主要经营：#{@cid3s.map{|c| c["cname3"]}.join('，')}。店内正在销售#{@brands.map{|b| b["brand_name"]}.join('，')}品牌商品。近日店铺有优惠券发放，欢迎大家关注！#{@coupons.map{|c| "满#{c["quota"]}元减#{c["discount"]}元"}.join('、')} 热销商品有：#{@products.sample(3).map{|r| r["title"]}.join('，')} 喜欢的话常来店铺逛逛呀！"
     @path = "#{request.path}/"
-    @suggest_keywords = @cid3s.map{|c| c["cname3"]}
+    @suggest_keywords = @cid3s.map{|c| c["cname3"]} + @brands.map{|b| b["brand_name"]}
+
+    url = "https://mall.jd.com/index-#{@shop_id}.html"
+    if is_device_mobile?
+      url = "https://shop.m.jd.com/?shopId=#{@shop_id}"
+    end
+    @hurl = "http://www.uuhaodian.com/jddiybuy?jd_channel=18&url=#{URI.encode_www_form_component(url)}"
+
     if is_device_mobile?
       render "m_jd_show", layout: "m_diyquan"
     else
@@ -45,7 +54,7 @@ class DianpuController < ApplicationController
     @suggest_keywords = []
     @path = "#{request.path}/"
     @shops = Shop.where("id > ?", @shop.id).order("id").select(:nick,:pic_url,:title).limit(15)
-    @jd_shops = JdShop.where("id > ?", @shop.id / 20).select(:shop_id, :shop_name).limit(15)
+    @jd_shops = JdShop.where("id > ? and status = 1", @shop.id / 20).select(:shop_id, :shop_name).limit(15)
     @scoupons = []
     if is_device_mobile?
       render "m_show", layout: "m_diyquan"
@@ -61,7 +70,7 @@ class DianpuController < ApplicationController
   def map_s
     @page = params[:page].to_i
     @page = @page == 0 ? 0 : @page - 1
-    @shops = JdShop.order("id desc").limit(1000).offset(1000 * @page).select(:id, :shop_id, :shop_name).to_a
+    @shops = JdShop.where(status: 1).order("id desc").limit(1000).offset(1000 * @page).select(:id, :shop_id, :shop_name).to_a
     not_found if @shops.size.zero?
     if @page > 0
       @title = "淘宝天猫京东旗舰店排行榜_爱券网_第#{@page}页"

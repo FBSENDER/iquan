@@ -12,7 +12,7 @@
     %h2 #{@shop_name}
     %p.sno #{@desc}
 
-  %a{href: "#", target: "_blank", rel: "nofollow"}
+  %a{href: "#{@hurl}", target: "_blank", rel: "nofollow"}
     .coupon
       %span.new-product 今日上新
       %span.go-coupon 进店看看
@@ -20,7 +20,7 @@
     %a{href: "#", data:{type: 2, tmpl:"336x280", tmplid:"53",rd: "2",style:"2", border: "1"}, biz:{keyword: '女装'}}
   - if @coupons.size > 0
     - @coupons.each do |sc|
-      %a{href: "javascript:;", title: "#{@shop_name}#{sc["discount"]}元优惠券", target: "_blank"}
+      %a{href: "#{@hurl}", title: "#{@shop_name}#{sc["discount"]}元优惠券", target: "_blank"}
         .coupon
           %span.amount
             %s ￥
