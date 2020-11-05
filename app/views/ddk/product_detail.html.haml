@@ -18,7 +18,7 @@
     %p.head
       %span 更多推荐
     .zk-list.clearfix#couponList
-    = render partial: "ddk_load_more", locals: {path: @path, pagesize: 20, sort_type: 0, pinyin: '', keyword: @detail["category"], cid: 0,sort: 7, type: 0}
+    = render partial: "diyquan/lanlan_load_more", locals: {path: 'https://api.uuhaodian.com/uu/home_list', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 
 = render partial: "footer"
 
