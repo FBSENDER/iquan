@@ -277,3 +277,13 @@ footer p{
   font-size: 16px;
   line-height: 1.5;
 }
+.article ul li{
+  line-height: 35px;
+}
+.article p{
+  padding: 10px 20px;
+}
+.article img{
+  width: 70%;
+  margin: 10px 15%;
+}
