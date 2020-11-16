@@ -1,0 +1,70 @@
+- title("【#{@k}】#{@k}价格/图片/品牌_便宜网购商城")
+- head_desc(@desc)
+- keywords("#{@k},#{@k}价格,#{@k}图片,#{@k}品牌,#{@k}店铺") 
+- path("/wp/#{@id}.html")
+- mobile_url("http://m.17430.com.cn/wp/#{@id}.html")
+
+%header
+  .navbar.hn
+    .container
+      %a.hlink{href: "/"} 便宜网购商城
+      %a.hlink{href: "/map/keyword/k1.html"} 商品推荐
+      %a.hlink{href: "/map/shop/s1.html"} 店铺推荐
+  %nav
+    .container
+      %a{href: "/", title: "便宜网购商城"} 首页
+      >
+      %a{href: "/map/keyword/k1.html"} 商品推荐
+      >
+      %h1 #{@k}
+
+%article.container
+  .columns
+    - @products.each do |pr|
+      - t1 = pr["short_title"].empty? ? pr["title"] : pr["short_title"]
+      - t1 = @base.inject(t1){|t, b| t.gsub(b, "<span class=\"H\">#{b}</span>")}
+        
+      .col-3.col-sm-6
+        .item
+          %a{href: "/yh/#{pr["item_id"]}/", alt: "#{pr["title"]}",rel: "nofollow"}
+            %img.img-responsive{src: "#{pr["pict_url"]}"}
+          %a{href: "/yh/#{pr["item_id"]}/", rel: "nofollow"}
+            %p.t #{t1.html_safe}
+          %p.d 价格：#{pr["zk_final_price"]}元
+          %p.d 店铺与品牌: #{pr["shop_title"]}
+          %p.d 商品优惠: #{pr["coupon_info"].empty? ? "暂无" : pr["coupon_info"]}
+          - unless pr["item_description"].empty?
+            %p.t #{pr["item_description"]}
+  %p.c
+    这些就是为你推荐的关于
+    %span.H #{@k}
+    的商品，可以查看其今日的售价以及正在进行的优惠活动，同时也可以看到
+    %span.H #{@k}
+    对应的店铺和品牌。
+    %br
+    - if @products.size > 0
+      点击查看更多
+      %a{href: "https://www.iquan.net/zhekou/#{URI.encode_www_form_component(@products[0]["category_name"].split('/')[0])}/"}
+        %span.H #{@products[0]["category_name"].split('/')[0]}
+      ，关于优惠券请点击
+      %a{href: "http://www.shikuaigou.com/zhekou/#{URI.encode_www_form_component(@products[0]["category_name"].split('/')[0])}/", title: "#{@products[0]["category_name"].split('/')[0]}优惠券"}
+        %span.H 这里
+      。
+
+  %p.c
+    您可能还在找：
+    - @ks.each do |w|
+      %a{href: "/wp/#{w.id}.html"} #{w.keyword}
+  %p.c
+    店铺推荐：
+    - @ss.each do |s|
+      %a{href: "/ws/#{s.id}.html"} #{s.nick}
+%aside.container
+  = render partial: "friend_link"
+
+%footer.container
+  %hr
+  %p.text-center
+    便宜网购商城为您推荐全网又新又全的
+    %span.H #{@k}
+    www.17430.com.cn

@@ -4,20 +4,23 @@
       .yl
         %p.head 友情链接：
         .yl-links
-          %a{href: "https://www.iquan.net", target: "_blank"} 优惠券
-          %a{href: "http://www.shikuaigou.com", target: "_blank"} 天天特价
-          %a{href: "http://www.vxixi.com", target: "_blank"} 羽毛球
+          %a{href: "https://www.uuhaodian.com", target: "_blank"} 京东优惠券
+          %a{href: "https://www.iquan.net", target: "_blank"} 优惠券网站
+          %a{href: "http://www.shikuaigou.com", target: "_blank"} 福利购
+          %a{href: "http://www.xiongmao123.com", target: "_blank"} 装饰画
           %a{href: "http://www.jidanguo.top", target: "_blank"} 百香果
-          %a{href: "http://www.ddzhusu.com", target: "_blank"} 滴滴住宿
+          %a{href: "http://www.ddzhusu.com", target: "_blank"} 特色民宿客栈
+          %a{href: "http://www.vxixi.com", target: "_blank"} 羽毛球
+          %a{href: "http://www.gouwuzhinan.cn", target: "_blank"} 购物指南
           - @kk.each do |k|
-            %a{href: "/wp/#{k[0]}.html"} #{k[1]}
+            %a{href: "/wp/#{k.id}.html"} #{k.keyword}
       .logo-slogan
-        .qr-code
-          %a{href: "/", title: "全网优惠券"}
-            %img{src: "/image/love1.jpg"}
+        .qr-code{style: "width: 120px;height:120px;"}
+          %a{href: "/", title: "便宜网购商城"}
+            %img{src: "https://www.uuhaodian.com/img/lbanner1.png", style: "width: 116px;height:116px;"}
         .txt
-          %p.s1 全网优惠券
+          %p.s1 关注公众号
           %p.s2 便宜好货超值购！
   .footer-bootom
     .wrapper
-      %p 打折促销活动,便宜好货超值购,全网网购优惠券 - 17430优惠券
+      %p 2020淘宝双十二来袭 - 特价折扣平台 - 便宜网购商城
