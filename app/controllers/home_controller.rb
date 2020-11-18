@@ -130,10 +130,11 @@ class HomeController < ApplicationController
       #redirect_to "https://mobile.yangkeduo.com/duo_cms_mall.html?pid=1781779_28436974&cpsSign=CM1781779_28436974_f3988bbc4a1c69301e6ccc9941f8c54c&duoduo_type=2", status: 302
       return
     end
-    if @@compete_brands.nil? || Time.now.to_i % 600 == 0
-      @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
-    end
-    @compete_brands = @@compete_brands
+    #if @@compete_brands.nil? || Time.now.to_i % 600 == 0
+    #  @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
+    #end
+    #@compete_brands = @@compete_brands
+    @compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
     if !is_robot? 
       if is_device_mobile?
         #redirect_to "https://www.iquan.net"
