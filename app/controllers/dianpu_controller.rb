@@ -70,14 +70,14 @@ class DianpuController < ApplicationController
   def map_s
     @page = params[:page].to_i
     @page = @page == 0 ? 0 : @page - 1
-    @shops = JdShop.where(status: 1).order("id desc").limit(1000).offset(1000 * @page).select(:id, :shop_id, :shop_name).to_a
+    @shops = JdShop.where(status: 1).limit(100).offset(100 * @page).select(:id, :shop_id, :shop_name).to_a
     not_found if @shops.size.zero?
     if @page > 0
       @title = "淘宝天猫京东旗舰店排行榜_爱券网_第#{@page}页"
     else
       @title = "淘宝天猫京东旗舰店排行榜_爱券网"
     end
-    @total_page = @page + 20
+    @total_page = @page + 20 > 548 ? 548 : @page + 20
     @h1 = "淘宝天猫京东旗舰店排行榜"
     @keywords = "京东旗舰店,天猫旗舰店,淘宝店铺,淘宝店铺大全,淘宝店铺排行榜"
     @description = "淘宝天猫京东旗舰店排行榜，女装、男装、居家、数码、美妆、箱包、母婴、宠物、配饰等多种类别的淘宝天猫店铺大排行，淘宝天猫店铺用户评价，卖的商品怎么样？店铺打折信息，内部优惠券，这里都查得到 - 爱券网"

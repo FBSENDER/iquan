@@ -11,7 +11,15 @@
     .wrapper
       - @shops.each do |shop|
         %a{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"} #{shop.shop_name}
-      - (@page..@total_page).to_a.each do |page|
-        %a{href: "/dianpu/?page=#{page}"} #{page}
+    .wrapper{style: "margin-top: 20px;"}
+      %hr
+      %a{href: "/dianpu/"} 首页
+      - if @total_page - @page < 20
+        - ((@total_page-20)..@total_page).to_a.each do |page|
+          %a{href: "/dianpu/?page=#{page}"} #{page}
+      - else
+        - (@page..@total_page).to_a.each do |page|
+          %a{href: "/dianpu/?page=#{page}"} #{page}
+      %a{href: "/dianpu/?page=548"} 末页
 
 = render partial: "diyquan/footer"
