@@ -15,8 +15,7 @@ class AmpController < ApplicationController
     @page_keywords = "#{@keyword},#{@keyword}多少钱,#{@keyword}价格,#{@keyword}特价,#{@keyword}包邮,#{@keyword}打折"
     @path = "#{request.path}/"
     @h1 = @keyword
-    #@items = get_dg_items(@keyword)
-    @items = []
+    @items = get_dg_items(@keyword)
     infos = get_dg_keyword_infos(@keyword)
     @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
     @cats = infos && infos["r_cats"] ? infos["r_cats"] : []

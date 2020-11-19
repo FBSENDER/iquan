@@ -67,10 +67,10 @@ class DiyquanController < ApplicationController
     else
       @coupons = []
       @zhekous = []
-      #data  = get_tbk_search_json(@keyword, 1)
-      #if data["tbk_dg_material_optional_response"] && data["tbk_dg_material_optional_response"]["result_list"] && data["tbk_dg_material_optional_response"]["result_list"]["map_data"].size > 0
-      #  @zhekous = data["tbk_dg_material_optional_response"]["result_list"]["map_data"]
-      #end
+      data  = get_tbk_search_json(@keyword, 1)
+      if data["tbk_dg_material_optional_response"] && data["tbk_dg_material_optional_response"]["result_list"] && data["tbk_dg_material_optional_response"]["result_list"]["map_data"].size > 0
+        @zhekous = data["tbk_dg_material_optional_response"]["result_list"]["map_data"]
+      end
       @shops = []
       @sort_type = sort_type
     end
