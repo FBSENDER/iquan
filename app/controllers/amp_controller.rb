@@ -17,6 +17,10 @@ class AmpController < ApplicationController
     @h1 = @keyword
     #@items = get_dg_items(@keyword)
     @items = []
+    data  = get_tbk_search_json(@keyword, 1)
+    if data["tbk_dg_material_optional_response"] && data["tbk_dg_material_optional_response"]["result_list"] && data["tbk_dg_material_optional_response"]["result_list"]["map_data"].size > 0
+      @items = data["tbk_dg_material_optional_response"]["result_list"]["map_data"]
+    end
     infos = get_dg_keyword_infos(@keyword)
     @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
     @cats = infos && infos["r_cats"] ? infos["r_cats"] : []
@@ -44,5 +48,10 @@ class AmpController < ApplicationController
     else
       return nil
     end
+  end
+
+  def get_tbk_search_json(keyword, page_no)
+    tbk = Tbkapi::Taobaoke.new
+    JSON.parse(tbk.taobao_tbk_dg_material_optional(keyword, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, '6707', $taobao_app_id_material, $taobao_app_secret_material, $taobao_adzone_id_material, page_no, 20 ))
   end
 end
