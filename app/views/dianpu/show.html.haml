@@ -66,6 +66,7 @@
           %a{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"}
             %img.shop-item-img{src: "/image/love.jpg"}
             %p.shop-item-p #{shop.shop_name}
+  = render partial: "/layouts/link_for_top"
 
 - if @coupons && @coupons.size > 0
   .wrapper
@@ -80,6 +81,7 @@
       %span 热门优惠券
     .rel-zk-list.clearfix
       = render partial: "diyquan/quan_list", locals: {coupons: @hot_coupons}
+
 
 = render partial: "layouts/taobao_js"
 = render partial: "diyquan/quan_detail_js"

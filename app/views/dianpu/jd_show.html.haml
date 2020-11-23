@@ -81,4 +81,6 @@
             %img.shop-item-img{src: "#{shop["img_url"].nil? || shop["img_url"].empty? ? "/image/love.jpg" : shop["img_url"]}"}
             %p.shop-item-p #{shop["name"]}
 
+  = render partial: "/layouts/link_for_top"
+
 = render partial: "diyquan/footer"

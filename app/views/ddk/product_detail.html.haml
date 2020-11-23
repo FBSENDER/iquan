@@ -20,6 +20,8 @@
     .zk-list.clearfix#couponList
     = render partial: "diyquan/lanlan_load_more", locals: {path: 'https://api.uuhaodian.com/uu/home_list', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 
+  = render partial: "/layouts/link_for_top"
+
 = render partial: "footer"
 
 :javascript
