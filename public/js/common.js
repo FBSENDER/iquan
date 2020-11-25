@@ -359,18 +359,18 @@ Util.getBottomOperElements = function(obj){
 }
 
 $(function(){
-    Util.lazyLoad('lazy');
-    Util.zkItemTimeCount();
-    var toTop = function(){
-      Util.scrollToTop(100);
-    }
-    $('#backToTop').click(toTop);
-    $(window).on('scroll',function(){
-        var scrollTop = document.documentElement.scrollTop;
-        if(scrollTop > 1500){
-          $('#backToTop').fadeIn(100);
-        }else{
-          $('#backToTop').fadeOut(100);
-        }
-    });
+  var toTop = function(){
+    Util.scrollToTop(100);
+  }
+  $('#backToTop').click(toTop);
+  $(window).on('scroll',function(){
+      var scrollTop = document.documentElement.scrollTop;
+      if(scrollTop > 1500){
+        $('#backToTop').fadeIn(100);
+      }else{
+        $('#backToTop').fadeOut(100);
+      }
+  });
+  Util.lazyLoad('lazy.new');
+  $('.lazy.new').removeClass('new');
 });

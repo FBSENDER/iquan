@@ -54,7 +54,7 @@
       <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(-660px, 0px, 0px);">
         <% @banners.each do |banner| %>
           <a class="swiper-slide" href="<%= banner["link_url"] %>" target="_blank">
-            <img style="width: 100%;" src="<%= banner["img_url"]%>">
+            <img class="lazy new" style="width: 100%;" data-original="<%= banner["img_url"]%>">
           </a>
         <% end %>
       </div>

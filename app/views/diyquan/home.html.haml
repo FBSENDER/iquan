@@ -23,7 +23,7 @@
       - @shops.each do |shop|
         .shop-item
           %a{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"}
-            %img.shop-item-img{src: "#{shop.img_url}"}
+            %img.shop-item-img.lazy.new{data: {original: "#{shop.img_url}"}}
             %p.shop-item-p #{shop.shop_name}
 
   .rel-zk-area{style: "margin-bottom: 30px;"}
