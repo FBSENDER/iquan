@@ -4,10 +4,6 @@ class HomeController < ApplicationController
   $c1,$c2,$c3,$c4,$c5 = [],[],[],[],[]
   $cc1,$cc2,$cc3,$cc4,$cc5 = [],[],[],[],[]
   def index
-    #if request.host == "www.iquan.net" && is_baiduspider?
-    #  not_found
-    #  return
-    #end
     @pc_host = request.host
     if request.host == "www.guanew.net" || request.host == 'm.guanew.net'
       if $cc1.size.zero?
@@ -93,24 +89,11 @@ class HomeController < ApplicationController
       return
     end
     if request.host == "www.iquan.net" && is_device_mobile?
-      redirect_to "http://m.iquan.net", status: 302
+      redirect_to "http://ls.iquan.net", status: 302
       return
     end
     if request.host == "lanlan.iquan.net" || request.host == "m.iquan.net"
-      if is_robot?
-        render "lanlan_home", layout: nil
-      else
-        redirect_to "http://ls.iquan.net", status: 302
-        #redirect_to "https://mobile.yangkeduo.com/duo_cms_mall.html?pid=1781779_28436974&cpsSign=CM1781779_28436974_f3988bbc4a1c69301e6ccc9941f8c54c&duoduo_type=2", status: 302
-      end
-      return
-    end
-    if request.host == "wap.uuhaodian.com"
-      render "uuhaodian_home", layout: nil
-      return
-    end
-    if request.host == "zhaoquan.shop" && !is_robot?
-      render "zhaoquan_home", layout: nil
+      redirect_to "http://ls.iquan.net", status: 302
       return
     end
     if !is_robot? && request.host.include?("pinpai.iquan.net")
@@ -122,28 +105,26 @@ class HomeController < ApplicationController
     if @@compete_brands.nil? || Time.now.to_i % 600 == 0
       @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
     end
-    @compete_brands = @@compete_brands
     if !is_device_mobile? && request.host == "www.iquan.net"
-      #redirect_to "http://www.iquan.net/index.html"
+      file = Rails.root.join("public/seo_articles").join("iquan_pc_home.html")
+      if File.exists?(file) && !params[:is_refresh]
+        render inline: File.read(file), layout: nil
+        return
+      end
+      @compete_brands = @@compete_brands
       diyquan_home
-      #redirect_to "http://www.uuhaodian.com/?from=iquan_home"
       return
+    else
+      @compete_brands = @@compete_brands
     end
     if !is_robot? && is_device_mobile? && request.host == "m.iquan.net"
       redirect_to "http://ls.iquan.net"
-      #redirect_to "https://mobile.yangkeduo.com/duo_cms_mall.html?pid=1781779_28436974&cpsSign=CM1781779_28436974_f3988bbc4a1c69301e6ccc9941f8c54c&duoduo_type=2", status: 302
       return
     end
     if !is_robot? 
       if is_device_mobile?
-        #redirect_to "https://www.iquan.net"
-        m_diyquan_home
-        #redirect_to "http://taobao.iquan.net", status: 302
-        #redirect_to "http://lanlan.iquan.net", status: 302
-        #redirect_to "http://iquan.zhequan.cc", status: 302
+        redirect_to "http://ls.iquan.net"
       else
-        #redirect_to "http://taobao.zhequan.cc", status: 302
-        #redirect_to "http://ls.iquan.net"
         diyquan_home
       end
       return
