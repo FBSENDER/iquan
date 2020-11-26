@@ -287,3 +287,20 @@ footer p{
   width: 70%;
   margin: 10px 15%;
 }
+.comment{
+  display: flex;
+  border-bottom: 1px solid #f7f7f7;
+}
+.comment .avatar-area{
+  width: 80px;
+}
+.comment .avatar-area .avatar{
+  width: 50px;
+  height: 50px;
+  padding: 15px;
+  border-radius: 40px;
+}
+.comment .cmt{
+  width: 150px;
+  margin: 10px;
+}

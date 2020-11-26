@@ -37,6 +37,8 @@
         %li 百香果直接食用会有点酸，有些人可能适应不了，可以用百香果肉来泡水，再添加一些带有甜味的调味剂来中和酸味，比如糖、养乐多、蜂蜜等。
         %li 百香果可以制成果酱，百香果果酱的风味可以说是独特至极，毕竟有“果汁之王”的称号在。
       %img{src: "/image/baixiangguo_3.jpg", alt: "百香果果酱"}
+      %h2.fr-title 用户对百香果的评价
+      = render partial: "comment"
 
     .home-bang
       %h2.fr-title
@@ -72,7 +74,7 @@
                 价格 ￥
                 %span.price #{g.price}
               .lg 百香果
-  .fr-3
+  %aside.fr-3
     .right-area
       %h2.fr-title 百香果网站说明
       .content

@@ -29,3 +29,4 @@ Capfile
 /lib/zkapi/zk_api.rb
 /lib/zkapi/lanlan_api.rb
 /lib/common_config.rb
+public/seo_articles/
