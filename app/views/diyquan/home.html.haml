@@ -1,7 +1,7 @@
 - title("爱券网_淘宝优惠券,天猫优惠券,找券网优惠券网站")
 - head_desc("爱券网 - 找券网,券大娘,券搜搜,找券搜券淘券抢券拿券妈妈券宝宝券猪猪券一网打尽，提供淘宝优惠券、天猫优惠券、优惠卷等实时查询服务找券网服务，先搜索领券，再淘宝下单，专享爱券网折上折。每日更新大额优惠券、品牌优惠券、一折特价底价专场、9块9包邮白菜价好东西，加入搜藏，天天省钱，找券就来 - 爱券网。") 
 - keywords("爱券网,爱券,天猫优惠券,淘宝优惠券,找券网,优惠券网站,券搜搜,丁丁特价,券大娘,优惠卷,优惠券")
-- h1("优惠券网站 - 天猫优惠券 - 淘宝优惠券")
+- h1("淘宝优惠券")
 - mobile_url("/")
 
 = render partial: "diyquan/home_adzone"
@@ -23,7 +23,7 @@
       - @shops.each do |shop|
         .shop-item
           %a{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"}
-            %img.shop-item-img.lazy.new{data: {original: "#{shop.img_url}"}}
+            %img.shop-item-img{src: "#{shop.img_url}"}
             %p.shop-item-p #{shop.shop_name}
 
   .rel-zk-area{style: "margin-bottom: 30px;"}
@@ -47,7 +47,7 @@
   #more-content.sno
     - @compete_brands.each_with_index do |brand, index|
       %p{style: "padding: 20px;background-color:#fff;line-height: 30px;margin-bottom:20px;"} 
-        #{brand.title}，网站介绍：#{brand.description.gsub('优惠券', '<strong>优惠券</strong>').gsub('折扣券','<strong>折扣券</strong>').gsub('找券网', '<strong>找券网</strong>').html_safe} 【淘宝优惠券】【天猫优惠券】网站排名-#{index+1}
+        #{brand.title}，网站介绍：#{brand.description.gsub('优惠券', '<strong>优惠券</strong>').gsub('折扣券','<strong>折扣券</strong>').gsub('淘宝', '<strong>淘宝</strong>').gsub('找券网', '<strong>找券网</strong>').html_safe} 【淘宝优惠券】【天猫优惠券】网站排名-#{index+1}
 
 = render partial: "diyquan/home_footer", locals: {links: @links}
 
