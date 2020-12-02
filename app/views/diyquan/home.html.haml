@@ -1,35 +1,84 @@
-- title("爱券网_淘宝优惠券,天猫优惠券,找券网优惠券网站")
-- head_desc("爱券网 - 找券网,券大娘,券搜搜,找券搜券淘券抢券拿券妈妈券宝宝券猪猪券一网打尽，提供淘宝优惠券、天猫优惠券、优惠卷等实时查询服务找券网服务，先搜索领券，再淘宝下单，专享爱券网折上折。每日更新大额优惠券、品牌优惠券、一折特价底价专场、9块9包邮白菜价好东西，加入搜藏，天天省钱，找券就来 - 爱券网。") 
-- keywords("爱券网,爱券,天猫优惠券,淘宝优惠券,找券网,优惠券网站,券搜搜,丁丁特价,券大娘,优惠卷,优惠券")
+- title("爱券网-天猫优惠券,淘宝优惠券领取平台,淘宝优惠券代理与合伙人招募中!")
+- head_desc("在哪里可以领天猫淘宝优惠券？来爱券网！搜索淘宝宝贝标题，一键领取淘宝天猫大额商家优惠券，5元券、10元券、百元券全都可能有！爱券网作为一个天猫淘宝优惠券领取平台，现已开放淘宝优惠券代理功能，优惠券代理与合伙人正在招募中，进入网站扫码加微信公众号，快来成为代理一起赚钱吧！")
+- keywords("爱券网,爱券,天猫优惠券,淘宝优惠券,找券网,优惠券网站,优惠卷,优惠券,淘宝优惠券代理,淘宝优惠券合伙人,淘宝优惠券领取,淘宝优惠券领取平台,优惠券网,淘宝券,淘宝大额优惠券")
 - h1("淘宝优惠券")
 - mobile_url("/")
 
-= render partial: "diyquan/home_adzone"
-.wrapper 
-  %div{style: "padding-left:15px;background-color: white;line-height: 45px;"} 
-    %span{style: "font-size:20px;font-weight:700;color:#FF472B;"} 九块九包邮
-    %a{href: "http://www.uuhaodian.com/collection/4/?from=iquan"} 
-      %span{style: "float:right;padding-right:20px;"} 查看更多
-  = render partial: "diyquan/wide_banner", locals: {items: @coupons_9kuai9}
-.wrapper.home-wrapper{style: "margin-top: 10px;"}
-  = render partial: "diyquan/lanlan_quan_filter"
-  = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/lanlan_load_more", locals: {path: 'https://api.uuhaodian.com/uu/home_list', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
+.wrapper1200
+  .rel-zk-area
+    %h1.head
+      %span 淘宝优惠券
+  %p.home-desc 在哪里可以领天猫淘宝优惠券？来爱券网！搜索淘宝宝贝标题，一键领取淘宝天猫大额商家优惠券，5元券、10元券、百元券全都可能有！爱券网作为一个天猫淘宝优惠券领取平台，现已开放淘宝优惠券代理功能，优惠券代理与合伙人正在招募中，进入网站扫码加微信公众号，快来成为代理一起赚钱吧！
+  .rel-zk-area
+    %h2.head
+      %span 淘宝优惠券代理与合伙人招募
+  .home-daili-area
+    .desc-item
+      %p
+        买买买只需要1秒
+        %br
+        对比价格却要2小时
+        %br
+        关注公众号注册合伙人
+        %br
+        拿全网优惠券💰
+        %br
+        领券下单，还有佣金拿😃
+    .desc-item
+      %p
+        埋头苦干工资却不够花
+        %br
+        房贷车贷压在身上
+        %br
+        省吃俭用已是常规操作
+        %br
+        0成本开启副业~ 
+        %br
+        轻松省赚，实现财务自由💰
+    .desc-item
+      %p
+        1️⃣ 上手简单没有门槛
+        %br
+        2️⃣ 不投资一分钱零风险
+        %br
+        3️⃣ 不用改变别人消费习惯
+        %br
+        碎片时间搞副业，建立长期稳定收益💰
+    .desc-item
+      %p
+        副业在手，闲钱我有😍
+        %br
+        帮朋友找优惠
+        %br
+        轻松开启第二职业👏
+        %br
+        自用省钱，分享赚钱💰
+        %br
+        这份事业怎么看都不会亏👫
+    .desc-item{style: "width: 240px;margin-right:0;"}
+      %img{src: "/image/lbanner1.png", style: "width: 180px;margin: 25px 30px;"}
 
-  .rel-zk-area{style: "margin-bottom: 30px;"}
+.wrapper1200
+  .rel-zk-area
     %p.head
       %span 精选店铺推荐
-    .rel-zk-list.clearfix
-      - @shops.each do |shop|
-        .shop-item
-          %a{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"}
-            %img.shop-item-img{src: "#{shop.img_url}"}
-            %p.shop-item-p #{shop.shop_name}
+  %div
+    - @shops.each do |shop|
+      .shop-item
+        %a{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"}
+          %img.shop-item-img{src: "#{shop.img_url}"}
+          %p.shop-item-p #{shop.shop_name}
 
-  .rel-zk-area{style: "margin-bottom: 30px;"}
+.wrapper1200
+  .rel-zk-area
+    %p.head
+      %span 九块九包邮
+  = render partial: "diyquan/wide_banner", locals: {items: @coupons_9kuai9}
+
+  .rel-zk-area
     %p.head
       %span 更多内容
-  %p{style: "padding: 20px;background-color:#fff;line-height: 30px;margin-bottom:20px;"} 
+  %p.home-desc
     爱券网 - 找券搜券淘券抢券拿券妈妈券宝宝券猪猪券券搜搜淘券券一网打尽，提供淘宝优惠券、天猫优惠券、爱淘宝优惠券等实时查询服务找券网服务，先搜索领券，再淘宝下单，专享爱券网折上折。每日更新大额优惠券、品牌优惠券、一折特价底价专场、9块9包邮白菜价好东西，加入搜藏，天天省钱，找券就来 - 爱券网。
     %br
     淘宝优惠券如何领取？现在很多淘宝天猫商家对商品设置了优惠券，有些面额还特别大，领取优惠券之后可以享受折上折优惠，大家现在只需登录优优好店www.uuhaodian.com，搜索关键词或者淘宝宝贝标题，如果有券，就都搜得到，有些商品没有优惠券，在优优好店也可以领取福利红包获得优惠！
@@ -42,17 +91,25 @@
     %span 优惠券网站
     汇总
     %span{style: "color: #ff6a00;float:right;"}
-      %a#more-btn{href: "javascript:;"} 展开内容+
+      %a#more-btn{href: "javascript:;"} 收起内容+
 
-  #more-content.sno
+  #more-content
     - @compete_brands.each_with_index do |brand, index|
-      %p{style: "padding: 20px;background-color:#fff;line-height: 30px;margin-bottom:20px;"} 
+      %p.home-desc
         #{brand.title}，网站介绍：#{brand.description.gsub('优惠券', '<strong>优惠券</strong>').gsub('折扣券','<strong>折扣券</strong>').gsub('淘宝', '<strong>淘宝</strong>').gsub('找券网', '<strong>找券网</strong>').html_safe} 【淘宝优惠券】【天猫优惠券】网站排名-#{index+1}
+
+.wrapper1200.home-wrapper
+  .rel-zk-area
+    %p.head
+      %span 淘宝优惠券领取
+  = render partial: "diyquan/lanlan_quan_filter"
+  #couponList.zk-list.clearfix
+  = render partial: "diyquan/lanlan_load_more", locals: {path: 'https://api.uuhaodian.com/uu/home_list', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 
 = render partial: "diyquan/home_footer", locals: {links: @links}
 
 :javascript
-  var more_open = false;
+  var more_open = true;
   $("#more-btn").click(function(){
     if(more_open){
       more_open = !more_open;

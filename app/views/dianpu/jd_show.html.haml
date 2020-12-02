@@ -3,12 +3,11 @@
 - keywords("#{@shop_name},#{@shop_name}首页,#{@shop_name}优惠券,#{@shop_name}折扣,#{@shop_name}怎么样,#{@shop_name}评价")
 - path(@path)
 - mobile_url(@path)
-- h1("#{@shop_name}")
 
 - if @suggest_keywords.size > 0
   = render partial: "diyquan/suggest_keywords", locals: {keywords: @suggest_keywords}
 
-.wrapper.zk-detail
+.wrapper1200.zk-detail
   .wrapper-l.zk-main
     = render partial: "dianpu/shop_bread", locals: {title: @shop_name}
     .shop
@@ -22,19 +21,12 @@
           #{@desc}
         .shop-buy
           %a.shop-buy-a{href: "#{@hurl}", title: "#{@shop_name}", rel: "nofollow", target: "_blank"} 去看看
-  .wrapper-r
-    .rel-zk-area{style: "margin-top: 60px"}
-      %p.head
-        %span 店铺优惠券
-        %a.more-his{href: "/", title: "淘宝优惠券网站"} 去抢热门券 - GO
-      .hot-zk-list.clearfix.swiper-container.swiper-container-horizontal{style: "overflow:scroll;"}
-        - @coupons.each do |coupon|
-          %div{style: "height:30px;line-height:30px;border-bottom:1px solid #f7f7f7;padding: 0 10px;"}
-            优惠券#{coupon["discount"]}元 - 满#{coupon["quota"]}元可用
-
+    .shop-right
+      %img{src: "/image/lbanner1.png", style: "width: 200px;margin: 0 auto;"}
+      %p 买买买只需要1秒，对比价格却要2小时，关注公众号注册合伙人，拿全网优惠券💰 领券下单，还有佣金拿😃
 
 - if @products && @products.size > 0
-  .wrapper
+  .wrapper1200
     .rel-zk-area{style: "margin-bottom: 30px;"}
       %p.head
         %span #{@shop_name}优惠折扣商品
@@ -60,7 +52,7 @@
                     %em.decimal> .#{coupon['lowest_price'].to_f.round(2).to_s.sub(/\d+\./,'')}
                 %span.coupon_click 折扣
 
-.wrapper
+.wrapper1200
   .rel-zk-area{style: "margin-bottom: 30px;"}
     %p.head
       %span 推荐店铺

@@ -47,20 +47,6 @@ var callback = function(data){
 }
 $(function(){
   getLanlanCouponList();
-  var sw = new Swiper('.banner-area',{
-    autoplay: true,
-    loop:true,
-    pagination: {
-      el: '.swiper-pager'
-    }
-  });
-  var sww = new Swiper('.wide-banner',{
-    loop: true,
-    navigation:{
-      prevEl:'.swiper-button-prev',
-      nextEl:'.swiper-button-next'
-    }
-  });
 
   $(document).on('scroll',function(){
     if(page%4 > 0){

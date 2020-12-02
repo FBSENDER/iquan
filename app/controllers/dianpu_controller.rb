@@ -32,14 +32,7 @@ class DianpuController < ApplicationController
   end
 
   def show
-    if is_robot?
-      return if redirect_pc_to_mobile
-    else
-      if request.host != 'tt.uuhaodian.com'
-        redirect_to "http://tt.uuhaodian.com#{request.path}/", status: 302
-        return
-      end
-    end
+    return if redirect_pc_to_mobile
     @shop = Shop.where(nick: params[:nick]).take
     not_found if @shop.nil?
     @dsr_info = JSON.parse(@shop.dsr_info)
@@ -63,10 +56,6 @@ class DianpuController < ApplicationController
     end
   end
 
-  def buy
-    redirect_to "https://market.m.taobao.com/apps/aliyx/coupon/detail.html?wh_weex=true&activity_id=#{params[:activity_id]}&seller_id=#{params[:seller_id]}", status: 302
-  end
-
   def map_s
     @page = params[:page].to_i
     @page = @page == 0 ? 0 : @page - 1
@@ -77,7 +66,7 @@ class DianpuController < ApplicationController
     else
       @title = "淘宝天猫京东旗舰店排行榜_爱券网"
     end
-    @total_page = @page + 20 > 548 ? 548 : @page + 20
+    @total_page = @page + 10 > 548 ? 548 : @page + 10
     @h1 = "淘宝天猫京东旗舰店排行榜"
     @keywords = "京东旗舰店,天猫旗舰店,淘宝店铺,淘宝店铺大全,淘宝店铺排行榜"
     @description = "淘宝天猫京东旗舰店排行榜，女装、男装、居家、数码、美妆、箱包、母婴、宠物、配饰等多种类别的淘宝天猫店铺大排行，淘宝天猫店铺用户评价，卖的商品怎么样？店铺打折信息，内部优惠券，这里都查得到 - 爱券网"

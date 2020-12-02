@@ -1,31 +1,19 @@
 Rails.application.routes.draw do
   root "home#index"
   get "/index.html", to: "home#frame_home"  
-
-  get "/youhui/:id", to: "diyquan#get_coupon_by_id", id: /\d+/
-  get "/fenlei/:pinyin", to: "diyquan#fenlei"
-  get "/tbzk/", to: "diyquan#zhekou"
   get "/zhekou/:keyword/", to: "diyquan#zhekou"
-  get "/zhekou/:keyword/rexiao/", to: "diyquan#zhekou_rexiao"
-  get "/zhekou/:keyword/tejia/", to: "diyquan#zhekou_tejia"
-  get "/zhekou/:keyword/dae/", to: "diyquan#zhekou_dae"
-  get "/zhekou/:keyword/yizhe/", to: "diyquan#zhekou_yizhe"
-  get "/lanlan_download/", to: "diyquan#lanlan_download"
   get "/g_:pinyin/", to: "diyquan#page"
-  get "/k_:pinyin/", to: "diyquan#k_pinyin"
-  get "/category/:cid", to: "diyquan#lanlan_fenlei"
 
   # Ying
-  get "/peishi", to: "ying#peishi"
-  get "/peishi/:id", to: "ying#peishi_product", id: /\d+/
-  get "/meizhuang", to: "ying#meizhuang"
-  get "/meizhuang/:id", to: "ying#meizhuang_product", id: /\d+/
+  #get "/peishi", to: "ying#peishi"
+  #get "/peishi/:id", to: "ying#peishi_product", id: /\d+/
+  #get "/meizhuang", to: "ying#meizhuang"
+  #get "/meizhuang/:id", to: "ying#meizhuang_product", id: /\d+/
 
   get "/query/noresult", to: "diyquan#noresult"
   get "/dianpu/", to: "dianpu#map_s"
   get "/dianpu/jd_:id", to: "dianpu#jd_show", id: /\d+/
   get "/dianpu/:nick/", to: "dianpu#show"
-  get "/dianpu_buy/:seller_id/", to: "dianpu#buy"
 
 
   #html sitemap
@@ -41,7 +29,6 @@ Rails.application.routes.draw do
   #amp
   get "/amp/zhekou/:keyword/", to: "amp#zhekou"
   get "/amp/g_:pinyin/", to: "amp#page"
-  get "/amp/k_:pinyin/", to: "amp#k_pinyin"
 
   #kefu
   #post "kefu/bd_post_message", to: "kefu#check_post_message"

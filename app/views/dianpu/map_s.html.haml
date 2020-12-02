@@ -5,21 +5,20 @@
 - mobile_url(@path)
 - h1(@h1)
 
-= render partial: "diyquan/header_fenlei_zhekou"
-.hori-cate-area
-  .hot-keywords
-    .wrapper
-      - @shops.each do |shop|
-        %a{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"} #{shop.shop_name}
-    .wrapper{style: "margin-top: 20px;"}
-      %hr
-      %a{href: "/dianpu/"} 首页
-      - if @total_page - @page < 20
-        - ((@total_page-20)..@total_page).to_a.each do |page|
-          %a{href: "/dianpu/?page=#{page}"} #{page}
-      - else
-        - (@page..@total_page).to_a.each do |page|
-          %a{href: "/dianpu/?page=#{page}"} #{page}
-      %a{href: "/dianpu/?page=548"} 末页
+.wrapper1200{style: "background-color: #fff;line-height: 50px;margin-top: 20px;"}
+  %p{style: "padding: 20px;"}
+    - @shops.each do |shop|
+      %a.slink{href: "/dianpu/jd_#{shop.shop_id}/", title: "#{shop.shop_name}"} #{shop.shop_name}
+.wrapper1200{style: "margin-top: 20px;background-color: #fff;"}
+  %hr
+  %p{style: "padding: 20px;text-align:center;"}
+    %a.slink{href: "/dianpu/"} 首页
+    - if @total_page - @page < 10
+      - ((@total_page-10)..@total_page).to_a.each do |page|
+        %a.slink{href: "/dianpu/?page=#{page}"} #{page}
+    - else
+      - (@page..@total_page).to_a.each do |page|
+        %a.slink{href: "/dianpu/?page=#{page}"} #{page}
+    %a.slink{href: "/dianpu/?page=548"} 末页
 
 = render partial: "diyquan/footer"

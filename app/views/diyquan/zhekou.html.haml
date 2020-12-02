@@ -7,24 +7,31 @@
 - h1(@h1)
 - home_anchor = @big_keywords.sample
 
-= render partial: "diyquan/header_fenlei_zhekou"
-.wrapper.search-result
-  %p.search-res-title 
+.wrapper1200.search-result
+  .search-res-title 
     %a{href: "/", title: "#{home_anchor}"} #{home_anchor}
     >
     - @cats.each do |cat|
       %a{href: "/zhekou/#{URI.encode(cat["name"].gsub('/',' '))}/"} #{cat["name"]}
       >
-    %span 
-      #{@keyword}
+    %span #{@keyword}
+  #gy_filter{style: "margin-bottom: 20px;"}
+    .wrapper1200
+      %ul.platform-area{style: "margin:0;"}
+        %li.platform-type.active{id: "platform_1", data:{type: 1}} 天猫淘宝
+        %li.platform-type{id: "platform_2", data:{type: 2}} 京东
+        %h1{style: "float:right;padding: 0 20px;font-size:14px;"} “#{@keyword[0,40]}” - 商品优惠券列表
+      = render partial: "dg_filter", locals: {has_coupon: false}
   #couponList.zk-list.clearfix
     - @items.each do |item|
       = render partial: "diyquan/dg_item", locals: {coupon: item}
-.wrapper
-  %div{style: "line-height: 60px;height:60px;overflow: auto;"}
+  = render partial: "dg_load_more", locals: {keyword: @keyword, has_coupon: 0, page: 2}
+
+.wrapper1200
+  %div{style: "line-height: 60px;height:60px;overflow: auto;margin-bottom: 20px;"}
     - @keywords.each do |k|
       %a{href: "/zhekou/#{URI.encode(k)}/", style: "height: 20px;line-height:20px; border-radius: 30px;background-color:#fff;padding: 10px 20px;font-size: 10px;"} #{k}
-  %p{style: "background:#fff;margin: 20px auto; padding: 20px;"} 
+  %p.home-desc
     #{@keyword}优惠专场，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，全场低至1折起包邮，敬请关注！这些#{@keyword}优惠券，是爱券网从全网各处（app、优惠网站、优惠qq群、优惠微信群）搜集而来，先领优惠券，再下单，价格可以更低一点。为了方便您找券，您可以将#{@keyword}优惠信息按照销量、价格、优惠额、优惠率等维度进行排序，也可以直接查找#{@keyword}大额优惠券。
     - @selectors.each do |s|
       %br

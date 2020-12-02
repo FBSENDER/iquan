@@ -3,12 +3,11 @@
 - keywords("#{@shop.title},#{@shop.title}首页,#{@shop.title}优惠券,#{@shop.title}折扣,#{@shop.title}怎么样,#{@shop.title}评价,#{@shop.title}淘宝,#{@shop.title}天猫")
 - path(@path)
 - mobile_url(@path)
-- h1("#{@shop.title}")
 
 - if @suggest_keywords.size > 0
   = render partial: "diyquan/suggest_keywords", locals: {keywords: @suggest_keywords}
 
-.wrapper.zk-detail
+.wrapper1200.zk-detail
   .wrapper-l.zk-main
     = render partial: "dianpu/shop_bread", locals: {title: @shop.title}
     .shop
@@ -17,7 +16,7 @@
         %p.shop-cover-p 
           %strong #{@shop.title}
       .shop-info
-        %p.shop-info-h1 #{@shop.title}
+        %h1.shop-info-h1 #{@shop.title}
         %p.shop-desc 
           - if @scoupons.size > 0
             %strong #{@shop.title}
@@ -28,30 +27,17 @@
               %a{href: "/dianpu_buy/#{sc.seller_id}/?activity_id=#{sc.activity_id}", title: "#{@shop.title}#{sc.coupon_price}元优惠券", style: "color:blue", target: "_blank"} 点我领取
               %br
           #{@desc}
-        %p.sno
-          #{@shop.title}在售商品：
-          - @items.each do |item|
-            #{item["title"].html_safe}，价格：#{item["price"]}元；
         .shop-buy
           %a.shop-buy-a{href: "#{@shop.shop_url}",isconvert: 1, title: "#{@shop.title}", rel: "nofollow", target: "_blank"} 去看看
-  .wrapper-r
-    .rel-zk-area{style: "margin-top: 60px"}
-      %p.head
-        %span 正在热销
-        %a.more-his{href: "/baokuan/", title: "淘宝爆款"} 去抢热门券 - GO
-      .hot-zk-list.clearfix.swiper-container.swiper-container-horizontal
-        .swiper-wrapper
-          - swiper_count = @hot_coupons.size / 4
-          - (0..swiper_count-1).each do |num|
-            .swiper-slide
-              - @hot_coupons[num * 4, 4].each do |coupon|
-                %a{href: "/youhui/#{coupon['coupon_id']}/", title: "#{coupon['title']}", class: "zk-img-item"}
-                  %img.lazy{data: {original: "#{coupon['thumbnail_pic']}"}, alt: "#{coupon['title']}", style: "opacity: 1;"}
+    .shop-right
+      %img{src: "/image/lbanner1.png", style: "width: 200px;margin: 0 auto;"}
+      %p 买买买只需要1秒，对比价格却要2小时，关注公众号注册合伙人，拿全网优惠券💰 领券下单，还有佣金拿😃
+
 
 .wrapper{style:"margin: 20px auto;"}
   %a{href: "#", data:{type: 2, tmpl:"720x220", tmplid:"209",rd: "2",style:"2", border: "1"}, biz:{keyword: '女装'}}
 
-.wrapper
+.wrapper1200
   .rel-zk-area{style: "margin-bottom: 30px;"}
     %p.head
       %span 推荐店铺
@@ -68,21 +54,4 @@
             %p.shop-item-p #{shop.shop_name}
   = render partial: "/layouts/link_for_top"
 
-- if @coupons && @coupons.size > 0
-  .wrapper
-    .rel-zk-area{style: "margin-bottom: 30px;"}
-      %p.head
-        %span #{@shop.title}优惠折扣商品
-      .rel-zk-list.clearfix
-        = render partial: "diyquan/quan_list", locals: {coupons: @coupons}
-.wrapper
-  .rel-zk-area{style: "margin-bottom: 30px;"}
-    %p.head
-      %span 热门优惠券
-    .rel-zk-list.clearfix
-      = render partial: "diyquan/quan_list", locals: {coupons: @hot_coupons}
-
-
-= render partial: "layouts/taobao_js"
-= render partial: "diyquan/quan_detail_js"
 = render partial: "diyquan/footer"

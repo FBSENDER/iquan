@@ -1,7 +1,0 @@
-#couponList.zk-list.clearfix
-  - if coupons
-    - coupons.each do |coupon|
-      = render partial: "diyquan/tb_quan_item", locals: {coupon: coupon}
-  - if zhekous
-    - zhekous.each do |zhekou|
-      = render partial: "diyquan/tb_zhekou_item", locals: {coupon: zhekou}
