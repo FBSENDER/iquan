@@ -4,12 +4,32 @@
 - path(@path)
 - mobile_url(@path)
 - amp_path(@path)
-- h1(@h1)
 
-.wrapper
-  = render partial: "m_diyquan/header", locals: {need_sort: true, need_ads: false}
-  = render partial: "m_diyquan/page_js", locals: {path: '/getSearchCouponList', pinyin: '', keyword: @search_keyword, pagesize: 20, sort_type: @sort_type}
-  .coupon-list
-    #couponList2
+.dazhe
+  = render partial: "/m_diyquan/search_header", locals: {keyword: @keyword}
+  - if @suggest_keywords.size > 0
+    .top-menu-container{style: "max-width:750px;margin-top:0;"}
+      .top-menu{style: "max-width:750px;"}
+        .inner
+          - @suggest_keywords.each do |k|
+            %a.top-menu-item{href: "/zhekou/#{URI.encode(k)}/"} #{k}
+  .content
+    = render partial: "/m_diyquan/filter"
+    #dazheList
       - @items.each do |item|
-        = render partial: "m_diyquan/dg_item", locals: {coupon: item}
+        = render partial: "/m_diyquan/dg_item", locals: {item: item}
+
+    %img#imgLoading{src: "/image/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+    .button-btn.sno#loadRetry 重新加载
+    .button-btn.sno#noMore 没有更多了
+  .ha{style: "padding-bottom: 10px;"}
+    %p.desc #{@description} 更新于#{Time.now.strftime("%Y年%m月%d日")}
+    %p.desc #{@desc_ext.html_safe}
+    %p.desc
+      相关推荐：
+      - @keywords.split(',').each do |k|
+        %strong #{k}
+
+  = render partial: "/m_diyquan/footer"
+
+= render partial: "/m_diyquan/data_js", locals: {page: 2}

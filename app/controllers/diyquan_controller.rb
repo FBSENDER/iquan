@@ -5,7 +5,6 @@ class DiyquanController < ApplicationController
   def zhekou
     return if redirect_pc_to_mobile
     zhekou_tdk
-    sort_type = 0
     @items = get_dg_items(@keyword)
     infos = get_dg_keyword_infos(@keyword)
     @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
@@ -13,13 +12,19 @@ class DiyquanController < ApplicationController
     @selectors = infos && infos["selector"] ? infos["selector"] : []
     rr = rand(10)
     @shops = get_jd_shops
-    @sort_type = sort_type
-    @path = request.path + "/"
-    if is_device_mobile?
-      render "m_diyquan/zhekou", layout: "layouts/m_diyquan"
-    else
-      render "zhekou", layout: "layouts/diyquan"
-    end
+    @sort_type = 0
+    render "zhekou", layout: "layouts/diyquan"
+  end
+
+  def m_zhekou
+    zhekou_tdk
+    @items = get_dg_items(@keyword)
+    infos = get_dg_keyword_infos(@keyword)
+    @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
+    #@cats = infos && infos["r_cats"] ? infos["r_cats"] : []
+    @selectors = infos && infos["selector"] ? infos["selector"] : []
+    @channel = 8
+    render "m_diyquan/zhekou", layout: "layouts/m_diyquan"
   end
 
   def noresult
@@ -67,11 +72,27 @@ class DiyquanController < ApplicationController
     @outlinks = OutLink.where(url: request.url).select(:keyword, :outurl)
     @h1 = @page_info.anchor
     @shops = get_jd_shops
-    if is_device_mobile?
-      render "m_diyquan/page", layout: "layouts/m_diyquan"
-    else
-      render "page"
+    render "page"
+  end
+
+  def m_page
+    @page_info = Page.where(pinyin: params[:pinyin]).take
+    not_found if @page_info.nil?
+    @title = @page_info.title
+    @description = @page_info.description
+    @desc_ext = @page_info.desc_ext
+    @page_info.core_keywords.split(',').each do |k|
+      @desc_ext = @desc_ext.gsub(k, "<strong>#{k}</strong>")
     end
+    @items = get_dg_items(@page_info.search_keyword)
+    @keywords = @page_info.keywords
+    @search_keyword = @page_info.search_keyword
+    @suggest_keywords = get_suggest_keywords_new(@page_info.search_keyword)
+    @path = request.path + "/"
+    @seo_k = @page_info.search_keyword 
+    @keyword = @page_info.search_keyword 
+    @h1 = @page_info.anchor
+    render "m_diyquan/page", layout: "layouts/m_diyquan"
   end
 
   def map_k

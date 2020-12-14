@@ -1,18 +1,19 @@
-- progress = (60..98).to_a.sample
+- ca = item["coupon_amount"].to_i 
+- buy_url = ca > 0 ? "http://api.uuhaodian.com/uu/buy?id=#{item["item_id"]}&channel=8" : item["url"]
 
-%a{href: "http://api.uuhaodian.com/uu/buy?id=#{coupon['item_id']}", target: "_blank", isconvert: 1, rel: "nofollow"}
-  .product-item-t2
-    .pic.lazy{data: {original: "#{coupon['pict_url']}"}}
-    %p.title
-      %span.post-free 包邮
-      #{coupon["short_title"]}
-    .progress-area
-      %p.pro-text 热销#{progress}%
-      .pro-container
-        .pro{data: {pro: "#{progress / 100.0}"}, style: "width:#{progress}%"}
-    .price-area
-      .price{style: "float:left"}
-        %span> 折扣价￥
-        %em.number-font #{coupon['zk_final_price']}
-        %span{style: "color:#a8a8a8;text-decoration:line-through"} ￥#{coupon['reserve_price']}
-
+.item
+  %a.zh{href: "#{buy_url}", target: "_blank", rel: "nofollow"}
+    %img.pic{src: "#{item["pict_url"]}", alt: "#{item["title"]}"}
+    .cent
+      %h3 
+        %span #{item["user_type"] == 1 ? "天猫" : "淘宝"} 
+        #{item["title"]}
+      .tags #{" "}
+      .num
+        %span 原价 ￥#{ca > 0 ? item["zk_final_price"] : item["reserve_price"]}
+        %span.r 已售#{item["volume"] > 10000 ? "#{(item["volume"] / 10000.0).round(1)}万" : item["volume"]}件
+      .money
+        到手价 ￥
+        %span.m #{(item["zk_final_price"].to_f - ca).round(2)}
+        .quan
+          %i #{ca > 0 ? "#{ca}元券" : "#{(item["zk_final_price"].to_f * 10 /item["reserve_price"].to_f).round(1)}折"}

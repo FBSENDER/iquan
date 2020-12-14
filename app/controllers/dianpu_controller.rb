@@ -24,11 +24,34 @@ class DianpuController < ApplicationController
     end
     @hurl = "http://www.uuhaodian.com/jddiybuy?jd_channel=18&url=#{URI.encode_www_form_component(url)}"
 
+    render "jd_show", layout: "diyquan"
+  end
+
+  def m_jd_show
+    s = JdShop.where(shop_id: params[:id].to_i).select(:id, :content, :img_url).take
+    not_found if s.nil?
+    c = JSON.parse(s.content)
+    d = c["result"]
+    @shop_id = d["shop_id"]
+    @shop_name = d["shop_name"]
+    @img_url = s.img_url.nil? || s.img_url.empty? ? "/image/love.jpg" : s.img_url
+    @coupons = d["coupons"]
+    @products = d["products"]
+    @brands = d["brands"]
+    @cid3s = d["cid3s"]
+    @related = d["related"] || []
+    @more = d["more"] || []
+    @desc = "#{@shop_name}是一家经营信誉良好、获得消费者广泛好评的一家京东店铺。#{@shop_name}主要经营：#{@cid3s.map{|c| c["cname3"]}.join('，')}。店内正在销售#{@brands.map{|b| b["brand_name"]}.join('，')}品牌商品。近日店铺有优惠券发放，欢迎大家关注！#{@coupons.map{|c| "满#{c["quota"]}元减#{c["discount"]}元"}.join('、')} 热销商品有：#{@products.sample(3).map{|r| r["title"]}.join('，')} 喜欢的话常来店铺逛逛呀！"
+    @path = "#{request.path}/"
+    @suggest_keywords = @cid3s.map{|c| c["cname3"]} + @brands.map{|b| b["brand_name"]}
+
+    url = "https://mall.jd.com/index-#{@shop_id}.html"
     if is_device_mobile?
-      render "m_jd_show", layout: "m_diyquan"
-    else
-      render "jd_show", layout: "diyquan"
+      url = "https://shop.m.jd.com/?shopId=#{@shop_id}"
     end
+    @hurl = "http://www.uuhaodian.com/jddiybuy?jd_channel=18&url=#{URI.encode_www_form_component(url)}"
+
+    render "m_jd_show", layout: "m_diyquan"
   end
 
   def show
@@ -37,7 +60,7 @@ class DianpuController < ApplicationController
     not_found if @shop.nil?
     @dsr_info = JSON.parse(@shop.dsr_info)
     ind = JSON.parse(@dsr_info["dsrStr"])["ind"]
-    @desc = "#{@shop.title}是一家经营信誉良好、获得消费者广泛好评的一家#{@shop.is_tmall == 1 ? '天猫' : '淘宝'}店铺。店铺掌柜为#{@shop.nick}，如果大家有任何关于#{@shop.title}的问题，都可以向其进行咨询。店铺的注册地点在#{@shop.provcity}，全国包邮哦，看到合适的宝贝赶快拍下，#{@shop.provcity}附近的朋友们可能在当天就收到快递喽。#{@shop.title}在售的宝贝有#{@shop.totalsold}件，有木有很多！近30天的销量为#{@shop.procnt}件，代掌柜#{@shop.nick}感谢大家的大力支持。#{@shop.title}主营类目为#{ind}，具体有#{@shop.main_auction}，欢迎大家选购。#{@shop.title}的综合评分还是不错的，在宝贝描述相符、服务态度、物流服务上均在平均水平之上，大家可以放心选购自己心仪的宝贝。
+    @desc = "#{@shop.title}是一家经营信誉良好、获得消费者广泛好评的一家#{@shop.is_tmall == 1 ? '天猫' : '淘宝'}店铺。店铺掌柜为#{@shop.nick}，如果大家有任何关于#{@shop.title}的问题，都可以向其进行咨询。店铺的注册地点在#{@shop.provcity}，全国包邮哦，看到合适的宝贝赶快拍下，#{@shop.provcity}附近的朋友们可能在当天就收到快递喽。#{@shop.title}在售的宝贝有#{@shop.totalsold}件，有木有很多！近30天的销量为#{@shop.procnt}件，代掌柜#{@shop.nick}感谢大家的大力支持。#{@shop.title}主营类目为#{ind}，具体有#{@shop.main_auction.gsub(/\d/, "")}，欢迎大家选购。#{@shop.title}的综合评分还是不错的，在宝贝描述相符、服务态度、物流服务上均在平均水平之上，大家可以放心选购自己心仪的宝贝。
 还在等什么？快去#{@shop.title}逛一逛~"
     @items = JSON.parse(@shop.auctions_inshop.empty? || @shop.auctions_inshop == 'null' ? "[]" : @shop.auctions_inshop)
     #@hot_coupons = get_hot_coupons(0, 0, 20)
@@ -49,11 +72,21 @@ class DianpuController < ApplicationController
     @shops = Shop.where("id > ?", @shop.id).order("id").select(:nick,:pic_url,:title).limit(15)
     @jd_shops = JdShop.where("id > ? and status = 1", @shop.id / 20).select(:shop_id, :shop_name).limit(15)
     @scoupons = []
-    if is_device_mobile?
-      render "m_show", layout: "m_diyquan"
-    else
-      render "show", layout: "diyquan"
-    end
+    render "show", layout: "diyquan"
+  end
+
+  def m_show
+    return if redirect_pc_to_mobile
+    @shop = Shop.where(nick: params[:nick]).take
+    not_found if @shop.nil?
+    @keyword = @shop.title.gsub("折扣", "").gsub("店铺", "").gsub("品牌", "").gsub("旗舰","").gsub("店", "").gsub("官方", "").gsub("专卖", "").gsub("专营", "")
+    @channel = 8
+    @dsr_info = JSON.parse(@shop.dsr_info)
+    ind = JSON.parse(@dsr_info["dsrStr"])["ind"]
+    @desc = "#{@shop.title}是一家经营信誉良好、获得消费者广泛好评的一家#{@shop.is_tmall == 1 ? '天猫' : '淘宝'}店铺。店铺掌柜为#{@shop.nick}，如果大家有任何关于#{@shop.title}的问题，都可以向其进行咨询。店铺的注册地点在#{@shop.provcity}，全国包邮哦，看到合适的宝贝赶快拍下，#{@shop.provcity}附近的朋友们可能在当天就收到快递喽。#{@shop.title}在售的宝贝有#{@shop.totalsold}件，有木有很多！近30天的销量为#{@shop.procnt}件，代掌柜#{@shop.nick}感谢大家的大力支持。#{@shop.title}主营类目为#{ind}，具体有#{@shop.main_auction.gsub(/\d/, "")}，欢迎大家选购。#{@shop.title}的综合评分还是不错的，在宝贝描述相符、服务态度、物流服务上均在平均水平之上，大家可以放心选购自己心仪的宝贝。
+还在等什么？快去#{@shop.title}逛一逛~"
+    @path = "#{request.path}/"
+    render "m_show", layout: "m_diyquan"
   end
 
   def map_s

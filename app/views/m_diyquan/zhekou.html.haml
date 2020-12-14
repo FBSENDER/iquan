@@ -1,21 +1,35 @@
-- title("【#{@keyword}】_#{@keyword}折扣_#{@keyword}优惠券_爱券网")
-- head_desc("淘宝天猫#{@keyword}优惠券,#{@keyword}折扣,#{@keyword}包邮,20元50元100元#{@keyword}优惠券，先领券，再下单，专享淘宝折上折优惠。领取#{@keyword}优惠券，查看#{@keyword}打折特价信息 - 爱券网。")
-- keywords("#{@keyword},#{@keyword}优惠,#{@keyword}优惠券,#{@keyword}折扣,特价#{@keyword}")
+- title(@title)
+- head_desc(@description)
+- keywords(@page_keywords)
 - path(@path)
-- amp_path(@path)
 - mobile_url(@path)
-- h1(@keyword)
+- amp_path(@path)
+- h1(@h1)
 
-.wrapper
-  = render partial: "m_diyquan/header", locals: {need_sort: true, need_ads: false}
-  = render partial: "m_diyquan/page_js", locals: {path: '/getSearchCouponList', pinyin: '', keyword: @keyword, pagesize: 20, sort_type: @sort_type}
-  .cate-section{style: "display:block"}
-    .coupon-list
-      #couponList2
-        - @items.each do |item|
-          = render partial: "m_diyquan/dg_item", locals: {coupon: item}
-  
-    %p.txt-loading
-    .download-fixed
-      %a{href: "/lanlan_download/", target: "_blank"}
-        %i
+.dazhe
+  = render partial: "/m_diyquan/search_header", locals: {keyword: @keyword}
+  - if @keywords.size > 0
+    .top-menu-container{style: "max-width:750px;margin-top:0;"}
+      .top-menu{style: "max-width:750px;"}
+        .inner
+          - @keywords.each do |k|
+            %a.top-menu-item{href: "/zhekou/#{URI.encode(k)}/"} #{k}
+  .content
+    = render partial: "/m_diyquan/filter"
+    #dazheList
+      - @items.each do |item|
+        = render partial: "/m_diyquan/dg_item", locals: {item: item}
+
+    %img#imgLoading{src: "/image/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+    .button-btn.sno#loadRetry 重新加载
+    .button-btn.sno#noMore 没有更多了
+  .ha{style: "padding-bottom: 10px;"}
+    %p.desc
+      #{@keyword}优惠专场，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，全场低至1折起包邮，敬请关注！这些#{@keyword}优惠券，是爱券网从全网各处（app、优惠网站、优惠qq群、优惠微信群）搜集而来，先领优惠券，再下单，价格可以更低一点。为了方便您找券，您可以将#{@keyword}优惠信息按照销量、价格、优惠额、优惠率等维度进行排序，也可以直接查找#{@keyword}大额优惠券。
+      - @selectors.each do |s|
+        %br
+        #{@keyword}#{s["type"]} #{s["value"].gsub(',', '，')}
+
+  = render partial: "/m_diyquan/footer"
+
+= render partial: "/m_diyquan/data_js", locals: {page: 2}

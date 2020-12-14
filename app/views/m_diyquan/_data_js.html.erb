@@ -1,0 +1,478 @@
+<script type="text/javascript">
+var globalChannel = 27;
+var retry =0,page = <%= page %>,pagesize = 20,load = 1,channel = '<%= @channel %>',sort = 0,is_simple = true, is_tmall = 0, has_coupon = 0, sort_type='',is_t = false, is_h = false, is_q = false, keyword = '<%= @keyword %>', platform = '1', jd_sort = null, jd_is_hot = 0, pdd_sort = 0, pdd_activity = '';
+function createList_dg(cl){
+  var obj = $('#dazheList');
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var coupon_money = z.coupon_amount ? parseInt(z.coupon_amount) : 0;
+    var now_price = (parseFloat(z.zk_final_price) - coupon_money).toFixed(2);
+    var o_price = coupon_money > 0 ? parseFloat(z.zk_final_price).toFixed(2) : parseFloat(z.reserve_price).toFixed(2);
+    var zhe = (now_price * 10.0 / o_price).toFixed(1);
+    var buy_url = 'https://api.uuhaodian.com/uu/buy?id=' + z.item_id + '&channel=' + channel;
+    if(coupon_money <= 0){
+      buy_url = z.url
+    }
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'淘宝商品jump\', \'click\', \'dazhe\'])">';
+    htmlstr += '<img class="pic" src="'+ z.pict_url +'" alt="'+z.
+      title +'"/>';
+    htmlstr += '<div class="cent">';
+    if(z.short_title != ''){
+      htmlstr += '<h3>';
+      if(z.user_type == 1){
+        htmlstr += '<span>天猫</span>';
+      }
+      else{
+        htmlstr += '<span>淘宝</span>';
+      }
+      htmlstr += z.short_title;
+      htmlstr += '</h3>';
+    }
+    else{
+      htmlstr += '<h3>';
+      if(z.user_type == 1){
+        htmlstr += '<span>天猫</span>';
+      }
+      else{
+        htmlstr += '<span>淘宝</span>';
+      }
+      htmlstr += z.title;
+      htmlstr += '</h3>';
+    }
+    htmlstr += '<div class="tags">';
+    htmlstr += '&nbsp;</div>';
+    htmlstr += '<div class="num">';
+    htmlstr += '<span>原价 ￥'+ o_price + '</span>';
+    if(z.volume > 0){
+      var vv = z.volume > 10000 ? ((z.volume / 10000.0).toFixed(1) + '万') : z.volume;
+      htmlstr += '<span class="r">已售'+ vv + '件</span>';
+    }
+    htmlstr += '</div>';
+    if(coupon_money > 0){
+      htmlstr += '<div class="money"><div class="quan"><i>' + coupon_money + '元券</i></div>';
+    }
+    else{
+      htmlstr += '<div class="money"><div class="quan"><i>' + zhe + ' 折</i></div>';
+    }
+    htmlstr += '到手价 ￥'
+    htmlstr += '<span class="m">' + now_price + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+function createList_jd(cl){
+  var obj = $('#dazheList');
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = 'http://www.uuhaodian.com/jd/buy/' + z.item_id + '/';
+    if(z.coupon_url != ''){
+      buy_url += '?coupon=' + encodeURIComponent(z.coupon_url);
+    }
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'京东商品jump\', \'click\', \'dazhe\'])">';
+    htmlstr += '<img class="pic" src="'+ z.pict_url +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3>';
+    htmlstr += '<span>京东</span>';
+    htmlstr += z.title;
+    htmlstr += '</h3>';
+    htmlstr += '<div class="tags">';
+    if(z.shop_title.indexOf('旗舰店') > 0){
+      htmlstr += '<span class="tag">旗舰店</span>';
+    }
+    if(z.owner == 'g'){
+      htmlstr += '<span class="tag">自营</span>';
+    }
+    if(z.is_hot == 1){
+      htmlstr += '<span class="tag">爆款</span>';
+    }
+    htmlstr += '&nbsp;</div>';
+    htmlstr += '<div class="num">';
+    if(z.coupon_amount > 0 && z.price_type == 2){
+      htmlstr += '<span>拼购价 ￥'+ z.lowest_price + '</span>';
+    }
+    else if(z.coupon_amount > 0 && z.price_type == 3){
+      htmlstr += '<span>秒杀价 ￥'+ z.lowest_price + '</span>';
+    }
+    else{
+      htmlstr += '<span>原价 ￥'+ z.o_price + '</span>';
+    }
+    if(z.sales > 0){
+      var vv = z.sales > 10000 ? ((z.sales / 10000.0).toFixed(1) + '万') : z.sales;
+      htmlstr += '<span class="r">已售'+ vv + '件</span>';
+    }
+    htmlstr += '</div>';
+    if(z.coupon_amount > 0){
+      htmlstr += '<div class="money"><div class="quan"><i>' + parseInt(z.coupon_amount) + '元券</i></div>';
+    }
+    else if(z.price_type == 2){
+      htmlstr += '<div class="money"><div class="quan"><i>拼购</i></div>';
+    }
+    else if(z.price_type == 3){
+      htmlstr += '<div class="money"><div class="quan"><i>秒杀</i></div>';
+    }
+    else{
+      htmlstr += '<div class="money"><div class="quan"><i>看一看</i></div>';
+    }
+    htmlstr += '到手价 ￥'
+    htmlstr += '<span class="m">' + z.lowest_coupon_price + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+function createList_pdd(cl){
+  var obj = $('#dazheList');
+  var htmlstr = '';
+  for(var i=0,len=cl.length;i<len;i++){
+    var z = cl[i];
+    var buy_url = 'http://www.uuhaodian.com/ddk/buy/' + z.itemId + '/';
+    htmlstr += '<div class="item">';
+    htmlstr += '<a class = "zh" href="'+ buy_url +'" target="_blank" onclick="_hmt.push([\'_trackEvent\', \'拼多多商品jump\', \'click\', \'dazhe\'])">';
+    htmlstr += '<img class="pic" src="'+ z.coverImage +'" alt="'+z.
+      title +'"/>';
+    htmlstr += '<div class="cent">';
+    htmlstr += '<h3>';
+    htmlstr += '<span>拼多多</span>';
+    htmlstr += z.shortTitle;
+    htmlstr += '</h3>';
+    htmlstr += '<div class="tags">';
+    if(z.shopName.indexOf('旗舰店') > 0){
+      htmlstr += '<span class="tag">旗舰店</span>';
+    }
+    htmlstr += '&nbsp;</div>';
+    htmlstr += '<div class="num">';
+    htmlstr += '<span>原价 ￥'+ z.price + '</span>';
+    if(z.monthSales != 0){
+      htmlstr += '<span class="r">已售'+ z.monthSales + '件</span>';
+    }
+    htmlstr += '</div>';
+    if(z.couponMoney > 0){
+      htmlstr += '<div class="money"><div class="quan"><i>' + z.couponMoney + '元券</i></div>';
+    }
+    else{
+      htmlstr += '<div class="money"><div class="quan"><i>拼购</i></div>';
+    }
+    htmlstr += '到手价 ￥'
+    htmlstr += '<span class="m">' + z.nowPrice + '</span></div>'
+    htmlstr += '</div></a></div>';
+  }
+  htmlstr = $(htmlstr);
+  obj.append(htmlstr);
+}
+var callback1 = function(data){
+  load = 1;
+  page ++;
+  if(data.status == 1){
+    createList_dg(data.results);
+    $("#imgLoading").addClass("sno");
+    if(data.results.length < pagesize){
+      $("#loadRetry").addClass("sno");
+      $("#noMore").removeClass("sno");
+      load = 0;
+    }
+    else{
+      $("#loadRetry").addClass("sno");
+      $("#noMore").addClass("sno");
+    }
+  }
+  else if(data.status == 200){
+    createList_jd(data.results);
+    $("#imgLoading").addClass("sno");
+    if(data.results.length < pagesize){
+      $("#loadRetry").addClass("sno");
+      $("#noMore").removeClass("sno");
+      load = 0;
+    }
+    else{
+      $("#loadRetry").addClass("sno");
+      $("#noMore").addClass("sno");
+    }
+  }
+  else if(data.status.code == 1001){
+    createList_pdd(data.result)
+    $("#imgLoading").addClass("sno");
+    if(data.result.length < pagesize){
+      $("#loadRetry").addClass("sno");
+      $("#noMore").removeClass("sno");
+      load = 0;
+    }
+    else{
+      $("#loadRetry").addClass("sno");
+      $("#noMore").addClass("sno");
+    }
+  }
+  else{
+    $("#loadRetry").removeClass("sno");
+    $("#imgLoading").addClass("sno");
+    $("#noMore").addClass("sno");
+  }
+};
+function getDazheCouponList(){
+  if(!load){
+    return;
+  }
+  $("#imgLoading").removeClass("sno");
+  $("#loadRetry").addClass("sno");
+  $("#noMore").addClass("sno");
+  if(platform == 1){
+    doTaobao();
+  }
+  else if(platform == 2){
+    doJingdong();
+  }
+  else{
+    doPinduoduo();
+  }
+}
+function doTaobao(){
+  var dd = {
+    'keyword': keyword,
+    'sort': sort_type,
+    'page':page,
+    'callback': 'callback1'
+  };
+  if(is_simple){
+    dd.is_simple = 1
+  }
+  if(is_tmall == 1){
+    dd.is_tmall = 1
+  }
+  if(has_coupon == 1){
+    dd.has_coupon = 1
+  }
+  $.ajax({
+    url: 'https://api.uuhaodian.com/uu/dg_goods_list',
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    jsonp: 'callback1',
+    jsonpCallback: 'callback1',
+    beforeSend:function(){
+      load = 0;
+    },
+    success:function(data){
+    },
+    error: function(data){
+      if(!retry){
+        retry = 1;
+        load = 1;
+        getDazheCouponList();
+      }
+      else{
+        $("#loadRetry").removeClass("sno");
+        $("#imgLoading").addClass("sno");
+        $("#noMore").addClass("sno");
+      }
+    }
+  });
+}
+function doJingdong(){
+  var dd = {
+    page: page,
+    keyword: keyword,
+    sort_name: jd_sort,
+    has_coupon: has_coupon,
+    is_hot: jd_is_hot,
+    callback: 'callback1'
+  }
+  $.ajax({
+    url: "https://api.uuhaodian.com/jduu/search_by_keyword",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    jsonp: 'callback1',
+    jsonpCallback: 'callback1',
+    beforeSend:function(){
+      load = 0;
+    },
+    success:function(data){
+    },
+    error: function(data){
+      if(!retry){
+        retry = 1;
+        load = 1;
+        getDazheCouponList();
+      }
+      else{
+        $("#loadRetry").removeClass("sno");
+        $("#imgLoading").addClass("sno");
+        $("#noMore").addClass("sno");
+      }
+    }
+  });
+}
+function doPinduoduo(){
+  var dd = {
+    page: page,
+    keyword: keyword.slice(0,40),
+    sort_type: pdd_sort,
+    has_coupon: has_coupon > 0 ? true : false,
+    activity: pdd_activity,
+    callback: 'callback1'
+  }
+  $.ajax({
+    url: "https://api.uuhaodian.com/ddk/search_2",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    jsonp: 'callback1',
+    jsonpCallback: 'callback1',
+    beforeSend:function(){
+      load = 0;
+    },
+    success:function(data){
+    },
+    error: function(data){
+      if(!retry){
+        retry = 1;
+        load = 1;
+        getDazheCouponList();
+      }
+      else{
+        $("#loadRetry").removeClass("sno");
+        $("#imgLoading").addClass("sno");
+        $("#noMore").addClass("sno");
+      }
+    }
+  });
+}
+
+
+
+$(function(){
+  $("#radio_1").attr("checked", "checked");
+  getDazheCouponList();
+  $(document).scroll(function(){
+    tp = document.body.scrollTop || document.documentElement.scrollTop;
+    if(tp > 216){
+      $('.scroll_top').removeClass('close');
+      $('.scroll_top').addClass('open');
+      $('.filter').addClass('fixed');
+      $('.platform-filter').addClass('fixed');
+    }
+    else{
+      $('.scroll_top').removeClass('open');
+      $('.scroll_top').addClass('close');
+      $('.filter').removeClass('fixed');
+      $('.platform-filter').removeClass('fixed');
+    }
+    if(tp >= (document.body.scrollHeight - 800)){
+      _hmt.push(['_trackEvent', '加载更多', 'click', 'dazhe']);
+      getDazheCouponList();
+    }
+  });
+  $(".scroll_top>a").click(function(){window.scrollTo(0, 2);});
+  $(".switch").change(function(){
+    var _this = $(this);
+    if(has_coupon == 0){
+      has_coupon = 1
+    }
+    else{
+      has_coupon = 0
+    }
+    page = 1;
+    load = 1;
+    $("#dazheList").html("");
+    getDazheCouponList();
+  });
+  $(".radio input").click(function(){
+    var _this = $(this);
+    platform = _this.val();
+    page = 1;
+    load = 1;
+    $("#dazheList").html("");
+    getDazheCouponList();
+  });
+  $("#loadRetry").click(function(){
+    getDazheCouponList();
+    _hmt.push(['_trackEvent', '点击重试', 'click', 'dazhe']);
+  });
+  $(".type").click(function(){
+    var _this = $(this);
+    if(_this.data('sort') == '3'){
+      if(!_this.hasClass('active')){
+        $('.type.active').removeClass('active');
+        _this.addClass('active');
+        is_simple = false;
+        sort_type = "price_asc";
+        is_tmall = 1
+        pdd_sort = 9
+        pdd_activity = '4,7,21'
+        jd_sort = "price_acs"
+        jd_is_hot = 0
+        $("#t3").html("价格↑");
+      }
+      else{
+        if(sort_type == "price_asc"){
+          sort_type = "price_des"
+          is_simple = false;
+          is_tmall = 1
+          pdd_sort = 10
+          pdd_activity = '4,7,21'
+          jd_sort = "price_desc"
+          jd_is_hot = 0
+          $("#t3").html("价格↓");
+        }else{
+          sort_type = "price_asc"
+          is_simple = false;
+          is_tmall = 1
+          pdd_sort = 9
+          pdd_activity = '4,7,21'
+          jd_sort = 'inOrderCount30Days'
+          jd_is_hot = 0
+          $("#t3").html("价格↑");
+        }
+      }
+      page = 1;
+      load = 1;
+      $("#dazheList").html("");
+      getDazheCouponList();
+      return;
+    }
+    if(!_this.hasClass('active')){
+      $('.type.active').removeClass('active');
+      _this.addClass('active');
+      sort = _this.data('sort');
+      if(sort == '1'){
+        is_simple = false;
+        is_tmall = 0;
+        sort_type = '';
+        pdd_sort = 0
+        pdd_activity = ''
+        jd_sort = null
+        jd_is_hot = 0
+        $("#t3").html("价格");
+      }
+      else if (sort == '2'){
+        is_simple = false;
+        sort_type = "total_sales_des";
+        is_tmall = 0
+        pdd_sort = 6
+        pdd_activity = ''
+        jd_sort = 'inOrderCount30Days'
+        jd_is_hot = 0
+        $("#t3").html("价格");
+      }
+      else if (sort == '5'){
+        is_simple = false;
+        sort_type = "tk_total_sales";
+        is_tmall = 1;
+        pdd_sort = 2
+        pdd_activity = '4,7,21'
+        jd_sort = 'inOrderCount30Days'
+        jd_is_hot = 1
+        $("#t3").html("价格");
+      }
+    }
+    page = 1;
+    load = 1;
+    $("#dazheList").html("");
+    getDazheCouponList();
+  });
+});
+</script>

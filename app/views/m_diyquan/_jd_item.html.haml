@@ -1,0 +1,22 @@
+- buy_url = "https://www.uuhaodian.com/jd/buy/#{item["item_id"]}/?channel=18"
+
+.item
+  %a.zh{href: "#{buy_url}", target: "_blank", rel: "nofollow"}
+    %img.pic{src: "#{item["pict_url"]}", alt: "#{item["title"]}"}
+    .cent
+      %h3 
+        %span 京东
+        #{item["title"]}
+      .tags
+        - if item["owner"] == "g"
+          %span.tag 自营
+        - if item["is_hot"] == 1
+          %span.tag 热销
+      .num
+        %span 原价 ￥#{item["o_price"]}
+        %span.r 已售#{item["sales"] > 10000 ? "#{(item["sales"] / 10000.0).round(1)}万" : item["sales"]}件
+      .money
+        到手价 ￥
+        %span.m #{item["lowest_price"]}
+        .quan
+          %i 去看看

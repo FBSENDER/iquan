@@ -1,13 +1,55 @@
-- title("爱券网_淘宝优惠券,天猫优惠券,找券网优惠券网站")
-- head_desc("爱券网 - 找券网,券大娘,券搜搜,找券搜券淘券抢券拿券妈妈券宝宝券猪猪券一网打尽，提供淘宝优惠券、天猫优惠券、优惠卷等实时查询服务找券网服务，先搜索领券，再淘宝下单，专享爱券网折上折。每日更新大额优惠券、品牌优惠券、一折特价底价专场、9块9包邮白菜价好东西，加入搜藏，天天省钱，找券就来 - 爱券网。") 
-- keywords("爱券网,爱券,天猫优惠券,淘宝优惠券,找券网,优惠券网站,券搜搜,丁丁特价,券大娘,优惠卷,优惠券")
-- h1("优惠券网站 - 天猫优惠券 - 淘宝优惠券")
+- title("爱券网-天猫优惠券,淘宝优惠券领取平台,淘宝优惠券代理与合伙人招募中!")
+- head_desc("在哪里可以领天猫淘宝优惠券？来爱券网！搜索淘宝宝贝标题，一键领取淘宝天猫大额商家优惠券，5元券、10元券、百元券全都可能有！爱券网作为一个天猫淘宝优惠券领取平台，现已开放淘宝优惠券代理功能，优惠券代理与合伙人正在招募中，进入网站扫码加微信公众号，快来成为代理一起赚钱吧！")
+- keywords("爱券网,爱券,天猫优惠券,淘宝优惠券,找券网,优惠券网站,优惠卷,优惠券,淘宝优惠券代理,淘宝优惠券合伙人,淘宝优惠券领取,淘宝优惠券领取平台,优惠券网,淘宝券,淘宝大额优惠券")
+- h1("淘宝优惠券")
+- mobile_url("/")
 
-.wrapper
-  = render partial: "m_diyquan/header", locals: {need_sort: false, need_ads: false}
-  .recommend-section
-    .banner-area.swiper-container.swiper-container-horizontal
-      #bannerArea.swiper-wrapper
-    .fixed-banner-area
-    = render partial: "m_diyquan/page_js", locals: {path: '/getHomeCouponList', pinyin: '', keyword: '', pagesize: 40, sort_type: 0}
-    = render partial: "m_diyquan/danpai_list", locals: {coupons: @coupons}
+.dazhe
+  = render partial: "/m_diyquan/search_header", locals: {keyword: "输入淘宝宝贝标题，可精准找券"}
+  .ha
+    %h1 淘宝优惠券代理与合伙人招募
+    %p.desc 在哪里可以领天猫淘宝优惠券？来爱券网！搜索淘宝宝贝标题，一键领取淘宝天猫大额商家优惠券，5元券、10元券、百元券全都可能有！爱券网作为一个天猫淘宝优惠券领取平台，现已开放淘宝优惠券代理功能，优惠券代理与合伙人正在招募中，进入网站扫码加微信公众号，快来成为代理一起赚钱吧！
+    %img{src: "/image/lbanner1.png"}
+  .content
+    = render partial: "/m_diyquan/filter"
+    #dazheList
+    %img#imgLoading{src: "/image/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+    .button-btn.sno#loadRetry 重新加载
+    .button-btn.sno#noMore 没有更多了
+  .ha{style: "padding-bottom: 10px;margin-bottom: 10px;"}
+    %p.desc
+      爱券网 - 找券搜券淘券抢券拿券妈妈券宝宝券猪猪券券搜搜淘券券一网打尽，提供淘宝优惠券、天猫优惠券、爱淘宝优惠券等实时查询服务找券网服务，先搜索领券，再淘宝下单，专享爱券网折上折。每日更新大额优惠券、品牌优惠券、一折特价底价专场、9块9包邮白菜价好东西，加入搜藏，天天省钱，找券就来 - 爱券网。
+      %br
+      淘宝优惠券如何领取？现在很多淘宝天猫商家对商品设置了优惠券，有些面额还特别大，领取优惠券之后可以享受折上折优惠，大家现在只需登录优优好店www.uuhaodian.com，搜索关键词或者淘宝宝贝标题，如果有券，就都搜得到，有些商品没有优惠券，在优优好店也可以领取福利红包获得优惠！
+      %br
+      从前淘宝优惠券，就是所谓的商家券，但是这些券现在已经不再发放了，改为了妈妈券，就是说只有有券，在哪里都搜的到。推荐大家去优优好店www.uuhaodian.com领优惠券，那里不但搜券方便，还会每日更新大额券、超值商品，让大家买的便宜、买的值！
+      %br
+      优优好店，关注同名微信公众号可以领淘宝天猫优惠券了，现在关注还送福利红包，最高能领100元！同时，优优好店小程序也已经上线，可以在微信里便捷的领取淘宝优惠券了。
+      %br
+      为大家准备了：淘宝天猫
+      %span 优惠券网站
+      汇总
+      %span{style: "color: #ff6a00;float:right;"}
+        %a#more-btn{href: "javascript:;"} 收起内容+
+    #more-content.ha{style: "padding-bottom: 10px;"}
+      - @compete_brands.each_with_index do |brand, index|
+        %p.desc
+          #{brand.title}，网站介绍：#{brand.description.gsub('优惠券', '<strong>优惠券</strong>').gsub('折扣券','<strong>折扣券</strong>').gsub('淘宝', '<strong>淘宝</strong>').gsub('找券网', '<strong>找券网</strong>').html_safe} 【淘宝优惠券】【天猫优惠券】网站排名-#{index+1}
+  = render partial: "/m_diyquan/footer"
+
+= render partial: "/m_diyquan/data_js", locals: {page: 1}
+
+:javascript
+  var more_open = true;
+  $("#more-btn").click(function(){
+    if(more_open){
+      more_open = !more_open;
+      $("#more-content").addClass("sno");
+      $("#more-btn").html("展开内容+");
+    }
+    else{
+      more_open = !more_open;
+      $("#more-content").removeClass("sno");
+      $("#more-btn").html("收起内容-");
+    }
+  });

@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+  root "home#iquan_pc", to: "home#iquan_pc", constraints: {host: "www.iquan.net"}
+  root "home#iquan_mobile", to: "home#iquan_mobile", constraints: {host: "m.iquan.net"}
   root "home#index"
+
+  get "/zhekou/:keyword/", to: "diyquan#m_zhekou", constraints: {host: "m.iquan.net"}
+  get "/g_:pinyin/", to: "diyquan#m_page", constraints: {host: "m.iquan.net"}
+  get "/dianpu/jd_:id", to: "dianpu#m_jd_show", id: /\d+/, constraints: {host: "m.iquan.net"}
+  get "/dianpu/:nick/", to: "dianpu#m_show", constraints: {host: "m.iquan.net"}
+
   get "/index.html", to: "home#frame_home"  
   get "/zhekou/:keyword/", to: "diyquan#zhekou"
   get "/g_:pinyin/", to: "diyquan#page"

@@ -3,6 +3,32 @@ class HomeController < ApplicationController
   @@product_brands = nil
   $c1,$c2,$c3,$c4,$c5 = [],[],[],[],[]
   $cc1,$cc2,$cc3,$cc4,$cc5 = [],[],[],[],[]
+
+  def iquan_pc
+    if is_device_mobile?
+      redirect_to "http://m.iquan.net", status: 302
+      return
+    end
+    if @@compete_brands.nil? || Time.now.to_i % 600 == 0
+      @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
+    end
+    #file = Rails.root.join("public/seo_articles").join("iquan_pc_home.html")
+    #if File.exists?(file) && !params[:is_refresh]
+    #  render inline: File.read(file), layout: nil
+    #  return
+    #end
+    @compete_brands = @@compete_brands
+    diyquan_home
+  end
+
+  def iquan_mobile
+    if @@compete_brands.nil? || Time.now.to_i % 600 == 0
+      @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
+    end
+    @compete_brands = @@compete_brands
+    m_diyquan_home
+  end
+
   def index
     @pc_host = request.host
     if request.host == "www.guanew.net" || request.host == 'm.guanew.net'
@@ -194,8 +220,8 @@ class HomeController < ApplicationController
     render "diyquan/home", layout: "layouts/diyquan"
   end
   def m_diyquan_home
-    @coupons = get_static_coupons('static_new_coupons')
-    @banners = []
+    @channel = 8
+    @keyword = "生活"
     render "m_diyquan/home", layout: "layouts/m_diyquan"
   end
   def ddk_home

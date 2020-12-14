@@ -5,7 +5,7 @@
     <title><%= yield(:title) %></title>
     <meta name="keywords" content="<%= yield(:keywords)%>">
     <meta name="description" content="<%= yield(:head_desc)%>">
-    <link rel="canonical" href="http://www.iquan.net<%= yield(:path) %>">
+    <link rel="canonical" href="https://www.iquan.net<%= yield(:path) %>">
     <%= yield(:amp_path) %>
     <meta http-equiv="mobile-agent" content="format=html5;url=http://m.iquan.net<%= yield(:path) %>">
     <meta name="mobile-agent" content="format=html5;url=http://m.iquan.net<%= yield(:path) %>">
@@ -14,124 +14,12 @@
     <meta name="applicable-device" content="mobile">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="http://m.ibantang.com/css/common.css">
-    <link rel="stylesheet" href="/css/zhekou.css">
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/Swiper/4.5.1/js/swiper.min.js"></script>
-    <script type="text/javascript" src="/js/quick_search.js"></script>
-    <style type="text/css">
-
-.download-fixed{
-  position: fixed;
-  right: 20px;
-  bottom: 95px;
-  width: 44px;
-  height: 44px;
-  border-radius: 44px;
-  background-color: rgba(255,255,255,.9);
-  border: 1px solid #bfbfbf;
-}
-.download-fixed i{
-  display: block;
-  margin: 0px auto;
-  width: 45px;
-  height: 45px;
-  background: url(/img/download_fixed.png) center no-repeat;
-  background-size: 25px 25px;
-}
-.shop-header{
-  margin-top: 80px;
-  padding: 15px;
-  background-color: white;
-}
-.shop-header h2{
-  font-size: 20px;
-  color: #030303;
-  text-align: center;
-}
-.shop-header p{
-  margin-top: 10px;
-  font-size: 14px;
-  line-height: 1.2;
-}
-.coupon{
-  padding: 10px 18px;
-  height: 80px;
-  background-image: url(//www.iquan.net/image/coupon_background.png);
-  background-repeat: no-repeat;
-  background-position: center 15px;
-  background-color: #F1F1F1;
-  background-size: auto 85px;
-}
-.coupon .amount{
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 18px;
-  line-height: 92px;
-  position: relative;
-}
-.coupon .amount s{
-  color: #FA6A06;
-  font-size: 18px;
-  text-decoration: none;
-}
-.coupon .amount b{
-  color: #FA6A06;
-  font-size: 40px;
-}
-.coupon .time{
-  display: inline-block;
-  vertical-align: middle;
-  width: 130px;
-  margin-left: 15px;
-  height: 40px;
-  position: relative;
-}
-.coupon .time s{
-  display: inline-block;
-  text-decoration: none;
-  font-size: 14px;
-  margin-bottom: 5px;
-  color: #696969;
-}
-.coupon .time i{
-  color: #FE814B;
-}
-.coupon .time b{
-  display: inline-block;
-  color: #696969;
-  font-size: 12px;
-  -webkit-transform: scale(0.8);
-  -ms-transform: scale(0.8);
-  transform: scale(0.8);
-  margin-left: -10px;
-}
-.coupon .new-product{
-  display: inline-block;
-  vertical-align: middle;
-  color: #FA6A06;
-  font-size: 20px;
-  margin-left: 80px;
-  line-height: 90px;
-  float: left;
-  position: relative;
-}
-.coupon .go-coupon{
-  display: inline-block;
-  vertical-align: middle;
-  color: #FFFFFF;
-  font-size: 20px;
-  margin-right: 20px;
-  line-height: 90px;
-  float: right;
-  position: relative;
-}
-
-    </style>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <h1 class="sno"><%= yield(:h1)%></h1>
     <%= yield %>
     <%= render partial: "layouts/ga_whole_js_mobile" %>
     <%= render partial: "m_diyquan/baidu_tj" %>
