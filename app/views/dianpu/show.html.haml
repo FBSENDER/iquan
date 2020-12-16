@@ -18,17 +18,9 @@
       .shop-info
         %h1.shop-info-h1 #{@shop.title}
         %p.shop-desc 
-          - if @scoupons.size > 0
-            %strong #{@shop.title}
-            正在发放的优惠券共有#{@scoupons.size}张：
-            %br
-            - @scoupons.each do |sc|
-              #{@shop.title}满#{sc.m_price}元减#{sc.coupon_price}元优惠券 - 有效期至#{Time.at(sc.end_time).strftime("%Y-%m-%d %H:%M")} - 
-              %a{href: "/dianpu_buy/#{sc.seller_id}/?activity_id=#{sc.activity_id}", title: "#{@shop.title}#{sc.coupon_price}元优惠券", style: "color:blue", target: "_blank"} 点我领取
-              %br
           #{@desc}
         .shop-buy
-          %a.shop-buy-a{href: "#{@shop.shop_url}",isconvert: 1, title: "#{@shop.title}", rel: "nofollow", target: "_blank"} 去看看
+          %a.shop-buy-a{href: "https://api.uuhaodian.com/uu/shop_go?shop_id=#{@shop.source_id}&sgo=iquan", title: "#{@shop.title}", rel: "nofollow", target: "_blank"} 去看看
     .shop-right
       %img{src: "/image/lbanner1.png", style: "width: 200px;margin: 0 auto;"}
       %p 买买买只需要1秒，对比价格却要2小时，关注公众号注册合伙人，拿全网优惠券💰 领券下单，还有佣金拿😃
