@@ -32,6 +32,6 @@ class HomeController < ApplicationController
   end
 
   def yh
-    redirect_to "https://www.uuhaodian.com/yh/#{params[:id]}/?channel=13", status: 302
+    redirect_to "https://api.uuhaodian.com/uu/newbuy?id=#{params[:id]}&title=#{params[:title]}&channel=13", status: 302
   end
 end

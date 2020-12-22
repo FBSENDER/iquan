@@ -26,9 +26,9 @@
         
       .col-3.col-sm-6
         .item
-          %a{href: "/yh/#{pr["item_id"]}/", alt: "#{pr["title"]}",rel: "nofollow"}
+          %a{href: "/yh/#{pr["item_id"]}/?title=#{URI.encode_www_form_component(pr["title"])}", alt: "#{pr["title"]}",rel: "nofollow", target: "_blank"}
             %img.img-responsive{src: "#{pr["pict_url"]}"}
-          %a{href: "/yh/#{pr["item_id"]}/", rel: "nofollow"}
+          %a{href: "/yh/#{pr["item_id"]}/?title=#{URI.encode_www_form_component(pr["title"])}", rel: "nofollow", target: "_blank"}
             %p.t #{t1.html_safe}
           %p.d 价格：#{pr["zk_final_price"]}元
           %p.d 店铺与品牌: #{pr["shop_title"]}

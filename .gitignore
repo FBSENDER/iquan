@@ -25,3 +25,4 @@ Capfile
 .DS_Store
 /app/controllers/diyquan_controller.rb
 /lib/zkapi/*.rb
+/public/seo_articles/*

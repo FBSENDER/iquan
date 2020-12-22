@@ -27,6 +27,10 @@
     是一家经营状况良好、获得超多好评的一家淘宝天猫网店。店铺掌柜migiaokes旗舰店待客热情，回复消息及时，如果大家有任何问题，可以直接在旺旺进行咨询。
     %span.H #{@s.nick}
     正在销售的产品包括#{@ks.map{|k| k.keyword}.join("、")}，欢迎大家选购。
+    %br
+    %a{href: "https://api.uuhaodian.com/uu/shop_go?shop_id=#{@shop.source_id}&sgo=17430", target: "_blank", rel: "nofollow", style: "float:right;padding: 8px 30px;background-color: red;color: #fff;font-size: 14px;"} 去店铺看看
+    %br
+      
 
   %p.c
     您可能还在找：
