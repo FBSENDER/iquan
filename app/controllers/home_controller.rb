@@ -17,7 +17,7 @@ class HomeController < ApplicationController
     #  render inline: File.read(file), layout: nil
     #  return
     #end
-    @compete_brands = @@compete_brands
+    @compete_brands = @@compete_brands.sample(10)
     diyquan_home
   end
 
@@ -25,7 +25,7 @@ class HomeController < ApplicationController
     if @@compete_brands.nil? || Time.now.to_i % 600 == 0
       @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
     end
-    @compete_brands = @@compete_brands
+    @compete_brands = @@compete_brands.sample(10)
     m_diyquan_home
   end
 
@@ -137,11 +137,11 @@ class HomeController < ApplicationController
         render inline: File.read(file), layout: nil
         return
       end
-      @compete_brands = @@compete_brands
+      @compete_brands = @@compete_brands.sample(10)
       diyquan_home
       return
     else
-      @compete_brands = @@compete_brands
+      @compete_brands = @@compete_brands.sample(10)
     end
     if !is_robot? && is_device_mobile? && request.host == "m.iquan.net"
       redirect_to "http://ls.iquan.net"
