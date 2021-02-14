@@ -112,6 +112,7 @@ class DiyquanController < ApplicationController
   end
 
   def friend_circle_list
+    return if redirect_pc_to_mobile
     @page = params[:page].to_i
     @page = 0 if @page < 0
     @fcs = DtkFc.where("dtk_id <> -1").select(:id, :content, :updated_at).order("id desc").offset(20 * @page).limit(20)
@@ -142,6 +143,7 @@ class DiyquanController < ApplicationController
       not_found
       return
     end
+    return if redirect_pc_to_mobile
     @fc = DtkFc.connection.execute("select c.id, c.dtk_id, c.content, p.dtitle, p.mainPic, p.monthSales, p.originalPrice, p.actualPrice, p.couponPrice, p.commissionRate, p.cnames, p.brandName, p.sellerId, p.shopName, c.updated_at, p.marketingMainPic
 from dataoke_friend_circles c
 join dataoke_products p on c.dtk_id = p.id
