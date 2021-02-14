@@ -111,4 +111,76 @@ class DiyquanController < ApplicationController
     map_k_tdk
   end
 
+  def friend_circle_list
+    @page = params[:page].to_i
+    @page = 0 if @page < 0
+    @fcs = DtkFc.where("dtk_id <> -1").select(:id, :content, :updated_at).order("id desc").offset(20 * @page).limit(20)
+    if @fcs.nil? || @fcs.size.zero?
+      not_found
+      return
+    end
+    @c = URI.decode(@fcs.first.content)
+    @title = "#{@c.split("\n").first}-优惠券代理-爱券网"
+    @title = "#{@c.split("\n").first}-优惠券代理-第#{@page}页-爱券网" if @page > 0
+    @description = @c.gsub("\n", "，") + " - 优惠券代理 - 爱券网"
+    @page_keywords = "优惠券代理,爱券网"
+    @h1 = ""
+    @path = "/fc/"
+    @pages = []
+    (1..20).each do |n|
+      @pages << @page + n if (@page + n < 610)
+    end
+    if request.host == "m.iquan.net"
+      render "m_diyquan/friend_circle_list", layout: "layouts/m_diyquan"
+      return
+    end
+  end
+
+  def friend_circle_detail
+    @id = params[:id].to_i
+    if @id < 0
+      not_found
+      return
+    end
+    @fc = DtkFc.connection.execute("select c.id, c.dtk_id, c.content, p.dtitle, p.mainPic, p.monthSales, p.originalPrice, p.actualPrice, p.couponPrice, p.commissionRate, p.cnames, p.brandName, p.sellerId, p.shopName, c.updated_at, p.marketingMainPic
+from dataoke_friend_circles c
+join dataoke_products p on c.dtk_id = p.id
+where c.id = #{@id} and c.dtk_id <> -1").to_a.map{|row|
+      {
+        id: row[0],
+        dtk_id: row[1],
+        content: row[2],
+        title: row[3],
+        mainPic: row[4],
+        sales: row[5],
+        op: row[6],
+        ap: row[7],
+        cp: row[8],
+        rate: row[9],
+        cnames: row[10],
+        brand: row[11],
+        shop_id: row[12],
+        shop_name: row[13],
+        time: row[14],
+        mPic: row[15]
+      }
+    }
+    if @fc.size.zero?
+      not_found
+      return
+    end
+    @fc = @fc.first
+    @c = URI.decode(@fc[:content])
+    @fcs = DtkFc.where("dtk_id <> -1 and id > ?", @id).select(:id, :content, :updated_at).order(:id).limit(10)
+    @title = "#{@c.split("\n").first}-爱券网"
+    @description = @c.gsub("\n", "，") + " - 爱券网"
+    @page_keywords = @fc[:cnames]
+    @h1 = @c.split("\n").first
+    @path = "/fc/#{@id}/"
+    if request.host == "m.iquan.net"
+      render "m_diyquan/friend_circle_detail", layout: "layouts/m_diyquan"
+      return
+    end
+  end
+
 end

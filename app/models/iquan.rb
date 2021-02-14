@@ -93,3 +93,11 @@ end
 class JdShop < ApplicationRecord 
   self.table_name = 'jd_shop_seo_jsons'
 end
+
+class DtkProduct < ApplicationRecord
+  self.table_name = 'dataoke_products'
+end
+
+class DtkFc < ApplicationRecord
+  self.table_name = 'dataoke_friend_circles'
+end

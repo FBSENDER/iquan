@@ -1,0 +1,37 @@
+- title(@title)
+- head_desc(@description)
+- keywords(@page_keywords)
+- path(@path)
+- mobile_url(@path)
+
+.dazhe
+  = render partial: "/m_diyquan/search_header", locals: {keyword: "输入关键词开始找券"}
+  .ha
+    %h1 爱券网 - 优惠券分享 - 朋友圈素材
+    %p.desc
+      #{@c.gsub("\n", "<br/>").html_safe}
+      %br
+      %span{style: "color: #FF927C;"}分享预估收入 ￥#{(@fc[:ap].to_f * @fc[:rate] / 100.0).round(2)}
+  .content
+    #dazheList
+      .item
+        %a{href: "https://13ifsgnd.kuaizhan.com/#/app/down?appId=550416&productType=1&userId=0", target: "_blank", rel: "nofollow"}
+          %img.pic{src: "#{@fc[:mainPic]}", alt: "#{@fc[:title]}"}
+          .cent
+            %h3 #{@fc[:title]}
+            .tags &nbsp;
+            .num
+              %span 原价 ￥#{@fc[:op]}
+              %span.r 已售#{@fc[:sales]}件
+            .money
+              到手价 ￥
+              %span.m #{@fc[:ap]}
+              .quan
+                %i #{@fc[:cp]}元券
+    %h2{style: "font-size: 16px;padding: 10px;"} 更多朋友圈素材
+    - @fcs.each do |f|
+      %a{href: "/fc/#{f[:id]}/"}
+        .ha{style: "border-bottom: 1px solid #e7e7e7;"}
+          %p.desc
+            #{URI.decode(f[:content]).gsub("\n", "<br/>").html_safe}
+  = render partial: "/m_diyquan/footer"

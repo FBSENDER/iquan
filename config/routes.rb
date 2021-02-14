@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get "/zhekou/:keyword/", to: "diyquan#zhekou"
   get "/g_:pinyin/", to: "diyquan#page"
 
+  get "/fc", to: "diyquan#friend_circle_list"
+  get "/fc/:id", to: "diyquan#friend_circle_detail"
+
   # Ying
   #get "/peishi", to: "ying#peishi"
   #get "/peishi/:id", to: "ying#peishi_product", id: /\d+/

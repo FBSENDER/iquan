@@ -72,8 +72,25 @@
 .wrapper1200
   .rel-zk-area
     %p.head
-      %span 九块九包邮
-  = render partial: "diyquan/wide_banner", locals: {items: @coupons_9kuai9}
+      %span 朋友圈素材
+  .fc
+    .cleft
+      %p
+        %a{href: "/fc"}更多分享
+    .cmiddle
+      - @fcs.each do |f|
+        .middle{style: "margin-bottom: 10px;"}
+          %img.avatar{src: "https://img.alicdn.com/imgextra/i1/2053469401/O1CN01OtJAFb2JJi10LnIGz_!!2053469401.png"}
+          .c-area
+            %p.name 可以分享的优惠券
+            %p.dn
+              #{f.updated_at.to_s[0,10]}
+              %span
+                %a{href: "/fc/#{f.id}/"} 查看详情
+            %p.fcc #{URI.decode(f.content).gsub("\n", "<br/>").html_safe}
+    .cright
+      %img{src: "/image/lbanner1.png", alt: "优惠券代理平台二维码"}
+      %p 买买买只需要1秒，对比价格却要2小时，关注公众号注册合伙人，拿全网优惠券💰 领券下单，还有佣金拿😃
 
   .rel-zk-area
     %p.head

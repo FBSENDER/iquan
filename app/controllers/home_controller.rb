@@ -213,8 +213,7 @@ class HomeController < ApplicationController
 
   def diyquan_home
     @coupons = []
-    #@banners = Banner.where(status: 1).select(:link_url, :img_url).order("id desc").limit(5)
-    @coupons_9kuai9 = get_coupon_9kuai9_data
+    @fcs = DtkFc.where("dtk_id <> -1").select(:id, :content, :updated_at).order(:id).limit(20)
     @links = Link.where(status: 1).to_a
     @shops = get_jd_shops
     render "diyquan/home", layout: "layouts/diyquan"

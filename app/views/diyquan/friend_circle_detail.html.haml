@@ -1,0 +1,82 @@
+- title(@title)
+- head_desc(@description)
+- keywords(@page_keywords)
+- path(@path)
+- mobile_url(@path)
+- h1(@h1)
+
+.wrapper1200.fc
+  .cleft
+    %p 
+      %a{href: "/fc"}更多分享
+
+  .cmiddle
+    .middle
+      %img.avatar{src: "https://img.alicdn.com/imgextra/i1/2053469401/O1CN01OtJAFb2JJi10LnIGz_!!2053469401.png"}
+      .c-area
+        %p.name 邻家小惠
+        %p.dn
+          优惠券代理平台，分享赚佣金！
+          %span
+            %a.buy-btn{href: "javascript:;"} 下载APP
+        %p.fcc #{@c.gsub("\n", "<br/>").html_safe}
+        .fci
+          %img{src: "#{@fc[:mPic].empty? ? @fc[:mainPic] : @fc[:mPic]}"}
+        .fcitem
+          %img{src: "#{@fc[:mainPic]}", alt: "#{@fc[:title]}"}
+          .cm
+            %p.t1 #{@fc[:title]}
+            %p.t2
+              优惠价
+              %span{style: "color: #FF6434;"} ￥#{@fc[:ap]}
+            %p.t3 分享赚钱，预估可赚 ￥#{(@fc[:ap].to_f * @fc[:rate].to_i / 100.0).round(2)}
+          %div
+            %span.s1
+              %a.buy-btn{href: "javascript:;"} 分享
+        %p{style: "margin-top: 15px;width: 100%;text-align: right;"}
+          - @fc[:cnames].split(',').each do |c|
+            %a.slink{href: "/zhekou/#{URI.encode_www_form_component(c)}/"} #{c}
+          - if !@fc[:brand].empty? && !@fc[:brand].include?("other")
+            %a.slink{href: "/zhekou/#{URI.encode_www_form_component(@fc[:brand])}/"} #{@fc[:brand]}
+    - @fcs.each do |f|
+      .middle{style: "margin-top: 10px;"}
+        %img.avatar{src: "https://img.alicdn.com/imgextra/i1/2053469401/O1CN01OtJAFb2JJi10LnIGz_!!2053469401.png"}
+        .c-area
+          %p.name 可以分享的优惠券
+          %p.dn
+            #{f.updated_at.to_s[0,10]}
+            %span
+              %a{href: "/fc/#{f.id}/"} 查看详情
+          %p.fcc #{URI.decode(f.content).gsub("\n", "<br/>").html_safe}
+  
+  .cright
+    %img{src: "/image/lbanner1.png", alt: "优惠券代理平台二维码"}
+    %p 买买买只需要1秒，对比价格却要2小时，关注公众号注册合伙人，拿全网优惠券💰 领券下单，还有佣金拿😃
+
+.qrcode-wrapper{style: "display: none;"}
+  %img{src: "//t16img.yangkeduo.com/mms_static/6b899e7e8395b448bca235576751a096.png"}
+  .qr-text
+    %img.close{src: "//t16img.yangkeduo.com/mms_static/6e1914ef2bc444e25da2a78e33553472.png"}
+    %p 扫一扫 激活码 UUDIAN
+    .padding
+      #qrcode.qr
+    .know 我知道啦
+
+= render partial: "diyquan/footer"
+
+:javascript
+  $('#qrcode').qrcode({
+    render: "canvas",
+    width: 300,
+    height: 300,
+    text: "https://13ifsgnd.kuaizhan.com/#/app/down?appId=550416&productType=1&userId=0"
+  });
+  $('.buy-btn').click(function(){
+    $('.qrcode-wrapper').css("display",'');
+  });
+  $('.qr-text .close').click(function(){
+    $('.qrcode-wrapper').css("display", "none");
+  });
+  $('.qr-text .know').click(function(){
+    $('.qrcode-wrapper').css("display", "none");
+  });
