@@ -109,6 +109,11 @@ class HomeController < ApplicationController
       render 'lingshi', layout: 'lingshi'
       return
     end
+    if request.host == "www.zhequan.cc"
+      @mobile_url = ''
+      render "zhequan"
+      return
+    end
     if request.host == "www.ichaopai.cc"
       @mobile_url = ''
       render "ichaopai"
