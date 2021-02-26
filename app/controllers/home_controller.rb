@@ -87,6 +87,15 @@ class HomeController < ApplicationController
       render 'lingshi', layout: 'lingshi'
       return
     end
+    if request.host == "www.zhequan.cc"
+      if @@compete_brands.nil? || Time.now.to_i % 600 == 0
+        @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
+      end
+      @compete_brands = @@compete_brands
+      @mobile_url = ''
+      render "zhequan"
+      return
+    end
     if request.host == "www.ichaopai.cc"
       @mobile_url = ''
       render "ichaopai"
