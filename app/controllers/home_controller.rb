@@ -111,6 +111,10 @@ class HomeController < ApplicationController
     end
     if request.host == "www.zhequan.cc"
       @mobile_url = ''
+      if @@compete_brands.nil? || Time.now.to_i % 600 == 0
+        @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
+      end
+      @compete_brands = @@compete_brands.sample(10)
       render "zhequan"
       return
     end
@@ -166,6 +170,10 @@ class HomeController < ApplicationController
     @product_brands = @@product_brands
     @path = "/"
     if request.host == "www.zhequan.cc"
+      if @@compete_brands.nil? || Time.now.to_i % 600 == 0
+        @@compete_brands = CompeteBrand.select(:title, :keywords, :description, :host).to_a
+      end
+      @compete_brands = @@compete_brands.sample(10)
       render "zhequan"
       return
     end
