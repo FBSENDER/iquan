@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get "/yh/:id", to: "home#yh"
   get "/wp/:id.html", to: "wp#wp"
   get "/ws/:id.html", to: "wp#ws"
+  get "/wd/:id.html", to: "wp#wd"
+  get "/wb/:id.html", to: "wp#wb"
 
   get "/test/", to: "test#index"
   get "/test/child", to: "test#child"

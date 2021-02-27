@@ -27,6 +27,7 @@ class WpController < ApplicationController
     else
       @products = []
     end
+    @ds = Detail.select(:id, :title, :description, :pic).order("id desc").limit(10)
     @desc += "特价折扣平台-17430.com.cn"
   end
 
@@ -40,6 +41,25 @@ class WpController < ApplicationController
     @ss = ComShop.where(id: s.r_shops.split(',')).select(:id, :nick)
     @s = s
     @desc = "便宜网购商城为您提供#{@s.nick}信息查询服务，包括#{@s.nick}首页网址、#{@s.nick}用户评价、#{@s.nick}优惠券以及#{@s.nick}折扣商品，特价折扣平台-17430.com.cn"
+    @ds = Detail.select(:id, :title, :description, :pic).order("id desc").limit(10)
+  end
+
+  def wd
+    @d = Detail.where(id: params[:id].to_i).take
+    not_found if @d.nil?
+    @products = DtkProduct.where(id: @d.product_ids.split(',')).select(:id, :goodsId, :dtitle, :desc, :originalPrice, :actualPrice, :discounts, :couponPrice, :couponEndTime, :monthSales, :sellerId, :shopName).order(:sellerId)
+    @pds = []
+    @products.map{|x| x.shopName}.uniq.each do |n|
+      @pds << [n, @products.select{|x| x.shopName == n}]
+    end
+    @ds = Detail.select(:id, :title, :description, :pic).order("id desc").limit(10)
+  end
+
+  def wb
+    @ds = Detail.where(brand_id: params[:id].to_i).select(:id, :brand_name, :title, :description, :pic).order("id desc")
+    not_found if @ds.size.zero?
+    @brand_id = params[:id].to_i
+    @brand_name = @ds.first.brand_name
   end
 
 end

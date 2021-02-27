@@ -44,6 +44,15 @@
       %a{href: "/ws/#{s.id}.html"} #{s.nick}
 
 %aside.container
+  %h3.c 更多优惠信息
+  .columns
+    - @ds.each do |ss|
+      .col-3.col-sm-6
+        .item
+          %a{href: "/wd/#{ss.id}.html"}
+            %img.img-responsive{src: "#{ss.pic}", alt: "#{ss.title}"}
+          %a{href: "/wd/#{ss.id}.html"}
+            %p.t #{ss.title}
   = render partial: "friend_link"
 
 %footer.container

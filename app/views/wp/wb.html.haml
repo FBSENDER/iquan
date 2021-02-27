@@ -1,0 +1,43 @@
+- title("#{@brand_name}打折促销活动汇总-便宜网购商城")
+- head_desc("#{@brand_name}打折促销活动汇总，每日更新优惠信息，快来便宜网购商城查看吧！")
+- keywords("#{@brand_name},#{@brand_name}打折,#{@brand_name}活动,#{@brand_name}促销,#{@brand_name}优惠,#{@brand_name}优惠券") 
+- path("/wb/#{@brand_id}.html")
+- mobile_url("http://m.17430.com.cn/wb/#{@brand_id}.html")
+
+%header
+  .navbar.hn
+    .container
+      %a.hlink{href: "/"} 便宜网购商城
+      %a.hlink{href: "/map/keyword/k1.html"} 商品推荐
+      %a.hlink{href: "/map/shop/s1.html"} 店铺推荐
+  %nav
+    .container
+      %a{href: "/", title: "便宜网购商城"} 首页
+      >
+      %span #{@brand_name}
+
+%article.container
+  .c
+    %h1{style: "font-size: 24px;"} #{@brand_name}打折促销活动汇总
+    %p{style: "margin-top: 20px;"} 便宜网购商城每日更新各个品牌的优惠促销信息，下面是#{@brand_name}近期促销活动汇总：
+
+  .columns
+    - @ds.each do |ss|
+      .col-3.col-sm-6
+        .item
+          %a{href: "/wd/#{ss.id}.html"}
+            %img.img-responsive{src: "#{ss.pic}", alt: "#{ss.title}"}
+          %a{href: "/wd/#{ss.id}.html"}
+            %p.t #{ss.title}
+          %p.d #{ss.description}
+
+%aside.container
+  = render partial: "friend_link"
+
+%footer.container
+  %hr
+  %p.text-center
+    便宜网购商城为您推荐全网又新又全的
+    %span.H #{@brand_name} 
+    优惠促销打折信息
+    www.17430.com.cn

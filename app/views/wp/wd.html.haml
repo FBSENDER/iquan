@@ -1,0 +1,52 @@
+- title("#{@d.title}-便宜网购商城")
+- head_desc(@d.description)
+- keywords("#{@d.brand_name},#{@d.brand_name}打折,#{@d.brand_name}活动,#{@d.brand_name}促销,#{@d.brand_name}优惠,#{@d.brand_name}优惠券") 
+- path("/wd/#{@d.id}.html")
+- mobile_url("http://m.17430.com.cn/wp/#{@d.id}.html")
+
+%header
+  .navbar.hn
+    .container
+      %a.hlink{href: "/"} 便宜网购商城
+      %a.hlink{href: "/map/keyword/k1.html"} 商品推荐
+      %a.hlink{href: "/map/shop/s1.html"} 店铺推荐
+  %nav
+    .container
+      %a{href: "/", title: "便宜网购商城"} 首页
+      >
+      %a{href: "/wb/#{@d.brand_id}.html"} #{@d.brand_name}
+      >
+      %span #{@d.brand_name} #{@d.c_date}
+
+%article.container
+  .c
+    %h1{style: "font-size: 24px;"} #{@d.title}
+    %p{style: "margin-top: 10px"} 更新日期：#{@d.created_at.localtime.to_s[0,16]}
+    %img.img-responsive{src: "#{@d.pic}", alt: "#{@d.title}", style: "width: 200px;margin: 20px auto 0;"}
+    %p{style: "margin-top: 20px;"} #{@d.description}下面给大家放送#{@d.brand_name}品牌各个店铺的优惠信息：
+  - @pds.each do |s|
+    .c
+      %h2{style: "font-size: 22px;"} #{s[0]} - 今日活动商品#{s[1].size}件，最高优惠#{s[1].map{|x| x.couponPrice}.max}元
+      %ul
+        - s[1].each do |pd|
+          %li 【#{pd.dtitle}】#{pd.desc}——月售#{pd.monthSales}件，原价#{pd.originalPrice}元，今日优惠价#{pd.actualPrice}元，速领#{pd.couponPrice}元优惠券（截止日期#{pd.couponEndTime[0,10]}）。
+
+%aside.container
+  %h3.c 更多优惠信息
+  .columns
+    - @ds.each do |ss|
+      .col-3.col-sm-6
+        .item
+          %a{href: "/wd/#{ss.id}.html"}
+            %img.img-responsive{src: "#{ss.pic}", alt: "#{ss.title}"}
+          %a{href: "/wd/#{ss.id}.html"}
+            %p.t #{ss.title}
+  = render partial: "friend_link"
+
+%footer.container
+  %hr
+  %p.text-center
+    便宜网购商城为您推荐全网又新又全的
+    %span.H #{@d.brand_name} 
+    优惠促销打折信息
+    www.17430.com.cn
