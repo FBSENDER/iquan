@@ -17,3 +17,7 @@ end
 class DtkProduct < ApplicationRecord
   self.table_name = "dataoke_products"
 end
+
+class Selector < ApplicationRecord
+  self.table_name = "tb_keyword_selectors"
+end

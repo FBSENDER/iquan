@@ -19,6 +19,8 @@
       %h1 #{@k}
 
 %article.container
+  - if @robot
+    %p.c #{@desc}
   .columns
     - @products.each do |pr|
       - t1 = pr["short_title"].empty? ? pr["title"] : pr["short_title"]
@@ -50,6 +52,15 @@
       %a{href: "http://www.shikuaigou.com/zhekou/#{URI.encode_www_form_component(@products[0]["category_name"].split('/')[0])}/", title: "#{@products[0]["category_name"].split('/')[0]}优惠券"}
         %span.H 这里
       。
+
+  - if @robot
+    %h3.c #{@k}商品筛选
+    %p.c
+      - @selector.each do |s|
+        #{@k}#{s["type"].gsub(":", "：")}
+        - s["value"].split(',').each do |ss|
+          %span #{ss}
+        %br
 
   %p.c
     您可能还在找：

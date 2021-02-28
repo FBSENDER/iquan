@@ -29,6 +29,14 @@ class WpController < ApplicationController
     end
     @ds = Detail.select(:id, :title, :description, :pic).order("id desc").limit(10)
     @desc += "特价折扣平台-17430.com.cn"
+    @robot = is_robot?
+    @selector = []
+    if @robot
+      s = Selector.where(keyword: @k).take
+      if s
+        @selector = JSON.parse(s.selector)
+      end
+    end
   end
 
   def ws
