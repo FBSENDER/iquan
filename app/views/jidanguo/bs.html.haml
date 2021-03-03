@@ -1,0 +1,46 @@
+- title("#{@bs.shopName}_商家推荐_鸡蛋果TOP")
+- keywords("#{@bs.shopName},#{@bs.shopName}首页,#{@bs.shopName}怎么样,百香果,鸡蛋果TOP") 
+- head_desc("#{@bs.shopName}是一家#{@bs.shopLevel}级的#{@bs.shopType == 1 ? "天猫" : "淘宝"}店铺，综合评价较高，受到多数用户认可。本站精选优质百香果，为您推荐百香果果品与百香果店铺。每日可以查询百香果价格、百香果图片、百香果店铺等，更多百香果相关信息，请看鸡蛋果TOP www.jidanguo.top")
+
+= render partial: "header"
+
+.container.fr
+  .fr-9
+    .article
+      %h1.fr-title #{@bs.shopName}
+      %img{src: "#{@bs.shopLogo}", alt: "#{@bs.shopName}", style: "width: 180px;height: 180px;border-radius:90px;margin: 10px auto;"}
+      %p #{@bs.shopName}是一家#{@bs.shopLevel}级的#{@bs.shopType == 1 ? "天猫" : "淘宝"}店铺，综合评价较高，受到多数用户认可。
+    .home-all
+      .home-bang
+        %h2.fr-title #{@bs.shopName}店铺商品推荐
+      .product-area
+        - @products.each do |g|
+          %a{href: "/bp/#{g.id}.html", title: "#{g.dtitle}"}
+            .product
+              %img.pic{src: "#{g.mainPic}", alt: "#{g.dtitle}"}
+              %p.t1 #{g.dtitle}
+              %p.t2{style: "padding-top: 12px;"}
+                %span.tag #{g.shopType == 0 ? '淘宝' : g.shopType == 1 ? '天猫' : '其他'}
+                %span{style: "float:right;"} #{g.monthSales}
+                %span{style: "float:right;"} 月销：
+              %p.t2
+                价格 ￥
+                %span.price #{g.actualPrice}
+              .lg 百香果
+      .home-bang
+        %h2.fr-title 更多店铺推荐
+      .product-area
+        - @shops.each do |g|
+          %a{href: "/bs/#{g.sellerId}.html", title: "#{g.shopName}"}
+            .product
+              %img.pic{src: "#{g.shopLogo}", alt: "#{g.shopName}"}
+              %p.t1{style: "line-height: 40px;text-align:center;"} #{g.shopName}
+  .fr-3
+    .right-area
+      %h2.fr-title 百香果网站说明
+      .content
+        %p 本站每日更新天猫、淘宝、京东、拼多多平台上热销中的百香果相关产品。
+        %p 您可以浏览到热销商品、优质店铺以及百香果的价格趋势。
+        %p 如果您认为自己的百香果更优质更实惠，欢迎联系本站，本站将视实际情况为您的商品安排展示位置。
+        
+= render partial: "footer"

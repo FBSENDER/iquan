@@ -46,15 +46,14 @@
         %span.fr-more{style: "display:none;"} 查看更多
       .goods-area
         - @goods.each_with_index do |g, index|
-          %a{href: "/bxgbuy/#{g.item_id}/", target: "_blank", rel: "nofollow"}
-            .goods
-              %img.pic{src: "#{g.pict_url}", alt: "#{g.title}"}
-              %p.t1 #{g.shop_title}
-              %p.t2
-                #{g.provcity}
-                %span{style: "float:right;color:red;"} #{g.volume}
-                %span{style: "float:right;"}月销：
-              .bang-order #{index + 1}
+          .goods
+            %img.pic{src: "#{g.pict_url}", alt: "#{g.title}"}
+            %p.t1 #{g.shop_title}
+            %p.t2
+              #{g.provcity}
+              %span{style: "float:right;color:red;"} #{g.volume}
+              %span{style: "float:right;"}月销：
+            .bang-order #{index + 1}
     .home-all
       .tags
         %a.active{href: "#"} 精选
@@ -62,17 +61,17 @@
           %a{href: "/bxgtag/#{tg.pinyin}.html"} #{tg.tag}
       .product-area
         - @products.each do |g|
-          %a{href: "/bxgbuy/#{g.item_id}/", target: "_blank", rel: "nofollow"}
+          %a{href: "/bp/#{g.id}.html", title: "#{g.dtitle}"}
             .product
-              %img.pic{src: "#{g.pict_url}", alt: "#{g.title}"}
-              %p.t1 #{g.title}
+              %img.pic{src: "#{g.mainPic}", alt: "#{g.dtitle}"}
+              %p.t1 #{g.dtitle}
               %p.t2{style: "padding-top: 12px;"}
-                %span.tag #{g.shop_type == 0 ? '淘宝' : g.shop_type == 1 ? '天猫' : '其他'}
-                %span{style: "float:right;"} #{g.volume}
+                %span.tag #{g.shopType == 0 ? '淘宝' : '天猫'}
+                %span{style: "float:right;"} #{g.monthSales}
                 %span{style: "float:right;"} 月销：
               %p.t2
                 价格 ￥
-                %span.price #{g.price}
+                %span.price #{g.actualPrice}
               .lg 百香果
   %aside.fr-3
     .right-area

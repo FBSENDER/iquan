@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "/bxgtag/:pinyin.html", to: "jidanguo#tag", constraints: {domain: 'jidanguo.top'}
   get "/bxgbuy/:id", to: "jidanguo#taobao_buy", constraints: {domain: 'jidanguo.top'}
   get "/bxglist/", to: "jidanguo#product_list", constraints: {domain: 'jidanguo.top'}
+  get "/bp/:id.html", to: "jidanguo#bp", constraints: {domain: 'jidanguo.top'}
+  get "/bs/:id.html", to: "jidanguo#bs", constraints: {domain: 'jidanguo.top'}
 
   root "home#index"
   get "/index.html", to: "home#frame_home"  

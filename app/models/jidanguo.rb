@@ -14,3 +14,10 @@ class JidanguoTagProduct < ApplicationRecord
   self.table_name = 'bxg_tag_products'
 end
 
+class JiProduct < ApplicationRecord
+  self.table_name = 'jidanguo_products'
+end
+
+class JiShop < ApplicationRecord
+  self.table_name = 'jidanguo_shops'
+end

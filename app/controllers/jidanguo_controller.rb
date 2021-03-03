@@ -77,7 +77,7 @@ class JidanguoController < ApplicationController
 
   def home
     @goods = Jidanguo.where(is_good: 1, status: 1).select(:id, :item_id, :pict_url, :title, :provcity, :volume, :shop_title).order("volume desc").limit(5)
-    @products = Jidanguo.where(status: 1).select(:id, :item_id, :title, :shop_type, :volume, :pict_url, :price).order("volume desc").offset(5).limit(40)
+    @products = JiProduct.select(:id, :dtitle, :mainPic, :monthSales, :actualPrice, :shopType).order(:id).limit(20)
     @tags = JidanguoTag.select(:id, :tag, :pinyin).to_a
     @shipin = $shipin
     @topics = $topics
@@ -148,7 +148,20 @@ where t.tag_id = #{@tag.id} order by p.id desc limit 40").to_a.each do |row|
   end
 
   def product_list
-    @products = Jidanguo.where(status: 1).select(:id, :item_id, :title, :shop_type, :volume, :pict_url, :price).order("id desc").offset(5).limit(100)
+    @products = JiProduct.select(:id, :dtitle, :mainPic, :monthSales, :actualPrice, :shopType).order(:id).limit(40)
+  end
+
+  def bp
+    @bp = JiProduct.where(id: params[:id].to_i).take
+    not_found if @bp.nil?
+    @products = JiProduct.where("id > ?", @bp.id).select(:id, :dtitle, :mainPic, :monthSales, :actualPrice, :shopType).limit(20)
+  end
+
+  def bs
+    @bs = JiShop.where(sellerId: params[:id].to_i).take
+    not_found if @bs.nil?
+    @products = JiProduct.where(sellerId: @bs.sellerId).select(:id, :dtitle, :mainPic, :monthSales, :actualPrice, :shopType)
+    @shops = JiShop.where("id > ?", @bs.id).select(:id, :sellerId, :shopName, :shopLogo).limit(8)
   end
 
 end
