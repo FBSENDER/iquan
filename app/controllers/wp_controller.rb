@@ -52,6 +52,10 @@ class WpController < ApplicationController
     @ds = Detail.select(:id, :title, :description, :pic).order("id desc").limit(10)
   end
 
+  def wd_list
+    @ds = Detail.select(:id, :title, :description, :pic).order("id desc").limit(40)
+  end
+
   def wd
     @d = Detail.where(id: params[:id].to_i).take
     not_found if @d.nil?

@@ -1,0 +1,38 @@
+- title("大牌优惠促销活动-便宜网购商城")
+- head_desc("便宜网购商城（www.17430.com.cn）为大家筛选今年淘宝双旦节（圣诞节、元旦）的折扣特价商品，活动期间天天有便宜好货等着您！今年的活动包含跨店满减、幸运红包、定金立减、商品优惠券等等，惊喜不断，快来买买买吧！")
+- keywords("17430优惠券,便宜网购商城,打折平台,特价,淘宝双旦节,淘宝圣诞节,淘宝新年活动")
+- path("/wd/")
+- mobile_url("http://m.17430.com.cn/wd/")
+
+%header
+  .navbar.hn
+    .container
+      %a.hlink{href: "/"} 便宜网购商城
+      %a.hlink{href: "/map/keyword/k1.html"} 商品推荐
+      %a.hlink{href: "/wd/"} 品牌推荐
+  %nav
+    .container
+      %a{href: "/", title: "便宜网购商城"} 首页
+      >
+      %span 品牌推荐
+
+%article.container
+  .c
+    %h1{style: "font-size: 24px;"} 大牌优惠促销
+  .columns
+    - @ds.each do |ss|
+      .col-3.col-sm-6
+        .item
+          %a{href: "/wd/#{ss.id}.html"}
+            %img.img-responsive{src: "#{ss.pic}", alt: "#{ss.title}"}
+          %a{href: "/wd/#{ss.id}.html"}
+            %p.t #{ss.title}
+  = render partial: "friend_link"
+
+%footer.container
+  %hr
+  %p.text-center
+    便宜网购商城为您推荐全网又新又全的
+    %span.H 大牌
+    优惠促销打折信息
+    www.17430.com.cn
