@@ -6,7 +6,7 @@ namespace :deploy do
 
   after :finished, :restart_puma do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      execute "cd #{deploy_to} && cp shared/config/database.yml current/config/database.yml && cp shared/config/secrets.yml current/config/secrets.yml && cp shared/app/controllers/diyquan_controller.rb current/app/controllers/"
+      execute "cd #{deploy_to} && cp shared/lib/express_config.rb current/lib/express_config.rb &&cp shared/config/database.yml current/config/database.yml && cp shared/config/secrets.yml current/config/secrets.yml && cp shared/app/controllers/diyquan_controller.rb current/app/controllers/"
       execute "docker tag 17430_docker 17430_docker:old || echo 1"
       execute "cd #{deploy_to}/current && docker build -t 17430_docker . --no-cache"
       execute "docker kill 17430_1 || echo 1"
