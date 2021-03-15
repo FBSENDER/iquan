@@ -1,0 +1,64 @@
+- title("#{@k} - Buy Promotional #{@k} Online - UuCoupon")
+- head_desc("Online shopping for promotional #{@k}, you can find hot sale #{@k} on UuCoupon - price info, discount info, lastest volume info and images of #{@k}.")
+- keywords("#{@k}, promotional #{@k}, hot sale #{@k}, #{@k} online") 
+- path("/ek/#{URI.encode(@keyword.keyword)}")
+
+%header
+  .navbar.hn
+    .container
+      %a.hlink{href: "/"} UuCoupon
+  %nav
+    .container
+      %a{href: "/", title: ""} Home
+      >
+      - @nav.each do |n|
+        %a{href: "/ec/#{n[0]}.html"} #{n[1]}
+        >
+      %a{href: "/ec/#{@category.id}.html"} #{@category.name}
+      >
+      %h1 #{@k}
+
+%article.container
+  %p.c Looking for a good deal on #{@k}? Online shopping for promotional #{@k}, you can find hot sale #{@k} on UuCoupon - price info, lastest volume info and images of #{@k}.Besides good quality brands, you’ll also find plenty of discounts when you shop for #{@k} during big sales.
+  .columns
+    - @items.each do |pr|
+      .col-3.col-sm-6
+        .item
+          %a{href: "/e_detail/#{pr["product_id"]}", title: "#{pr["product_title"]}",rel: "nofollow", target: "_blank"}
+            %img.img-responsive{src: "#{pr["product_main_image_url"]}", alt: "#{pr["product_title"]}"}
+          %a{href: "/e_detail/#{pr["product_id"]}", rel: "nofollow", target: "_blank"}
+            %p.t #{pr["product_title"]}
+          %p.d
+            %span{style: "color:red;"} US $#{pr["target_sale_price"] || pr["target_original_price"]}
+          %p.d{style: "color: #999;"} 
+            %span{style: "text-decoration:line-through;"} $#{pr["target_original_price"]}
+            %span - #{pr["discount"] || "none"} off
+          %p.d{style: "color: #999;"} #{pr["lastest_volume"]} sold
+  %h2.c Hot Promotions in #{@k} on coupon.uuhaodian.com
+  %p.c
+    Hot wire!!! You’re in the right place for #{@k}.Now you know that whatever you're looking for, you'll find it on UuCoupon. We have thousands of excellent products in all product categories. Whether you're looking for a high-end label or a cheap, economical bulk purchase, we guarantee it's on UuCoupon.
+    %br
+    You'll find small independent discount sellers next to the official store brand, all of whom offer fast shipping and reliable, as well as convenient and safe payment methods, no matter how much money you choose.
+    %br
+    If you are still hesitant about the #{@k} and are considering a similar product, coupon.uuhaodian.com is a good place to compare prices and sellers. We'll help you determine whether it's worth paying extra for a high-end version, or whether you get the same benefits by buying a cheaper product. Moreover, if you just want to be nice to yourself and spend a lot of money on the most expensive version, uucoupon will always make sure you get the best price for your money, even let you know when it will be better to wait for the promotion to start, and the savings you can expect
+
+  - if @hot_keywords.size > 0
+    %p.c
+      Hot Search:
+      %br
+      - @hot_keywords.each do |k|
+        %a{href: "/ek/#{URI.encode(k)}", title: "Promotional #{k}"} #{k}
+  - if @rank_keywords.size > 0
+    %p.c
+      Ranking Search:
+      %br
+      - @rank_keywords.each do |k|
+        %a{href: "/ek/#{URI.encode(k)}", title: "Promotional #{k}"} #{k}
+
+%footer.container
+  %hr
+  %p.text-center
+    Online shopping for promotional
+    %span.H #{@k}
+    #{" - "}
+    coupon.uuhaodian.com

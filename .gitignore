@@ -26,3 +26,4 @@ Capfile
 /app/controllers/diyquan_controller.rb
 /lib/zkapi/*.rb
 /public/seo_articles/*
+/lib/express_config.rb
