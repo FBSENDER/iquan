@@ -28,7 +28,7 @@ class ExpressController < ApplicationController
     @keywords = AliKeyword.where(id: kids, is_hot: 0, is_rank: 0).pluck(:keyword)
     @hot_keywords = $hot_keywords.sample(10)
     @rank_keywords = $rank_keywords.sample(10)
-    @items = get_items(@category.name.gsub("&", ""), @category.cid > 0 ? @category.cid.to_s : "")
+    @items = get_items(@category.name.gsub("&", "").gsub("°", ""), @category.cid > 0 ? @category.cid.to_s : "")
     ar = AliCategoryAttr.where(category_id: @category.id).take
     if ar.nil? || ar.attr_json.empty?
       @attr = []
