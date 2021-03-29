@@ -28,7 +28,12 @@ class ExpressController < ApplicationController
     @keywords = AliKeyword.where(id: kids, is_hot: 0, is_rank: 0).pluck(:keyword)
     @hot_keywords = $hot_keywords.sample(10)
     @rank_keywords = $rank_keywords.sample(10)
-    @items = get_items(@category.name.gsub("&", "").gsub("°", ""), @category.cid > 0 ? @category.cid.to_s : "")
+    file = Rails.root.join("public/express_jsons/category").join("ec_#{@category.id}.json")
+    if File.exists?(file)
+      @items = JSON.parse(File.read(file))
+    else
+      @items = get_items(@category.name.gsub("&", "").gsub("°", ""), @category.cid > 0 ? @category.cid.to_s : "")
+    end
     ar = AliCategoryAttr.where(category_id: @category.id).take
     if ar.nil? || ar.attr_json.empty?
       @attr = []
@@ -47,7 +52,12 @@ class ExpressController < ApplicationController
     @brands = AliBrand.where(id: bids).select(:id, :name, :img_url)
     @hot_keywords = $hot_keywords.sample(10)
     @rank_keywords = $rank_keywords.sample(10)
-    @items = get_items(@brand.name.gsub("&", " "), "")
+    file = Rails.root.join("public/express_jsons/brand").join("eb_#{@brand.id}.json")
+    if File.exists?(file)
+      @items = JSON.parse(File.read(file))
+    else
+      @items = get_items(@brand.name.gsub("&", " "), "")
+    end
   end
 
   def ecb
@@ -63,8 +73,13 @@ class ExpressController < ApplicationController
     @keywords = AliKeyword.where(id: kids, is_hot: 0, is_rank: 0).pluck(:keyword)
     @hot_keywords = $hot_keywords.sample(10)
     @rank_keywords = $rank_keywords.sample(10)
-    @items = get_items(@brand.name.gsub("&", " ") + " " + @category.name.gsub("&", ""), @category.cid > 0 ? @category.cid.to_s : "")
-    @items = get_items(@brand.name.gsub("&", " "), "") if @items.size.zero?
+    file = Rails.root.join("public/express_jsons/category_brand").join("ecb_#{@category.id}_#{@brand.id}.json")
+    if File.exists?(file)
+      @items = JSON.parse(File.read(file))
+    else
+      @items = get_items(@brand.name.gsub("&", " ") + " " + @category.name.gsub("&", ""), @category.cid > 0 ? @category.cid.to_s : "")
+      @items = get_items(@brand.name.gsub("&", " "), "") if @items.size.zero?
+    end
     ar = AliCategoryAttr.where(category_id: @category.id).take
     if ar.nil? || ar.attr_json.empty?
       @attr = []
@@ -86,8 +101,13 @@ class ExpressController < ApplicationController
     @keywords = AliKeyword.where(id: kids).select(:keyword, :is_hot, :is_rank)
     @hot_keywords = $hot_keywords.sample(10)
     @rank_keywords = $rank_keywords.sample(10)
-    @items = get_items(@keyword.keyword.gsub("&", ""), @keyword.is_hot == 0 && @keyword.is_rank == 0 && @category.cid > 0 ? @category.cid.to_s : "")
-    @items = get_items(@keyword.keyword.gsub("&", ""), "") if @items.size.zero?
+    file = Rails.root.join("public/express_jsons/keyword").join("ek_#{@keyword.id}.json")
+    if File.exists?(file)
+      @items = JSON.parse(File.read(file))
+    else
+      @items = get_items(@keyword.keyword.gsub("&", ""), @keyword.is_hot == 0 && @keyword.is_rank == 0 && @category.cid > 0 ? @category.cid.to_s : "")
+      @items = get_items(@keyword.keyword.gsub("&", ""), "") if @items.size.zero?
+    end
   end
 
   def e_detail
