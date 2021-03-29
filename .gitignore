@@ -27,6 +27,8 @@ Capfile
 .DS_Store
 /lib/zkapi/zk_api.rb
 /lib/zkapi/lanlan_api.rb
+/lib/express_config.rb
 /lib/common_config.rb
 /public/iquan_pc_home.html
 /public/seo_articles/
+/public/express_jsons/
