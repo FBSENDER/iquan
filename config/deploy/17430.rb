@@ -8,10 +8,10 @@ namespace :deploy do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       execute "cd #{deploy_to} && cp shared/lib/express_config.rb current/lib/express_config.rb &&cp shared/config/database.yml current/config/database.yml && cp shared/config/secrets.yml current/config/secrets.yml && cp shared/app/controllers/diyquan_controller.rb current/app/controllers/"
       execute "docker tag 17430_docker 17430_docker:old || echo 1"
-      execute "cd #{deploy_to}/current && docker build -t 17430_docker . --no-cache"
+      execute "cd #{deploy_to}/current && mkdir public/express_jsons && mkdir public/express_jsons/category && mkdir public/express_jsons/brand && mkdir public/express_jsons/keyword && mkdir public/express_jsons/category_brand && docker build -t 17430_docker . --no-cache"
       execute "docker kill 17430_1 || echo 1"
       execute "docker rm 17430_1 || echo 1"
-      execute "docker run -v /tmp/17430/17430_1/:/tmp/ -v /home/work/17430/shared/public/assets/:/usr/src/app/public/assets/ -v /home/work/17430/shared/log_1/:/usr/src/app/log/ -d --name 17430_1 17430_docker"
+      execute "docker run -v /tmp/17430/17430_1/:/tmp/ -v /home/work/17430/shared/public/assets/:/usr/src/app/public/assets/ -v /home/work/17430/shared/log_1/:/usr/src/app/log/ -v /home/work/17430/shared/public/express_jsons/:/usr/src/app/public/express_jsons/ -v /home/work/17430/shared/public/express_jsons/category/:/usr/src/app/public/express_jsons/category/ -v /home/work/17430/shared/public/express_jsons/brand/:/usr/src/app/public/express_jsons/brand/ -v /home/work/17430/shared/public/express_jsons/keyword/:/usr/src/app/public/express_jsons/keyword/ -v /home/work/17430/shared/public/express_jsons/category_brand/:/usr/src/app/public/express_jsons/category_brand/ -d --name 17430_1 17430_docker"
       execute "docker cp /home/work/17430/shared/simsun.ttc 17430_1:/usr/share/fonts/"
 
     end
