@@ -10,6 +10,6 @@
   = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanHomeCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
   %div{style: "background-color: white;padding:10px;margin-bottom: 20px;"}
     %h2 今日推荐
-    - %w(zara 连衣裙 hm t恤女 牛仔裤 衬衫 牛仔裤女 女装 t恤女短袖 运动裤女 白色t恤女 牛仔外套女 短袖女 运动套装女 风衣 衬衫女 外套 防晒衣 半身裙 卫衣女).each do |k|
+    - %w(春装 品牌春装 2021春装 男装 女装 大码女装 新款男装).each do |k|
       %a{href: "/amp/qq/#{URI.encode(k)}/"} #{k}
 = render partial: "diyquan/home_footer", locals: {links: @links}
