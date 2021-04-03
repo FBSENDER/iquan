@@ -88,7 +88,7 @@ class ExpressController < ApplicationController
     end
   end
 
-  def ek
+  def deal_keyword_request
     @keyword = AliKeyword.where(keyword: params[:keyword]).take
     not_found if @keyword.nil?
     @k = @keyword.keyword
@@ -107,7 +107,20 @@ class ExpressController < ApplicationController
     else
       @items = get_items(@keyword.keyword.gsub("&", ""), @keyword.is_hot == 0 && @keyword.is_rank == 0 && @category.cid > 0 ? @category.cid.to_s : "")
       @items = get_items(@keyword.keyword.gsub("&", ""), "") if @items.size.zero?
+      if @items.size > 0
+        File.open(file, "w") do |f|
+          f.puts @items.to_json
+        end
+      end
     end
+  end
+
+  def ek
+    deal_keyword_request
+  end
+
+  def e_popular
+    deal_keyword_request
   end
 
   def e_detail

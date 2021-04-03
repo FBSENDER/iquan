@@ -46,6 +46,7 @@
     %p.c
       Hot Search:
       %br
+      %a{href: "/e_popular/#{URI.encode(@k)}", title: "Best Value #{@k}"} #{@k}
       - @hot_keywords.each do |k|
         %a{href: "/ek/#{URI.encode(k)}", title: "Promotional #{k}"} #{k}
   - if @rank_keywords.size > 0
