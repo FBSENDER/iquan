@@ -226,7 +226,7 @@ class HomeController < ApplicationController
 
   def diyquan_home
     @coupons = []
-    @fcs = DtkFc.where("dtk_id <> -1").select(:id, :content, :updated_at).order("id desc").limit(20)
+    @fcs = DtkFc.where("dtk_id <> -1").select(:id, :content, :updated_at).order("id desc").limit(2)
     @links = Link.where(status: 1).to_a
     @shops = get_jd_shops
     render "diyquan/home", layout: "layouts/diyquan"
