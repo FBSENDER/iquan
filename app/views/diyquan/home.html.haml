@@ -10,6 +10,6 @@
   = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanHomeCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
   %div{style: "background-color: white;padding:10px;margin-bottom: 20px;"}
     %h2 今日推荐
-    - %w(春装 品牌春装 2021春装 男装 女装 大码女装 新款男装).each do |k|
+    - %w(粽子 蚊香液 螺蛳粉 抽纸 洗衣液 凉席 面膜 落地扇 短袖).each do |k|
       %a{href: "/amp/qq/#{URI.encode(k)}/"} #{k}
 = render partial: "diyquan/home_footer", locals: {links: @links}
