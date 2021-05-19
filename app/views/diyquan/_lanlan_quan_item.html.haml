@@ -7,10 +7,6 @@
       %img.lazy{src: "", alt: "#{coupon['shortTitle']}#{coupon['couponMoney'].to_i}元优惠券", data: {original: "#{coupon['coverImage']}"}, style: "opacity: 1;"}
 
     %p.title-area.elli
-      - if coupon["shopType"] == "tmall"
-        %i.i_tmall
-      - else 
-        %i.i_taobao
       %span.post-free 包邮
       #{coupon['shortTitle']}
     .raw-price-area

@@ -22,7 +22,7 @@ class HomeController < ApplicationController
   def diyquan_home
     if is_robot?
       #@coupons = get_static_coupons('static_new_coupons')
-      @coupons = []
+      @coupons = get_home_coupons
     else
       @coupons = []
     end
@@ -34,5 +34,16 @@ class HomeController < ApplicationController
   def m_diyquan_home
     @coupons = get_static_coupons('static_new_coupons')
     render "m_diyquan/home", layout: "layouts/m_diyquan"
+  end
+
+  def get_home_coupons
+    url = "http://www.shikuaigou.com/getLanlanHomeCouponList"
+    result = Net::HTTP.get(URI(url))
+    data = JSON.parse(result)
+    if data["status"] && data["status"]["code"] && data["status"]["code"] == 1001
+      return data["result"]
+    else
+      return []
+    end
   end
 end
