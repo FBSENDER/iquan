@@ -226,11 +226,13 @@ class HomeController < ApplicationController
 
   def diyquan_home
     @coupons = []
-    @fcs = DtkFc.where("dtk_id <> -1").select(:id, :content, :updated_at).order("id desc").limit(2)
+    @fcs = DtkFc.where("dtk_id <> -1").select(:id, :content, :updated_at).order("id desc").limit(5)
     @links = Link.where(status: 1).to_a
     @shops = get_jd_shops
+    @items = DtkProduct.where(status: 1).select(:id, :mainPic, :dtitle, :originalPrice, :actualPrice, :couponPrice, :monthSales, :shopType).order("id desc").limit(20)
     render "diyquan/home", layout: "layouts/diyquan"
   end
+
   def m_diyquan_home
     @channel = 8
     @keyword = "生活"

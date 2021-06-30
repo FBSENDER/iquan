@@ -95,9 +95,14 @@ class JdShop < ApplicationRecord
 end
 
 class DtkProduct < ApplicationRecord
-  self.table_name = 'dataoke_products'
+  self.table_name = 'dataoke_products_for_iquan'
+end
+
+class DtkProductImg < ApplicationRecord
+  self.table_name = 'dataoke_product_imgs_for_iquan'
 end
 
 class DtkFc < ApplicationRecord
   self.table_name = 'dataoke_friend_circles'
 end
+

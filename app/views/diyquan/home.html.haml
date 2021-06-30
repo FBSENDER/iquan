@@ -121,6 +121,21 @@
       %span 爱券网 - 淘宝优惠券天猫优惠券领取
   = render partial: "diyquan/lanlan_quan_filter"
   #couponList.zk-list.clearfix
+    - @items.each do |item|
+      .zk-item
+        %a{href: "/note/#{item.id}", title: "#{item.dtitle}"}
+          .img-area
+            %img{src: "#{item.mainPic}", alt: "#{item.dtitle}"}
+          %p.title-area #{item.dtitle}
+          .tags-area
+            %span.tag #{item.shopType == 1 ? "天猫" : "淘宝"}
+            %span.tag.c #{item.couponPrice}元券
+          .price-area
+            券后价 ￥
+            %span.price #{item.actualPrice}
+          .raw-price-area
+            原价: ￥#{item.originalPrice}
+            %p.sold #{item.monthSales}人已付款
   = render partial: "diyquan/lanlan_load_more", locals: {path: 'https://api.uuhaodian.com/uu/home_list', pinyin: '', keyword: '',cid: 0, sort_type: 7,type: 0,  pagesize: 20, wclass: '.home-wrapper'}
 
 = render partial: "diyquan/home_footer", locals: {links: @links}

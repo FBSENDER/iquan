@@ -1,0 +1,120 @@
+- title(@d.dtitle)
+- head_desc("#{@d.dtitle} - #{@d.title} - #{@d.desc}")
+- keywords("#{@d.dtitle},#{@d.cnames},爱券网")
+- path("/note/#{@d.id}")
+- mobile_url("/note/#{@d.id}")
+- buy_url = "https://api.uuhaodian.com/uu/pcbuy?id=#{@d.goodsId}&activity_id=&channel=2"
+- shop_url = "https://api.uuhaodian.com/uu/shop_go?shop_id=#{@d.sellerId}&sgo=iquan"
+- ercode_url = "https://18a12001.kuaizhan.com/#/app/down?appId=550416&productType=1&userId=0"
+
+.wrapper1200
+  .haohuo-area
+    .img-left-area
+      %img#cover_image{src: "#{@d.mainPic}", alt: "#{@d.dtitle}"}
+      .small-area
+        %ul
+          - @imgs[0,5].each do |pic|
+            %li{style: "display:inline;"}
+              %img.small_img{src: "#{pic}"}
+    .info-middle-area
+      %h1
+        #{@d.dtitle}
+      %p.recommend #{@d.desc}
+      .price-d
+        %p
+          优惠信息：#{@youhui}
+          %span{style: "float:right"} 包邮
+        %p
+          券后价：#{@d.actualPrice}元
+          %span{style: "float:right"} 更新于#{@d.updated_at.to_s[0,10]}
+
+      %a#buy_click{href: "javascript:;", onclick: "go_buy_url();"}
+        .buy-d
+          %span.s1 领#{@d.couponPrice}元优惠券，到手价￥#{@d.actualPrice}
+          %span.s2 立即购买
+
+      %a{href: "javascript:;", onclick: "go_shop_url();"}
+        .shop-d
+          .d1
+            %img{src: "https://www.uuhaodian.com/img/shop.svg"}
+          .d2
+            %h3 #{@d.shopName}
+            %p 店铺推荐
+          .d3 进店看看 >>
+      .query-d
+        相关搜索：
+        %a{href: "/zhekou/#{URI.encode_www_form_component(@d.cnames)}/"} #{@d.cnames}
+        - if !@d.brandName.empty? && !@d.brandName.include?("其他")
+          %a{href: "/zhekou/#{URI.encode_www_form_component(@d.brandName)}/"} #{@d.brandName}
+      .ma-d
+        .d1
+          %img{src: "https://www.uuhaodian.com/img/lbanner1.png"}
+          关注公众号
+        .d1
+          #qrcode_in{style: "height: 80px;margin: 10px auto;"}
+          成为合伙人
+    .list-right-area
+      %h3 今日上新
+      %ul
+        - @news.each do |item|
+          %a{href: "/note/#{item.id}", title: "#{item.dtitle}"}
+            %li
+              %img{src: "#{item.mainPic}", alt: "#{item.dtitle}"}
+              %p
+                #{item.dtitle}
+                %br
+                券后价#{item.actualPrice}元
+.wrapper1200.haohuo-detail-area
+  .same-left-area
+    %h3 相似商品推荐
+    %ul
+      - @related.each do |item|
+        %a{href: "/note/#{item.id}", title: "#{item.dtitle}"}
+          %li
+            %img{src: "#{item.mainPic}", alt: "#{item.dtitle}"}
+            %p
+              #{item.dtitle}
+              %br
+              %span 券后价￥#{item.actualPrice}
+  .detail-middle-area
+    %h3 商品详情与用户评价
+    .d1
+      .title
+        %h4 商品描述
+      %p #{@d.title} - #{@d.desc}
+      .title
+        %h4 商品详情
+      - @details.each_with_index do |pic, index|
+        %img{src: "#{pic}", alt: "#{@d.dtitle}商品图片-#{index+1}"}
+      .title
+        %h4 用户评价
+      %p 评价1：#{@d.desc}
+
+  .shop-right-area
+    %h3 店铺推荐
+    %ul
+      - @shops.each do |s|
+        %li #{s}
+
+= render partial: "diyquan/footer"
+
+:javascript
+  $(".small_img").hover(function(){
+    $("#cover_image").attr("src", $(this).attr("src"));
+  })
+  var go_buy_url = function(){
+    window.location.href = "#{buy_url}";
+  }
+  var go_shop_url = function(){
+    window.location.href = "#{shop_url}";
+  }
+  var canvas_callback = function(data){
+    var cv = $("#qrcode_in");
+    cv.qrcode({
+      render: "canvas",
+      height: 80,
+      width: 80,
+      text: "#{ercode_url}"
+    });
+  }
+  canvas_callback();

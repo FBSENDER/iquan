@@ -16,7 +16,8 @@
       .c-area
         %p.name 邻家小惠
         %p.dn
-          优惠券代理平台，分享赚佣金！
+          #{@fc[:time].to_s[0,10]}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;优惠券代理平台，分享赚佣金！
           %span
             %a.buy-btn{href: "javascript:;"} 下载APP
         %p.fcc #{@c.gsub("\n", "<br/>").html_safe}
@@ -52,6 +53,27 @@
   .cright
     %img{src: "/image/lbanner1.png", alt: "优惠券代理平台二维码"}
     %p 买买买只需要1秒，对比价格却要2小时，关注公众号注册合伙人，拿全网优惠券💰 领券下单，还有佣金拿😃
+
+.wrapper1200{style: "margin-bottom: 20px;"}
+  .rel-zk-area
+    %p.head
+      %span 今日上新商品 
+  #couponList.zk-list.clearfix
+    - @items.each do |item|
+      .zk-item
+        %a{href: "/note/#{item.id}", title: "#{item.dtitle}"}
+          .img-area
+            %img{src: "#{item.mainPic}", alt: "#{item.dtitle}"}
+          %p.title-area #{item.dtitle}
+          .tags-area
+            %span.tag #{item.shopType == 1 ? "天猫" : "淘宝"}
+            %span.tag.c #{item.couponPrice}元券
+          .price-area
+            券后价 ￥
+            %span.price #{item.actualPrice}
+          .raw-price-area
+            原价: ￥#{item.originalPrice}
+            %p.sold #{item.monthSales}人已付款
 
 .qrcode-wrapper{style: "display: none;"}
   %img{src: "//t16img.yangkeduo.com/mms_static/6b899e7e8395b448bca235576751a096.png"}

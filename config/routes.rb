@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get "/fc", to: "diyquan#friend_circle_list"
   get "/fc/:id", to: "diyquan#friend_circle_detail"
 
+  #dataoke
+  get "/note/:id", to: "diyquan#dataoke_product"
+
   # Ying
   #get "/peishi", to: "ying#peishi"
   #get "/peishi/:id", to: "ying#peishi_product", id: /\d+/

@@ -121,7 +121,7 @@ class DiyquanController < ApplicationController
       return
     end
     @c = URI.decode(@fcs.first.content)
-    @title = "#{@c.split("\n").first}-优惠券代理-爱券网"
+    @title = "朋友圈分享素材-优惠券代理-爱券网"
     @title = "#{@c.split("\n").first}-优惠券代理-第#{@page}页-爱券网" if @page > 0
     @description = @c.gsub("\n", "，") + " - 优惠券代理 - 爱券网"
     @page_keywords = "优惠券代理,爱券网"
@@ -183,6 +183,23 @@ where c.id = #{@id} and c.dtk_id <> -1").to_a.map{|row|
       render "m_diyquan/friend_circle_detail", layout: "layouts/m_diyquan"
       return
     end
+    @items = DtkProduct.where(status: 1).select(:id, :mainPic, :dtitle, :originalPrice, :actualPrice, :couponPrice, :monthSales, :shopType).order("id desc").limit(10)
+  end
+
+  def dataoke_product
+    @d = DtkProduct.where(id: params[:id].to_i).take
+    if @d.nil?
+      not_found
+      return
+    end
+    img = DtkProductImg.where(product_id: @d.id).take
+    @imgs = img.nil? ? [@d.mainPic] : img.imgs.split(',')
+    @details = img.nil? ? @imgs : img.details.empty? ? @imgs : JSON.parse(img.details).map{|x| x["img"]}
+    @news = DtkProduct.select(:id, :dtitle, :actualPrice, :mainPic).order("id desc").limit(10)
+    @related = DtkProduct.where(cid: @d.cid, status: [0,1]).select(:id, :dtitle, :actualPrice, :mainPic, :shopName).limit(10)
+    @shops = @related.map{|r| r.shopName}.uniq
+    @youhui = JSON.parse(@d.specialText).first
+    @youhui = "可领#{@d["couponPrice"]}元优惠券" if @youhui.nil?
   end
 
 end
