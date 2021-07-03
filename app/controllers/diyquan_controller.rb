@@ -64,15 +64,31 @@ class DiyquanController < ApplicationController
     @items = get_dg_items(@page_info.search_keyword)
     @keywords = @page_info.keywords
     @search_keyword = @page_info.search_keyword
-    @suggest_keywords = get_suggest_keywords_new(@page_info.search_keyword)
     @path = request.path + "/"
-    @seo_k = @page_info.search_keyword 
     @keyword = @page_info.search_keyword 
-    @links = Page.select(:anchor, :url)
-    @outlinks = OutLink.where(url: request.url).select(:keyword, :outurl)
-    @h1 = @page_info.anchor
-    @shops = get_jd_shops
-    render "page"
+    if @page_info.product_id == 0
+      @seo_k = @page_info.search_keyword 
+      @suggest_keywords = get_suggest_keywords_new(@page_info.search_keyword)
+      @links = Page.select(:anchor, :url).order(:id).limit(56)
+      @outlinks = OutLink.where(url: request.url).select(:keyword, :outurl)
+      @h1 = @page_info.anchor
+      @shops = get_jd_shops
+      render "page"
+    else
+      @d = DtkProductPage.where(id: @page_info.product_id).take
+      if @d.nil?
+        not_found
+        return
+      end
+      img = DtkProductImgPage.where(product_id: @d.id).take
+      @imgs = img.nil? ? [@d.mainPic] : img.imgs.split(',')
+      @details = img.nil? ? @imgs : img.details.empty? ? @imgs : JSON.parse(img.details).map{|x| x["img"]}
+      @news = DtkProduct.select(:id, :dtitle, :actualPrice, :mainPic).order("id desc").limit(10)
+      @youhui = JSON.parse(@d.specialText).first
+      @youhui = "可领#{@d["couponPrice"]}元优惠券" if @youhui.nil?
+      @links = Page.where("id < ?", @page_info.id).select(:anchor, :url).order("id desc").limit(30)
+      render "page_new"
+    end
   end
 
   def m_page

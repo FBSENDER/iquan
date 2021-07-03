@@ -102,6 +102,14 @@ class DtkProductImg < ApplicationRecord
   self.table_name = 'dataoke_product_imgs_for_iquan'
 end
 
+class DtkProductPage < ApplicationRecord
+  self.table_name = 'dataoke_products_for_iquan_pages'
+end
+
+class DtkProductImgPage < ApplicationRecord
+  self.table_name = 'dataoke_product_imgs_for_iquan_pages'
+end
+
 class DtkFc < ApplicationRecord
   self.table_name = 'dataoke_friend_circles'
 end
