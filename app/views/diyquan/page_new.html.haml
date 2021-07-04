@@ -85,7 +85,7 @@
         %h4 商品描述
       - tt = "#{@d.dtitle} - #{@d.title} - #{@d.desc}"
       - @page_info.core_keywords.split(',').each{|k| tt = tt.gsub(k, "<strong>#{k}</strong>")}
-      %p #{tt}
+      %p #{tt.html_safe}
       .title
         %h4 商品详情
       - @details.each_with_index do |pic, index|
