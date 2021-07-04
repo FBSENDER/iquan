@@ -43,7 +43,8 @@
           .d3 进店看看 >>
       .query-d
         相关搜索：
-        %a{href: "/zhekou/#{URI.encode_www_form_component(@d.cnames)}/"} #{@d.cnames}
+        - @d.cnames.split(',').each do |c|
+          %a{href: "/zhekou/#{URI.encode_www_form_component(c)}/"} #{c}
         - if !@d.brandName.empty? && !@d.brandName.include?("其他")
           %a{href: "/zhekou/#{URI.encode_www_form_component(@d.brandName)}/"} #{@d.brandName}
       .ma-d
