@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/ec/:id.html", to: "express#ec", id: /\d+/, constraints: {host: 'coupon.uuhaodian.com'}
   get "/eb/:id.html", to: "express#eb", id: /\d+/, constraints: {host: 'coupon.uuhaodian.com'}
   get "/ec/:cid/:bid.html", to: "express#ecb", constraints: {host: 'coupon.uuhaodian.com'}
-  get "/ek/:keyword", to: "express#ek", constraints: {host: 'coupon.uuhaodian.com'}
+  get "/ek/:keyword", to: "express#ek", keyword: /.*/, constraints: {host: 'coupon.uuhaodian.com'}
   get "/e_popular/:keyword", to: "express#e_popular", constraints: {host: 'coupon.uuhaodian.com'}
   get "/e_detail/:id", to: "express#e_detail", constraints: {host: 'coupon.uuhaodian.com'}
 

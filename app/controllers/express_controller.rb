@@ -33,6 +33,7 @@ class ExpressController < ApplicationController
       @items = JSON.parse(File.read(file))
     else
       @items = get_items(@category.name.gsub("&", "").gsub("°", ""), @category.cid > 0 ? @category.cid.to_s : "")
+      @items = get_items("hot promotions", "") if @items.size.zero?
     end
     ar = AliCategoryAttr.where(category_id: @category.id).take
     if ar.nil? || ar.attr_json.empty?
@@ -57,6 +58,7 @@ class ExpressController < ApplicationController
       @items = JSON.parse(File.read(file))
     else
       @items = get_items(@brand.name.gsub("&", " "), "")
+      @items = get_items("hot promotions", "") if @items.size.zero?
     end
   end
 
@@ -79,6 +81,7 @@ class ExpressController < ApplicationController
     else
       @items = get_items(@brand.name.gsub("&", " ") + " " + @category.name.gsub("&", ""), @category.cid > 0 ? @category.cid.to_s : "")
       @items = get_items(@brand.name.gsub("&", " "), "") if @items.size.zero?
+      @items = get_items("hot promotions", "") if @items.size.zero?
     end
     ar = AliCategoryAttr.where(category_id: @category.id).take
     if ar.nil? || ar.attr_json.empty?
@@ -112,6 +115,7 @@ class ExpressController < ApplicationController
           f.puts @items.to_json
         end
       end
+      @items = get_items(@k.split.first, "") if @items.size.zero?
     end
   end
 
