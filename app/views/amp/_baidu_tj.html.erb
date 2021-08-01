@@ -1,0 +1,24 @@
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?8ae6d3e0e018d4d04bf518aaf041c900";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+var tb_item_click = function(){
+  _hmt.push(['_trackEvent', 'amp_qq_item', 'click', 'tb']);
+}
+var footer_home_click = function(){
+  _hmt.push(['_trackEvent', 'amp_footer', 'click', 'home']);
+  window.location.href = "http://uuu.uuhaodian.com/index.php?r=index/wap&from=shikuai";
+}
+var footer_dw_click = function(){
+  _hmt.push(['_trackEvent', 'amp_footer', 'click', 'dw']);
+  window.location.href = "https://18a12001.kuaizhan.com/#/app/down?appId=550416&productType=1&userId=0";
+}
+var load_more_click = function(keyword){
+  _hmt.push(['_trackEvent', 'amp_qq_item', 'click', 'more']);
+  window.location.href = "http://wap.uuhaodian.com/dz/" + encodeURIComponent(keyword);
+}
+</script>

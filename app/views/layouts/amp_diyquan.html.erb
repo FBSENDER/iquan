@@ -54,6 +54,46 @@
       .sno{
         display: none;
       }
+      .footer{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        max-width: 750px;
+        margin: 0 auto;
+        z-index: 200;
+        background: #fff;
+        box-shadow: 0 -2px 2px 0 rgba(0,0,0,.1);
+        height: 56px;
+      }
+      .footer .home{
+        color: #FF6434;
+        margin: 8px;
+        width: 30%;
+        float: left;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+      }
+      .footer .btnn{
+        z-index: 100;
+        margin: 8px;
+        width: 60%;
+        float: right;
+        padding-right: 8px;
+        border-radius: 5px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        border: 0;
+        background: -moz-linear-gradient(left,#FBAA58 0,#FA4DBE 100%);
+        background: -webkit-gradient(linear,left top,left right,color-stop(0,#FBAA58),color-stop(100%,#FA4DBE));
+        background: -webkit-linear-gradient(left,#FBAA58 0,#FA4DBE 100%);
+        background: -o-linear-gradient(left,#FBAA58 0,#FA4DBE 100%);
+        background: -ms-linear-gradient(left,#FBAA58 0,#FA4DBE 100%);
+        background: linear-gradient(to left,#FBAA58 0,#FA4DBE 100%);
+      }
     </style>
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
   </head>
@@ -72,14 +112,5 @@
       </script>
     </amp-analytics>
     <%= yield %>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?8ae6d3e0e018d4d04bf518aaf041c900";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
   </body>
 </html>

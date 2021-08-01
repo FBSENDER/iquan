@@ -25,7 +25,7 @@
       <% zhe = (now_price * 10.0 / item["reserve_price"].to_f).round(1) %>
       <% buy_url = coupon_money <= 0 ? item["url"] : "https://api.uuhaodian.com/uu/buy?id=#{item["item_id"]}&channel=12" %>
       <div class="col-3 col-sm-6 column" style="margin-top: 10px;">
-        <a href="<%= buy_url %>" target="_blank" style="color:#3b4351;" rel="nofollow">
+        <a href="<%= buy_url %>" onclick="tb_item_click();" target="_blank" style="color:#3b4351;" rel="nofollow">
           <div class="col-12 item">
             <amp-img src="<%= item["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
             <p class="title"><%= item["title"] %></p>
@@ -43,6 +43,9 @@
         </a>
       </div>
     <% end %>
+  </div>
+  <div class="col-12 column" style="">
+    <div style="margin: 20px auto;text-align:center;color: #FF6434;height: 40px;line-height:40px;border-radius:20px;border: 1px solid #FF6434;background-color: #fff;" onclick="load_more_click('<%= @keyword %>');">加载更多</div>
   </div>
   <div class="col-12 column" style="margin: 20px 0;overflow: auto;height: 60px;line-height:60px;">
     <% @keywords.each do |k| %>
@@ -80,3 +83,7 @@
 <footer style="text-align:center;font-size:12px;padding: 20px 0;">
   「十块购官网」福利购,粉丝福利购,天猫淘宝天天特价,今日特价! - 京ICP备18009981号-2
 </footer>
+<%= render partial: "baidu_tj"%>
+<% if @is_mobile %>
+<%= render partial: "mobile_fixed_footer"%>
+<% end %>

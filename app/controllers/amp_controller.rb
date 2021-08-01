@@ -25,6 +25,7 @@ class AmpController < ApplicationController
     @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []
     @cats = infos && infos["r_cats"] ? infos["r_cats"] : []
     @selectors = infos && infos["selector"] ? infos["selector"] : []
+    @is_mobile = is_device_mobile?
     render "amp/qq", layout: "layouts/amp_diyquan"
   end
 
