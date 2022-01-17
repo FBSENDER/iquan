@@ -55,4 +55,21 @@ class AmpController < ApplicationController
     tbk = Tbkapi::Taobaoke.new
     JSON.parse(tbk.taobao_tbk_dg_material_optional(keyword, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, '6707', $taobao_app_id_material, $taobao_app_secret_material, $taobao_adzone_id_material, page_no, 20 ))
   end
+
+  def map_keyword
+    @page1 = params[:page1].to_i
+    @page2 = params[:page2].to_i
+    @letter = params[:letter]
+    not_found if @page1.zero? || @page2.zero? || @letter.nil?
+    @cnt = (KeywordMap.where(letter: @letter).count * 1.0 / 2000).ceil
+    not_found if @cnt.zero?
+    @ks = KeywordMap.select(:id, :keyword).where(letter: @letter).order(:id).offset((@page1 - 1) * 2000 + (@page2 - 1) * 200).limit(200).to_a
+    not_found if @ks.size.zero?
+    @title = "商品列表_分类#{@letter}_第#{@page1}页#{@page2}子页_十块购"
+    @description = "十块购为您提供各类商品打折优惠价格信息，当前商品列表，分类为#{@letter}类，第#{@page1}页，第#{@page2}子页。"
+    @page_keywords = "十块购"
+    @path = "#{request.path}/"
+    @h1 = "站点地图#{@letter}类-第#{@page1}页-#{@page2}子页"
+    render "amp/map_keyword", layout: "layouts/amp_diyquan"
+  end
 end

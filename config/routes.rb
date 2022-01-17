@@ -41,4 +41,5 @@ Rails.application.routes.draw do
 
   #amp
   get "/amp/qq/:keyword", to: "amp#qq"
+  get "/amp/map-k-:letter-:page1-:page2.html", to: "amp#map_keyword"
 end

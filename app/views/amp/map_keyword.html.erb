@@ -1,0 +1,63 @@
+<% title(@title) %>
+<% head_desc(@description) %>
+<% keywords(@page_keywords) %>
+<% path(@path) %>
+<% h1(@h1) %>
+<% home_anchor = "十块购" %>
+
+<header class="col-12" style="background-color:#FF6434;color:#fff;height:40px;line-height:40px;text-align:center;">十块购</header>
+<article class="container" style="max-width:1200px;margin: 0 auto;min-height:500px;background-color:#f6f6f6;padding-bottom: 20px;">
+  <div class="columns">
+    <div class="col-12">
+      <p style="padding: 10px 10px 0 10px;margin:0;font-size:14px;color:#999;">
+      <a href="/" style="color:#999;"><%= home_anchor %></a>
+      >
+      <%= @h1 %>
+      </p>
+    </div>
+  </div>
+
+  <div class="col-12 column" style="margin: 20px 0;overflow: auto;height: 60px;line-height:60px;">
+    <% ('A'..'Z').each do |num| %>
+      <a href="/amp/map-k-<%= num %>-1-1.html" class="k"><%= "#{num}" %></a>
+    <% end %>
+    <% (0..9).each do |num| %>
+      <a href="/amp/map-k-<%= num %>-1-1.html" class="k"><%= "#{num}" %></a>
+    <% end %>
+  </div>
+
+  <div class="col-12 column" style="background-color:#fff;padding:10px;margin: 20px 0;">
+    <p style="margin:0;font-size:14px;line-height: 40px;">
+      <% @ks.each do |k| %>
+        <a href="/amp/qq/<%= URI.encode_www_form_component(k.keyword)%>/" style="padding: 10px;"><%= k.keyword%></a>
+      <% end %>
+    </p>
+  </div>
+
+  <div class="col-12 column" style="margin: 20px 0;overflow: auto;height: 60px;line-height:60px;">
+    <% (1..10).each do |num| %>
+      <a href="/amp/map-k-<%= @letter %>-<%= @page1 %>-<%= num %>.html" class="k"><%= "#{(num - 1) * 200}-#{num * 200}" %></a>
+    <% end %>
+  </div>
+
+  <div class="col-12 column" style="margin: 20px 0;overflow: auto;height: 60px;line-height:60px;">
+    <% (1..@cnt).each do |num| %>
+      <a href="/amp/map-k-<%= @letter %>-<%= num %>-1.html" class="k"><%= "#{num}" %>页</a>
+    <% end %>
+  </div>
+
+  <div class="col-12 column" style="background-color:#fff;padding:10px;margin: 20px 0;">
+    <p style="margin:0;font-size:14px;">
+    <%= "十块购，实时更新各类商品淘宝天猫优惠券折扣特卖信息，疫情期间，请多多关注包邮的优惠商品。" %>
+      <br/>
+    </p>
+  </div>
+  <h1 class="sno"><%= @h1 %></h1>
+</article>
+<footer style="text-align:center;font-size:12px;padding: 20px 0;">
+  「十块购官网」福利购,粉丝福利购,天猫淘宝天天特价,今日特价! - 京ICP备18009981号-2
+</footer>
+<% if @is_mobile %>
+<%= render partial: "mobile_fixed_footer"%>
+<% end %>
+<%= render partial: "baidu_tj"%>

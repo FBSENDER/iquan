@@ -69,3 +69,7 @@ end
 class ZhekouKeyword < ApplicationRecord
   self.table_name = 'iquan_zhekou_keywords'
 end
+
+class KeywordMap < ApplicationRecord
+  self.table_name = 'tb_keyword_maps'
+end
