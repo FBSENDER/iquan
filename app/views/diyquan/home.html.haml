@@ -1,15 +1,14 @@
-- title("「十块购官网」福利购,粉丝福利购,天猫淘宝天天特价,今日特价!")
-- head_desc("十块购官网（ShiKuaiGou.Com）消费导购平台，天天精选超高性价比的特价商品保证天天特价，天猫淘宝粉丝朋友们可以在这里享受粉丝福利购的大额优惠券。福利购、天天特价导购模块每日更新，等待您来选购！十块购为您提供精明的购物决策，我们致力于以客观中立的态度，为您推荐兼具品质和性价比的特价好货，天天特价！")
-- keywords("十块购,十元包邮,10块购,十块邮,十块购官网,福利购,粉丝福利购,天天特价,特价好货,今日特价,今日特价网,十块,天猫特价")
+- title("「十块购官网」网购省钱,天天特价!")
+- head_desc("十块购官网（ShiKuaiGou.Com）消费导购平台，天天精选超高性价比的特价商品保证天天特价，天猫淘宝粉丝朋友们可以在这里享受粉丝福利大额优惠券。折上折、天天特价导购模块每日更新，等待您来选购！十块购为您提供精明的购物决策，我们致力于以客观中立的态度，为您推荐兼具品质和性价比的特价好货，天天特价！")
+- keywords("十块购,十元包邮,10块购,十块邮,十块购官网,天天特价,特价好货,今日特价,今日特价网,十块,天猫特价")
 - mobile_url("/")
-- h1("十块购官网")
 
 = render partial: "diyquan/home_adzone"
-%article.wrapper.home-wrapper
-  = render partial: "diyquan/lanlan_quan_list", locals: {coupons: @coupons}
-  = render partial: "diyquan/lanlan_load_more", locals: {path: '/getLanlanHomeCouponList', pinyin: '', keyword: '', pagesize: 20, wclass: '.home-wrapper'}
+.wrapper1200
+  .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
+  = render partial: "diyquan/dg_load_more", locals: {keyword: @top_query.sample, has_coupon: 0}
   %div{style: "background-color: white;padding:10px;margin-bottom: 20px;"}
-    %h2 今日推荐
+    %h1 十块购官网 - 今日推荐
     - %w(粽子 蚊香液 螺蛳粉 抽纸 洗衣液 凉席 面膜 落地扇 短袖).each do |k|
       %a{href: "/amp/qq/#{URI.encode(k)}/"} #{k}
 = render partial: "diyquan/home_footer", locals: {links: @links}

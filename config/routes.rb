@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   get "/getLanlanFenleiCouponList", to: "diyquan#get_lanlan_coupons_fenlei"
   get "/getLanlanSearchCouponList", to: "diyquan#get_lanlan_coupons_search"
 
+  get "/detail/x_:id", to: "diyquan#detail_x"
+  get "/detail/y_:id", to: "diyquan#detail_y"
+  get "/detail/z_:id", to: "diyquan#detail_z"
+
   get "/youhui/:id", to: "diyquan#get_coupon_by_id", id: /\d+/
   get "/zhuanchang/:id", to: "diyquan#zhuanchang", id: /\d+/
   get "/fenlei/:pinyin", to: "diyquan#fenlei"
@@ -33,7 +37,12 @@ Rails.application.routes.draw do
   get "/dianpu/", to: "dianpu#map_s"
   get "/dianpu/:nick/", to: "dianpu#show"
   get "/dianpu_buy/:seller_id/", to: "dianpu#buy"
+  get "/buy/z_:id", to: "diyquan#buy_z"
+  get "/buy/y_:id", to: "diyquan#buy_y"
   get "/buy/:id", to: "diyquan#buy"
+  get "/buy_url/x_:id", to: "diyquan#buy_url_x"
+  get "/buy_url/y_:id", to: "diyquan#buy_url_y"
+  get "/buy_url/z_:id", to: "diyquan#buy_url_z"
 
   #html sitemap
   get "/map_k/", to: "diyquan#map_k"

@@ -1,0 +1,118 @@
+<header class="header">
+  <div class="header_search">
+    <a href="/" class="logo" title="十块购">
+      <img src="http://www.shikuaigou.com/image/logo.png" alt="十块购"/>
+    </a>
+    <div class="search">
+      <div class="tag">
+        <a class="active">淘宝</a>
+        <a class="">京东</a>
+        <a class="">拼多多</a>
+        <a class="">抖音</a>
+      </div>
+      <div class="search-form">
+        <input maxlength="100" placeholder="粘贴宝贝标题或输入关键词" class="search-input"/>
+        <button class="search-btn">搜 索</button>
+      </div>
+      <div class="search-list">
+        <% if @top_query %>
+          <% @top_query.each do |k|%>
+            <a href="/zhekou/<%= URI.encode(k) %>"><%= k %></a>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="downloadapp">
+      <a href="/lanlan_download/" target="_blank" rel="nofollow noindex">
+        <img src="https://l4.51fanli.net/event/attach/image/2015/08/55e3efff2bb03.png" />
+      </a>
+    </div>
+  </div>
+  <nav class="nav">
+    <ul>
+      <li class="active">
+        <a href="/">首页</a>
+      </li>
+      <li>
+        <a href="http://uuhaodian.com/?r=/l&sort=0" target="_blank">好货精选</a>
+      </li>
+      <li>
+        <a href="http://uuhaodian.com/?r=/p" target="_blank">疯抢榜</a>
+      </li>
+      <li>
+        <a href="http://uuhaodian.com/?r=/nine" target="_blank">9块9包邮</a>
+      </li>
+      <li>
+        <a href="http://uuhaodian.com/?r=/ddq" target="_blank">咚咚抢</a>
+      </li>
+      <li>
+        <a href="http://uuhaodian.com/?r=/every/half" target="_blank">每日半价</a>
+      </li>
+      <li>
+        <a href="http://uuhaodian.com/?r=/realtime/zsz" target="_blank">折上折</a>
+      </li>
+      <li class="tip_area">十块购-省钱网购 天天特价</li>
+    </ul>
+  </nav>
+  <div class="search-fixed">
+    <div class="row">
+      <div class="fixed-nav">
+        <a href="/">首页</a>
+        <a href="http://uuhaodian.com/?r=/l&sort=0" target="_blank">好货精选</a>
+        <a href="http://uuhaodian.com/?r=/p" target="_blank">疯抢榜</a>
+        <a href="http://uuhaodian.com/?r=/nine" target="_blank">9块9包邮</a>
+        <a href="http://uuhaodian.com/?r=/ddq" target="_blank">咚咚抢</a>
+        <a href="http://uuhaodian.com/?r=/every/half" target="_blank">每日半价</a>
+        <a href="http://uuhaodian.com/?r=/realtime/zsz" target="_blank">折上折</a>
+      </div>
+      <div class="search-fix">
+        <input maxlength="100" placeholder="粘贴宝贝标题或输入关键词" class="search-input"/>
+        <button class="search-btn"></button>
+      </div>
+    </div>
+  </div>
+</header>
+<script type="text/javascript">
+$(function(){
+  var searchFixed = $('.search-fixed'),
+  headerTag = $('.header .nav ul li'),
+  si = $('.search-input'),
+  errTip = $('.err-tip'),
+  sb = $('.search-btn');
+
+
+  $(document).on('scroll',function(){
+    var _top = $(document).scrollTop();
+    if(_top >= 400){
+      searchFixed.addClass('show');
+    }else{
+      searchFixed.removeClass('show');
+    }
+  });
+
+  si.on('keyup',function(e){
+    var keycode = e.keyCode,
+    q = $(this).val();
+    si.val(q);
+
+    if(keycode == 13 && q.trim()){
+      goSearch(q.trim());
+    }
+  });
+
+  sb.on('click',function(){
+    var q = $(si[0]).val();
+    if(q.trim() && q.trim() != '输入关键词'){
+      goSearch(q.trim());
+    }
+  });
+
+  function goSearch(q){
+    if(q.match(/http|\.tmall|\.taobao/)){
+      window.location.href = '/tbzk/?keyword=' + encodeURIComponent(q);
+      return;
+    }
+    window.location.href = '/zhekou/' + encodeURIComponent(q).replace(/\x/g, "%") + '/';
+  }
+});
+</script>

@@ -1,6 +1,27 @@
 class DiyquanController < ApplicationController
   include DiyquanHelper
   skip_before_action :verify_authenticity_token
+  $coupon_9kuai9_data = {}
+
+  def get_coupon_9kuai9_data
+    if $coupon_9kuai9_data["update_at"].nil? || $coupon_9kuai9_data["items"].nil? || $coupon_9kuai9_data["items"].size.zero? || Time.now.to_i - $coupon_9kuai9_data["update_at"] > 3600
+      url = "http://api.uuhaodian.com/uu/jiukuaijiu_list"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["status"] && json["status"]["code"] == 1001
+        $coupon_9kuai9_data["items"] = json["result"]
+        $coupon_9kuai9_data["update_at"] = Time.now.to_i
+        return $coupon_9kuai9_data["items"]
+      else
+        return []
+      end
+    end
+    return $coupon_9kuai9_data["items"]
+  end
+
+  def get_top_query
+    @top_query = %w(口罩 抽纸 洗衣液 洗脸巾 蚊香液 防晒霜 面膜 沐浴露 空气炸锅)
+  end
 
   def fenlei
     return if redirect_pc_to_mobile
@@ -14,7 +35,7 @@ class DiyquanController < ApplicationController
       if is_device_mobile?
         redirect_to "http://m.uuhaodian.com/index.php?r=index/classify&kw=#{URI.encode_www_form_component(@keyword)}", status: 302
       else
-        redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=shikuai", status: 302
+        redirect_to "/zhekou/#{URI.encode_www_form_component(@keyword)}/", status: 302
       end
       return
     end
@@ -58,12 +79,9 @@ class DiyquanController < ApplicationController
     unless is_robot?
       if is_device_mobile?
         s_type = is_taobao_title?(@keyword) ? 1 : 0
-        #redirect_to "http://m.uuhaodian.com/index.php?r=index%2Fsearch&s_type=#{s_type}&kw=#{URI.encode_www_form_component(@keyword)}&from=m_shikuai", status: 302
         redirect_to "http://tt.uuhaodian.com/dz/#{URI.encode_www_form_component(@keyword)}/?from=m_shikuai", status: 302
-      else
-        redirect_to "http://www.uuhaodian.com/query/#{URI.encode_www_form_component(@keyword)}/?from=shikuai", status: 302
+        return
       end
-      return
     else
       @coupons = []
       @zhekous = []
@@ -76,6 +94,7 @@ class DiyquanController < ApplicationController
     end
     @keywords = ZhekouKeyword.where(keyword: @keyword).pluck(:word)
     @sks = [] 
+    @related_k = []
     @nicks = []
     @path = request.path + "/"
     if is_device_mobile?
@@ -85,10 +104,13 @@ class DiyquanController < ApplicationController
       ss = SuggestShop.where(keyword: @keyword).select(:nicks).take
       unless sk.nil?
         @sks = sk.sks.split(',')
+        @related_k = @sks.sample(10)
+        @sks -= @related_k
       end
       unless ss.nil?
         @nicks = ss.nicks.split(',')
       end
+      get_top_query
       render "zhekou", layout: "layouts/diyquan"
     end
   end
@@ -289,7 +311,7 @@ class DiyquanController < ApplicationController
   end
 
   def lanlan_download
-    redirect_to "http://u.58pu.net.cn/x/9dcb8d5a", status: 302
+    redirect_to "https://api.uuhaodian.com/uu/xiaohui_app", status: 302
     if !is_robot?
       one_click = AppDownload.new
       one_click.ip = request.remote_ip
@@ -336,6 +358,229 @@ class DiyquanController < ApplicationController
     content = f.split("######")
     @meta = YAML.load(content[0])[:article]
     @html = File.read(html)
+  end
+
+  def detail_x
+    @coupon_money = params[:coupon_money].to_i
+    url = "http://api.uuhaodian.com/uu/product?item_id=#{params[:id]}"
+    json = {}
+    @items = []
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"]["code"] != 1001 || json["result"].nil?
+        url = "http://api.uuhaodian.com/uu/product_tb?item_id=#{params[:id]}"
+        result = Net::HTTP.get(URI(URI.encode(url)))
+        json = JSON.parse(result)
+        if json["status"] == 0 || json["result"].nil? || json["status"]["code"] != 1001
+          not_found
+          return
+        end
+      end
+      unless is_device_mobile?
+        url_recommend = "http://api.uuhaodian.com/uu/tb_goods_recommend?item_id=#{params[:id]}"
+        result_recommend = Net::HTTP.get(URI(url_recommend))
+        r_json = JSON.parse(result_recommend)
+        if r_json["status"] == 2
+          @items = r_json["results"]
+        end
+      end
+    rescue
+      not_found
+      return
+    end
+    @detail = json["result"]
+    if !@coupon_money.nil? && @coupon_money > 0 && @detail["couponMoney"].to_i == 0
+      @detail["couponMoney"] = @coupon_money
+      price = @detail["nowPrice"]
+      @detail["nowPrice"] = @detail["nowPrice"].to_f - @coupon_money
+      @detail["price"] = price
+    end
+    if @detail["auctionImages"].size < 6
+      @detail["auctionImages"].unshift(@detail["coverImage"])
+    end
+    if @detail.nil?
+      not_found
+      return
+    end
+    #@top_keywords = get_hot_keywords_data.sample(7)
+    @path = "https://api.uuhaodian.com/uu/dg_goods_list"
+    if is_device_mobile?
+      #
+    end
+    get_top_query
+    @jiukuaijiu = get_coupon_9kuai9_data
+  end
+
+  def buy_url_x
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
+    url = "http://api.uuhaodian.com/uu/buy?id=#{params[:id]}&channel=3&xcx=1&short=1"
+    json = {}
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      url = result
+      if url.empty?
+        render json: {status: 1, id: params[:id], url: "http://m.uuhaodian.com"}, callback: params[:callback]
+        return
+      end
+      render json: {status: 1, id: params[:id], url: url}, callback: params[:callback]
+    rescue
+      render json: {status: 0}, callback: params[:callback]
+    end
+  end
+
+  def detail_y
+    url = "http://api.uuhaodian.com/jduu/product?id=#{params[:id]}"
+    json = {}
+    @items = []
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] != 200
+        not_found
+        return
+      end
+    rescue
+      not_found
+      return
+    end
+    @detail = json["result"]
+    if @detail.nil?
+      not_found
+      return
+    end
+    get_top_query
+    @jiukuaijiu = get_coupon_9kuai9_data
+  end
+
+  def buy_y
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
+    if params[:id].to_i < 10 && params[:coupon]
+      redirect_to params[:coupon], status: 302
+      return
+    end
+    url = "http://api.uuhaodian.com/jduu/product_url?id=#{params[:id]}&jd_channel=5"
+    if params[:coupon]
+      url = "http://api.uuhaodian.com/jduu/product_url?id=#{params[:id]}&jd_channel=5&coupon=#{URI.encode_www_form_component(params[:coupon])}"
+    end
+    json = {}
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] != 200
+        if params[:coupon]
+          redirect_to "/buy/y_#{params[:id]}/"
+          return
+        end
+        not_found
+        return
+      end
+      redirect_to json["data"], status: 302
+    rescue
+      not_found
+      return
+    end
+  end
+
+  def buy_url_y
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
+    if params[:id].to_i < 10 && params[:coupon]
+      render json: {status: 1, id: params[:id], url: params[:coupon]}, callback: params[:callback]
+      return
+    end
+    url = "http://api.uuhaodian.com/jduu/product_url?id=#{params[:id]}&jd_channel=11"
+    if params[:coupon]
+      url = "http://api.uuhaodian.com/jduu/product_url?id=#{params[:id]}&jd_channel=11&coupon=#{URI.encode_www_form_component(params[:coupon])}"
+    end
+    json = {}
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] != 200
+        render json: {status: 1, id: params[:id], url: "https://item.jd.com/#{params[:id]}.html"}, callback: params[:callback]
+        return
+      end
+      render json: {status: 1, id: params[:id], url: json["data"]}, callback: params[:callback]
+    rescue
+      render json: {status: 0}, callback: params[:callback]
+    end
+  end
+
+  def detail_z
+    url = "http://api.uuhaodian.com/ddk/product?id=#{params[:id]}"
+    json = {}
+    @items = []
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+    rescue
+      not_found
+      return
+    end
+    @detail = json["result"]
+    if @detail.nil?
+      not_found
+      return
+    end
+    if @detail["auctionImages"].size < 6
+      @detail["auctionImages"].unshift(@detail["coverImage"])
+    end
+    @path = "https://api.uuhaodian.com/uu/dg_goods_list"
+    if is_device_mobile?
+      #
+    end
+    get_top_query
+    @jiukuaijiu = get_coupon_9kuai9_data
+  end
+
+  def buy_z
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
+    url = "http://api.uuhaodian.com/ddk/promotion_url?id=#{params[:id]}"
+    json = {}
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] != 1
+        not_found
+        return
+      end
+      redirect_to json["result"]["we_app_web_view_short_url"], status: 302
+    rescue
+      not_found
+      return
+    end
+  end
+
+  def buy_url_z
+    if is_robot?
+      render "not_found", status: 403
+      return
+    end
+    url = "http://api.uuhaodian.com/ddk/promotion_url?id=#{params[:id]}"
+    json = {}
+    begin
+      result = Net::HTTP.get(URI(URI.encode(url)))
+      json = JSON.parse(result)
+      if json["status"] != 1
+        render json: {status: 1, id: params[:id], url: "https://p.pinduoduo.com/61pQKH5i"}, callback: params[:callback]
+        return
+      end
+      render json: {status: 1, id: params[:id], url: json["result"]["short_url"]}, callback: params[:callback]
+    rescue
+      render json: {status: 0}, callback: params[:callback]
+    end
   end
 
 end

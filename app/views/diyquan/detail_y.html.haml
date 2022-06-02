@@ -1,0 +1,147 @@
+- title("#{@detail["title"]}_十块购")
+- head_desc("#{@detail["title"]} - #{@detail["shop_title"]} - 到手价#{@detail["lowest_coupon_price"]}元 - 十块购")
+- keywords("#{@detail["title"]},#{@detail["shop_titile"]},十块购")
+- path("/detail/y_#{@detail["item_id"]}")
+- mobile_url("/detail/y_#{@detail["item_id"]}")
+
+- coupon = @detail
+- buy_url = @detail["coupon_url"] == '' ? "/buy/y_#{@detail["item_id"]}/" : "/buy/y_#{@detail["item_id"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon_url"])}"
+- c_url = @detail["coupon_url"] == '' ? "/buy_url/y_#{@detail["item_id"]}/" : "/buy_url/y_#{@detail["item_id"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon_url"])}"
+
+.wrapper1200
+  .haohuo-area
+    .img-left-area
+      %img#cover_image{src: "#{@detail["pict_url"]}", alt: "#{@detail["title"]}"}
+      .small-area
+        %ul
+          - @detail["images"][0,5].each do |pic|
+            %li{style: "display:inline;"}
+              %img.small_img{src: "#{pic}"}
+    .info-middle-area
+      %h1
+        #{@detail["title"]}
+      %p.recommend 微信扫一扫下方二维码，关注公众号"UU好店"，领券更方便！现已支持淘宝天猫、京东、拼多多优惠券领取，还有不定期红包！ 
+      .price-d
+        %p
+          优惠信息：
+          - if @detail["owner"] == "g"
+            %span 京东自营
+          - if @detail["price_type"] == 1
+            %span 拼购
+          - elsif @detail["price_type"] == 2
+            %span 秒杀
+          - if @detail["coupon_amount"] > 0
+            %span 优惠券#{@detail["coupon_amount"]}元
+
+          %span{style: "float:right"} 包邮
+        %p
+          价格：#{@detail["lowest_price"]}元
+          %span{style: "float:right"} 更新于#{Time.now.to_s[0,10]}
+
+      %a#buy_click{href: "javascript:;", onclick: "go_buy_url();"}
+        .buy-d
+          %span.s1 到手价￥#{@detail["lowest_coupon_price"]}
+          %span.s2 立即购买
+      %a{href: "javascript:;", data:{id: "#{@detail["shop_id"]}"}, onclick: "go_shop_url_y($(this));"}
+        .shop-d
+          .d1
+            %img{src: "https://www.uuhaodian.com/img/shop.svg"}
+          .d2
+            %h3 #{@detail["shop_title"]}
+            %p 京东好店推荐
+          .d3 进店看看 >>
+      .query-d
+        商品分类：
+        %a{href: "/zhekou/#{URI.encode_www_form_component(@detail["cname1"])}/"} #{@detail["cname1"]}
+        >
+        %a{href: "/zhekou/#{URI.encode_www_form_component(@detail["cname2"])}/"} #{@detail["cname2"]}
+        >
+        %a{href: "/zhekou/#{URI.encode_www_form_component(@detail["cname3"])}/"} #{@detail["cname3"]}
+      .ma-d
+        .d1
+          %img{src: "https://www.uuhaodian.com/img/lbanner1.png"}
+          关注公众号
+        .d1
+          #qrcode_in{style: "height: 80px;margin: 10px auto;"}
+          京东/微信扫一扫 直接购买
+    .list-right-area
+      %h3 九块九包邮
+      %ul
+        - @jiukuaijiu.each do |item|
+          %a{href: "/detail/x_#{item["itemId"]}", title: "#{item["shortTitle"]}"}
+            %li
+              %img{src: "#{item["coverImage"]}", alt: "#{item["shortTitle"]}"}
+              %p
+                #{item["shortTitle"]}
+                %br
+                到手价￥#{item["nowPrice"]}
+.wrapper1200.haohuo-detail-area
+  .same-left-area
+    %h3 相似商品推荐
+    %ul
+      - @jiukuaijiu.each do |item|
+        %a{href: "/detail/x_#{item["itemId"]}", title: "#{item["shotTitle"]}"}
+          %li
+            %img{src: "#{item["coverImage"]}"}
+            %p
+              #{item["shortTitle"]}
+              %br
+              %span 
+                到手价￥#{item["nowPrice"]}
+  .detail-middle-area
+    %h3 商品详情与用户评价
+    .d1
+      .title
+        %h4 商品描述
+      %p #{@detail["title"]}
+      .title
+        %h4 商品详情
+      - @detail["images"].each_with_index do |pic, index|
+        %img{src: "#{pic}", alt: "#{@detail["title"]}商品图片-#{index+1}"}
+      .title
+        %h4 用户评价
+      %p 没有更多了
+  .shop-right-area
+    %h3 店铺推荐
+    %ul
+      - @jiukuaijiu.each do |item|
+        %li
+          %a{href: "javascript:;", data:{id: "#{item["sellerId"]}"}, onclick: "go_shop_url($(this));"}
+            #{item["shopName"]}
+
+:javascript
+  $(".small_img").hover(function(){
+    $("#cover_image").attr("src", $(this).attr("src"));
+  })
+  var go_shop_url = function(e){
+    url = "https://api.uuhaodian.com/uu/shop_go?shop_id="+ e.data("id") +"&sgo=shikuai";
+    window.open(url);
+  }
+  var go_shop_url_y = function(e){
+    url = "https://www.uuhaodian.com/jdshop_go/"+ e.data("id");
+    window.open(url);
+  }
+  var go_buy_url = function(){
+    window.open("#{buy_url}");
+  }
+  var canvas_callback = function(data){
+    if(data.status == 1){
+      var cv = $("#qrcode_in");
+      cv.qrcode({
+        render: "canvas",
+        height: 80,
+        width: 80,
+        text: data.url
+      });
+    }
+  }
+  $.ajax({
+    url: "#{c_url}",
+    type: 'GET',
+    dataType: 'jsonp',
+    data:{
+      'callback': 'canvas_callback'
+    },
+    success:function(data){
+    }
+  });
