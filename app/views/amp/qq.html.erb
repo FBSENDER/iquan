@@ -64,15 +64,15 @@
       <% end %>
       <br/>
       <%= @keyword %>优惠专场：
-      <a href="/zhekou/#{URI.encode(@keyword)}/"><%= @keyword %>优惠券</a>
+      <a href="/zhekou/<%= URI.encode(@keyword) %>/"><%= @keyword %>折扣优惠</a>
       |
-      <a href="/zhekou/#{URI.encode(@keyword)}/rexiao/">热销<%= @keyword %></a>
+      <a href="/zhekou/<%= URI.encode(@keyword) %>/rexiao/">热销<%= @keyword %></a>
       |
-      <a href="/zhekou/#{URI.encode(@keyword)}/tejia/">特价<%= @keyword %></a>
+      <a href="/zhekou/<%= URI.encode(@keyword) %>/tejia/">特价<%= @keyword %></a>
       |
-      <a href="/zhekou/#{URI.encode(@keyword)}/dae/">大额<%= @keyword %></a>
+      <a href="/zhekou/<%= URI.encode(@keyword) %>/dae/">大额<%= @keyword %>优惠券</a>
       |
-      <a href="/zhekou/#{URI.encode(@keyword)}/yizhe/">一折<%= @keyword %></a>
+      <a href="/zhekou/<%= URI.encode(@keyword) %>/yizhe/">一折<%= @keyword %></a>
       <br/>
       <a href="/amp/map-k-A-1-1.html">站点地图</a>
     </p>
