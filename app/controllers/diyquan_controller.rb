@@ -365,14 +365,6 @@ class DiyquanController < ApplicationController
           return
         end
       end
-      unless is_device_mobile?
-        url_recommend = "http://api.uuhaodian.com/uu/tb_goods_recommend?item_id=#{params[:id]}"
-        result_recommend = Net::HTTP.get(URI(url_recommend))
-        r_json = JSON.parse(result_recommend)
-        if r_json["status"] == 2
-          @items = r_json["results"]
-        end
-      end
     rescue
       not_found
       return
@@ -393,11 +385,13 @@ class DiyquanController < ApplicationController
     end
     #@top_keywords = get_hot_keywords_data.sample(7)
     @path = "https://api.uuhaodian.com/uu/dg_goods_list"
-    if is_device_mobile?
-      #
-    end
     get_top_query
     @jiukuaijiu = get_coupon_9kuai9_data
+    if is_device_mobile?
+      render "dazhe/detail_x", layout: "layouts/dazhe"
+    else
+      render "detail_x", layout: "layouts/diyquan"
+    end
   end
 
   def buy_url_x
@@ -442,6 +436,11 @@ class DiyquanController < ApplicationController
     end
     get_top_query
     @jiukuaijiu = get_coupon_9kuai9_data
+    if is_device_mobile?
+      render "dazhe/detail_y", layout: "layouts/dazhe"
+    else
+      render "detail_y", layout: "layouts/diyquan"
+    end
   end
 
   def buy_y
@@ -523,11 +522,13 @@ class DiyquanController < ApplicationController
       @detail["auctionImages"].unshift(@detail["coverImage"])
     end
     @path = "https://api.uuhaodian.com/uu/dg_goods_list"
-    if is_device_mobile?
-      #
-    end
     get_top_query
     @jiukuaijiu = get_coupon_9kuai9_data
+    if is_device_mobile?
+      render "dazhe/detail_z", layout: "layouts/dazhe"
+    else
+      render "detail_z", layout: "layouts/diyquan"
+    end
   end
 
   def buy_z

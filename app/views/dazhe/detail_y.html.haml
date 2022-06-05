@@ -1,0 +1,93 @@
+- title("#{@detail["title"]}_十块购")
+- head_desc("#{@detail["title"]} - #{@detail["shop_title"]} - 到手价#{@detail["lowest_coupon_price"]}元 - 十块购")
+- keywords("#{@detail["title"]},#{@detail["shop_titile"]},十块购")
+- path("/detail/y_#{@detail["item_id"]}")
+- mobile_url("/detail/y_#{@detail["item_id"]}")
+
+- coupon = @detail
+- buy_url = @detail["coupon_url"] == '' ? "/buy/y_#{@detail["item_id"]}/" : "/buy/y_#{@detail["item_id"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon_url"])}"
+- c_url = @detail["coupon_url"] == '' ? "/buy_url/y_#{@detail["item_id"]}/" : "/buy_url/y_#{@detail["item_id"]}/?coupon=#{URI.encode_www_form_component(@detail["coupon_url"])}"
+
+.dazhe{style: "margin-top: 0;background-color:#f7f7f7;"}
+  %img.coverimg{src: "#{@detail["pict_url"]}", alt: "#{@detail["title"]}"}
+  .goods-container
+    .price
+      %span.desc 到手价
+      ￥#{@detail["lowest_coupon_price"]}
+      %span.ori-price ￥#{@detail["o_price"]}
+      %span.volumn #{@detail["sales"].to_i > 0 ? "#{@detail["sales"]}人已付款" : ""} 更新于#{Time.now.to_s[0,10]}
+    .share-right
+      %span.share-b{onclick: "go_search();"} 找券
+    %h1.title
+      %span.tag 京东
+      #{@detail["title"]}
+  .recommend
+    商品分类：
+    %a{href: "/zhekou/#{URI.encode_www_form_component(@detail["cname1"])}/"} #{@detail["cname1"]}
+    |
+    %a{href: "/zhekou/#{URI.encode_www_form_component(@detail["cname2"])}/"} #{@detail["cname2"]}
+    |
+    %a{href: "/zhekou/#{URI.encode_www_form_component(@detail["cname3"])}/"} #{@detail["cname3"]}
+
+  .tb-token-container{onclick: "go_buy_url();"}
+    .tb-token
+      .click
+        - if @detail["coupon_amount"].to_i > 0
+          %span 点击领取优惠券
+        - else
+          %span 到京东购买
+      .content
+        - if @detail["coupon_amount"].to_i > 0
+          %span.tx #{@detail["coupon_amount"].to_i}元优惠券
+        - else
+          %span.tx
+            - if @detail["owner"] == "g"
+              %span 京东自营
+            - if @detail["price_type"] == 1
+              %span 拼购
+            - elsif @detail["price_type"] == 2
+              %span 秒杀
+            到手价￥#{@detail["lowest_coupon_price"]}
+  .shop-container{data: {id: "#{@detail["shop_id"]}"}, onclick: "go_shop_url_y($(this));"}
+    .d1
+      %img{src: "https://www.uuhaodian.com/img/shop.svg"}
+    .d2
+      %h3 #{@detail["shop_title"]}
+      %p 京东好店推荐
+    .d3 &nbsp;>&nbsp;
+
+  .h2-title 商品详情
+  .detail-container
+    - @detail["images"].each_with_index do |img, index|
+      %img{src: "#{img}", alt: "#{@detail["title"]}商品图片-#{index}"}
+
+  .footer
+    %a.home{href: "/"}
+      %img.icon{src: "/favicon.ico"}
+      .text 十块购首页
+    %a#more_btn.btn{href: "/lanlan_download", target: "_blank"} 下载APP获取更多优惠
+
+:javascript
+  var go_shop_url = function(e){
+    url = "https://api.uuhaodian.com/uu/shop_go?shop_id="+ e.data("id") +"&sgo=shikuai";
+    window.open(url);
+  }
+  var go_shop_url_y = function(e){
+    url = "https://www.uuhaodian.com/jdshop_go/"+ e.data("id");
+    window.open(url);
+  }
+  var go_buy_url = function(){
+    window.open("#{buy_url}");
+  }
+  var go_search = function(){
+    window.open("http://m.uuhaodian.com/index.php?r=/search/tb");
+  }
+  $(document).scroll(function(){
+    tp = document.body.scrollTop || document.documentElement.scrollTop;
+    if(tp > 500){
+      $('.tb-token').addClass('fixed');
+    }
+    else{
+      $('.tb-token').removeClass('fixed');
+    }
+  })

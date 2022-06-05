@@ -1,0 +1,84 @@
+- title("#{@detail["shortTitle"]}_十块购")
+- head_desc("#{@detail["shortTitle"]}：#{@detail["title"]}#{@detail["recommend"]} 到手价#{@detail["nowPrice"]}元 - 十块购")
+- keywords("#{@detail["shortTitle"]},#{@detail["title"]}")
+- path("/detail/x_#{@detail["itemId"]}")
+- mobile_url("/detail/x_#{@detail["itemId"]}")
+- h1("")
+- coupon = @detail
+- aaid = coupon['couponUrl'].match(/activityId=(\w*)/)
+- aaid = aaid.nil? ? '' : aaid[1]
+- buy_url = "http://api.uuhaodian.com/uu/pcbuy?id=#{coupon["itemId"]}&activity_id=#{aaid}&channel=3"
+- c_url = "/buy_url/x_#{coupon["itemId"]}"
+
+.dazhe{style: "margin-top: 0;background-color:#f7f7f7;"}
+  %img.coverimg{src: "#{@detail["coverImage"]}", alt: "#{@detail["shortTitle"]}"}
+  .goods-container
+    .price
+      %span.desc 到手价
+      ￥#{@detail["nowPrice"]}
+      %span.ori-price ￥#{@detail["price"]}
+      %span.volumn #{@detail["monthSales"].to_i > 0 ? "#{@detail["monthSales"]}人已付款" : ""} 更新于#{Time.now.to_s[0,10]}
+    .share-right
+      %span.share-b{onclick: "go_search();"} 找券
+    %h1.title
+      %span.tag #{@detail["shopType"] == "tmall" ? "天猫" : "淘宝"} 
+      #{@detail["shortTitle"]}
+
+  .recommend
+    %span.t 推荐理由：#{@detail["recommend"].empty? ? "#{@detail["title"]}" : "#{@detail["recommend"]}"}
+    %br
+    %br
+    商品分类：
+    %a{href: "/zhekou/#{URI.encode_www_form_component(@detail["category"])}/"} #{@detail["category"]}
+
+  .tb-token-container{onclick: "go_buy_url();"}
+    .tb-token
+      .click
+        - if @detail["couponMoney"].to_i > 0
+          %span 点击领取优惠券
+        - else
+          %span 到淘宝购买
+      .content
+        - if @detail["couponMoney"].to_i > 0
+          %span.tx #{@detail["couponMoney"].to_i}元优惠券
+        - else
+          %span.tx 预估到手价￥#{@detail["nowPrice"]}
+  .shop-container{data: {id: "#{@detail["sellerId"]}"}, onclick: "go_shop_url($(this));"}
+    .d1
+      %img{src: "https://www.uuhaodian.com/img/shop.svg"}
+    .d2
+      %h3 #{@detail["shopName"]}
+      %p 天猫淘宝好店推荐
+    .d3 &nbsp;>&nbsp;
+  .h2-title 商品详情
+  .detail-container
+    - @detail["detailImages"].each_with_index do |img, index|
+      %img{src: "#{img}", alt: "#{@detail["title"]}商品图片-#{index}"}
+    - @detail["auctionImages"].each_with_index do |img, index|
+      %img{src: "#{img}", alt: "#{@detail["shortTitle"]}图片-#{index}"}
+
+  .footer
+    %a.home{href: "/"}
+      %img.icon{src: "/favicon.ico"}
+      .text 十块购首页
+    %a#more_btn.btn{href: "/lanlan_download", target: "_blank"} 下载APP获取更多优惠
+:javascript
+  var go_shop_url = function(e){
+    url = "https://api.uuhaodian.com/uu/shop_go?shop_id="+ e.data("id") +"&sgo=shikuai";
+    window.open(url);
+  }
+  var go_buy_url = function(){
+    window.open("#{buy_url}");
+  }
+  var go_search = function(){
+    window.open("http://m.uuhaodian.com/index.php?r=/search/tb");
+  }
+  $(document).scroll(function(){
+    tp = document.body.scrollTop || document.documentElement.scrollTop;
+    if(tp > 500){
+      $('.tb-token').addClass('fixed');
+    }
+    else{
+      $('.tb-token').removeClass('fixed');
+    }
+  })
