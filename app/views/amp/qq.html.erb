@@ -54,20 +54,6 @@
   </div>
   <div class="col-12 column" style="background-color:#fff;padding:10px;margin: 20px 0;">
     <p style="margin:0;font-size:14px;">
-      最近在各处搜集的各种工具类和信息类站点，快加入收藏吧，总会用得上：
-      <a href="https://www.iquan.net" style="padding: 0 10px 0 0;">爱券网</a>
-      <a href="http://www.17430.com.cn" style="padding: 0 10px 0 0;">便宜网购商城</a>
-      <a href="https://www.uuhaodian.com" style="padding: 0 10px 0 0;">京东优惠券</a>
-      <a href="http://www.shikuaigou.com" style="padding: 0 10px 0 0;">粉丝福利购</a>
-      <a href="http://www.vxixi.com" style="padding: 0 10px 0 0;">羽毛球比赛规则</a>
-      <a href="http://www.xiongmao123.com" style="padding: 0 10px 0 0;">黑白装饰画</a>
-      <a href="http://www.jidanguo.top" style="padding: 0 10px 0 0;">百香果的功效与作用</a>
-      <a href="http://www.ddzhusu.com" style="padding: 0 10px 0 0;">特色民宿客栈</a>
-      <a href="http://www.gouwuzhinan.cn" style="padding: 0 10px 0 0;">购物指南</a>
-    </p>
-  </div>
-  <div class="col-12 column" style="background-color:#fff;padding:10px;margin: 20px 0;">
-    <p style="margin:0;font-size:14px;">
     <%= "十块购#{@keyword}，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，疫情期间，请多多关注包邮的#{@keyword}。" %>
       <br/>
       <%= "#{@keyword}推荐店铺：" %>
@@ -76,6 +62,17 @@
         <br/>
         <%= "#{@keyword}#{s["type"]} #{s["value"].gsub(',', '，')}" %>
       <% end %>
+      <br/>
+      <%= @keyword %>优惠专场：
+      <a href="/zhekou/#{URI.encode(@keyword)}/"><%= @keyword %>优惠券</a>
+      |
+      <a href="/zhekou/#{URI.encode(@keyword)}/rexiao/">热销<%= @keyword %></a>
+      |
+      <a href="/zhekou/#{URI.encode(@keyword)}/tejia/">特价<%= @keyword %></a>
+      |
+      <a href="/zhekou/#{URI.encode(@keyword)}/dae/">大额<%= @keyword %></a>
+      |
+      <a href="/zhekou/#{URI.encode(@keyword)}/yizhe/">一折<%= @keyword %></a>
       <br/>
       <a href="/amp/map-k-A-1-1.html">站点地图</a>
     </p>
