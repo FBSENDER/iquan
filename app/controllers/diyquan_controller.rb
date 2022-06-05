@@ -76,41 +76,29 @@ class DiyquanController < ApplicationController
 
   def zhekou_render(sort_type)
     return if redirect_pc_to_mobile
-    unless is_robot?
-      if is_device_mobile?
-        s_type = is_taobao_title?(@keyword) ? 1 : 0
-        redirect_to "http://tt.uuhaodian.com/dz/#{URI.encode_www_form_component(@keyword)}/?from=m_shikuai", status: 302
-        return
-      end
-    else
-      @coupons = []
-      @zhekous = []
-      data  = get_tbk_search_json(@keyword, 1)
-      if data["tbk_dg_material_optional_response"] && data["tbk_dg_material_optional_response"]["result_list"] && data["tbk_dg_material_optional_response"]["result_list"]["map_data"].size > 0
-        @zhekous = data["tbk_dg_material_optional_response"]["result_list"]["map_data"]
-      end
-      @shops = []
-      @sort_type = sort_type
-    end
+    @coupons = []
+    @zhekous = []
+    @shops = []
+    @sort_type = sort_type
     @keywords = ZhekouKeyword.where(keyword: @keyword).pluck(:word)
     @sks = [] 
     @related_k = []
     @nicks = []
     @path = request.path + "/"
+    sk = SuggestKeyword.where(keyword: @keyword).select(:sks).take
+    ss = SuggestShop.where(keyword: @keyword).select(:nicks).take
+    unless sk.nil?
+      @sks = sk.sks.split(',')
+      @related_k = @sks.sample(10)
+      @sks -= @related_k
+    end
+    unless ss.nil?
+      @nicks = ss.nicks.split(',')
+    end
+    get_top_query
     if is_device_mobile?
-      render "m_diyquan/zhekou", layout: "layouts/m_diyquan"
+      render "dazhe/zhekou", layout: "layouts/dazhe"
     else
-      sk = SuggestKeyword.where(keyword: @keyword).select(:sks).take
-      ss = SuggestShop.where(keyword: @keyword).select(:nicks).take
-      unless sk.nil?
-        @sks = sk.sks.split(',')
-        @related_k = @sks.sample(10)
-        @sks -= @related_k
-      end
-      unless ss.nil?
-        @nicks = ss.nicks.split(',')
-      end
-      get_top_query
       render "zhekou", layout: "layouts/diyquan"
     end
   end

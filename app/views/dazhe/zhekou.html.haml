@@ -1,0 +1,60 @@
+- title(@title)
+- head_desc(@description)
+- keywords(@page_keywords + ',' + @keywords[0,20].join(','))
+- path(@path)
+- home_anchor = @big_keywords.sample
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "javascript:;", onclick: "go_search();"}
+          %p #{@keyword}
+  .content
+    = render partial: "dazhe/dazhe_filter"
+    #dazheList
+    %img#imgLoading{src: "/image/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+
+  .button-btn.sno#loadRetry 重新加载
+  .button-btn.sno#noMore 没有更多了
+  .info
+    %h1 #{@keyword}优惠专场
+    %p.desc #{@keyword}优惠专场，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，全场低至1折起包邮，敬请关注！这些#{@keyword}优惠券，是爱券网从全网各处（app、优惠网站、优惠qq群、优惠微信群）搜集而来，先领优惠券，再下单，价格可以更低一点。为了方便您找券，您可以将#{@keyword}优惠信息按照销量、价格、优惠额、优惠率等维度进行排序，也可以直接查找#{@keyword}大额优惠券。
+    %p.desc 
+      %a{href: "/amp/qq/#{URI.encode(@keyword)}/"} #{@keyword}
+      |
+      %a{href: "/zhekou/#{URI.encode(@keyword)}/rexiao/"} 热销#{@keyword}
+      |
+      %a{href: "/zhekou/#{URI.encode(@keyword)}/tejia/"} 特价#{@keyword}
+      |
+      %a{href: "/zhekou/#{URI.encode(@keyword)}/dae/"} #{@keyword}大额优惠券
+      |
+      %a{href: "/zhekou/#{URI.encode(@keyword)}/yizhe/"} 一折#{@keyword}
+  .info{style: "margin-bottom: 10px;"}
+    %h2 #{@keyword} 相关推荐
+    %p.desc
+      - @keywords.sample(20).each do |k|
+        %a{href: "https://www.baidu.com/s?wd=#{URI.encode(k)}", target: "_blank"} #{k}
+        |
+      - @sks.each do |k|
+        %a{href: "/zhekou/#{URI.encode(k)}/"} #{k}优惠券
+        |
+        %a{href: "/amp/qq/#{URI.encode(k)}/"} #{k}
+        |
+      #{@keyword}
+  .footer
+    %a.home{href: "/"}
+      %img.icon{src: "/favicon.ico"}
+      .text 十块购首页
+    %a#more_btn.btn{href: "/lanlan_download", target: "_blank"} 下载APP获取更多优惠
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/image/to_top.png"}
+= render partial: "dazhe/dazhe_js"
+
+:javascript
+  function go_search(){
+    window.open("http://m.uuhaodian.com/index.php?r=/search/tb");
+  }
