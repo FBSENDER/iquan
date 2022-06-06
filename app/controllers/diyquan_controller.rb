@@ -54,23 +54,28 @@ class DiyquanController < ApplicationController
 
   def zhekou_rexiao
     zhekou_rexiao_tdk
+    @ss_id = 2
     zhekou_render(1)
   end
   def zhekou_tejia
     zhekou_tejia_tdk
+    @ss_id = 3
     zhekou_render(2)
   end
   def zhekou_dae
     zhekou_dae_tdk
+    @ss_id = 4
     zhekou_render(4)
   end
   def zhekou_yizhe
     zhekou_yizhe_tdk
+    @ss_id = 5
     zhekou_render(3)
   end
 
   def zhekou
     zhekou_tdk
+    @ss_id = 1
     zhekou_render(0)
   end
 

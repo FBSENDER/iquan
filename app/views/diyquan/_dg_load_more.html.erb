@@ -147,6 +147,60 @@ var callback = function(data){
     loadingText.html('没有更多了');
   }
 };
+function ssSort(id){
+  if(id == 2){
+    is_simple = false  
+    sort = "total_sales_des"
+    is_tmall = 0
+    pdd_sort = 6
+    pdd_activity = ''
+    jd_sort = 'inOrderCount30Days'
+    jd_is_hot = 0
+    $("#li-sort-2").addClass("active");
+    $("#li-sort-3").html("价格");
+  }
+  else if(id == 3){
+    is_simple = false  
+    has_coupon = 1
+    sort = "price_asc";
+    is_tmall = 0
+    pdd_sort = 9
+    pdd_activity = '4,7,21'
+    jd_sort = 'price_asc'
+    jd_is_hot = 0
+    $("#li-sort-3").html("价格↑");
+    $("#li-sort-3").addClass("active");
+    $('#li-q').addClass('active');
+    $('#li-q-switch').prop("checked", true);
+  }
+  else if(id == 4){
+    is_simple = false  
+    has_coupon = 1
+    sort = "price_des";
+    is_tmall = 1
+    pdd_sort = 9
+    pdd_activity = '4,7,21'
+    jd_sort = 'price_des'
+    jd_is_hot = 0
+    $("#li-sort-3").html("价格↓");
+    $("#li-sort-3").addClass("active");
+    $('#li-q').addClass('active');
+    $('#li-q-switch').prop("checked", true);
+  }
+  else if(id == 5){
+    is_simple = false
+    sort = "tk_total_sales_des"
+    is_tmall = 1
+    pdd_sort = 2
+    pdd_activity = '4,7,21'
+    jd_sort = 'inOrderCount30Days'
+    jd_is_hot = 1
+    $("#li-sort-3").html("价格");
+    $("#li-sort-5").addClass("active");
+  }
+  else{
+  }
+}
 $(function(){
   if($.cookie('ff_platform') != undefined){
     platform = $.cookie('ff_platform');
@@ -164,6 +218,7 @@ $(function(){
     $("#platform_1").addClass('active');
   }
 
+  ssSort(<%= @ss_id ? @ss_id : 0 %>);
   getDgList();
 
   $(document).on('scroll',function(){
