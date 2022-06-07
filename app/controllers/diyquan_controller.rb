@@ -2,6 +2,7 @@ class DiyquanController < ApplicationController
   include DiyquanHelper
   skip_before_action :verify_authenticity_token
   $coupon_9kuai9_data = {}
+  $top_query = {}
 
   def get_coupon_9kuai9_data
     if $coupon_9kuai9_data["update_at"].nil? || $coupon_9kuai9_data["items"].nil? || $coupon_9kuai9_data["items"].size.zero? || Time.now.to_i - $coupon_9kuai9_data["update_at"] > 3600
@@ -20,7 +21,21 @@ class DiyquanController < ApplicationController
   end
 
   def get_top_query
-    @top_query = %w(口罩 抽纸 洗衣液 洗脸巾 蚊香液 防晒霜 面膜 沐浴露 空气炸锅)
+    if $top_query["update_at"].nil? || $top_query["items"].nil? || $top_query["items"].size.zero? || Time.now.to_i - $top_query["update_at"] > 3600
+      url = "http://api.uuhaodian.com/uu/hot_keywords_new"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["code"] && json["code"] == 0 && json["data"]["hotWords"]
+        $top_query["items"] = json["data"]["hotWords"]
+        $top_query["update_at"] = Time.now.to_i
+        @top_query = $top_query["items"].sample(10)
+        return
+      else
+        @top_query = []
+        return
+      end
+    end
+    @top_query = $top_query["items"].sample(10)
   end
 
   def fenlei
@@ -55,32 +70,41 @@ class DiyquanController < ApplicationController
   def zhekou_rexiao
     zhekou_rexiao_tdk
     @ss_id = 2
-    @h1 = "热销#{@keyword}"
     zhekou_render(1)
   end
   def zhekou_tejia
     zhekou_tejia_tdk
     @ss_id = 3
-    @h1 = "特价#{@keyword}"
     zhekou_render(2)
   end
   def zhekou_dae
     zhekou_dae_tdk
     @ss_id = 4
-    @h1 = "#{@keyword}大额优惠券"
     zhekou_render(4)
   end
   def zhekou_yizhe
     zhekou_yizhe_tdk
     @ss_id = 5
-    @h1 = "一折#{@keyword}"
     zhekou_render(3)
+  end
+
+  def zhekou_jd
+    zhekou_jd_tdk
+    @ss_id = 1
+    cookies[:ff_platform] = 2
+    zhekou_render(0)
+  end
+
+  def zhekou_pdd
+    zhekou_pdd_tdk
+    @ss_id = 1
+    cookies[:ff_platform] = 3
+    zhekou_render(0)
   end
 
   def zhekou
     zhekou_tdk
     @ss_id = 1
-    @h1 = "#{@keyword}优惠专场"
     zhekou_render(0)
   end
 

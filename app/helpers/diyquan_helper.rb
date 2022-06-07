@@ -60,14 +60,38 @@ module DiyquanHelper
     @links = []
   end
 
+  def zhekou_jd_tdk
+    @keyword = params[:keyword].force_encoding('utf-8')
+    @title= "#{@keyword}_京东#{@keyword}折扣优惠活动_十块购"
+    @description = "京东#{@keyword}优惠券,京东#{@keyword}折扣，20元50元100元，先领券，再下单，专享京东折上折优惠。领取#{@keyword}优惠券，查看#{@keyword}打折特价信息 - #{$website_name}。"
+    @page_keywords = "#{@keyword},京东#{@keyword},#{@keyword}优惠,#{@keyword}优惠券,#{@keyword}折扣,特价#{@keyword}"
+    @big_keywords = $big_keywords
+    @h1 = "京东#{@keyword}折扣优惠活动"
+    @seo_k = @keyword
+    @path = request.path + "/"
+    @links = []
+  end
+
+  def zhekou_pdd_tdk
+    @keyword = params[:keyword].force_encoding('utf-8')
+    @title= "#{@keyword}_拼多多#{@keyword}折扣优惠活动_十块购"
+    @description = "拼多多#{@keyword}优惠券,拼多多#{@keyword}折扣，20元50元100元，先领券，再下单，专享拼多多折上折优惠。领取#{@keyword}优惠券，查看#{@keyword}打折特价信息 - #{$website_name}。"
+    @page_keywords = "#{@keyword},拼多多#{@keyword},#{@keyword}优惠,#{@keyword}优惠券,#{@keyword}折扣,特价#{@keyword}"
+    @big_keywords = $big_keywords
+    @h1 = "拼多多#{@keyword}"
+    @seo_k = @keyword
+    @path = request.path + "/"
+    @links = []
+  end
+
   def zhekou_tdk
     @keyword = params[:keyword].force_encoding('utf-8')
     @title= "#{@keyword}_#{@keyword}折扣优惠券"
     @description = "淘宝天猫隐藏#{@keyword}优惠券,#{@keyword}折扣，20元50元100元，先领券，再下单，专享淘宝折上折优惠。领取#{@keyword}优惠券，查看#{@keyword}打折特价信息 - #{$website_name}。"
     @page_keywords = "#{@keyword},#{@keyword}优惠,#{@keyword}优惠券,#{@keyword}折扣,特价#{@keyword}"
     @big_keywords = $big_keywords
-    @h1 = @keyword
-    @seo_k = @h1
+    @h1 = "#{@keyword}优惠专场"
+    @seo_k = @keyword
     @path = request.path + "/"
     @links = []
   end

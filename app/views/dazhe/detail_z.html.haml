@@ -41,12 +41,13 @@
         - else
           %span.tx 预估到手价￥#{@detail["nowPrice"]}
 
-  .shop-container
+  .shop-container{onclick: "go_buy_url();"}
     .d1
       %img{src: "https://www.uuhaodian.com/img/shop.svg"}
     .d2
       %h3 #{@detail["sellerName"]}
       %p 拼多多好店推荐
+    .d3 &nbsp;>&nbsp;
 
   .h2-title 商品详情
   .detail-container

@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   get "/zhekou/:keyword/tejia/", to: "diyquan#zhekou_tejia"
   get "/zhekou/:keyword/dae/", to: "diyquan#zhekou_dae"
   get "/zhekou/:keyword/yizhe/", to: "diyquan#zhekou_yizhe"
+  get "/zhekou/:keyword/platform2/", to: "diyquan#zhekou_jd"
+  get "/zhekou/:keyword/platform3/", to: "diyquan#zhekou_pdd"
   get "/lanlan_download/", to: "diyquan#lanlan_download"
   get "/query/noresult", to: "diyquan#noresult"
   get "/baokuan/", to: "diyquan#baokuan"
