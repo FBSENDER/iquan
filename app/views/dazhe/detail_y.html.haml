@@ -13,7 +13,7 @@
   .goods-container
     .price
       %span.desc 到手价
-      ￥#{@detail["lowest_coupon_price"]}
+      ￥#{@detail["lowest_coupon_price"].to_f.round(2)}
       %span.ori-price ￥#{@detail["o_price"]}
       %span.volumn #{@detail["sales"].to_i > 0 ? "#{@detail["sales"]}人已付款" : ""} 更新于#{Time.now.to_s[0,10]}
     .share-right

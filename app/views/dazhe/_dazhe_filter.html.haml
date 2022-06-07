@@ -1,16 +1,16 @@
 .filter
-  .type.active{id: "t1", data: {sort: 1}}
+  .type{id: "t1", data: {sort: 1}}
     %a{href: "javascript:;"} 综合
-  .type{data: {sort: 2}}
+  .type{id: "t2", data: {sort: 2}}
     %a{href: "javascript:;"} 销量
-  .type{data: {sort: 5}}
+  .type{id: "t5", data: {sort: 5}}
     %a{href: "javascript:;"} 推荐
-  .type{data: {sort: 3}}
+  .type{id: "tt3", data: {sort: 3}}
     %a{id: "t3", href: "javascript:;"} 价格
 .platform-filter
   %div{style: "float:left;padding:5px 0 5px 20px;height:30px;"}
-    %input.switch{type: "checkbox", style: "font-size: 20px;"}
-  %div{style: "float:left;padding-left:10px;"} 只看券
+    %input#li-q-switch.switch{type: "checkbox", style: "font-size: 20px;"}
+  %div#li-q{style: "float:left;padding-left:10px;"} 只看券
   %div{style: "float:right;"}
     .radio{style: "float:right;"}
       %input{id: "radio_3", name: "platform", type: "radio", value: "3"}

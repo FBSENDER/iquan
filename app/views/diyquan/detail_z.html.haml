@@ -30,7 +30,7 @@
 
       %a#buy_click{href: "javascript:;", onclick: "go_buy_url();"}
         .buy-d
-          %span.s1 到手价￥#{@detail["nowPrice"]}
+          %span.s1 到手价￥#{@detail["nowPrice"].to_f.round(2)}
           %span.s2 立即购买
       %a{href: "javascript:;", data:{id: "#{@detail["sellerId"]}"}, onclick: "go_buy_url();"}
         .shop-d

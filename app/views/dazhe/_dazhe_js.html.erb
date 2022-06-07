@@ -74,7 +74,7 @@ function createList_jd(cl){
     }
     htmlstr += '<div class="item">';
     htmlstr += '<a class = "zh" href="/detail/y_'+ z.item_id +'" target="_blank">';
-    htmlstr += '<img class="pic" src="'+ z.pict_url +'"/>';
+    htmlstr += '<img class="pic" src="'+ z.pict_url +'" alt="' + z.title + '"/>';
     htmlstr += '<div class="cent">';
     htmlstr += '<h3>';
     htmlstr += '<span>京东</span>';
@@ -342,6 +342,61 @@ function doPinduoduo(){
   });
 }
 
+function ssSort(id){
+  if(id == 2){
+    is_simple = false  
+    sort = "total_sales_des"
+    is_tmall = 0
+    pdd_sort = 6
+    pdd_activity = ''
+    jd_sort = 'inOrderCount30Days'
+    jd_is_hot = 0
+    $("#t2").addClass("active");
+    $("#t3").html("价格");
+  }
+  else if(id == 3){
+    is_simple = false  
+    has_coupon = 1
+    sort = "price_asc";
+    is_tmall = 0
+    pdd_sort = 9
+    pdd_activity = '4,7,21'
+    jd_sort = 'price_asc'
+    jd_is_hot = 0
+    $("#t3").html("价格↑");
+    $("#tt3").addClass("active");
+    $('#li-q').addClass('active');
+    $('#li-q-switch').prop("checked", true);
+  }
+  else if(id == 4){
+    is_simple = false  
+    has_coupon = 1
+    sort = "price_des";
+    is_tmall = 1
+    pdd_sort = 9
+    pdd_activity = '4,7,21'
+    jd_sort = 'price_des'
+    jd_is_hot = 0
+    $("#t3").html("价格↓");
+    $("#tt3").addClass("active");
+    $('#li-q').addClass('active');
+    $('#li-q-switch').prop("checked", true);
+  }
+  else if(id == 5){
+    is_simple = false
+    sort = "tk_total_sales_des"
+    is_tmall = 1
+    pdd_sort = 2
+    pdd_activity = '4,7,21'
+    jd_sort = 'inOrderCount30Days'
+    jd_is_hot = 1
+    $("#t3").html("价格");
+    $("#t5").addClass("active");
+  }
+  else{
+    $("#t1").addClass("active");
+  }
+}
 
 
 $(function(){
@@ -360,6 +415,7 @@ $(function(){
   else{
     $("#radio_1").attr("checked", "checked");
   }
+  ssSort(<%= @ss_id ? @ss_id : 0 %>);
   getDazheCouponList();
   $(document).scroll(function(){
     tp = document.body.scrollTop || document.documentElement.scrollTop;

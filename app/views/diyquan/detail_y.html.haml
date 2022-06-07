@@ -40,7 +40,7 @@
 
       %a#buy_click{href: "javascript:;", onclick: "go_buy_url();"}
         .buy-d
-          %span.s1 到手价￥#{@detail["lowest_coupon_price"]}
+          %span.s1 到手价￥#{@detail["lowest_coupon_price"].to_f.round(2)}
           %span.s2 立即购买
       %a{href: "javascript:;", data:{id: "#{@detail["shop_id"]}"}, onclick: "go_shop_url_y($(this));"}
         .shop-d
