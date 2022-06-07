@@ -1,42 +1,6 @@
 class DiyquanController < ApplicationController
   include DiyquanHelper
   skip_before_action :verify_authenticity_token
-  $coupon_9kuai9_data = {}
-  $top_query = {}
-
-  def get_coupon_9kuai9_data
-    if $coupon_9kuai9_data["update_at"].nil? || $coupon_9kuai9_data["items"].nil? || $coupon_9kuai9_data["items"].size.zero? || Time.now.to_i - $coupon_9kuai9_data["update_at"] > 3600
-      url = "http://api.uuhaodian.com/uu/jiukuaijiu_list"
-      result = Net::HTTP.get(URI(url))
-      json = JSON.parse(result)
-      if json["status"] && json["status"]["code"] == 1001
-        $coupon_9kuai9_data["items"] = json["result"]
-        $coupon_9kuai9_data["update_at"] = Time.now.to_i
-        return $coupon_9kuai9_data["items"]
-      else
-        return []
-      end
-    end
-    return $coupon_9kuai9_data["items"]
-  end
-
-  def get_top_query
-    if $top_query["update_at"].nil? || $top_query["items"].nil? || $top_query["items"].size.zero? || Time.now.to_i - $top_query["update_at"] > 3600
-      url = "http://api.uuhaodian.com/uu/hot_keywords_new"
-      result = Net::HTTP.get(URI(url))
-      json = JSON.parse(result)
-      if json["code"] && json["code"] == 0 && json["data"]["hotWords"]
-        $top_query["items"] = json["data"]["hotWords"]
-        $top_query["update_at"] = Time.now.to_i
-        @top_query = $top_query["items"].sample(10)
-        return
-      else
-        @top_query = []
-        return
-      end
-    end
-    @top_query = $top_query["items"].sample(10)
-  end
 
   def fenlei
     return if redirect_pc_to_mobile

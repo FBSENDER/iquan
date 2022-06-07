@@ -28,7 +28,7 @@ class HomeController < ApplicationController
     end
     @meta = get_articles_meta
     @links = Link.where(status: 1).to_a
-    @top_query = %w(口罩 抽纸 洗衣液 洗脸巾 蚊香液 防晒霜 面膜 沐浴露 空气炸锅)
+    get_top_query
     render "diyquan/home", layout: "layouts/diyquan"
   end
 
