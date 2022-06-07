@@ -397,7 +397,7 @@ class DiyquanController < ApplicationController
       render "not_found", status: 403
       return
     end
-    url = "http://api.uuhaodian.com/uu/buy?id=#{params[:id]}&channel=3&xcx=1&short=1"
+    url = "http://api.uuhaodian.com/uu/buy?id=#{params[:id]}&channel=16&xcx=1&short=1"
     json = {}
     begin
       result = Net::HTTP.get(URI(URI.encode(url)))
