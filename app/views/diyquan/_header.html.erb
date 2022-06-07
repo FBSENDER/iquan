@@ -17,7 +17,7 @@
       <div class="search-list">
         <% if @top_query %>
           <% @top_query.each do |k|%>
-            <a href="/zhekou/<%= URI.encode(k) %>"><%= k %></a>
+            <a href="/zhekou/<%= URI.encode(k) %>/"><%= k %></a>
           <% end %>
         <% end %>
       </div>
