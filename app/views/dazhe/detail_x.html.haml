@@ -50,6 +50,8 @@
       %h3 #{@detail["shopName"]}#{@detail["sellerName"]}
       %p 天猫淘宝好店推荐
     .d3 &nbsp;>&nbsp;
+
+  = render partial: "layouts/google_ad_mobile_bottom"
   .h2-title 商品详情
   .detail-container
     - @detail["detailImages"].each_with_index do |img, index|

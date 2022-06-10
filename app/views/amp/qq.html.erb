@@ -52,6 +52,16 @@
       <a href="/amp/qq/<%= URI.encode(k) %>/" class="k"><%= k %></a>
     <% end %>
   </div>
+  <% if @is_mobile %>
+  <amp-ad width="100vw" height="320"
+                        type="adsense"
+                        data-ad-client="ca-pub-3259544082307715"
+                        data-ad-slot="1508329037"
+                        data-auto-format="rspv"
+                        data-full-width="">
+    <div overflow=""></div>
+  </amp-ad>
+  <% end %>
   <div class="col-12 column" style="background-color:#fff;padding:10px;margin: 20px 0;">
     <p style="margin:0;font-size:14px;">
     <%= "十块购#{@keyword}，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，疫情期间，请多多关注包邮的#{@keyword}。" %>
