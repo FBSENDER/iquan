@@ -11,4 +11,5 @@
     %h1 十块购官网 - 今日推荐
     - %w(粽子 蚊香液 螺蛳粉 抽纸 洗衣液 凉席 面膜 落地扇 短袖).each do |k|
       %a{href: "/amp/qq/#{URI.encode(k)}/"} #{k}
+  = render partial: "layouts/google_ad_pc_middle"
 = render partial: "diyquan/home_footer", locals: {links: @links}
