@@ -16,8 +16,6 @@
       - @detail["auctionImages"].each_with_index do |img, index|
         .swiper-slide
           %img.coverimg{src: "#{img}", alt: "#{@detail["shortTitle"]}展示图片_#{index + 1}", onclick: "go_buy_url();"}
-      .swiper-slide
-        %ins.adsbygoogle{style: "display: block;", data: {"ad-client": "ca-pub-3259544082307715", "ad-slot": "3475893112", "ad-format": "auto", "full-width-responsive": "true"}}
     .swiper-pagination
   .goods-container
     .price
