@@ -50,7 +50,7 @@
       %p 天猫淘宝好店推荐
     .d3 &nbsp;>&nbsp;
 
-  = render partial: "layouts/google_ad_mobile_bottom"
+  = render partial: "layouts/google_ad_mobile_bottom_1"
 
   .recommend
     %span.t 推荐理由：#{@detail["recommend"].empty? ? "#{@detail["title"]}" : "#{@detail["recommend"]}"}
@@ -88,7 +88,6 @@
   var go_search = function(){
     window.open("http://m.uuhaodian.com/index.php?r=/search/tb");
   }
-  var clipboard = new ClipboardJS('.kouling');
   var get_kouling = function(){
     $.ajax({
       url: "https://api.uuhaodian.com/uu/buy_kouling",
@@ -108,6 +107,22 @@
   var kouling_callback = function(data){
     $("#kouling_val").val(data.k)
   }
+  $(function(){
+  var mySwiper = new Swiper ('.swiper-container', {
+    autoplay: 3000,
+    loop: true,
+    pagination : '.swiper-pagination'
+  });
+  $(document).scroll(function(){
+    tp = document.body.scrollTop || document.documentElement.scrollTop;
+    if(tp > 500){
+      $('.tb-token').addClass('fixed');
+    }
+    else{
+      $('.tb-token').removeClass('fixed');
+    }
+  })
+  var clipboard = new ClipboardJS('.kouling');
   clipboard.on('success', function (e) {
     $.toast({
       text: "复制口令成功，打开【淘宝】领券购买",
@@ -131,17 +146,5 @@
     e.clearSelection();
   });
   get_kouling();
-  $(document).scroll(function(){
-    tp = document.body.scrollTop || document.documentElement.scrollTop;
-    if(tp > 500){
-      $('.tb-token').addClass('fixed');
-    }
-    else{
-      $('.tb-token').removeClass('fixed');
-    }
-  })
-  var mySwiper = new Swiper ('.swiper-container', {
-    autoplay: 3000,
-    loop: true,
-    pagination : '.swiper-pagination'
+  (adsbygoogle = window.adsbygoogle || []).push({});
   });
