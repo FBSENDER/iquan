@@ -13,13 +13,11 @@
 .dazhe{style: "margin-top: 0;background-color:#f7f7f7;"}
   .swiper-container
     .swiper-wrapper
-      .swiper-slide
-        %img.coverimg{src: "#{@detail["coverImage"]}", alt: "#{@detail["shortTitle"]}", onclick: "go_buy_url();"}
-      .swiper-slide
-        %ins.adsbygoogle{style: "display: block;", data: {"ad-client": "ca-pub-3259544082307715", "ad-slot": "3475893112", "ad-format": "auto", "full-width-responsive": "true"}}
       - @detail["auctionImages"].each_with_index do |img, index|
         .swiper-slide
           %img.coverimg{src: "#{img}", alt: "#{@detail["shortTitle"]}展示图片_#{index + 1}", onclick: "go_buy_url();"}
+      .swiper-slide
+        %ins.adsbygoogle{style: "display: block;", data: {"ad-client": "ca-pub-3259544082307715", "ad-slot": "3475893112", "ad-format": "auto", "full-width-responsive": "false"}}
     .swiper-pagination
   .goods-container
     .price
@@ -95,7 +93,7 @@
   var clipboard = new ClipboardJS('.kouling');
   var get_kouling = function(){
     $.ajax({
-      url: "http://localhost:3100/uu/buy_kouling",
+      url: "https://api.uuhaodian.com/uu/buy_kouling",
       type: 'GET',
       dataType: 'jsonp',
       data: {
