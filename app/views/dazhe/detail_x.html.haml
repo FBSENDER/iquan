@@ -11,7 +11,16 @@
 - c_url = "/buy_url/x_#{coupon["itemId"]}"
 
 .dazhe{style: "margin-top: 0;background-color:#f7f7f7;"}
-  %img.coverimg{src: "#{@detail["coverImage"]}", alt: "#{@detail["shortTitle"]}"}
+  .swiper-container
+    .swiper-wrapper
+      .swiper-slide
+        %img.coverimg{src: "#{@detail["coverImage"]}", alt: "#{@detail["shortTitle"]}", onclick: "go_buy_url();"}
+      .swiper-slide
+        %ins.adsbygoogle{style: "display: block;", data: {"ad-client": "ca-pub-3259544082307715", "ad-slot": "3475893112", "ad-format": "auto", "full-width-responsive": "true"}}
+      - @detail["auctionImages"].each_with_index do |img, index|
+        .swiper-slide
+          %img.coverimg{src: "#{img}", alt: "#{@detail["shortTitle"]}展示图片_#{index + 1}", onclick: "go_buy_url();"}
+    .swiper-pagination
   .goods-container
     .price
       %span.desc 到手价
@@ -24,12 +33,6 @@
       %span.tag #{@detail["shopType"] == "tmall" ? "天猫" : "淘宝"} 
       #{@detail["shortTitle"]}
 
-  .recommend
-    %span.t 推荐理由：#{@detail["recommend"].empty? ? "#{@detail["title"]}" : "#{@detail["recommend"]}"}
-    %br
-    %br
-    商品分类：
-    %a{href: "/zhekou/#{URI.encode_www_form_component(@detail["category"])}/"} #{@detail["category"]}
 
   .tb-token-container{onclick: "go_buy_url();"}
     .tb-token
@@ -52,6 +55,18 @@
     .d3 &nbsp;>&nbsp;
 
   = render partial: "layouts/google_ad_mobile_bottom"
+
+  .recommend
+    %span.t 推荐理由：#{@detail["recommend"].empty? ? "#{@detail["title"]}" : "#{@detail["recommend"]}"}
+    %br
+    %br
+    商品分类：
+    %a{href: "/zhekou/#{URI.encode_www_form_component(@detail["category"])}/"} #{@detail["category"]}
+    %br
+    %br
+    淘宝口令：
+    %input#kouling_val{value: ""}
+
   .h2-title 商品详情
   .detail-container
     - @detail["detailImages"].each_with_index do |img, index|
@@ -63,7 +78,9 @@
     %a.home{href: "/"}
       %img.icon{src: "/favicon.ico"}
       .text 十块购首页
-    %a#more_btn.btn{href: "/lanlan_download", target: "_blank"} 下载APP获取更多优惠
+    %a.lingquan{href: "javascript:;", onclick: "go_buy_url();"} 立即领券
+    %a.kouling{href: "javascript:;", data: {"clipboard-target": "#kouling_val"}} 复制口令
+= render partial: "dazhe/scroll_top"
 :javascript
   var go_shop_url = function(e){
     url = "https://api.uuhaodian.com/uu/shop_go?shop_id="+ e.data("id") +"&sgo=shikuai";
@@ -75,6 +92,50 @@
   var go_search = function(){
     window.open("http://m.uuhaodian.com/index.php?r=/search/tb");
   }
+  var clipboard = new ClipboardJS('.kouling');
+  var get_kouling = function(){
+    $.ajax({
+      url: "http://localhost:3100/uu/buy_kouling",
+      type: 'GET',
+      dataType: 'jsonp',
+      data: {
+        id: #{@detail["itemId"]},
+        channel: 3,
+        callback: 'kouling_callback'
+      },
+      success:function(data){
+      },
+      complete: function(){
+      }
+    });
+  }
+  var kouling_callback = function(data){
+    alert(data.k);
+    $("#kouling_val").val(data.k)
+  }
+  clipboard.on('success', function (e) {
+    $.toast({
+      text: "复制口令成功，打开【淘宝】领券购买",
+      showHideTransition: 'fade',
+      position : 'mid-center',
+      textAlign: 'center',
+      stack: false,
+      allowToastClose: false
+    });
+    e.clearSelection();
+  });
+  clipboard.on('error', function (e) {
+    $.toast({
+      text: "复制口令失败，请重试",
+      showHideTransition: 'fade',
+      position : 'mid-center',
+      textAlign: 'center',
+      stack: false,
+      allowToastClose: false
+    });
+    e.clearSelection();
+  });
+  get_kouling();
   $(document).scroll(function(){
     tp = document.body.scrollTop || document.documentElement.scrollTop;
     if(tp > 500){
@@ -84,3 +145,8 @@
       $('.tb-token').removeClass('fixed');
     }
   })
+  var mySwiper = new Swiper ('.swiper-container', {
+    autoplay: 3000,
+    loop: true,
+    pagination : '.swiper-pagination'
+  });

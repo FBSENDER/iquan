@@ -1,0 +1,16 @@
+.scroll-top
+  .hongbao
+    .item
+      %a.close_icon{href: "javascript:;"}
+        %i.iconfont.icon-hide
+      %a{href: "javascript:;", onclick: "go_hongbao_url();"}
+        %img{src: "https://img.alicdn.com/imgextra/i4/2053469401/O1CN01guPXyj2JJiAk4ZHMB_!!2053469401.png"}
+  %a.top{href: "javascript:;", style: "display: none;"}
+    %span
+      %i.iconfont.icon-huidingbusvg
+      顶部
+:javascript
+  var go_hongbao_url = function(e){
+    url = 'https://s.click.taobao.com/BTp3eWu';
+    window.open(url);
+  }
