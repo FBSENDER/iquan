@@ -51,29 +51,19 @@
           #qrcode_in{style: "height: 80px;margin: 10px auto;"}
           微信/拼多多扫一扫 直接购买
     .list-right-area
-      %h3 九块九包邮
+      %h3 新品推荐-十块购
       %ul
-        - @jiukuaijiu.each do |item|
-          %a{href: "/detail/x_#{item["itemId"]}", title: "#{item["shortTitle"]}"}
+        - @cid3.each do |item|
+          %a{href: "/detail/x_#{item["goodsId"]}", title: "#{item["dtitle"]}"}
             %li
-              %img{src: "#{item["coverImage"]}", alt: "#{item["shortTitle"]}"}
+              %img{src: "#{item["mainPic"]}", alt: "#{item["dtitle"]}"}
               %p
-                #{item["shortTitle"]}
+                #{item["dtitle"]}
                 %br
-                到手价￥#{item["nowPrice"]}
+                到手价￥#{item["actualPrice"]}
 .wrapper1200.haohuo-detail-area
   .same-left-area
     %h3 相似商品推荐
-    %ul
-      - @jiukuaijiu.each do |item|
-        %a{href: "/detail/x_#{item["itemId"]}", title: "#{item["shotTitle"]}"}
-          %li
-            %img{src: "#{item["coverImage"]}"}
-            %p
-              #{item["shortTitle"]}
-              %br
-              %span 
-                到手价￥#{item["nowPrice"]}
   .detail-middle-area
     %h3 商品详情与用户评价
     .d1
@@ -128,3 +118,42 @@
     success:function(data){
     }
   });
+  $.ajax({
+    url: "https://api.uuhaodian.com/uu/dg_goods_list",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: {
+      'keyword': '#{@detail["shortTitle"][-8,8]}',
+      'page': 1,
+      'callback': 'callback'
+    },
+    success:function(data){
+    },
+    complete: function(){
+    }
+  });
+  var callback = function(data){
+    if(data.status == 1){
+      var cl = data.results
+      var htmlstr = '<ul>';
+      for(var i=0,len=cl.length;i<len;i++){
+        var z = cl[i];
+        var coupon_money = z.coupon_amount ? parseInt(z.coupon_amount) : 0;
+        var now_price = (parseFloat(z.zk_final_price) - coupon_money).toFixed(2);
+        var o_price = coupon_money > 0 ? parseFloat(z.zk_final_price).toFixed(2) : parseFloat(z.reserve_price).toFixed(2);
+        var zhe = (now_price * 10.0 / o_price).toFixed(1);
+        var platform = '',platformPic = '';
+        htmlstr += '<a href="/detail/x_' + z.item_id +  '" title="'+ z.title +'">';
+        htmlstr += '<li>';
+        htmlstr += '<img src="' + z.pict_url + '" alt="' + z.title + '"/>';
+        htmlstr += '<p>';
+        htmlstr += z.short_title;
+        htmlstr += '<br/>'
+        htmlstr += '<span>到手价￥' + now_price + '</span>';
+        htmlstr += '</p></li></a>'
+      }
+      htmlstr += '</ul>';
+      htmlstr = $(htmlstr);
+      $('.same-left-area').append(htmlstr);
+    }
+  }

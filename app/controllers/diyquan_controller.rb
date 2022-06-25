@@ -385,6 +385,7 @@ class DiyquanController < ApplicationController
     @path = "https://api.uuhaodian.com/uu/dg_goods_list"
     get_top_query
     @jiukuaijiu = get_coupon_9kuai9_data
+    @cid3 = get_cid3_data
     if is_device_mobile?
       render "dazhe/detail_x", layout: "layouts/dazhe"
     else
@@ -434,6 +435,7 @@ class DiyquanController < ApplicationController
     end
     get_top_query
     @jiukuaijiu = get_coupon_9kuai9_data
+    @cid3 = get_cid3_data
     if is_device_mobile?
       render "dazhe/detail_y", layout: "layouts/dazhe"
     else
@@ -522,6 +524,7 @@ class DiyquanController < ApplicationController
     @path = "https://api.uuhaodian.com/uu/dg_goods_list"
     get_top_query
     @jiukuaijiu = get_coupon_9kuai9_data
+    @cid3 = get_cid3_data
     if is_device_mobile?
       render "dazhe/detail_z", layout: "layouts/dazhe"
     else

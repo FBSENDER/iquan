@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   $top_query = {}
   $coupon_9kuai9_data = {}
+  $cid3_data = {}
   def get_coupon_9kuai9_data
     if $coupon_9kuai9_data["update_at"].nil? || $coupon_9kuai9_data["items"].nil? || $coupon_9kuai9_data["items"].size.zero? || Time.now.to_i - $coupon_9kuai9_data["update_at"] > 3600
       url = "http://api.uuhaodian.com/uu/jiukuaijiu_list"
@@ -23,6 +24,21 @@ class ApplicationController < ActionController::Base
       end
     end
     return $coupon_9kuai9_data["items"]
+  end
+  def get_cid3_data
+    if $cid3_data["update_at"].nil? || $cid3_data["items"].nil? || $cid3_data["items"].size.zero? || Time.now.to_i - $cid3_data["update_at"] > 60
+      url = "http://api.uuhaodian.com/uu/dtk_category_new_goods?cid=3"
+      result = Net::HTTP.get(URI(url))
+      json = JSON.parse(result)
+      if json["code"] == 0 && json["data"] && json["data"]["list"]
+        $cid3_data["items"] = json["data"]["list"]
+        $cid3_data["update_at"] = Time.now.to_i
+        return $cid3_data["items"]
+      else
+        return []
+      end
+    end
+    return $cid3_data["items"]
   end
   def get_top_query
     if $top_query["update_at"].nil? || $top_query["items"].nil? || $top_query["items"].size.zero? || Time.now.to_i - $top_query["update_at"] > 3600
