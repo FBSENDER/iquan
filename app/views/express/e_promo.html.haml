@@ -1,24 +1,25 @@
-- title("#{@k} - Buy Promotional #{@k} Online - UuCoupon")
-- head_desc("Online shopping for promotional #{@k}, you can find hot sale #{@k} on UuCoupon - price info, discount info, lastest volume info and images of #{@k}.")
+- title("#{@k} - Featuredpromo - UuCoupon")
+- head_desc("#{@k}, featuredpromo products on UuCoupon - price info, discount info, lastest volume info and images of #{@k}.")
 - keywords("#{@k}, promotional #{@k}, hot sale #{@k}, #{@k} online") 
-- path("/eb/#{@brand.id}.html")
+- path("/e_promo/#{URI.encode(@k)}")
 
 = render partial: "header_pc"
-
 .wrapper1200
-  .brand-list-area{style: "height: 105px"}
-    %a{href: "javascript:;"}
-      %img{src: "#{@brand.img_url}", alt: "#{@brand.name}"}
-      %h1{style: "margin: 0;text-align: center;font-size: 14px;"} #{@brand.name}
-  - if @categories.size > 0
-    .desc{style: "margin-top: 10px;margin-bottom: 10px;"}
-      %p 
-        Brand Categories :
-        - @categories.each do |c|
-          %a{href: "/ec/#{c.id}.html"} #{c.name}
-          |
+  .desc{style: "margin: 0;"}
+    %nav{style: "margin:0;"}
+      %a{href: "/"} Home
+      >
+      %h1{style: "display: inline;"} #{@k}
 
-.wrapper1200
+  .desc{style: "margin: 10px 0 0 0;"}
+    %p 
+      Select Categories :
+      %a{href: "?category=0", class: "#{@category_id == 0 ? 'active' : ''}"} All
+      - @cate1.each do |c|
+        |
+        %a{href: "/e_promo/#{URI.encode(@k)}?category=#{c.id}", class: "#{c.id == @category_id ? 'active' : ''}"} #{c.name}
+
+.wrapper1200{style: "margin-top: 10px;"}
   #gy_filter
     .wrapper1200
       %ul.platform-area{style: "margin: 0;padding:0;"}
@@ -33,16 +34,8 @@
           %li.sort_li#li-sort-1{data: {sort: "1"}} Best Match
           %li.sort_li#li-sort-2{data: {sort: "2"}} Orders
           %li.sort_li#li-sort-3{data: {sort: "3"}} Price
-
-  .zk-list.clearfix#couponList{style: "margin-top: 10px;"}
-  = render partial: "load_more_pc", locals: {keyword: "#{@brand.name}", has_coupon: 0, cid: nil}
-
-- if @brands.size > 0
-  .brand-list-area{style: "height: #{(@brands.size / 8.0).ceil * 105}px"}
-    - @brands.each do |b|
-      %a{href: "/eb/#{b.id}.html"}
-        %img{src: "#{b.img_url}", alt: "#{b.name}"}
-        %p #{b.name}
+  .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
+  = render partial: "e_promo_load_more_pc", locals: {keyword: @k, has_coupon: 0, cid: @category.nil? ? nil : @category.cid}
 
 .wrapper1200
   .desc
@@ -53,7 +46,7 @@
   .desc
     %p You'll find small independent discount sellers next to the official store brand, all of whom offer fast shipping and reliable, as well as convenient and safe payment methods, no matter how much money you choose.
   .desc
-    %p If you are still hesitant about the #{@k} and are considering a similar product, coupon.uuhaodian.com is a good place to compare prices and sellers. We'll help you determine whether it's worth paying extra for a high-end version, or whether you get the same benefits by buying a cheaper product. Moreover, if you just want to be nice to yourself and spend a lot of money on the most expensive version, uucoupon will always make sure you get the best price for your money, even let you know when it will be better to wait for the promotion to start, and the savings you can expect
+    %p If you are still hesitant about the #{@k} and are considering a similar product, coupon.uuhaodian.com is a good place to compare prices and sellers. We'll help you determine whether it's worth paying extra for a high-end version, or whether you get the same benefits by buying a cheaper product. Moreover, if you just want to be nice to yourself and spend a lot of money on the most expensive version, uucoupon will always make sure you get the best price for your money, even let you know when it will be better to wait for the promotion to start, and the savings you can expect.
 
   - if @hot_keywords.size > 0
     .desc

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= yield(:title) %></title>
+    <meta name="keywords" content="<%= yield(:keywords)%>">
+    <meta name="description" content="<%= yield(:head_desc)%>">
+    <link rel="canonical" href="http://coupon.uuhaodian.com<%= yield(:path) %>">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-10-y/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/util.js"></script>
+    <link rel="stylesheet" href="/css/common_old.css">
+    <link rel="stylesheet" href="/css/express_pc.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7221HS2P7G"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-7221HS2P7G');
+    </script>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

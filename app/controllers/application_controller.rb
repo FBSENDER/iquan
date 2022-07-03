@@ -1,8 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-#  def set_layout
-#    "m" if request.host == 'm.bighaowu.com'
-#  end
 
   def is_robot?
     user_agent = request.headers["HTTP_USER_AGENT"]

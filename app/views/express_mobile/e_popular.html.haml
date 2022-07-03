@@ -1,0 +1,57 @@
+- title("Top 20 best value #{@k} - Great deals on #{@k} from global #{@k} sellers - UuCoupon")
+- head_desc("Online shopping for best value #{@k}, you can find great deals on #{@k} from UuCoupon - price info, discount info, lastest volume info and images of #{@k}.Global #{@k} sellers.")
+- keywords("#{@k}, best value #{@k}, top 20 #{@k}, top 20 best value #{@k} online") 
+- path("/e_popular/#{URI.encode(@k)}")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "javascript:;", onclick: "go_search();"}
+          %p #{@k}
+  .content
+    = render partial: "express_mobile/filter"
+    #dazheList
+    %img#imgLoading{src: "/image/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+
+  .button-btn.sno#loadRetry Retry
+  .button-btn.sno#noMore No More
+  .info
+    %nav.desc 
+      %a{href: "/"} Home
+      >
+      - @nav.each do |n|
+        %a{href: "/ec/#{n[0]}.html"} #{n[1]}
+        >
+      - if @category
+        %a{href: "/ec/#{@category.id}.html"} #{@category.name}
+        >
+      %h1{style: "display: inline;"} best value #{@k}
+    %p.desc Looking for best value #{@k}? Online shopping for best value #{@k}, you can find great deals on #{@k} from global #{@k} sellers  - price info, lastest volume info and images of #{@k}.Besides good quality brands, you’ll also find plenty of discounts when you shop for #{@k} during big sales.
+    - if @hot_keywords.size > 0
+      %p.desc
+        Hot Search:
+        %br
+        %a{href: "/ek/#{URI.encode(@k)}", title: "Promotional #{@k}"} #{@k}
+        |
+        - @hot_keywords.each do |k|
+          %a{href: "/e_popular/#{URI.encode(k)}", title: "Best Value #{k}"} #{k}
+          |
+    - if @rank_keywords.size > 0
+      %p.desc
+        Ranking Search:
+        %br
+        - @rank_keywords.each do |k|
+          %a{href: "/e_popular/#{URI.encode(k)}", title: "Best Value #{k}"} #{k}
+          |
+  .footer
+    %a.home{href: "/"}
+      %img.icon{src: "/favicon.ico"}
+      .text UuCoupon
+    %a#more_btn.btn{href: "javascript:;", onclick: "go_amazon_s();"} Find #{@k} On  Amazon
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/image/to_top.png"}
+= render partial: "express_mobile/page_js", locals: {keyword: @k, cid: nil}

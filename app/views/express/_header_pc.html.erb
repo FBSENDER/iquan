@@ -1,0 +1,106 @@
+<header class="header">
+  <div class="header_search">
+    <a href="/" class="logo" title="uucoupon">
+      <img src="/image/uucoupon_logo.png" alt="uucoupon"/>
+    </a>
+    <div class="search">
+      <div class="tag">
+        <a class="active">AliExpress</a>
+        <a id="tag_amazon" href="javascript:;">Amazon</a>
+      </div>
+      <div class="search-form">
+        <input maxlength="100" placeholder="SEARCH FOR COUPONS AND PROMO CODES" class="search-input"/>
+        <button class="search-btn">GO</button>
+      </div>
+      <div class="search-list">
+        <% if @top_query %>
+          <% @top_query.each do |k|%>
+            <a href="/ek/<%= URI.encode(k) %>"><%= k %></a>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <nav class="nav">
+    <ul>
+      <li class="<%= @top_nav == 1 ? 'active' : ''%>">
+        <a href="/">Home</a>
+      </li>
+      <li class="<%= @top_nav == 2 ? 'active' : ''%>">
+        <a href="/e_promo/Hot%20Product">Hot Product</a>
+      </li>
+      <li class="<%= @top_nav == 3 ? 'active' : ''%>">
+        <a href="/e_promo/New%20Arrival">New Arrival</a>
+      </li>
+      <li class="<%= @top_nav == 4 ? 'active' : ''%>">
+        <a href="/e_promo/Best%20Seller">Best Seller</a>
+      </li>
+      <li class="<%= @top_nav == 5 ? 'active' : ''%>">
+        <a href="/e_promo/Weekly%20Deal">Weekly Deal</a>
+      </li>
+      <li class="tip_area">UUCOUPON - COUPONS & PROMO CODES</li>
+    </ul>
+  </nav>
+  <div class="search-fixed">
+    <div class="row">
+      <div class="fixed-nav">
+        <a href="/" class="<%= @top_nav == 1 ? 'active' : ''%>">Home</a>
+        <a href="/e_promo/Hot%20Product" class="<%= @top_nav == 2 ? 'active' : ''%>">Hot Product</a>
+        <a href="/e_promo/New%20Arrival" class="<%= @top_nav == 3 ? 'active' : ''%>">New Arrival</a>
+        <a href="/e_promo/Best%20Seller" class="<%= @top_nav == 4 ? 'active' : ''%>">Best Seller</a>
+        <a href="/e_promo/Weekly%20Deal" class="<%= @top_nav == 5 ? 'active' : ''%>">Weekly Deal</a>
+      </div>
+      <div class="search-fix">
+        <input maxlength="100" placeholder="SEARCH FOR COUPONS AND PROMO CODES" class="search-input"/>
+        <button class="search-btn"></button>
+      </div>
+    </div>
+  </div>
+</header>
+<script type="text/javascript">
+$(function(){
+  var searchFixed = $('.search-fixed'),
+  headerTag = $('.header .nav ul li'),
+  si = $('.search-input'),
+  errTip = $('.err-tip'),
+  sb = $('.search-btn');
+
+
+  $(document).on('scroll',function(){
+    var _top = $(document).scrollTop();
+    if(_top >= 400){
+      searchFixed.addClass('show');
+    }else{
+      searchFixed.removeClass('show');
+    }
+  });
+
+  si.on('keyup',function(e){
+    var keycode = e.keyCode,
+    q = $(this).val();
+    si.val(q);
+
+    if(keycode == 13 && q.trim()){
+      goSearch(q.trim());
+    }
+  });
+
+  sb.on('click',function(){
+    var q = $(si[0]).val();
+    if(q.trim() && q.trim() != ''){
+      goSearch(q.trim());
+    }
+  });
+
+  function goSearch(q){
+    window.location.href = '/ek/' + encodeURIComponent(q);
+  }
+  function goAmazon(){
+    window.open("https://www.amazon.com?tag=uucoupon-20");
+  }
+  $("#tag_amazon").click(function(){
+    goAmazon();
+  });
+});
+</script>
+

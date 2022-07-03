@@ -1,0 +1,69 @@
+- title("#{@detail["product_title"]} - UuCoupon")
+- head_desc("#{@detail["product_title"]}, sale price $#{@detail["sale_price"]}, discount -#{@detail["discount"]}, #{@detail["lastest_volume"]} orders, you can find more hot sale products on UuCoupon")
+- keywords("#{@detail["product_title"]}, #{@detail["first_level_category_name"]}, #{@detail["second_level_category_name"]}, uucoupon") 
+- path("/e_detail/#{@id}")
+
+.dazhe{style: "margin-top: 0;background-color:#f7f7f7;"}
+  .swiper-container
+    .swiper-wrapper
+      - @detail["product_small_image_urls"]["string"].each_with_index do |img, index|
+        .swiper-slide
+          %img.coverimg{src: "#{img}", alt: "#{@detail["product_title"]} image - #{index + 1}", onclick: "go_buy_url();"}
+    .swiper-pagination
+  .goods-container
+    .price
+      $#{@detail["sale_price"]}
+      %span.ori-price $#{@detail["original_price"]}
+      %span.volumn #{@detail["lastest_volume"].to_i > 0 ? "#{@detail["lastest_volume"]} orders" : ""} updated at #{Time.now.to_s[0,10]}
+    .share-right
+      %span.share-b{onclick: "go_search();"} Search
+    %h1.title
+      #{@detail["product_title"]}
+
+  .tb-token-container{onclick: "go_buy_url();"}
+    .tb-token
+      .click
+        %span Visit AliExpress And Buy Now
+      .content
+        %span.tx $#{@detail["sale_price"]}
+  .shop-container{data: {id: "#{@detail["shop_id"]}"}, onclick: "go_shop_x_url($(this));"}
+    .d1
+      %img{src: "/image/shop.svg"}
+    .d2
+      %h3 AliExpress Shop
+      %p receive shop coupons
+    .d3 &nbsp;>&nbsp;
+  .recommend
+    %span.t Reasons for recommendation: #{@detail["product_title"]}
+    %br
+    %br
+    Category：
+    - if @cate1
+      %a{href: "/ec/#{@cate1.id}.html"} #{@cate1.name}
+    - if @cate2
+      %a{href: "/ec/#{@cate2.id}.html"} #{@cate2.name}
+    %br
+    %br
+  .h2-title Product Detail
+  .detail-container
+    - @detail["product_small_image_urls"]["string"].each_with_index do |img, index|
+      %img{src: "#{img}", alt: "#{@detail["product_title"]} images - #{index}"}
+  .footer
+    %a.home{href: "/"}
+      %img.icon{src: "/favicon.ico"}
+      .text UuCoupon
+    %a#more_btn.btn{href: "javascript:;", onclick: "go_buy_url();"} Buy Now
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/image/to_top.png"}
+:javascript
+  var go_shop_x_url = function(e){
+    url = "/e_shop_x_buy?id="+ e.data("id");
+    window.open(url);
+  }
+  var go_buy_url = function(){
+    window.open("#{@detail["promotion_link"]}");
+  }
+  var go_search = function(){
+    window.open("https://www.amazon.com/s?k=Hot+Product&tag=uucoupon-20");
+  }

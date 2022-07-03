@@ -3,10 +3,13 @@ Rails.application.routes.draw do
   root "express#home", constraints: {host: 'coupon.uuhaodian.com'}
   get "/ec/:id.html", to: "express#ec", id: /\d+/, constraints: {host: 'coupon.uuhaodian.com'}
   get "/eb/:id.html", to: "express#eb", id: /\d+/, constraints: {host: 'coupon.uuhaodian.com'}
-  get "/ec/:cid/:bid.html", to: "express#ecb", constraints: {host: 'coupon.uuhaodian.com'}
   get "/ek/:keyword", to: "express#ek", keyword: /.*/, constraints: {host: 'coupon.uuhaodian.com'}
+  get "/e_promo/:keyword", to: "express#e_promo", keyword: /.*/, constraints: {host: 'coupon.uuhaodian.com'}
   get "/e_popular/:keyword", to: "express#e_popular", constraints: {host: 'coupon.uuhaodian.com'}
   get "/e_detail/:id", to: "express#e_detail", constraints: {host: 'coupon.uuhaodian.com'}
+  get "/e_query", to: "express#e_query", constraints: {host: 'coupon.uuhaodian.com'}
+  get "/e_promo_query", to: "express#e_promo_query", constraints: {host: 'coupon.uuhaodian.com'}
+  get "/e_shop_x_buy", to: "express#e_shop_x_buy", constraints: {host: 'coupon.uuhaodian.com'}
 
   #wp
   root "home#index"

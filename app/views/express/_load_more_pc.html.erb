@@ -1,0 +1,192 @@
+<div class="more-coupon">
+  <span id="moreCoupon" class="btn loading-text" >More Coupons & Promo Codes</span>
+</div>
+<script type="text/javascript">
+var couponList = $('#couponList'),loadingText = $('.loading-text');
+var page = 1,pagesize = 20, channel = 27, load = 1,sort_id= 1, sort = '', pdd_sort = 0, pdd_activity = '', jd_sort = null, jd_is_hot = 0,is_simple = true, sort_type='',is_tmall = 0, has_coupon = <%= has_coupon %>, platform = 1;
+function doAjaxAliExpress(d){
+  var dd = {
+    page: d.page,
+    category: d.category,
+    keyword: d.keyword,
+    callback: d.callback
+  }
+  if(d.sort != ''){
+    dd.sort = d.sort
+  }
+  $.ajax({
+    url: "/e_query",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: dd,
+    beforeSend:function(){
+      load = 0;
+      loadingText.html('LOADING...');
+    },
+    success:function(data){
+    },
+    complete: function(){
+    }
+  });
+}
+
+function getAliList(){
+  if(!load){
+    return;
+  }
+  var d = {
+    'keyword': '<%= keyword %>',
+    'category': '<%= cid.nil? ? "": cid %>',
+    'page':page,
+    'sort': sort,
+    'callback': 'callback'
+  };
+  if(platform == 1){
+    doAjaxAliExpress(d);
+  }
+}
+var callback = function(data){
+  var r = data.aliexpress_affiliate_product_query_response.resp_result;
+  if(r.resp_code == 200){
+    Util.createAliList(r.result.products.product,couponList,channel,'搜索');
+    if(r.result.products.product.length >= pagesize || r.result.total_record_count > page * pagesize){
+      page ++;
+      load = 1;
+      $("#r_num").html(": total " + r.result.total_record_count + ", current page " + (page-1));
+      loadingText.html('More Coupons & Promo Codes');
+    }else{
+      loadingText.html('No More');
+    }
+  }
+  else{
+    load = 1;
+    loadingText.html('No More');
+  }
+};
+function ssSort(id){
+  if(id == 2){
+    sort = "LAST_VOLUME_DESC"
+    $("#li-sort-2").addClass("active");
+  }
+  else{
+    $("#li-sort-1").addClass("active");
+  }
+}
+
+$(function(){
+  $("#platform_1").addClass('active');
+  ssSort(<%= @sort_id %>);
+
+  getAliList();
+
+  $(document).on('scroll',function(){
+    if(page%4 > 0){
+      var _top = $(document).scrollTop(),
+        scroll_height = Util.pageSize()['scrollHeight'],
+        client_height = Util.pageSize()['clientHeight'];
+        if(_top + client_height >= (scroll_height-800)){
+          getAliList();
+        }
+    }
+  });
+
+  loadingText.on('click',function(){
+    getAliList();
+  });
+
+
+
+  //sno
+  var sTabItem = $('.s-tab .tab-list li');
+  sTabItem.on('click',function(){
+    var _this = $(this);
+    if(!_this.hasClass('active')){
+      $('.s-tab .tab-list li.active').removeClass('active');
+      _this.addClass('active');
+      var i = _this.data('index');
+      $('.s-tab .content p.active').removeClass('active');
+      $('.s-tab .content p[data-index='+i+']').addClass('active');
+    }
+  });
+
+  $('.sort_li').on('click', function(){
+    var _this = $(this);
+    is_simple = false;
+    if(_this.data('sort') == '3'){
+      if(!_this.hasClass('active')){
+        $('.sort_li.active').removeClass('active');
+        _this.addClass('active');
+        sort = "SALE_PRICE_ASC";
+        is_tmall = 1
+        pdd_sort = 9
+        pdd_activity = '4,7,21'
+        jd_sort = 'price_asc'
+        jd_is_hot = 0
+        _this.html("Price↑");
+      }
+      else{
+        if(sort == "SALE_PRICE_ASC"){
+          sort = "SALE_PRICE_DESC"
+          is_tmall = 1
+          pdd_sort = 10
+          pdd_activity = '4,7,21'
+          jd_sort = 'price_desc'
+          jd_is_hot = 0
+          _this.html("Price↓");
+        }else{
+          sort = "SALE_PRICE_ASC";
+          is_tmall = 1
+          pdd_sort = 9
+          pdd_activity = '4,7,21'
+          jd_sort = 'price_asc'
+          jd_is_hot = 0
+          _this.html("Price↑");
+        }
+      }
+      page = 1;
+      $('#couponList').html('');
+      getAliList();
+      return;
+    }
+    if(!_this.hasClass('active')){
+      $('.sort_li.active').removeClass('active');
+      _this.addClass('active');
+      sort_id = _this.data('sort');
+      if (sort_id == '1'){
+        sort = ""
+        is_tmall = 0
+        pdd_sort = 0
+        pdd_activity = ''
+        jd_sort = null
+        jd_is_hot = 0
+        $("#li-sort-3").html("Price");
+      }
+      else if (sort_id == '2'){
+        sort = "LAST_VOLUME_DESC"
+        is_tmall = 0
+        pdd_sort = 6
+        pdd_activity = ''
+        jd_sort = 'inOrderCount30Days'
+        jd_is_hot = 0
+        $("#li-sort-3").html("Price");
+      }
+      else if (sort_id == '5'){
+        sort = "tk_total_sales_des"
+        is_tmall = 1
+        pdd_sort = 2
+        pdd_activity = '4,7,21'
+        jd_sort = 'inOrderCount30Days'
+        jd_is_hot = 1
+        $("#li-sort-3").html("Price");
+      }
+      page = 1;
+      load = 1;
+      $('#couponList').html('');
+      getAliList();
+    }
+  });
+});
+function go_amazon_s(q){
+  window.open("https://www.amazon.com/s?k=" + encodeURIComponent(q) + "&tag=uucoupon-20");
+}
+</script>

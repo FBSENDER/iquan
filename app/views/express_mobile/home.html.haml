@@ -1,0 +1,56 @@
+- title("Hot Promotions Online - UuCoupon")
+- head_desc("Online shopping for hot promotional products, you can find hot sale promotions on UuCoupon - price info, discount info, lastest volume info and images of hot sale products.")
+- keywords("hot promotions, hot promotions online") 
+- path("/")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "javascript:;", onclick: "go_search();"}
+          %p SEARCH FOR COUPONS AND PROMO CODES
+  .info
+    .desc
+      %h1  Hot Promotions on coupon.uuhaodian.com
+
+  .content
+    = render partial: "express_mobile/filter"
+    #dazheList
+    %img#imgLoading{src: "/image/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+
+  .button-btn.sno#loadRetry Retry
+  .button-btn.sno#noMore No More
+  .info
+    %p.desc Looking for a good deal on hot promotions? Online shopping for promotional hot products, you can find hot sale products on UuCoupon - price info, lastest volume info and images of #hot sale products.Besides good quality brands, you’ll also find plenty of discounts when you shop for hot promotions during big sales.
+    %p.desc
+      Select Categories :
+      - @cate1.each do |c|
+        %a{href: "/ec/#{c.id}.html"} #{c.name}
+        |
+    - if @hot_keywords.size > 0
+      %p.desc
+        Hot Search:
+        %br
+        %a{href: "/e_popular/#{URI.encode(@k)}", title: "Best Value #{@k}"} #{@k}
+        |
+        - @hot_keywords.each do |k|
+          %a{href: "/ek/#{URI.encode(k)}", title: "Promotional #{k}"} #{k}
+          |
+    - if @rank_keywords.size > 0
+      %p.desc
+        Ranking Search:
+        %br
+        - @rank_keywords.each do |k|
+          %a{href: "/ek/#{URI.encode(k)}", title: "Promotional #{k}"} #{k}
+          |
+  .footer
+    %a.home{href: "/"}
+      %img.icon{src: "/favicon.ico"}
+      .text UuCoupon
+    %a#more_btn.btn{href: "javascript:;", onclick: "go_search();"} Find More Coupons On Amazon
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/image/to_top.png"}
+= render partial: "express_mobile/page_js", locals: {keyword: "Best Seller", cid: nil}

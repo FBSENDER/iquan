@@ -1,0 +1,123 @@
+- title("#{@detail["product_title"]} - UuCoupon")
+- head_desc("#{@detail["product_title"]}, sale price $#{@detail["sale_price"]}, discount -#{@detail["discount"]}, #{@detail["lastest_volume"]} orders, you can find more hot sale products on UuCoupon")
+- keywords("#{@detail["product_title"]}, #{@detail["first_level_category_name"]}, #{@detail["second_level_category_name"]}, uucoupon") 
+- path("/e_detail/#{@id}")
+
+= render partial: "header_pc"
+
+.wrapper1200
+  .haohuo-area
+    .img-left-area
+      %img#cover_image{src: "#{@detail["product_main_image_url"]}", alt: "#{@detail["product_title"]}"}
+      .small-area
+        %ul
+          - @detail["product_small_image_urls"]["string"][0,5].each do |pic|
+            %li{style: "display:inline;"}
+              %img.small_img{src: "#{pic}"}
+    .info-middle-area
+      %h1
+        #{@detail["product_title"]}
+      .price-d{style: "margin-top: 20px;"}
+        %p
+          Preferential information: Discount -#{@detail["discount"]}  
+          %span{style: "float:right"} #{@detail["lastest_volume"]} Orders
+        %p
+          Sale Price: $#{@detail["sale_price"]}
+          %span{style: "float:right"} Updated At #{Time.now.to_s[0,10]}
+
+      %a#buy_click{href: "javascript:;", onclick: "go_buy_url();"}
+        .buy-d
+          %span.s1 $#{@detail["sale_price"]}
+          %span.s2 Buy Now
+      %a{href: "javascript:;", data:{id: "#{@detail["shop_id"]}"}, onclick: "go_shop_x_url($(this));"}
+        .shop-d
+          .d1
+            %img{src: "/image/shop.svg"}
+          .d2
+            %h3 AliExpress Shop
+            %p receive shop coupons
+          .d3 visit store >>
+      .query-d
+        Categories：
+        - if @cate1
+          %a{href: "/ec/#{@cate1.id}.html"} #{@cate1.name}
+        - if @cate2
+          %a{href: "/ec/#{@cate2.id}.html"} #{@cate2.name}
+    .list-right-area
+      %h3 New Arrival Products 
+      %ul
+        - @new_arrival.each do |item|
+          %a{href: "/e_detail/#{item["product_id"]}", title: "#{item["product_title"]}"}
+            %li
+              %img{src: "#{item["product_main_image_url"]}", alt: "#{item["product_title"]}"}
+              %p
+                #{item["product_title"]}
+.wrapper1200.haohuo-detail-area
+  .same-left-area
+    %h3 Recommendations
+  .detail-middle-area
+    %h3 Description & Customer Reviews
+    .d1
+      .title
+        %h4 DESCRIPTION
+      %p #{@detail["product_title"]}
+      .title
+        %h4 PRODUCTION DETAIL
+      - @detail["product_small_image_urls"]["string"].each_with_index do |pic, index|
+        %img{src: "#{pic}", alt: "#{@detail["product_title"]} images - #{index+1}"}
+      .title
+        %h4 CUSTOMER REVIEWS
+      %p No More
+  .shop-right-area
+    %h3 More Brands
+    %ul
+      - @brands.each do |item|
+        %li
+          %a{href: "/eb/#{item.id}.html",title: "#{item.name}"}
+            %img{src: "#{item.img_url}", alt: "#{item.name}"}
+:javascript
+  $(".small_img").hover(function(){
+    $("#cover_image").attr("src", $(this).attr("src"));
+  })
+  var go_shop_x_url = function(e){
+    url = "/e_shop_x_buy?id="+ e.data("id");
+    window.open(url);
+  }
+  var go_buy_url = function(){
+    window.open("#{@detail["promotion_link"]}");
+  }
+  $.ajax({
+    url: "/e_promo_query",
+    type: 'GET',
+    dataType: 'jsonp',
+    data: {
+      'promo_name': 'Hot Product',
+      'category': '#{@cate1.cid}',
+      'page': 1,
+      'callback': 'callback'
+    },
+    success:function(data){
+    },
+    complete: function(){
+    }
+  });
+  var callback = function(data){
+    if(data.aliexpress_affiliate_product_query_response.resp_result.resp_code == '200'){
+      var cl = data.aliexpress_affiliate_product_query_response.resp_result.result.products.product;
+      var htmlstr = '<ul>';
+      for(var i=0,len=cl.length;i<len;i++){
+        var z = cl[i];
+        htmlstr += '<a href="/e_detail/' + z.product_id +  '" title="'+ z.product_title +'">';
+        htmlstr += '<li>';
+        htmlstr += '<img src="' + z.product_main_image_url + '" alt="' + z.product_title + '"/>';
+        htmlstr += '<p>';
+        htmlstr += z.product_title;
+        htmlstr += '<br/>'
+        htmlstr += '<span>$' + z.sale_price + '</span>';
+        htmlstr += '</p></li></a>'
+      }
+      htmlstr += '</ul>';
+      htmlstr = $(htmlstr);
+      $('.same-left-area').append(htmlstr);
+    }
+  }

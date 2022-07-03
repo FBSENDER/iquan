@@ -1,0 +1,51 @@
+- title("#{@k} - Buy Promotional #{@k} Online - UuCoupon")
+- head_desc("Online shopping for promotional #{@k}, you can find hot sale #{@k} on UuCoupon - price info, discount info, lastest volume info and images of #{@k}.")
+- keywords("#{@k}, promotional #{@k}, hot sale #{@k}, #{@k} online") 
+- path("/ek/#{URI.encode(@k)}")
+
+.dazhe
+  .header_pr.header_red.transition
+    .icon_header
+      .search
+        %i
+        %a{href: "javascript:;", onclick: "go_search();"}
+          %p #{@k}
+  .content
+    = render partial: "express_mobile/filter"
+    #dazheList
+    %img#imgLoading{src: "/image/img_loading.gif", width: "200px", style: "margin: 10px auto;"}
+
+  .button-btn.sno#loadRetry Retry
+  .button-btn.sno#noMore No More
+  .info
+    %nav.desc 
+      %a{href: "/"} Home
+      >
+      %h1{style: "display: inline;"} #{@k}
+    %p.desc Looking for a good deal on #{@k}? Online shopping for promotional #{@k}, you can find hot sale #{@k} on UuCoupon - price info, lastest volume info and images of #{@k}.Besides good quality brands, you’ll also find plenty of discounts when you shop for #{@k} during big sales.
+    - if @hot_keywords.size > 0
+      %p.desc
+        Hot Search:
+        %br
+        %a{href: "/e_popular/#{URI.encode(@k)}", title: "Best Value #{@k}"} #{@k}
+        |
+        - @hot_keywords.each do |k|
+          %a{href: "/ek/#{URI.encode(k)}", title: "Promotional #{k}"} #{k}
+          |
+    - if @rank_keywords.size > 0
+      %p.desc
+        Ranking Search:
+        %br
+        - @rank_keywords.each do |k|
+          %a{href: "/ek/#{URI.encode(k)}", title: "Promotional #{k}"} #{k}
+          |
+  .footer
+    %a.home{href: "/"}
+      %img.icon{src: "/favicon.ico"}
+      .text UuCoupon
+    %a#more_btn.btn{href: "javascript:;", onclick: "go_amazon_s();"} Find #{@k} On  Amazon
+
+.scroll_top.close
+  %a{href: "javascript:;"}
+    %img{src: "/image/to_top.png"}
+= render partial: "express_mobile/page_js", locals: {keyword: @k, cid: nil}
