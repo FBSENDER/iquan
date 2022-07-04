@@ -25,7 +25,7 @@
           %li.sort_li#li-sort-2{data: {sort: "2"}} Orders
           %li.sort_li#li-sort-3{data: {sort: "3"}} Price
   .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
-  = render partial: "load_more_pc", locals: {keyword: @k, has_coupon: 0}
+  = render partial: "load_more_pc", locals: {keyword: @k, has_coupon: 0, cid: nil}
 .wrapper1200
   .desc
     %nav 
