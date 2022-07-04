@@ -69,4 +69,4 @@
 .scroll_top.close
   %a{href: "javascript:;"}
     %img{src: "/image/to_top.png"}
-= render partial: "express_mobile/page_js", locals: {keyword: "", cid: @category.cid}
+= render partial: "express_mobile/page_js", locals: {keyword: @search_k, cid: @category.cid}

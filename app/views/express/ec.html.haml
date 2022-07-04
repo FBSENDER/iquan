@@ -33,7 +33,7 @@
 
 .wrapper1200
   .zk-list.clearfix#couponList
-  = render partial: "load_more_pc", locals: {keyword: "", has_coupon: 0, cid: @category.cid}
+  = render partial: "load_more_pc", locals: {keyword: @search_k, has_coupon: 0, cid: @category.cid}
 .wrapper1200
   - if @attr.size > 0
     .desc

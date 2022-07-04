@@ -46,6 +46,7 @@ class ExpressController < ApplicationController
     @category = AliCategory.where(id: params[:id].to_i).take
     not_found if @category.nil?
     @k = @category.name
+    @search_k = @category.level == 1 ? "" : @k.split('&')[0].strip.gsub("'", "")  
     @nav = JSON.parse(@category.nav)
     @cate1 = AliCategory.where(parent_id: 0).select(:id, :name).order(:id)
     @same_level_cate = @category.level >= 2 ? AliCategory.where(parent_id: @category.parent_id).select(:id, :name).order(:id) : []
