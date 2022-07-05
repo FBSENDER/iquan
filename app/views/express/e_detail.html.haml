@@ -92,7 +92,7 @@
     dataType: 'jsonp',
     data: {
       'promo_name': 'Hot Product',
-      'category': '#{@cate1.cid}',
+      'category': '#{@cate1 ? @cate1.cid : ''}',
       'page': 1,
       'callback': 'callback'
     },
