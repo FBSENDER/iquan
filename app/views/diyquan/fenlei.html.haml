@@ -10,7 +10,10 @@
 .wrapper.home-wrapper
   %div{style: "background-color:white;margin: 0 0 20px 0;padding:10px;"}
     %h2 #{@keyword}优惠专场
-    %p #{@keyword}优惠专场，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，全场低至1折起包邮，敬请关注！这些#{@keyword}优惠券，是爱券网从全网各处（app、优惠网站、优惠qq群、优惠微信群）搜集而来，先领优惠券，再下单，价格可以更低一点。为了方便您找券，您可以将#{@keyword}优惠信息按照销量、价格、优惠额、优惠率等维度进行排序，也可以直接查找#{@keyword}大额优惠券。
+    %p 
+      更新于#{Time.now.to_s[0,10]}
+      %br
+      #{@keyword}优惠专场，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，全场低至1折起包邮，敬请关注！这些#{@keyword}优惠券，是爱券网从全网各处（app、优惠网站、优惠qq群、优惠微信群）搜集而来，先领优惠券，再下单，价格可以更低一点。为了方便您找券，您可以将#{@keyword}优惠信息按照销量、价格、优惠额、优惠率等维度进行排序，也可以直接查找#{@keyword}大额优惠券。
   = render partial: "diyquan/tb_quan_list", locals: {zhekous: @zhekous, coupons: []}
 
   %div{style: "background-color:white;margin: 10px 0;padding:10px;"}

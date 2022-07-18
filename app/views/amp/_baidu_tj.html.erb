@@ -11,16 +11,16 @@ var tb_item_click = function(){
 }
 var footer_home_click = function(){
   _hmt.push(['_trackEvent', 'amp_footer', 'click', 'home']);
-  window.location.href = "http://uuu.uuhaodian.com/index.php?r=index/wap&from=shikuai";
+  window.open("http://uuu.uuhaodian.com/index.php?r=index/wap&from=shikuai");
 }
 var footer_dw_click = function(){
   _hmt.push(['_trackEvent', 'amp_footer', 'click', 'dw']);
-  window.location.href = "https://s.click.taobao.com/4akeBXu";
+  window.open("https://api.uuhaodian.com/uu/xiaohui_app");
 }
 var load_more_click = function(keyword){
   _hmt.push(['_trackEvent', 'amp_qq_item', 'click', 'more']);
-  window.location.href = "/zhekou/" + encodeURIComponent(keyword) + "/";
+  window.open("/zhekou/" + encodeURIComponent(keyword) + "/");
 }
 var btnn = document.getElementsByClassName("btnn")[0];
-if(btnn != null){btnn.innerHTML = "618红包";}
+if(btnn != null){btnn.innerHTML = "领券赚钱APP";}
 </script>

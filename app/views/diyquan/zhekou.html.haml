@@ -26,6 +26,7 @@
           %li#li-q{data: {q: "1"}}
             %input.switch#li-q-switch{type: "checkbox"}
             %label#li-q-switch-label{for: "li-q-switch"} 只看券
+        %span{style: "float:right;line-height: 40px;padding: 0 20px;"} 更新于#{Time.now.to_s[0,10]}
   .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
   = render partial: "dg_load_more", locals: {keyword: @keyword, has_coupon: 0}
 

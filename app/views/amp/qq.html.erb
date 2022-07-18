@@ -94,7 +94,9 @@
   <h1 class="sno"><%= @keyword %></h1>
 </article>
 <footer style="text-align:center;font-size:12px;padding: 20px 0;">
-  「十块购官网」福利购,粉丝福利购,天猫淘宝天天特价,今日特价! - 京ICP备18009981号-2
+  「十块购官网」网购省钱，天天特价! - 京ICP备18009981号-2
+  <br/>
+  <span>更新于<%= Time.now.to_s[0,10] %></span>
 </footer>
 <% if @is_mobile %>
 <%= render partial: "mobile_fixed_footer"%>

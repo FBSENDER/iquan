@@ -5,7 +5,15 @@
 
 = render partial: "diyquan/home_adzone"
 .wrapper1200
-  .zk-list.clearfix#couponList{style: "margin-top: 20px;"}
+  #gy_filter{style: "height: 42px;margin-top: 10px;"}
+    .order-area
+      %ul.sort-type
+        %li.sort_li#li-sort-1{data: {sort: "1"}} 综合
+        %li.sort_li#li-sort-2{data: {sort: "2"}} 销量
+        %li.sort_li#li-sort-5{data: {sort: "5"}} 推荐
+        %li.sort_li#li-sort-3{data: {sort: "3"}} 价格
+      %span{style: "float:right;line-height: 40px;padding: 0 20px;"} 更新于#{Time.now.to_s[0,10]}
+  .zk-list.clearfix#couponList{style: "margin-top: 0px;"}
   = render partial: "diyquan/dg_load_more", locals: {keyword: @top_query.sample, has_coupon: 0}
   %div{style: "background-color: white;padding:10px;margin-bottom: 20px;"}
     %h1 十块购官网 - 今日推荐
