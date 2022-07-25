@@ -6,8 +6,9 @@ var _hmt = _hmt || [];
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
-var tb_item_click = function(){
+var tb_item_click = function(url){
   _hmt.push(['_trackEvent', 'amp_qq_item', 'click', 'tb']);
+  window.open(url);
 }
 var footer_home_click = function(){
   _hmt.push(['_trackEvent', 'amp_footer', 'click', 'home']);
