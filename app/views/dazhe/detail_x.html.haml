@@ -50,8 +50,6 @@
       %p 天猫淘宝好店推荐
     .d3 &nbsp;>&nbsp;
 
-  = render partial: "layouts/google_ad_mobile_bottom_1"
-
   .recommend
     %span.t 推荐理由：#{@detail["recommend"].empty? ? "#{@detail["title"]}" : "#{@detail["recommend"]}"}
     %br
