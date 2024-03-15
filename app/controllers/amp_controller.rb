@@ -18,8 +18,8 @@ class AmpController < ApplicationController
     #@items = get_dg_items(@keyword)
     @items = []
     data  = get_tbk_search_json(@keyword, 1)
-    if data["tbk_dg_material_optional_response"] && data["tbk_dg_material_optional_response"]["result_list"] && data["tbk_dg_material_optional_response"]["result_list"]["map_data"].size > 0
-      @items = data["tbk_dg_material_optional_response"]["result_list"]["map_data"]
+    if data["tbk_dg_material_optional_upgrade_response"] && data["tbk_dg_material_optional_upgrade_response"]["result_list"] && data["tbk_dg_material_optional_upgrade_response"]["result_list"]["map_data"].size > 0
+      @items = data["tbk_dg_material_optional_upgrade_response"]["result_list"]["map_data"]
     end
     infos = get_dg_keyword_infos(@keyword)
     @keywords = infos && infos["r_keywords"] ? infos["r_keywords"] : []

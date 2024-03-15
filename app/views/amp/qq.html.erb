@@ -20,18 +20,19 @@
       </p>
     </div>
     <% @items.each do |item|%>
-      <% coupon_money = item["coupon_amount"] ? item["coupon_amount"].to_i : 0 %>
-      <% now_price = (item["zk_final_price"].to_f - coupon_money).round(2) %>
-      <% zhe = (now_price * 10.0 / item["reserve_price"].to_f).round(1) %>
-      <% buy_url = coupon_money <= 0 ? item["url"] : "https://api.uuhaodian.com/uu/buy?id=#{item["item_id"]}&channel=12" %>
+      <% now_price = item["price_promotion_info"]["final_promotion_price"].to_f.round(2) %>
+      <% zk_final_pirce = item["price_promotion_info"]["zk_final_price"].to_f.round(2) %>
+      <% coupon_money = (zk_final_pirce - now_price).to_i %>
+      <% zhe = (now_price * 10.0 / item["price_promotion_info"]["reserve_price"].to_f).round(1) %>
+      <% buy_url = coupon_money <= 0 ? item["publish_info"]["click_url"] : "https://api.uuhaodian.com/uu/buy?id=#{item["item_id"]}&channel=12" %>
       <div class="col-3 col-sm-6 column" style="margin-top: 10px;">
         <a href="/detail/x_<%= item["item_id"] %>" onclick="tb_item_click('<%= buy_url %>');" target="_blank" style="color:#3b4351;" rel="nofollow">
           <div class="col-12 item">
-            <amp-img src="<%= item["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
-            <p class="title"><%= item["title"] %></p>
+            <amp-img src="<%= item["item_basic_info"]["pict_url"] %>" height="200px" width="200px" layout="responsive"></amp-img>
+            <p class="title"><%= item["item_basic_info"]["title"] %></p>
             <p class="o-price">
-            原价 ￥<%= coupon_money > 0 ? item["zk_final_price"] : item["reserve_price"] %>
-          <span style="float:right"><%= item["volume"] %>人已付款</span>
+            原价 ￥<%= coupon_money > 0 ? item["price_promotion_info"]["zk_final_price"] : item["price_promotion_info"]["reserve_price"] %>
+          <span style="float:right"><%= item["item_basic_info"]["volume"] %>人已付款</span>
             </p>
             <p style="margin:0;padding: 0 5px 5px 5px;">
               <span style="font-size:16px;color:red;">￥<%= now_price%><span>
@@ -64,10 +65,10 @@
   <% end %>
   <div class="col-12 column" style="background-color:#fff;padding:10px;margin: 20px 0;">
     <p style="margin:0;font-size:14px;">
-    <%= "十块购#{@keyword}，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，疫情期间，请多多关注包邮的#{@keyword}。" %>
+    <%= "十块购#{@keyword}，实时更新#{@keyword}淘宝天猫优惠券折扣特卖信息，请多多关注包邮的#{@keyword}。" %>
       <br/>
       <%= "#{@keyword}推荐店铺：" %>
-      <%= @items.map{|t| t["shop_title"]}.uniq.join('，')%>
+      <%= @items.map{|t| t["item_basic_info"]["shop_title"]}.uniq.join('，')%>
       <% @selectors.each do |s| %>
         <br/>
         <%= "#{@keyword}#{s["type"]} #{s["value"].gsub(',', '，')}" %>
