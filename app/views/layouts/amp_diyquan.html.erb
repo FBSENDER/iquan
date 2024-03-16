@@ -2,15 +2,18 @@
 <html amp lang="zh-CN">
   <head>
     <meta charset="utf-8">
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async src="/js/v0.js"></script>
     <title><%= yield(:title) %></title>
     <meta name="keywords" content="<%= yield(:keywords)%>">
     <meta name="description" content="<%= yield(:head_desc)%>">
     <link rel="canonical" href="<%= yield(:path) %>">
     <link rel="amphtml" href="<%= yield(:path) %>">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async custom-element="amp-analytics" src="/js/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-ad" src="/js/amp-ad-0.1.js"></script>
+    <script async custom-element="amp-auto-lightbox" src="/js/amp-auto-lightbox-0.1.js"></script>
+    <script async custom-element="amp-loader" src="/js/amp-ad-0.1.js"></script>
+    <script async custom-element="amp-ad-network-adsense-impl" src="/js/amp-ad-0.1.js"></script>
     <style amp-custom>
       <%= render partial: "layouts/amp_spectre_css" %>
       .item{
